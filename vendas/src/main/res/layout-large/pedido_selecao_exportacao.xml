@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/txtNomeClientePedSel"
+        android:layout_width="312dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/txtCodClientePedSel"
+        android:text="Medium Text"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtStatusPedSel"
+        android:layout_width="31dp"
+        android:layout_height="35dp"
+        android:layout_alignEnd="@+id/txtValorPedSel"
+        android:layout_alignParentTop="true"
+        android:text="Medium Text"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtValorPedSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignTop="@+id/txtDataPedSel"
+        android:layout_marginEnd="13dp"
+        android:text="Medium Text"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtDataPedSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtCodClientePedSel"
+        android:layout_centerHorizontal="true"
+        android:text="Medium Text"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/txtCodClientePedSel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="44dp"
+        android:text="Medium Text"
+        android:textSize="30sp"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

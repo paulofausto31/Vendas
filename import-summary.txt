@@ -1,0 +1,324 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From Vendas:
+* .hgignore
+* .idea\
+* .idea\.name
+* .idea\compiler.xml
+* .idea\copyright\
+* .idea\copyright\profiles_settings.xml
+* .idea\encodings.xml
+* .idea\libraries\
+* .idea\libraries\dexedLibs.xml
+* .idea\libraries\dexedLibs2.xml
+* .idea\libraries\libs.xml
+* .idea\misc.xml
+* .idea\modules.xml
+* .idea\scopes\
+* .idea\scopes\scope_settings.xml
+* .idea\vcs.xml
+* .idea\workspace.xml
+* Vendas.iml
+* out\
+* out\production\
+* out\production\Vendas\
+* out\production\Vendas\Vendas.apk
+* out\production\Vendas\Vendas.unaligned.apk
+* out\production\Vendas\persistencia\
+* out\production\Vendas\persistencia\adapters\
+* out\production\Vendas\persistencia\adapters\CidadeAdapter.class
+* out\production\Vendas\persistencia\adapters\ClienteAdapter.class
+* out\production\Vendas\persistencia\adapters\ClienteNaoPositivadoAdapter.class
+* out\production\Vendas\persistencia\adapters\ConsultaClienteAdapter.class
+* out\production\Vendas\persistencia\adapters\ConsultaProdutosAdapter.class
+* out\production\Vendas\persistencia\adapters\ContasReceberAdapter.class
+* out\production\Vendas\persistencia\adapters\FornecedorAdapter.class
+* out\production\Vendas\persistencia\adapters\GrupoAdapter.class
+* out\production\Vendas\persistencia\adapters\HistoricoPedidoAdapter.class
+* out\production\Vendas\persistencia\adapters\ItensPedidoAdapter.class
+* out\production\Vendas\persistencia\adapters\UtilitarioPedidoAdapter.class
+* out\production\Vendas\persistencia\adapters\produtoAdapter.class
+* out\production\Vendas\persistencia\brl\
+* out\production\Vendas\persistencia\brl\CaminhoFTPBRL.class
+* out\production\Vendas\persistencia\brl\ClienteBRL.class
+* out\production\Vendas\persistencia\brl\ClienteNaoPositivadoBRL.class
+* out\production\Vendas\persistencia\brl\ConfiguracaoBRL.class
+* out\production\Vendas\persistencia\brl\ContaReceberBRL.class
+* out\production\Vendas\persistencia\brl\FormaPgtoBRL.class
+* out\production\Vendas\persistencia\brl\FornecedorBRL.class
+* out\production\Vendas\persistencia\brl\GrupoBRL.class
+* out\production\Vendas\persistencia\brl\ItenPedidoBRL.class
+* out\production\Vendas\persistencia\brl\JustificativaPositivacaoBRL.class
+* out\production\Vendas\persistencia\brl\PedidoBRL.class
+* out\production\Vendas\persistencia\brl\PrecoBRL.class
+* out\production\Vendas\persistencia\brl\ProdutoBRL.class
+* out\production\Vendas\persistencia\brl\VendedorBRL.class
+* out\production\Vendas\persistencia\dao\
+* out\production\Vendas\persistencia\dao\CaminhoFTPDAO.class
+* out\production\Vendas\persistencia\dao\ClienteDAO.class
+* out\production\Vendas\persistencia\dao\ClienteNaoPositivadoDAO.class
+* out\production\Vendas\persistencia\dao\ConfiguracaoDAO.class
+* out\production\Vendas\persistencia\dao\ContaReceberDAO.class
+* out\production\Vendas\persistencia\dao\FormaPgtoDAO.class
+* out\production\Vendas\persistencia\dao\FornecedorDAO.class
+* out\production\Vendas\persistencia\dao\GrupoDAO.class
+* out\production\Vendas\persistencia\dao\ItenPedidoDAO.class
+* out\production\Vendas\persistencia\dao\JustificativaPositivacaoDAO.class
+* out\production\Vendas\persistencia\dao\PedidoDAO.class
+* out\production\Vendas\persistencia\dao\PrecoDAO.class
+* out\production\Vendas\persistencia\dao\ProdutoDAO.class
+* out\production\Vendas\persistencia\dao\VendedorDAO.class
+* out\production\Vendas\persistencia\db\
+* out\production\Vendas\persistencia\db\Preference.class
+* out\production\Vendas\persistencia\db\db.class
+* out\production\Vendas\persistencia\dto\
+* out\production\Vendas\persistencia\dto\CaminhoFTPDTO.class
+* out\production\Vendas\persistencia\dto\ClienteDTO.class
+* out\production\Vendas\persistencia\dto\ClienteNaoPositivadoDTO.class
+* out\production\Vendas\persistencia\dto\ConfiguracaoDTO.class
+* out\production\Vendas\persistencia\dto\ContaReceberDTO.class
+* out\production\Vendas\persistencia\dto\FormaPgtoDTO.class
+* out\production\Vendas\persistencia\dto\FornecedorDTO.class
+* out\production\Vendas\persistencia\dto\GrupoDTO.class
+* out\production\Vendas\persistencia\dto\ItenPedidoDTO.class
+* out\production\Vendas\persistencia\dto\JustificativaPositivacaoDTO.class
+* out\production\Vendas\persistencia\dto\PedidoDTO.class
+* out\production\Vendas\persistencia\dto\PrecoDTO.class
+* out\production\Vendas\persistencia\dto\ProdutoDTO.class
+* out\production\Vendas\persistencia\dto\VendedorDTO.class
+* out\production\Vendas\venda\
+* out\production\Vendas\venda\util\
+* out\production\Vendas\venda\util\FTP.class
+* out\production\Vendas\venda\util\GerenciadorComunicacao$1.class
+* out\production\Vendas\venda\util\GerenciadorComunicacao$2$1.class
+* out\production\Vendas\venda\util\GerenciadorComunicacao$2.class
+* out\production\Vendas\venda\util\GerenciadorComunicacao.class
+* out\production\Vendas\venda\util\Global.class
+* out\production\Vendas\venda\util\Util.class
+* out\production\Vendas\venda\util\dataHora.class
+* out\production\Vendas\venda\util\math.class
+* out\production\Vendas\venda\util\mensagem.class
+* out\production\Vendas\venda\util\texto.class
+* out\production\Vendas\vendas\
+* out\production\Vendas\vendas\telas\
+* out\production\Vendas\vendas\telas\BuildConfig.class
+* out\production\Vendas\vendas\telas\ClienteComplemento.class
+* out\production\Vendas\vendas\telas\ClienteContasReceber.class
+* out\production\Vendas\vendas\telas\ClienteLista$1.class
+* out\production\Vendas\vendas\telas\ClienteLista$2.class
+* out\production\Vendas\vendas\telas\ClienteLista.class
+* out\production\Vendas\vendas\telas\ClienteTabContainer.class
+* out\production\Vendas\vendas\telas\Comunicacao$1$1$1.class
+* out\production\Vendas\vendas\telas\Comunicacao$1$1.class
+* out\production\Vendas\vendas\telas\Comunicacao$1.class
+* out\production\Vendas\vendas\telas\Comunicacao$2$1$1.class
+* out\production\Vendas\vendas\telas\Comunicacao$2$1.class
+* out\production\Vendas\vendas\telas\Comunicacao$2.class
+* out\production\Vendas\vendas\telas\Comunicacao.class
+* out\production\Vendas\vendas\telas\ConfiguracaoGeral$1.class
+* out\production\Vendas\vendas\telas\ConfiguracaoGeral.class
+* out\production\Vendas\vendas\telas\ConfiguracaoLocal.class
+* out\production\Vendas\vendas\telas\ConfiguracaoRemoto.class
+* out\production\Vendas\vendas\telas\ConfiguracaoTabContainer.class
+* out\production\Vendas\vendas\telas\ConsultaPositivacao.class
+* out\production\Vendas\vendas\telas\ConsultaTabContainer.class
+* out\production\Vendas\vendas\telas\ConsultaVendasCliente$1.class
+* out\production\Vendas\vendas\telas\ConsultaVendasCliente$2.class
+* out\production\Vendas\vendas\telas\ConsultaVendasCliente.class
+* out\production\Vendas\vendas\telas\ConsultaVendasProduto.class
+* out\production\Vendas\vendas\telas\Entrada$1.class
+* out\production\Vendas\vendas\telas\Entrada.class
+* out\production\Vendas\vendas\telas\FiltroCidade.class
+* out\production\Vendas\vendas\telas\FiltroFornecedor.class
+* out\production\Vendas\vendas\telas\FiltroGrupo.class
+* out\production\Vendas\vendas\telas\GeoLocalizacao.class
+* out\production\Vendas\vendas\telas\JustificativaBasico$1.class
+* out\production\Vendas\vendas\telas\JustificativaBasico$2.class
+* out\production\Vendas\vendas\telas\JustificativaBasico.class
+* out\production\Vendas\vendas\telas\JustificativaHistorico$1.class
+* out\production\Vendas\vendas\telas\JustificativaHistorico$2.class
+* out\production\Vendas\vendas\telas\JustificativaHistorico.class
+* out\production\Vendas\vendas\telas\JustificativaTabContainer.class
+* out\production\Vendas\vendas\telas\MySql.class
+* out\production\Vendas\vendas\telas\PedidoAbrir$1.class
+* out\production\Vendas\vendas\telas\PedidoAbrir.class
+* out\production\Vendas\vendas\telas\PedidoBasico$1.class
+* out\production\Vendas\vendas\telas\PedidoBasico$2.class
+* out\production\Vendas\vendas\telas\PedidoBasico$3.class
+* out\production\Vendas\vendas\telas\PedidoBasico.class
+* out\production\Vendas\vendas\telas\PedidoHistorico$1.class
+* out\production\Vendas\vendas\telas\PedidoHistorico$2.class
+* out\production\Vendas\vendas\telas\PedidoHistorico$3.class
+* out\production\Vendas\vendas\telas\PedidoHistorico$4.class
+* out\production\Vendas\vendas\telas\PedidoHistorico.class
+* out\production\Vendas\vendas\telas\PedidoInfAdicional.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$1.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$2.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$3.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$4.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$5.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo$6.class
+* out\production\Vendas\vendas\telas\PedidoItemNovo.class
+* out\production\Vendas\vendas\telas\PedidoItens$1.class
+* out\production\Vendas\vendas\telas\PedidoItens$2.class
+* out\production\Vendas\vendas\telas\PedidoItens.class
+* out\production\Vendas\vendas\telas\PedidoTabContainer.class
+* out\production\Vendas\vendas\telas\Principal$1.class
+* out\production\Vendas\vendas\telas\Principal$2.class
+* out\production\Vendas\vendas\telas\Principal$3.class
+* out\production\Vendas\vendas\telas\Principal$4.class
+* out\production\Vendas\vendas\telas\Principal$5.class
+* out\production\Vendas\vendas\telas\Principal$6.class
+* out\production\Vendas\vendas\telas\Principal$7.class
+* out\production\Vendas\vendas\telas\Principal$8.class
+* out\production\Vendas\vendas\telas\Principal$9.class
+* out\production\Vendas\vendas\telas\Principal.class
+* out\production\Vendas\vendas\telas\ProdutoLista$1.class
+* out\production\Vendas\vendas\telas\ProdutoLista$2.class
+* out\production\Vendas\vendas\telas\ProdutoLista.class
+* out\production\Vendas\vendas\telas\R$array.class
+* out\production\Vendas\vendas\telas\R$attr.class
+* out\production\Vendas\vendas\telas\R$drawable.class
+* out\production\Vendas\vendas\telas\R$id.class
+* out\production\Vendas\vendas\telas\R$layout.class
+* out\production\Vendas\vendas\telas\R$string.class
+* out\production\Vendas\vendas\telas\R.class
+* out\production\Vendas\vendas\telas\UtilitarioPedido.class
+* previews.xml
+* proguard.cfg
+From volley:
+* java\
+* java\com\
+* java\com\android\
+* java\com\android\volley\
+* java\com\android\volley\AuthFailureError.java
+* java\com\android\volley\Cache.java
+* java\com\android\volley\CacheDispatcher.java
+* java\com\android\volley\DefaultRetryPolicy.java
+* java\com\android\volley\ExecutorDelivery.java
+* java\com\android\volley\Network.java
+* java\com\android\volley\NetworkDispatcher.java
+* java\com\android\volley\NetworkError.java
+* java\com\android\volley\NetworkResponse.java
+* java\com\android\volley\NoConnectionError.java
+* java\com\android\volley\ParseError.java
+* java\com\android\volley\Request.java
+* java\com\android\volley\RequestQueue.java
+* java\com\android\volley\Response.java
+* java\com\android\volley\ResponseDelivery.java
+* java\com\android\volley\RetryPolicy.java
+* java\com\android\volley\ServerError.java
+* java\com\android\volley\TimeoutError.java
+* java\com\android\volley\VolleyError.java
+* java\com\android\volley\VolleyLog.java
+* java\com\android\volley\toolbox\
+* java\com\android\volley\toolbox\AndroidAuthenticator.java
+* java\com\android\volley\toolbox\Authenticator.java
+* java\com\android\volley\toolbox\BasicNetwork.java
+* java\com\android\volley\toolbox\ByteArrayPool.java
+* java\com\android\volley\toolbox\ClearCacheRequest.java
+* java\com\android\volley\toolbox\DiskBasedCache.java
+* java\com\android\volley\toolbox\HttpClientStack.java
+* java\com\android\volley\toolbox\HttpHeaderParser.java
+* java\com\android\volley\toolbox\HttpStack.java
+* java\com\android\volley\toolbox\HurlStack.java
+* java\com\android\volley\toolbox\ImageLoader.java
+* java\com\android\volley\toolbox\ImageRequest.java
+* java\com\android\volley\toolbox\JsonArrayRequest.java
+* java\com\android\volley\toolbox\JsonObjectRequest.java
+* java\com\android\volley\toolbox\JsonRequest.java
+* java\com\android\volley\toolbox\NetworkImageView.java
+* java\com\android\volley\toolbox\NoCache.java
+* java\com\android\volley\toolbox\PoolingByteArrayOutputStream.java
+* java\com\android\volley\toolbox\RequestFuture.java
+* java\com\android\volley\toolbox\StringRequest.java
+* java\com\android\volley\toolbox\Volley.java
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:18.0.0
+gson-2.2.4.jar => com.google.code.gson:gson:2.2.4
+
+Potentially Missing Dependency:
+-------------------------------
+When we replaced the following .jar files with a Gradle dependency, we
+inferred the dependency version number from the filename. This
+specific version may not actually be available from the repository.
+If you get a build error stating that the dependency is missing, edit
+the version number to for example "+" to pick up the latest version
+instead. (This may require you to update your code if the library APIs
+have changed.)
+
+gson-2.2.4.jar => version 2.2.4 in com.google.code.gson:gson:2.2.4
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+google-play-services_lib => [com.google.android.gms:play-services:+]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In volley:
+* AndroidManifest.xml => volley\src\main\AndroidManifest.xml
+* assets\ => volley\src\main\assets
+* res\ => volley\src\main\res
+* src\ => volley\src\main\java\
+In Vendas:
+* AndroidManifest.xml => vendas\src\main\AndroidManifest.xml
+* assets\ => vendas\src\main\assets
+* libs\commons-net-1.4.1.jar => vendas\libs\commons-net-1.4.1.jar
+* libs\ksoap2-android-assembly-3.2.0-jar-with-dependencies.jar => vendas\libs\ksoap2-android-assembly-3.2.0-jar-with-dependencies.jar
+* libs\volley.jar => vendas\libs\volley.jar
+* lint.xml => vendas\lint.xml
+* res\ => vendas\src\main\res\
+* src\ => vendas\src\main\java\
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

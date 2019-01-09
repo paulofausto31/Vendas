@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="318dp"
+        android:layout_height="396dp" >
+
+        <TextView
+            android:id="@+id/lblEmpresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Numero                " />
+
+        <EditText
+            android:id="@+id/txtNumeroPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/lblEmpresa"
+            android:layout_below="@+id/lblEmpresa"
+            android:editable="false"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/txtEstoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="Data" />
+
+        <EditText
+            android:id="@+id/txtDataPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtNumeroPedido"
+            android:layout_alignBottom="@+id/txtNumeroPedido"
+            android:layout_alignLeft="@+id/txtEstoque"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/txtLoHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtNumeroPedido"
+            android:text="Cliente" />
+
+        <EditText
+            android:id="@+id/txtClientePedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtLoHora"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/txtLoVend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtClientePedido"
+            android:text="Forma Pgto" />
+
+        <Spinner
+            android:id="@+id/cbxFormaPgtoPedido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/txtLoVend" />
+
+        <TextView
+            android:id="@+id/txtLoGPS1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/cbxFormaPgtoPedido"
+            android:layout_marginEnd="130dp"
+            android:text="Prazo" />
+
+        <EditText
+            android:id="@+id/txtPrazoPedido"
+            android:layout_width="166dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/txtLoGPS1"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/txtParcelaPedido"
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtPrazoPedido"
+            android:layout_alignBottom="@+id/txtPrazoPedido"
+            android:layout_alignLeft="@+id/btnHoraSaidaPedido"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/txtLoGPS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/cbxFormaPgtoPedido"
+            android:text="Parcela               " />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtPrazoPedido"
+            android:text="          " />
+
+    </RelativeLayout>
+
+</ScrollView>

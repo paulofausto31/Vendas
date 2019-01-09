@@ -1,0 +1,309 @@
+package persistencia.dao;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import persistencia.db.db;
+import persistencia.dto.ClienteDTO;
+import venda.util.Global;
+
+public class ClienteDAO {
+
+	private static String tableName = "cliente";
+	private static Context ctx;
+	private SQLiteDatabase db;
+	private static String[] columns = {"id", "codCliente", "codEmpresa", "nome", "endereco", "telefone",
+		"dataUltimaCompra", "valorAtraso", "valorVencer", "formaPgto", "prazo", "cpfCnpj", "seqVisita",
+		"infAdicional", "razaoSocial", "bairro", "cidade", "rotaDia"};
+	
+	public ClienteDAO(){}
+	
+	public ClienteDAO(Context ctx){
+		this.ctx = ctx;
+		this.db = new db(ctx).getWritableDatabase();
+	}
+
+	public void CloseConection(){
+		db.close();
+	}
+	
+	public boolean insert(ClienteDTO dto){
+		
+		ContentValues ctv = new ContentValues();
+		ctv.put("id", dto.getId());
+		ctv.put("codEmpresa", dto.getCodEmpresa());
+		ctv.put("codCliente", dto.getCodCliente());
+		ctv.put("nome", dto.getNome());
+		ctv.put("endereco", dto.getEndereco());
+		ctv.put("telefone", dto.getTelefone());
+		ctv.put("dataUltimaCompra", dto.getDataUltimaCompra());
+		ctv.put("valorAtraso", dto.getValorAtraso());
+		ctv.put("valorVencer", dto.getValorVencer());
+		ctv.put("formaPgto", dto.getFormaPgto());
+		ctv.put("prazo", dto.getPrazo());
+		ctv.put("cpfCnpj", dto.getCpfCnpj());
+		ctv.put("seqVisita", dto.getSeqVisita());
+		ctv.put("infAdicional", dto.getInfAdicional());
+		ctv.put("razaoSocial", dto.getRazaoSocial());
+		ctv.put("bairro", dto.getBairro());
+		ctv.put("cidade", dto.getCidade());
+		ctv.put("rotaDia", dto.getRotaDia());
+		
+		return (db.insert(tableName, null, ctv) > 0);
+	}
+	
+	public boolean delete(ClienteDTO dto){
+		
+		return (db.delete(tableName, "id=?", new String[]{dto.getId().toString()}) > 0);
+	}
+
+	public boolean deleteByEmpresa(){
+
+		return (db.delete(tableName, "codEmpresa=?", new String[]{Global.codEmpresa}) > 0);
+	}
+
+	public boolean deleteAll(){
+
+		return (db.delete(tableName,null , null) > 0);
+	}
+
+	public boolean update(ClienteDTO dto){
+
+		ContentValues ctv = new ContentValues();
+		ctv.put("codEmpresa", dto.getCodEmpresa());
+		ctv.put("codCliente", dto.getCodCliente());
+		ctv.put("nome", dto.getNome());
+		ctv.put("endereco", dto.getEndereco());
+		ctv.put("telefone", dto.getTelefone());
+		ctv.put("dataUltimaCompra", dto.getDataUltimaCompra());
+		ctv.put("valorAtraso", dto.getValorAtraso());
+		ctv.put("valorVencer", dto.getValorVencer());
+		ctv.put("formaPgto", dto.getFormaPgto());
+		ctv.put("prazo", dto.getPrazo());
+		ctv.put("cpfCnpj", dto.getCpfCnpj());
+		ctv.put("seqVisita", dto.getSeqVisita());
+		ctv.put("infAdicional", dto.getInfAdicional());
+		ctv.put("razaoSocial", dto.getRazaoSocial());
+		ctv.put("bairro", dto.getBairro());
+		ctv.put("cidade", dto.getCidade());
+		ctv.put("rotaDia", dto.getRotaDia());
+		
+		return (db.update(tableName, ctv, "id=?", new String[]{dto.getId().toString()}) > 0);
+	}
+	
+	public ClienteDTO getById(Integer ID){
+
+		Cursor rs = db.query(tableName, columns, "id=?", new String[]{ID.toString()}, null, null, null);
+		
+		ClienteDTO dto = null;
+		
+		if(rs.moveToFirst()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+		}
+		
+		return dto;
+	}
+	
+	public ClienteDTO getByCodCliente(Integer codCliente){
+
+		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, null);
+		
+		ClienteDTO dto = null;
+		
+		if(rs.moveToFirst()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+		}
+		
+		return dto;
+	}
+	
+	public List<ClienteDTO> getByNome(String nome){
+
+		Cursor rs = db.query(tableName, columns, "nome like ? and codEmpresa=?", new String[]{"%" + nome + "%", Global.codEmpresa}, null, null, null);
+		
+		ClienteDTO dto = null;
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+		
+		while(rs.moveToNext()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+	
+		return lista;
+	}
+	
+	public List<ClienteDTO> getByRazaoSocial(String rSocial){
+
+		Cursor rs = db.query(tableName, columns, "razaoSocial like ? and codEmpresa=?", new String[]{"%" + rSocial + "%", Global.codEmpresa}, null, null, null);
+		
+		ClienteDTO dto = null;
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+		
+		while(rs.moveToNext()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+	
+		return lista;
+	}
+
+	public List<ClienteDTO> getAll(){
+
+		Cursor rs = db.rawQuery("SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa), null);
+		
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+		
+		while(rs.moveToNext()){
+			ClienteDTO dto = new ClienteDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getInt(rs.getColumnIndex("codCliente")), rs.getString(rs.getColumnIndex("nome")),
+					rs.getString(rs.getColumnIndex("endereco")), rs.getString(rs.getColumnIndex("telefone")), rs.getString(rs.getColumnIndex("dataUltimaCompra")),
+					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
+					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
+					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+		
+		return lista;
+	}
+
+	public Integer getTotalClientes(){
+
+		Cursor rs = db.rawQuery("SELECT * FROM cliente WHERE codEmpresa = ".concat(Global.codEmpresa), null);
+		
+		return rs.getCount();
+	}
+
+	public List<ClienteDTO> getTodosOrdenado(String campoOrdenacao){
+
+		Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+
+		while(rs.moveToNext()){
+			ClienteDTO dto = new ClienteDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getInt(rs.getColumnIndex("codCliente")), rs.getString(rs.getColumnIndex("nome")),
+					rs.getString(rs.getColumnIndex("endereco")), rs.getString(rs.getColumnIndex("telefone")), rs.getString(rs.getColumnIndex("dataUltimaCompra")),
+					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
+					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
+					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
+	public List<ClienteDTO> getRotaDiaOrdenado(String campoOrdenacao){
+
+		Cursor rs = db.rawQuery("SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+		
+		while(rs.moveToNext()){
+			ClienteDTO dto = new ClienteDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getInt(rs.getColumnIndex("codCliente")), rs.getString(rs.getColumnIndex("nome")),
+					rs.getString(rs.getColumnIndex("endereco")), rs.getString(rs.getColumnIndex("telefone")), rs.getString(rs.getColumnIndex("dataUltimaCompra")),
+					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
+					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
+					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+		
+		return lista;
+	}
+
+	public List<ClienteDTO> getAllCidade(){
+
+		Cursor rs = db.rawQuery("SELECT Cidade FROM cliente WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" group by cidade "), null);
+		
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+		
+		while(rs.moveToNext()){
+			ClienteDTO dto = new ClienteDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getInt(rs.getColumnIndex("codCliente")), rs.getString(rs.getColumnIndex("nome")),
+					rs.getString(rs.getColumnIndex("endereco")), rs.getString(rs.getColumnIndex("telefone")), rs.getString(rs.getColumnIndex("dataUltimaCompra")),
+					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
+					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
+					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+			lista.add(dto);
+		}
+		
+		return lista;
+	}
+}
+

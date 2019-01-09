@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\3866c2afabb5e4f84c65c0942e4b7cf04b738f58\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c72b1515efbd8ad652e2d63582c8234a979b1e53">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_05b6a9271983d7c50cd2d4045c598db65a45cf95\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\f4a02e15c01ef8534e60b17525ac6bc70b4ac381\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="a5d52089bf4d31537232bb6bcb70cee817d8a374">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e6ffb6fdbc5841245559f965ccff91291a42389a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\94e47a1864ba148c53df427a184d5e54853d33a9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8673b19d7b271bee0d916c7627fff4869b4dd8b6\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\3357c0dc9c47f17172979d148bf3f650f41dab4e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3ac08c35419ab7cf9146969de471768dbe502f0f">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f24f9edb8773f410634ffa4c7ffa3349d0863cd2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\e97237a51e2939ac5322ea49dd9043c381ce78d2\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="02b91f8efa91dcdf5c555ee24b7f006f02cd0f8b">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_0c6c8a3f98b21f91362858192fb54927fcda110d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\dbf0bec3e647cfa2c89b1f2980179730e92b60f6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8057bbc5e15263e3d900426ec0b856fbc6b824d2\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\4ebe6253b6d89186b53eed51087563a16bbc1e7c\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e09436d69cdb07b121bdfcd9ce5bfcf52bd14891\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\0356d65946d16f52e11d98b28efb7cdd261661b6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_20739c43940a36317a1382d0e0751487057956f7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\842ab6aa765a4178dc5167ffca0327d857eb28d0\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="416fb9ee2fd6e7af0bba04b01d90cb475b1e2074">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_af2b8dac34f5f670fb538b8e3f805fca0f32a5e1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\8d30b28de8b2e0fc515fa41671ce4b6ef8248961\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_45fc395b3a7901d445e0914372eba749572e2cff\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\libs\commons-net-1.4.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="abb932adb2c10790c1eaa4365d3ac2a1ac7cb700">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\2\commons-net-1.4.1_91518b2f6f98b5d976104db83737564117031e5f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\libs\commons-net-1.4.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="abb932adb2c10790c1eaa4365d3ac2a1ac7cb700">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\2\commons-net-1.4.1_91518b2f6f98b5d976104db83737564117031e5f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\2935c4f58bb501a165b19e806ac21c4d1d62730b\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="a25b0b5aec89681b95d32780ad7904c1e1e4c679">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_458f5a4f8d8f9dc61b56930fa9acf940a6598983\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\libs\ksoap2-android-assembly-3.2.0-jar-with-dependencies.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="28d8f13fdec2fe5de24af98b7131c858c266bbea">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\2\ksoap2-android-assembly-3.2.0-jar-with-dependencies_9bb48fc92f7476189f1fa0e1fc21bee5cb06e511\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\e19e0b72610dd293a8816929abce65a8d85e5476\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f47f4d5bdfd7d7bf330945b8a7ccce4ab437a710">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_38ef17c642ab2963531b0759ed472c5d387bac5f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\a3e500a07f320698ef359f8f8f18ab5d5f7d937f\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="34c23b5894b4f24d566bfc33e0e25462c6436b78">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b1f7a0e004328555cd143217be91898a2aff36f3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\0506906e1e24b924d81038f6044c130376048d21\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_23d5aaa9491578861eb144df0d76c150d6b9a077\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\eb44de12532c974b2b7a1c9a4bc4bfcb6f1627c6\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6185d259a7df312ed985dacca6a3ba60f5ccbf4e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\b748100193d10f6618227faa70ff40fb6dba2e47\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="78ea232052df889856dcb7b7b542707c89bb3bfb">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1854af0eb03733377a37142b244a34db6d8ceb57\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="0d4b34c87d88c0fb70e98c27094d73fbac0dd1e3">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c6d9f80252a325208c8d4badea4f5bdf99b42a5c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_079a80d585de09824412e7fc5fbb1141fed27575\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.0"
+        sha1="92fdcb835139ab7d4c820e5d23a4f400df95ea16">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_c6d9f80252a325208c8d4badea4f5bdf99b42a5c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="510aa6efc159983dfbffa676a0dae37568c0a46f">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_079a80d585de09824412e7fc5fbb1141fed27575\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\4d9c9b5f3856c8cf9d1d4361faa0a237b8f8e823\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_d5a561f747a2d94b88ad4d2ce7ea5dcd2fb4b3fb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\903048d87851eb7f35b83e8722f5edacdd8716f9\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="bfba7cf662f7e3e2cfeb92226c6b84c08e590225">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_82e15c057f1c0181ccd840726755978273e07573\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.gradle\caches\modules-2\files-2.1\com.itextpdf\itextg\5.5.9\3580383b2c7db8fa2fee1ffbe1993017a9ea296e\itextg-5.5.9.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3580383b2c7db8fa2fee1ffbe1993017a9ea296e">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\itextg-5.5.9_263ed8dd2eb58beb7a6a903c2dbfdea13034507f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\c6022df785f1f0e5cbf03a583be3940c5f0a3b70\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="5594a368622908d89c47d9a391aa2724fe046c35">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_03ba35326dc6874fd5fd6366867d7c42af90f33c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\2eea1d6f53eb049ca69f3e2050c267b4db08f377\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="057fb316bed8467398333f30926c2d5506e275b2">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_66ccb91321093f47ca48927842e9a17edd67eca4\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\4153ae0fe5f02bdf0d56b1a236f2962e23bbcd7d\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="41f47bbcd281fdb1e42e220220ab3bfa1da591e0">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1836c7e3facecf5567dfb9353289b139d69b19b1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\ee6466664de921a4d6449fcaab136418ff6b05a4\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="76ea35b41786082af23db898ca9e0fc07cc71fb9">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a353a81448e8eaa6a241884a0798e2a3ad444cec\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\babdef58c0e93d68cef23a04ea68ffe26a469b25\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="fc3036436defd3070337b7191c50a136ebca7f8f">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f6a73f4452c6a4f913cedafcde7eb60e76801e6b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\c4ffcb57b1fa10f5629c541d587ba8ca9c4b0504\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="f2cb88e7e28736d44e7e643deb80c9af1c3662c8">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_72d12cb77640e267f88a6146573c6ac32106aa94\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\StudioProjects\Vendas\vendas\libs\ksoap2-android-assembly-3.2.0-jar-with-dependencies.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="28d8f13fdec2fe5de24af98b7131c858c266bbea">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\2\ksoap2-android-assembly-3.2.0-jar-with-dependencies_9bb48fc92f7476189f1fa0e1fc21bee5cb06e511\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\162ce5d4a70b69c256743b9a18be907959659ee8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="63b03eaa1aa9b9431c7638841175f9842dcbf274">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_80f893923527e81673ccb793f547f7d43613fa35\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Paulo\.android\build-cache\146e2ad476eb04f04c06d9b731126183c1b518ae\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cb454b52545859ed2f24a6c01366805b0fa04b22">
+        <dex dex="C:\Users\Paulo\StudioProjects\Vendas\vendas\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8d782b3156e3d1cd034cb76cea37c2c2f3e9ff23\classes.dex" />
+    </item>
+
+</items>
