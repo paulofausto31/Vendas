@@ -16,7 +16,7 @@ public class CidadeAdapter extends BaseAdapter {
 
 	private Context ctx;
 	private List<ClienteDTO> lista;
-	// teste
+	// teste do teste
 
 	public CidadeAdapter(Context ctx, List<ClienteDTO> lista){
 		this.ctx = ctx;
