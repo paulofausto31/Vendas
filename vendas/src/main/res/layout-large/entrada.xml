@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:gravity="center_horizontal"
+    android:orientation="horizontal" >
+
+    <TextView
+        android:id="@+id/txtEstoque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/app_versao"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txtLoHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/bco_versao"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/lblEmpresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vendedor:"
+        android:textSize="40sp"
+        android:layout_below="@+id/textView2"
+        android:layout_toLeftOf="@+id/txtEstoque"
+        android:layout_marginTop="166dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="21dp"
+        android:text="Vendedor:"
+        android:textSize="40sp"
+        android:layout_below="@+id/txtLoHora"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:id="@+id/txtVendedorEntrada"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="25sp"
+        android:layout_below="@+id/lblEmpresa"
+        android:layout_alignLeft="@+id/lblEmpresa"
+        android:layout_alignRight="@+id/lblEmpresa" />
+
+    <Button
+        android:id="@+id/btnEntrar"
+        android:layout_width="100dp"
+        android:layout_height="70dp"
+        android:text="Entrar"
+        android:textSize="25sp"
+        android:layout_above="@+id/textView1"
+        android:layout_toRightOf="@+id/txtLoHora"
+        android:layout_marginBottom="225dp" />
+    
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="107dp"
+        android:textSize="25sp"
+        android:text="Modo: Tablet" />
+
+    <Spinner
+        android:id="@+id/cbxEmpresa"
+        android:layout_width="match_parent"
+        android:layout_height="120px"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView2"
+        android:textSize="30sp" />
+
+</RelativeLayout>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="363dp" >
+
+        <TextView
+            android:id="@+id/lblEmpresa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Produto"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/txtCodProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lblEmpresa"
+            android:layout_toLeftOf="@+id/txtUnidade"
+            android:ems="10"
+            android:textSize="20sp" >
+
+            <requestFocus />
+        </EditText>
+
+        <Button
+            android:id="@+id/btnPesquisarProduto"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignBottom="@+id/txtCodProduto"
+            android:layout_alignParentRight="true"
+            android:text="Pesquisar" />
+
+        <TextView
+            android:id="@+id/txtDescricaoProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtCodProduto"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <TextView
+            android:id="@+id/txtEstoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtDescricaoProduto"
+            android:text="Quantidade"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/txtQuantidade"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignRight="@+id/txtEstoque"
+            android:layout_below="@+id/txtEstoque"
+            android:ems="10"
+            android:inputType="number|numberDecimal"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtLoVend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtQuantidade"
+            android:text="Preço"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/cbxPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtLoVend" />
+
+        <Button
+            android:id="@+id/btnIncluirProduto"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/cbxPreco"
+            android:layout_toRightOf="@+id/txtCodProduto"
+            android:text="Incluir"
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/txtUnidade"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignLeft="@+id/txtLoGPS1"
+            android:layout_alignRight="@+id/txtLoGPS1"
+            android:layout_below="@+id/txtLoGPS1"
+            android:editable="false"
+            android:ems="10"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/txtLoGPS2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescricaoProduto"
+            android:layout_centerHorizontal="true"
+            android:text="Desconto/Acrescimo"
+            android:textSize="25sp" />
+
+        <TextView
+            android:id="@+id/txtLoGPS1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtCodProduto"
+            android:layout_toLeftOf="@+id/btnPesquisarProduto"
+            android:text="Unidade      "
+            android:textSize="25sp" />
+
+        <EditText
+            android:id="@+id/txtDA"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
+            android:layout_alignBaseline="@+id/txtQuantidade"
+            android:layout_toRightOf="@+id/txtLoGPS2"
+            android:editable="false"
+            android:ems="10"
+            android:inputType="numberDecimal"
+            android:textSize="20sp" />
+
+        <RadioGroup
+            android:id="@+id/rdgDA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtLoVend"
+            android:layout_alignLeft="@+id/txtLoGPS2"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/radio0"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:checked="true"
+                android:text="D"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/radio1"
+                android:layout_width="wrap_content"
+                android:layout_height="70dp"
+                android:text="A"
+                android:textSize="20sp" />
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+</ScrollView>

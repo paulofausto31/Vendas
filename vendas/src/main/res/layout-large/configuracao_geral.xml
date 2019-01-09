@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <TextView
+        android:id="@+id/lblEmpresa"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="Caminho FTP local"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/txtCaminhoFtp"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/lblEmpresa"
+        android:ems="10"
+        android:textSize="25sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <TextView
+        android:id="@+id/txtEstoque"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtCaminhoFtp"
+        android:text="Codigo da Empresa"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/txtCodigoEmpresa"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/txtEstoque"
+        android:layout_below="@+id/txtEstoque"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/txtLoHora"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtCodigoEmpresa"
+        android:text="Caminho Recepção Manual"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/txtCaminhoManual"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/txtLoHora"
+        android:ems="10"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/txtLoVend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/txtCaminhoManual"
+        android:text="Porta FTP"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/txtPortaFtp"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/txtCodigoEmpresa"
+        android:layout_below="@+id/txtLoVend"
+        android:ems="10"
+        android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/btnSalvar"
+                android:layout_width="136dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/txtPortaFtp"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/txtLoVend"
+                android:layout_toRightOf="@+id/txtLoHora"
+                android:text="Salvar" />
+    
+</RelativeLayout>
