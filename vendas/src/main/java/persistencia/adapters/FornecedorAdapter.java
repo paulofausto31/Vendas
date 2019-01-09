@@ -2,9 +2,8 @@ package persistencia.adapters;
 
 import java.util.List;
 
-import persistencia.brl.ClienteNaoPositivadoBRL;
-import persistencia.brl.PedidoBRL;
-import persistencia.dto.ClienteDTO;
+import persistencia.dto.FornecedorDTO;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,17 +11,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-public class CidadeAdapter extends BaseAdapter {
+public class FornecedorAdapter extends BaseAdapter {
 
 	private Context ctx;
-	private List<ClienteDTO> lista;
-	// teste
-
-	public CidadeAdapter(Context ctx, List<ClienteDTO> lista){
+	private List<FornecedorDTO> lista;
+	
+	public FornecedorAdapter(Context ctx, List<FornecedorDTO> lista){
 		this.ctx = ctx;
 		this.lista = lista;
 	}
-
+	
 	@Override
 	public int getCount() {
 		return lista.size();
@@ -39,17 +37,16 @@ public class CidadeAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		ClienteDTO dto = (ClienteDTO)getItem(position);
+	public View getView(int position, View view, ViewGroup viewGroup) {
+		FornecedorDTO dto = (FornecedorDTO)getItem(position);
 		
 		LayoutInflater layout = (LayoutInflater)ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View v = layout.inflate(vendas.telas.R.layout.filtro_cidade, null);
+		View v = layout.inflate(vendas.telas.R.layout.filtro_fornecedor, null);
 		
-		TextView txtCidade = (TextView)v.findViewById(vendas.telas.R.id.txtCidade);
-		txtCidade.setText(dto.getCidade().toString() + "  ");
+		TextView txtDescricao = (TextView)v.findViewById(vendas.telas.R.id.txtDescricao);
+		txtDescricao.setText(dto.getDescricao());
 
 		return v;
 	}
 
-	
 }
