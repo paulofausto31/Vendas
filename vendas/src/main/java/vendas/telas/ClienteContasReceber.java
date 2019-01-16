@@ -40,6 +40,8 @@ public class ClienteContasReceber extends ListActivity {
 					 + "Data Promessa: " + dto.getDataPromessa() + "\n"
 					 + "Forma Pgto: " + dto.getFormaPgto() + "\n"
 					 + "Valor: " + dto.getValor().toString() + "\n"
+					 + "Juros:" + PgtoBRL.getJurosCalculado(dto.getFormaPgto(), dto.getValor(), dto.getDataVencimento()) + "\n"
+					 + "Multa:" + PgtoBRL.getMultaCalculado(dto.getFormaPgto(), dto.getValor()) + "\n"
 			         + "Vl. Corrigido " + PgtoBRL.getValorAtualizado(dto.getFormaPgto(), dto.getValor(), dto.getDataVencimento()).toString(), Toast.LENGTH_LONG).show();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

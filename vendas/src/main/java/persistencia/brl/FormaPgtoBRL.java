@@ -83,14 +83,31 @@ public class FormaPgtoBRL {
     	return formaPgtoDAO.getCombo(campo, item0);
     }
 
-    public Double getMulta(String codPgto){
+    private Double getMulta(String codPgto){
     	return formaPgtoDAO.getMulta(codPgto);
     }
 
-    public Double getJuros(String codPgto){
+    private Double getJuros(String codPgto){
     	return formaPgtoDAO.getJuros(codPgto);
     }
-    
+
+    public String getMultaCalculado(String codFpto, Double valor){
+        Double multa = (valor * getMulta(codFpto));
+        return FormataValorNumerico(multa);
+    }
+
+    public String getJurosCalculado(String codFpto, Double valor, String dataVenc) throws ParseException {
+        Date dateAtual = new Date();
+        Date dateVenc = venda.util.Util.StringToDate(dataVenc);
+        Double juros = (valor * (venda.util.Util.dataDiff(dateVenc, dateAtual) * getJuros(codFpto)));
+        return FormataValorNumerico(juros);
+    }
+
+    private String FormataValorNumerico(Double valor){
+        DecimalFormat formatador = new DecimalFormat("##,##00.00");
+        return formatador.format(valor).replace(',', '.');
+    }
+
     public String getValorAtualizado(String codFpto, Double valor, String dataVenc) throws ParseException{
         Date dateAtual = new Date();
         Date dateVenc = venda.util.Util.StringToDate(dataVenc);

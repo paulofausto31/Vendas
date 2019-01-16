@@ -1,8 +1,12 @@
 package persistencia.brl;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -174,7 +178,7 @@ public class CaminhoFTPBRL {
 		else
 			return null;
     }
-    
+
     public Boolean RecebeArquivoFTP(int destino, String arquivo, FTPClient ftp){
     	ftpDTO = caminhoFTPDAO.getByEmpresa();
 		if (destino == 2131230966)
