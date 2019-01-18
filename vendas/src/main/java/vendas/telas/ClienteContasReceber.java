@@ -36,13 +36,13 @@ public class ClienteContasReceber extends ListActivity {
 		 
 		 try {
 			Toast.makeText(getBaseContext(), "Documento: " + dto.getDocumento() + "\n"
-					 + "Data Vencimento: " + dto.getDataVencimento() + "\n"
-					 + "Data Promessa: " + dto.getDataPromessa() + "\n"
+					 + "Data Emissão: " + dto.getDataVencimento() + "\n"
+					 + "Data Vencimento: " + dto.getDataPromessa() + "\n"
 					 + "Forma Pgto: " + dto.getFormaPgto() + "\n"
 					 + "Valor: " + dto.getValor().toString() + "\n"
-					 + "Juros:" + PgtoBRL.getJurosCalculado(dto.getFormaPgto(), dto.getValor(), dto.getDataVencimento()) + "\n"
+					 + "Juros:" + PgtoBRL.getJurosCalculado(dto.getFormaPgto(), dto.getValor(), dto.getDataPromessa()) + "\n"
 					 + "Multa:" + PgtoBRL.getMultaCalculado(dto.getFormaPgto(), dto.getValor()) + "\n"
-			         + "Vl. Corrigido " + PgtoBRL.getValorAtualizado(dto.getFormaPgto(), dto.getValor(), dto.getDataVencimento()).toString(), Toast.LENGTH_LONG).show();
+			         + "Vl. Corrigido " + PgtoBRL.getValorAtualizado(dto.getFormaPgto(), dto.getValor(), dto.getDataPromessa()).toString(), Toast.LENGTH_LONG).show();
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
