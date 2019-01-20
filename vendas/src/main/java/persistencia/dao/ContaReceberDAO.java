@@ -5,7 +5,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 import persistencia.db.db;
@@ -93,10 +99,10 @@ public class ContaReceberDAO {
 		
 		return dto;
 	}
-	
+
 	public List<ContaReceberDTO> getByCliente(Integer codCliente){
 
-		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, null);
+		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, "dataPromessa");
 		
 		ContaReceberDTO dto = null;
 		List<ContaReceberDTO> lista = new ArrayList<ContaReceberDTO>();
@@ -113,8 +119,34 @@ public class ContaReceberDAO {
 			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
 			lista.add(dto);
 		}
-		
+
+		Collections.sort(lista, new SortByDataPromessa());
 		return lista;
+	}
+
+	public class SortByDataPromessa implements Comparator<ContaReceberDTO>{
+
+		@Override
+		public int compare(ContaReceberDTO o1, ContaReceberDTO o2) {
+			DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
+			Date date1 = null;
+			try {
+				date1 = (Date)formatter.parse(o1.getDataPromessa());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			Date date2 = null;
+			try {
+				date2 = (Date)formatter.parse(o2.getDataPromessa());
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+
+			return date1.compareTo(date2);
+
+		}
 	}
 
 	public List<ContaReceberDTO> getAll(){

@@ -27,7 +27,7 @@ public class ClienteContasReceber extends ListActivity {
 		ContaReceberBRL brl = new ContaReceberBRL(getBaseContext());
 
 		Intent it = getIntent();
-	    int codCliente = it.getIntExtra("codCliente", 1);
+	    Integer codCliente = it.getIntExtra("codCliente", 1);
 		setListAdapter(new ContasReceberAdapter(getBaseContext(), brl.getByCliente(codCliente)));
 	}
 	
