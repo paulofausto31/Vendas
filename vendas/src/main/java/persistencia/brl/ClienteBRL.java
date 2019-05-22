@@ -41,6 +41,7 @@ public class ClienteBRL {
         dto.setPrazo(Integer.parseInt(linha.substring(130, 134)));
         dto.setCpfCnpj(linha.substring(134, 152));
         dto.setSeqVisita(Integer.parseInt(linha.substring(152, 155)));
+        dto.setLimiteCredito(Double.parseDouble(linha.substring(155,162).replace(',', '.')));
         dto.setInfAdicional(linha.substring(162, 170));
         dto.setRazaoSocial(linha.substring(170, 205)); 
         dto.setBairro(linha.substring(205, 225));

@@ -129,13 +129,38 @@
             android:layout_below="@+id/txtAvencer"
             android:text="Telefone" />
 
-        <EditText
-            android:id="@+id/txtTelefone"
+        <TextView
+            android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/txtAvencer"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="261dp"
+            android:layout_marginTop="0dp"
+            android:text="Limite Crédito" />
+
+        <EditText
+            android:id="@+id/txtTelefone"
+            android:layout_width="237dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView7"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="147dp"
+            android:editable="false"
+            android:ems="10" />
+
+        <EditText
+            android:id="@+id/txtLimiteCredito"
+            android:layout_width="118dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/textView7"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="260dp"
+            android:layout_marginTop="-1dp"
+            android:layout_marginRight="6dp"
             android:editable="false"
             android:ems="10" />
 

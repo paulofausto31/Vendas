@@ -1036,8 +1036,8 @@
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="app_name">PalmVenda Android</string>
-    <string name="app_versao">Versão apk: 8.3</string>
-    <string name="bco_versao">Versão Banco: 28.0</string>
+    <string name="app_versao">Versão apk: 8.4</string>
+    <string name="bco_versao">Versão Banco: 29.0</string>
     <string name="btnAbrir">Abrir</string>
     <string name="btnAnterior">&lt;</string>
     <string name="btnCliente">Cliente</string>

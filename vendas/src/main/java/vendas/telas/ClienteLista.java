@@ -72,6 +72,7 @@ public class ClienteLista extends ListActivity {
 				 + "CPF/CNPJ: " + dto.getCpfCnpj() + "\n"
 				 + "Endereço: " + dto.getEndereco() + "\n"
 				 + "Telefone: " + dto.getTelefone() + "\n"
+				 + "Limite Crédito: " + dto.getLimiteCredito() + "\n"
 				 + "Prazo: " + dto.getPrazo().toString(), Toast.LENGTH_LONG).show();
 	 }
 	 

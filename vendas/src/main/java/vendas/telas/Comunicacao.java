@@ -650,10 +650,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
             
             while ((lstrlinha = br.readLine()) != null) {
-            	ConfiguracaoDTO dto = brl.InstanciaConfiguracao(lstrlinha);
-                if (!brl.InsereConfiguracao(dto)){
-                	new Exception("Falhou importacao de Configuracao");
-                }
+            	if (lstrlinha.length() > 0) {
+					ConfiguracaoDTO dto = brl.InstanciaConfiguracao(lstrlinha);
+					if (!brl.InsereConfiguracao(dto)) {
+						new Exception("Falhou importacao de Configuracao");
+					}
+				}
             }            
         	arq.delete();
              
@@ -710,10 +712,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-            	JustificativaPositivacaoDTO dto = brl.InstanciaJustPositivacao(lstrlinha);
-                if (!brl.InsereJustPositivacao(dto)){
-                	new Exception("Falhou importacao de Justificativas");
-                }
+				if (lstrlinha.length() > 0) {
+					JustificativaPositivacaoDTO dto = brl.InstanciaJustPositivacao(lstrlinha);
+					if (!brl.InsereJustPositivacao(dto)) {
+						new Exception("Falhou importacao de Justificativas");
+					}
+				}
             }            
         	arq.delete();
              
@@ -739,10 +743,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                ContaReceberDTO dto = brl.InstanciaContaReceber(lstrlinha);
-                if (!brl.InsereContaReceber(dto)){
-                	new Exception("Falhou importacao de Contas a Receber");
-                }
+				if (lstrlinha.length() > 0) {
+					ContaReceberDTO dto = brl.InstanciaContaReceber(lstrlinha);
+					if (!brl.InsereContaReceber(dto)) {
+						new Exception("Falhou importacao de Contas a Receber");
+					}
+				}
             }            
         	arq.delete();
              
@@ -768,10 +774,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                PrecoDTO dto = brl.InstanciaPreco(lstrlinha);
-                if (!brl.InserePreco(dto)){
-                	new Exception("Falhou importacao de Precos");
-                }
+				if (lstrlinha.length() > 0) {
+					PrecoDTO dto = brl.InstanciaPreco(lstrlinha);
+					if (!brl.InserePreco(dto)) {
+						new Exception("Falhou importacao de Precos");
+					}
+				}
             }            
         	arq.delete();
              
@@ -796,11 +804,13 @@ public class Comunicacao extends Activity {
             br = new BufferedReader(new FileReader(arq));
             
 			while ((lstrlinha = br.readLine()) != null) {
-				Log.d("Produto", lstrlinha);
-			    ProdutoDTO dto = proBRL.InstanciaProduto(lstrlinha);
-			    if (!proBRL.InsereProduto(dto)){
-			    	new Exception("Falhou importacao de Produtos");
-			    }
+				if (lstrlinha.length() > 0) {
+					Log.d("Produto", lstrlinha);
+					ProdutoDTO dto = proBRL.InstanciaProduto(lstrlinha);
+					if (!proBRL.InsereProduto(dto)) {
+						new Exception("Falhou importacao de Produtos");
+					}
+				}
 			}
         	arq.delete();
    
@@ -826,10 +836,12 @@ public class Comunicacao extends Activity {
             br = new BufferedReader(new FileReader(arq));
             
 			while ((lstrlinha = br.readLine()) != null) {
-			    ClienteDTO dto = cliBRL.InstanciaCliente(lstrlinha);
-			    if (!cliBRL.InsereCliente(dto)){
-			    	new Exception("Falhou importa��o de Clientes");
-			    }
+				if (lstrlinha.length() > 0) {
+					ClienteDTO dto = cliBRL.InstanciaCliente(lstrlinha);
+					if (!cliBRL.InsereCliente(dto)) {
+						new Exception("Falhou importa��o de Clientes");
+					}
+				}
 			}
         	arq.delete();
 
@@ -856,10 +868,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                GrupoDTO dto = brl.InstanciaGrupo(lstrlinha);
-                if (!brl.InsereGrupo(dto)){
-                	new Exception("Falhou importacao de Grupos");
-                }
+				if (lstrlinha.length() > 0) {
+					GrupoDTO dto = brl.InstanciaGrupo(lstrlinha);
+					if (!brl.InsereGrupo(dto)) {
+						new Exception("Falhou importacao de Grupos");
+					}
+				}
             }            
         	arq.delete();
              
@@ -885,10 +899,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                VendedorDTO dto = brl.InstanciaVendedor(lstrlinha);
-                if (!brl.InsereVendedor(dto)){
-                	new Exception("Falhou importa��o de Vendedores");
-                }
+				if (lstrlinha.length() > 0) {
+					VendedorDTO dto = brl.InstanciaVendedor(lstrlinha);
+					if (!brl.InsereVendedor(dto)) {
+						new Exception("Falhou importa��o de Vendedores");
+					}
+				}
             }            
         	arq.delete();
              
@@ -914,10 +930,12 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                FormaPgtoDTO dto = brl.InstanciaFormaPgto(lstrlinha);
-                if (!brl.InsereFormaPgto(dto)){
-                	new Exception("Falhou importacao de Formas de Pagamento");
-                }
+				if (lstrlinha.length() > 0) {
+					FormaPgtoDTO dto = brl.InstanciaFormaPgto(lstrlinha);
+					if (!brl.InsereFormaPgto(dto)) {
+						new Exception("Falhou importacao de Formas de Pagamento");
+					}
+				}
             }            
         	arq.delete();
              
@@ -943,11 +961,13 @@ public class Comunicacao extends Activity {
             BufferedReader br = new BufferedReader(new FileReader(arq));
 
             while ((lstrlinha = br.readLine()) != null) {
-                FornecedorDTO dto = brl.InstanciaFornecedor(lstrlinha);
+				if (lstrlinha.length() > 0) {
+					FornecedorDTO dto = brl.InstanciaFornecedor(lstrlinha);
 
-                if (!brl.InsereFornecedor(dto)){
-                	new Exception("Falhou importacao de Fornecedores");
-                }
+					if (!brl.InsereFornecedor(dto)) {
+						new Exception("Falhou importacao de Fornecedores");
+					}
+				}
             }            
         	arq.delete();
              

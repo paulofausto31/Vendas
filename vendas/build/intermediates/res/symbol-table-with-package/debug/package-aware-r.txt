@@ -1420,6 +1420,7 @@ id textTitle
 id textView
 id textView1
 id textView2
+id textView3
 id textView7
 id textView8
 id text_list_view
@@ -1466,6 +1467,7 @@ id txtFormaPgto
 id txtInfAdicional
 id txtItens
 id txtJustificativa
+id txtLimiteCredito
 id txtLoClie
 id txtLoData
 id txtLoGPS1

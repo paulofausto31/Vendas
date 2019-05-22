@@ -20,6 +20,7 @@ public class ClienteDTO {
     String bairro;
     String cidade;
     String rotaDia;
+    Double limiteCredito;
     
 	public ClienteDTO(){
 		
@@ -28,7 +29,7 @@ public class ClienteDTO {
 	public ClienteDTO(Integer id, String codEmpresa, Integer codCliente, String nome, String endereco
 		, String telefone, String dataUltimaCompra, Double valorAtraso, Double valorVencer
 		, String formaPgto, Integer prazo, String cpfCnpj, Integer seqVisita, String infAdicional,
-		String razaoSocial, String bairro, String Cidade, String rotaDia){
+		String razaoSocial, String bairro, String Cidade, String rotaDia, Double limiteCredito){
 		this.id = id;
 		this.codEmpresa = codEmpresa;
 		this.codCliente = codCliente;
@@ -47,6 +48,7 @@ public class ClienteDTO {
 		this.bairro = bairro;
 		this.cidade = cidade;
 		this.rotaDia = rotaDia;
+		this.limiteCredito = limiteCredito;
 	}
     public Integer getId() {
 		return id;
@@ -156,5 +158,11 @@ public class ClienteDTO {
 	}
 	public void setRotaDia(String rotaDia) {
 		this.rotaDia = rotaDia;
+	}
+	public Double getLimiteCredito() {
+		return limiteCredito;
+	}
+	public void setLimiteCredito(Double limiteCredito) {
+		this.limiteCredito = limiteCredito;
 	}
 }

@@ -19,7 +19,7 @@ public class ClienteDAO {
 	private SQLiteDatabase db;
 	private static String[] columns = {"id", "codCliente", "codEmpresa", "nome", "endereco", "telefone",
 		"dataUltimaCompra", "valorAtraso", "valorVencer", "formaPgto", "prazo", "cpfCnpj", "seqVisita",
-		"infAdicional", "razaoSocial", "bairro", "cidade", "rotaDia"};
+		"infAdicional", "razaoSocial", "bairro", "cidade", "rotaDia", "limiteCredito"};
 	
 	public ClienteDAO(){}
 	
@@ -53,7 +53,8 @@ public class ClienteDAO {
 		ctv.put("bairro", dto.getBairro());
 		ctv.put("cidade", dto.getCidade());
 		ctv.put("rotaDia", dto.getRotaDia());
-		
+		ctv.put("limiteCredito", dto.getLimiteCredito());
+
 		return (db.insert(tableName, null, ctv) > 0);
 	}
 	
@@ -92,7 +93,8 @@ public class ClienteDAO {
 		ctv.put("bairro", dto.getBairro());
 		ctv.put("cidade", dto.getCidade());
 		ctv.put("rotaDia", dto.getRotaDia());
-		
+		ctv.put("limiteCredito", dto.getLimiteCredito());
+
 		return (db.update(tableName, ctv, "id=?", new String[]{dto.getId().toString()}) > 0);
 	}
 	
@@ -122,6 +124,7 @@ public class ClienteDAO {
 			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
 			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
 			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
 		}
 		
 		return dto;
@@ -153,6 +156,7 @@ public class ClienteDAO {
 			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
 			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
 			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
 		}
 		
 		return dto;
@@ -185,6 +189,7 @@ public class ClienteDAO {
 			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
 			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
 			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 	
@@ -218,6 +223,7 @@ public class ClienteDAO {
 			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
 			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
 			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 	
@@ -236,7 +242,7 @@ public class ClienteDAO {
 					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
 					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
 					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
-					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")), rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 		
@@ -261,7 +267,7 @@ public class ClienteDAO {
 					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
 					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
 					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
-					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")), rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 
@@ -280,7 +286,7 @@ public class ClienteDAO {
 					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
 					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
 					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
-					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")), rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 		
@@ -299,7 +305,7 @@ public class ClienteDAO {
 					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
 					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
 					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
-					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")));
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")), rs.getDouble(rs.getColumnIndex("limiteCredito")));
 			lista.add(dto);
 		}
 		

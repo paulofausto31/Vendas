@@ -28,6 +28,7 @@ public class ClienteComplemento extends Activity {
     EditText txtFormaPgto;
     EditText txtBairro;
     EditText txtCidade;
+    EditText txtLimiteCredito;
 
     @Override
 	public void onCreate(Bundle e){
@@ -45,6 +46,7 @@ public class ClienteComplemento extends Activity {
 	    txtFormaPgto = (EditText) findViewById(R.id.txtFormaPgto);
 	    txtBairro = (EditText) findViewById(R.id.txtBairro);
 	    txtCidade = (EditText) findViewById(R.id.txtCidade);
+		txtLimiteCredito = (EditText) findViewById(R.id.txtLimiteCredito);
 	    
 	    Intent it = getIntent();
 	    ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
@@ -61,6 +63,7 @@ public class ClienteComplemento extends Activity {
 	    txtFormaPgto.setText(cliDTO.getFormaPgto());
 	    txtBairro.setText(cliDTO.getBairro());
 	    txtCidade.setText(cliDTO.getCidade());
+	    txtLimiteCredito.setText(cliDTO.getLimiteCredito().toString());
 	}
 
 	@Override

@@ -8,7 +8,7 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 28;
+	private static int version = 29;
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
@@ -34,7 +34,7 @@ public class db extends SQLiteOpenHelper {
 		sql = "CREATE TABLE IF NOT EXISTS [cliente] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [nome] VARCHAR(40), " +
 				"[endereco] VARCHAR(40), [telefone] VARCHAR(13), [dataUltimaCompra] VARCHAR(10), [valorAtraso] DECIMAL(18,2), " +
 				"[valorVencer] DECIMAL(18,2), [formaPgto] VARCHAR(4), [prazo] INTEGER, [cpfCnpj] VARCHAR(18), [seqVisita] INTEGER, " +
-				"[infAdicional] VARCHAR(1), [razaoSocial] VARCHAR(100), [bairro] VARCHAR(50), [cidade] VARCHAR(50), [rotaDia] VARCHAR(1))"; 
+				"[infAdicional] VARCHAR(1), [razaoSocial] VARCHAR(100), [bairro] VARCHAR(50), [cidade] VARCHAR(50), [rotaDia] VARCHAR(1), [limiteCredito] DECIMAL(18,2))";
 		db.execSQL(sql);					
 		sql = "CREATE TABLE IF NOT EXISTS [produto] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codProduto] BIGINT, [descricao] VARCHAR(100), " +
 				"[unidade] VARCHAR(6), [estoque] DECIMAL(18,2), [grupo] VARCHAR(3), [fornecedor] INTEGER, [unidade2] INTEGER)";
@@ -112,7 +112,7 @@ public class db extends SQLiteOpenHelper {
 		sql = "CREATE TABLE IF NOT EXISTS [cliente] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [nome] VARCHAR(40), " +
 				"[endereco] VARCHAR(40), [telefone] VARCHAR(13), [dataUltimaCompra] VARCHAR(10), [valorAtraso] DECIMAL(18,2), " +
 				"[valorVencer] DECIMAL(18,2), [formaPgto] VARCHAR(4), [prazo] INTEGER, [cpfCnpj] VARCHAR(18), [seqVisita] INTEGER, " +
-				"[infAdicional] VARCHAR(1), [razaoSocial] VARCHAR(100), [bairro] VARCHAR(50), [cidade] VARCHAR(50), [rotaDia] VARCHAR(1))"; 
+				"[infAdicional] VARCHAR(1), [razaoSocial] VARCHAR(100), [bairro] VARCHAR(50), [cidade] VARCHAR(50), [rotaDia] VARCHAR(1), [limiteCredito] DECIMAL(18,2))";
 		db.execSQL(sql);					
 		sql = "CREATE TABLE IF NOT EXISTS [produto] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codProduto] BIGINT, [descricao] VARCHAR(100), " +
 				"[unidade] VARCHAR(6), [estoque] DECIMAL(18,2), [grupo] VARCHAR(3), [fornecedor] INTEGER, [unidade2] INTEGER)";
