@@ -21,12 +21,14 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.brl.CaminhoFTPBRL;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ConfiguracaoBRL;
+import persistencia.brl.ContaReceberBRL;
 import persistencia.brl.FormaPgtoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.brl.VendedorBRL;
@@ -45,6 +47,7 @@ public class PedidoBasico extends Activity {
 	VendedorDTO venDTO = new VendedorDTO();
 	PedidoBRL pedBRL; 
 	ConfiguracaoBRL cfgBRL;
+	ContaReceberBRL recBRL;
 	private static final String URL = "http://pfsoft.esy.es/serverphp/sitlgps.php";
 
 	//... Componentes da Tela
@@ -67,13 +70,20 @@ public class PedidoBasico extends Activity {
 		venDTO = venBRL.getAll();
 		pedBRL = new PedidoBRL(getBaseContext());
 		cfgBRL = new ConfiguracaoBRL(getBaseContext());
+		recBRL = new ContaReceberBRL(getBaseContext());
 		
 		Intent it = getIntent();
 	    ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
 	    int idCliente = it.getIntExtra("idCliente", 1);
 	    cliDTO = cliBRL.getById(idCliente);
-	    
-	    localizacao = new Localizacao(getBaseContext());
+		try {
+			Global.totalContasReceber = recBRL.getValorAbertoByCliente(cliDTO.getCodCliente());
+			Global.totalLimiteCredito = cliDTO.getLimiteCredito();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		localizacao = new Localizacao(getBaseContext());
 	    
 	    exibeMensagemVendedor();
 	    

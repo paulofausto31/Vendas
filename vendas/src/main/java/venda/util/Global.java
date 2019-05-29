@@ -17,4 +17,6 @@ public class Global {
 	public static String filtroLinha;
 	public static Integer filtroFornecedor;
 	public static String retornoThead;
+	public static Double totalContasReceber;
+	public static Double totalLimiteCredito;
 }

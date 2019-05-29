@@ -568,7 +568,19 @@ public class PedidoItemNovo extends Activity {
 				IncluiProduto();
 		}
 	}
-	
+
+	private Boolean ValidaLimiteCredito(String qtd, String preco){
+		Integer codPedido = 0;
+		Double totalPed = 0.00;
+		codPedido = Global.pedidoGlobalDTO.getId();
+		totalPed = itpBRL.getTotalPedido(codPedido);
+		totalPed += Double.parseDouble(qtd) * Double.parseDouble(preco);
+		if ((totalPed + Global.totalContasReceber) > Global.totalLimiteCredito)
+			return true;
+		else
+			return false;
+	}
+
 	private boolean ValidaInclusao() {
 		if (txtDescricaoProduto.getText().toString().trim().length() <= 0){
 			Toast.makeText(getBaseContext(), "Selecione um produto", Toast.LENGTH_SHORT).show();
@@ -582,11 +594,18 @@ public class PedidoItemNovo extends Activity {
 			Toast.makeText(getBaseContext(), "Quantidade informada maior que o Saldo em Estoque", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-			
+
 		if (Preco.trim().equals("Selecione")){
 			Toast.makeText(getBaseContext(), "Selecione um Preço", Toast.LENGTH_SHORT).show();
 			return false;
 		}
-		return true;
+
+		if(!Global.pedidoGlobalDTO.getFormaPgto().equals("DIN")) {
+			if (ValidaLimiteCredito(txtQuantidade.getText().toString().trim(), Preco.trim())) {
+				Toast.makeText(getBaseContext(), "Este pedido está execedendo o limite de crédito do cliente", Toast.LENGTH_SHORT).show();
+			}
+		}
+
+			return true;
 	}	
 }

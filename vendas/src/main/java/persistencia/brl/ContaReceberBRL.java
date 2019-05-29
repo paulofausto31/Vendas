@@ -2,6 +2,7 @@ package persistencia.brl;
 
 import android.content.Context;
 
+import java.text.ParseException;
 import java.util.List;
 
 import persistencia.dao.ContaReceberDAO;
@@ -88,6 +89,16 @@ public class ContaReceberBRL {
     
     public List<ContaReceberDTO> getByCliente(Integer codCliente){
     	return contaReceberDAO.getByCliente(codCliente);
+    }
+
+    public Double getValorAbertoByCliente(Integer codCliente) throws ParseException {
+        FormaPgtoBRL fpgBRL = new FormaPgtoBRL(ctx);
+        List<ContaReceberDTO> list = contaReceberDAO.getByCliente(codCliente);
+        Double total = 0.00;
+        for (ContaReceberDTO ctrDTO:list) {
+            total += Double.parseDouble(fpgBRL.getValorAtualizado(ctrDTO.getFormaPgto(),ctrDTO.getValor(),ctrDTO.getDataVencimento()));
+        }
+        return total;
     }
 
 }

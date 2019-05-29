@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Wed May 22 20:07:02 GMT-03:00 2019
+#Wed May 29 20:39:59 GMT-03:00 2019
 1.base=C\:\\Users\\paulo\\projetos\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 2.path=classes.dex
 0.baseType=DIRECTORY
