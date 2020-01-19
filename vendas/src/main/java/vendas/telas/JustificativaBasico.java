@@ -29,6 +29,7 @@ public class JustificativaBasico extends Activity {
 
 	String codJustificativa = ""; 
 	ClienteDTO cliDTO = new ClienteDTO();
+	ClienteNaoPositivadoDTO cnpDTO = new ClienteNaoPositivadoDTO();
 	ClienteNaoPositivadoBRL cnpBRL;
 	List<String> listaDescricao;
 	List<String> listaCodigo;
@@ -78,8 +79,19 @@ public class JustificativaBasico extends Activity {
 
 		return true; 
 	 }
-	 
-	 @Override
+
+	@Override
+	protected void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		List<ClienteNaoPositivadoDTO> listCNP = cnpBRL.getByCodCliente(cliDTO.getCodCliente());
+		for (ClienteNaoPositivadoDTO cnpDTO : listCNP) {
+			cnpDTO.setDataFim(venda.util.Util.getDate());
+			cnpDTO.setHoraFim(venda.util.Util.getTime());
+			cnpBRL.Update(cnpDTO);
+		}
+	}
+		@Override
 	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
 		
 		 switch (menu.getItemId()){
@@ -120,7 +132,6 @@ public class JustificativaBasico extends Activity {
 
 	private void btnGravar_click(){
 		if (ValidaCampos()){
-			ClienteNaoPositivadoDTO cnpDTO = new ClienteNaoPositivadoDTO();
 			cnpDTO.setCodCliente(cliDTO.getCodCliente());
 			cnpDTO.setCodJustificativa(Integer.parseInt(codJustificativa));
 			cnpDTO.setData(Util.getDate());

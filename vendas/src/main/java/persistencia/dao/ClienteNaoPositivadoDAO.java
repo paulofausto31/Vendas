@@ -102,7 +102,7 @@ public class ClienteNaoPositivadoDAO {
 	
 	public List<ClienteNaoPositivadoDTO> getByCodCliente(Integer codCliente){
 
-		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, null);
+		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=? and Baixado=0", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, null);
 		
 		ClienteNaoPositivadoDTO dto = null;
 		List<ClienteNaoPositivadoDTO> lista = new ArrayList<ClienteNaoPositivadoDTO>();

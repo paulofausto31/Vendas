@@ -2,7 +2,9 @@ package persistencia.brl;
 
 import android.content.Context;
 
+import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.dao.ContaReceberDAO;
@@ -28,15 +30,21 @@ public class ContaReceberBRL {
 
     public ContaReceberDTO InstanciaContaReceber(String linha) 
     {
-    	ContaReceberDTO dto = new ContaReceberDTO();
-        //dto.setId(1);
-        dto.setCodEmpresa(Global.codEmpresa);
-        dto.setCodCliente(Integer.parseInt(linha.substring(0, 6)));
-        dto.setDocumento(linha.substring(6, 16));
-        dto.setDataVencimento(linha.substring(16, 26));
-        dto.setDataPromessa(linha.substring(26, 36));
-        dto.setValor(Double.parseDouble(linha.substring(36, 44).replace(',', '.')));
-        dto.setFormaPgto(linha.substring(44, 47));
+        ContaReceberDTO dto = new ContaReceberDTO();
+        try{
+            dto.setCodEmpresa(Global.codEmpresa);
+            dto.setCodCliente(Integer.parseInt(linha.substring(0, 6)));
+            dto.setDocumento(linha.substring(6, 16));
+            dto.setDataVencimento(linha.substring(16, 26));
+            dto.setDataPromessa(linha.substring(26, 36));
+            dto.setValor(Double.parseDouble(linha.substring(36, 44).replace(',', '.')));
+            dto.setFormaPgto(linha.substring(44, 47));
+        }catch (Exception e) {
+            //Global.retornoimportacao = new ArrayList<>();
+            //Global.retornoimportacao.add(String.format("Tabela: TABREC Linha: %d Erro: %s \\n",1,e.getMessage().substring(0,20)));
+            //Global.retornoimportacao.add(String.format("Tabela: TABREC Linha: %d Erro: %s \\n",2,e.getMessage().substring(0,20)));
+            return null;
+        }
         return dto;
     }
     

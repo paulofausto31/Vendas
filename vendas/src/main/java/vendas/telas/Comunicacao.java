@@ -247,12 +247,14 @@ public class Comunicacao extends Activity {
 											HabilitaDesabilitaBotoes(true);
 											processando = false;
 											progresso.setVisibility(4);
+											//Toast.makeText(getApplicationContext(), Global.retornoimportacao.toString(), Toast.LENGTH_LONG).show();
 										}else{
 											Toast.makeText(getBaseContext(), "Importando ".concat(arquivoImp), Toast.LENGTH_SHORT).show();
 										}
 									}
 								});
-								if (!arquivoImp.equals("Final"))	RecebeArquivosTXT(arquivoImp);
+								if (!arquivoImp.equals("Final"))
+									RecebeArquivosTXT(arquivoImp);
 							}
 							ftpBRL.DesconectaFTP(rbtDestino.getCheckedRadioButtonId(), ftp);
 						}
@@ -512,6 +514,8 @@ public class Comunicacao extends Activity {
 				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemCNP.getHora(), 5));
 				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemCNP.getObs(), 100));
 				   lstrlinha = lstrlinha.concat(Util.FormataZeros(Global.codEmpresa, 4));
+				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemCNP.getDataFim(), 10));
+				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemCNP.getHoraFim(), 5));
 				   lstrlinha = lstrlinha.concat("\r\n");
 				   //transforma o texto digitado em array de bytes
 				   dados = lstrlinha.getBytes();
@@ -745,8 +749,9 @@ public class Comunicacao extends Activity {
             while ((lstrlinha = br.readLine()) != null) {
 				if (lstrlinha.length() > 0) {
 					ContaReceberDTO dto = brl.InstanciaContaReceber(lstrlinha);
-					if (!brl.InsereContaReceber(dto)) {
-						new Exception("Falhou importacao de Contas a Receber");
+					if(dto != null) {
+						if (!brl.InsereContaReceber(dto))
+							new Exception("Falhou importacao de Contas a Receber");
 					}
 				}
             }            

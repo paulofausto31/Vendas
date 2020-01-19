@@ -60,7 +60,7 @@ public class Entrada extends Activity {
 		venBRL = new VendedorBRL(getBaseContext());
 
         btnEntrar.setOnClickListener(new Button.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				if (txtVendedor.getText().toString().length() == 0)
@@ -78,10 +78,10 @@ public class Entrada extends Activity {
 					}else{
 						Toast.makeText(getBaseContext(), "Este aparelho não esta preparado para este vendedor", Toast.LENGTH_LONG).show();
 						AbreComunicacao();
-					}		
+					}
 				}
 			}
-		});        
+		});
 	}
 
 	public void VerificaPermissaoGravacao(){

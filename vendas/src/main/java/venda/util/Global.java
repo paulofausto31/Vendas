@@ -1,5 +1,7 @@
 package venda.util;
 
+import java.util.ArrayList;
+
 import persistencia.dto.CaminhoFTPDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
@@ -19,4 +21,5 @@ public class Global {
 	public static String retornoThead;
 	public static Double totalContasReceber;
 	public static Double totalLimiteCredito;
+	public static ArrayList<String> retornoimportacao;
 }
