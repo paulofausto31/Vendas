@@ -90,20 +90,20 @@ public class FormaPgtoDAO {
 	
 	public Double getMulta(String codFPgto){
 
-		Cursor rs = db.query(tableName, columns, "codFPgto=? and codEmpresa=?", new String[]{codFPgto, Global.codEmpresa}, null, null, null);
-		
+		Cursor rs = db.query(tableName, columns, "codFPgto=? and codEmpresa=?", new String[]{codFPgto.trim(), Global.codEmpresa}, null, null, null);
+
 		Double multa = null;
-		
+
 		if(rs.moveToFirst()){
 			multa = rs.getDouble(rs.getColumnIndex("multa")) / 100;
 		}
-		
+
 		return multa;
 	}
 
 	public Double getJuros(String codFPgto){
 
-		Cursor rs = db.query(tableName, columns, "codFPgto=? and codEmpresa=?", new String[]{codFPgto, Global.codEmpresa}, null, null, null);
+		Cursor rs = db.query(tableName, columns, "codFPgto=? and codEmpresa=?", new String[]{codFPgto.trim(), Global.codEmpresa}, null, null, null);
 		
 		Double juros = null;
 		

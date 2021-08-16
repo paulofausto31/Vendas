@@ -1,4 +1,0 @@
-#Mon Sep 10 19:46:31 BRT 2018
-base.0=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_2
-renamed.0=classes.dex
-file.0=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\5\\slice_2\\classes.dex

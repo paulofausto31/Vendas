@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.os.Environment;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -149,8 +150,8 @@ public class CaminhoFTPBRL {
     		mensagem = "Informe a senha remota";
     	else if (ftpDTO.getCaminho().trim().length() <= 0)
     		mensagem = "Informe o caminho";
-    	else if (ftpDTO.getCaminhoManual().trim().length() <= 0)
-    		mensagem = "Informe o caminho de recepção manual";
+    	else if (ftpDTO.getEmailEmpresa().trim().length() <= 0)
+    		mensagem = "Informe o email da empresa";
     	
     	if (tipo == 1 && mensagem != null){
     		Toast.makeText(ctx, mensagem, Toast.LENGTH_SHORT).show();
@@ -161,13 +162,13 @@ public class CaminhoFTPBRL {
     	return retorno;
     }
     
-    public FTPClient ConectaFTP(int destino) throws NumberFormatException, Exception{
+    public FTPClient ConectaFTP() throws NumberFormatException, Exception{
     	ftpDTO = caminhoFTPDAO.getByEmpresa();
     	if (ValidaCaminhoFTP(1, ftpDTO)){
-    		if (destino == 2131230966) //2131099676
+    		if (Global.caminhoFTPDTO.getComDefault().equals("L")) //2131099676
     			return FTP.ConectaServidorFTP(ftpDTO.getServerLocal(), ftpDTO.getUserLocal(), 
     					ftpDTO.getPasswordLocal(), ftpDTO.getCaminho() + Global.codVendedor, Integer.parseInt(ftpDTO.getPortaFTP()));
-    		else if (destino == 2131230968){ //2131099677
+    		else if (Global.caminhoFTPDTO.getComDefault().equals("R")){ //2131099677
     			if (!FTP.verificaConexao(ctx))
     				throw new Exception("Verifique sua conexão com internet");
     			return FTP.ConectaServidorFTP(ftpDTO.getServerRemoto(), ftpDTO.getUserRemoto(), 
@@ -179,34 +180,34 @@ public class CaminhoFTPBRL {
 			return null;
     }
 
-    public Boolean RecebeArquivoFTP(int destino, String arquivo, FTPClient ftp){
+    public Boolean RecebeArquivoFTP(String arquivo, FTPClient ftp, String pastaDest){
     	ftpDTO = caminhoFTPDAO.getByEmpresa();
-		if (destino == 2131230966)
-	    	return FTP.RecebeArquivoFTP(arquivo, ftp);
-		else if (destino == 2131230968)
-	    	return FTP.RecebeArquivoFTP(arquivo, ftp);
+		if (Global.caminhoFTPDTO.getComDefault().equals("L"))
+	    	return FTP.RecebeArquivoFTP(arquivo, ftp, pastaDest);
+		else if (Global.caminhoFTPDTO.getComDefault().equals("R"))
+	    	return FTP.RecebeArquivoFTP(arquivo, ftp, pastaDest);
 		else
 			return true;
     }
 
-    public Boolean EnviaArquivoFTP(int destino, String arquivo, FTPClient ftp){
+    public Boolean EnviaArquivoFTP(String arquivo, FTPClient ftp, String pastaDest){
     	ftpDTO = caminhoFTPDAO.getByEmpresa();
-		if (destino == 2131230966)
-	    	return FTP.EnviaArquivoFTP(arquivo, ftp);
-		else if (destino == 2131230968)
-	    	return FTP.EnviaArquivoFTP(arquivo, ftp);
+		if (Global.caminhoFTPDTO.getComDefault().equals("L"))
+	    	return FTP.EnviaArquivoFTP(arquivo, ftp, pastaDest);
+		else if (Global.caminhoFTPDTO.getComDefault().equals("R"))
+	    	return FTP.EnviaArquivoFTP(arquivo, ftp, pastaDest);
 		else
 			return true;
     }
 
-    public void DesconectaFTP(int destino, FTPClient ftp){
-    	if (destino == 2131230966 || destino == 2131230968)
+    public void DesconectaFTP(FTPClient ftp){
+    	if (Global.caminhoFTPDTO.getComDefault().equals("L") || Global.caminhoFTPDTO.getComDefault().equals("R"))
     		FTP.DesconectaFTP(ftp);
     }
 
-    public String getCaminhoRecepcaoManual(){
+    public String getEmailDaEmpresa(){
     	ftpDTO = caminhoFTPDAO.getByEmpresa();
-    	return ftpDTO.getCaminhoManual();
+    	return ftpDTO.getEmailEmpresa();
     }
     
     public Boolean CheckFileExists(String[] arquivos, FTPClient ftp) throws IOException{
@@ -224,10 +225,10 @@ public class CaminhoFTPBRL {
 			return false;
 	}
 
-    public boolean CriaArquivoZip(String nomeArqZip, String nomeArqTxt) throws ZipException, IOException{
+    public boolean CriaArquivoZip(String nomeArqZip, String nomeArqTxt, String pastaDest) throws ZipException, IOException{
     	Util zip = new Util();
-    	File fileZip = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos").concat("/").concat(nomeArqZip));
-    	File fileTxt = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos").concat("/").concat(nomeArqTxt));
+    	File fileZip = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat("/").concat(nomeArqZip));
+    	File fileTxt = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat("/").concat(nomeArqTxt));
     	zip.criarZip(fileZip, fileTxt);
 		return true;
     }

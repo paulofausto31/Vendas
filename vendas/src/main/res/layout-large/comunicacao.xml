@@ -40,11 +40,11 @@
             android:text="Remoto    " />
 
         <RadioButton
-            android:id="@+id/rbtNenhum"
+            android:id="@+id/rbtEmail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="Nenhum" />
+            android:text="Email" />
         
         <RadioButton
             android:id="@+id/rbtWebService"

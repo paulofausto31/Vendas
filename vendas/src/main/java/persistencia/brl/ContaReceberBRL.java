@@ -99,6 +99,10 @@ public class ContaReceberBRL {
     	return contaReceberDAO.getByCliente(codCliente);
     }
 
+    public Double getTotalReceberCliente(Integer codCliente){
+        return  contaReceberDAO.getTotalReceberCliente(codCliente);
+    }
+
     public Double getValorAbertoByCliente(Integer codCliente) throws ParseException {
         FormaPgtoBRL fpgBRL = new FormaPgtoBRL(ctx);
         List<ContaReceberDTO> list = contaReceberDAO.getByCliente(codCliente);

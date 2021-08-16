@@ -100,6 +100,19 @@ public class ContaReceberDAO {
 		return dto;
 	}
 
+	public Double getTotalReceberCliente(Integer codCliente){
+
+		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, "dataPromessa");
+
+		double total = 0.00;
+
+		while(rs.moveToNext()){
+			total += rs.getDouble(rs.getColumnIndex("valor"));
+		}
+
+		return total;
+	}
+
 	public List<ContaReceberDTO> getByCliente(Integer codCliente){
 
 		Cursor rs = db.query(tableName, columns, "codCliente=? and codEmpresa=?", new String[]{codCliente.toString(), Global.codEmpresa}, null, null, "dataPromessa");

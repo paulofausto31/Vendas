@@ -16,8 +16,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import persistencia.adapters.ClienteAdapter;
-import persistencia.brl.ClienteBRL;
-import persistencia.dto.ClienteDTO;
+import persistencia.brl.*;
+import persistencia.dto.*;
 import venda.util.Global;
 
 public class ClienteLista extends ListActivity {
@@ -35,6 +35,7 @@ public class ClienteLista extends ListActivity {
 	private static int RETORNO_ORDENACAO = 1;
 	
 	ClienteBRL brl;
+	ContaReceberBRL crbrl;
 	
 	@Override
 	public void onCreate(Bundle e){
@@ -49,6 +50,7 @@ public class ClienteLista extends ListActivity {
 	protected void onResume() {
 		super.onResume();
 		brl = new ClienteBRL(getBaseContext());
+		crbrl = new ContaReceberBRL(getBaseContext());
 		setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("nome")));
 	}
 
@@ -65,7 +67,7 @@ public class ClienteLista extends ListActivity {
 
 	protected void onListItemClick(ListView l, View v, int position, long id){
 		 ClienteDTO dto = (ClienteDTO) l.getAdapter().getItem(position);
-		 
+		 Double totReceber = crbrl.getTotalReceberCliente(dto.getCodCliente());
 		 Toast.makeText(getBaseContext(), "Codigo: " + dto.getCodCliente().toString() + "\n"
 				 + "R.Social: " + dto.getRazaoSocial() + "\n"
 				 + "Fantasia: " + dto.getNome() + "\n"
@@ -73,6 +75,8 @@ public class ClienteLista extends ListActivity {
 				 + "Endereço: " + dto.getEndereco() + "\n"
 				 + "Telefone: " + dto.getTelefone() + "\n"
 				 + "Limite Crédito: " + dto.getLimiteCredito() + "\n"
+				 + "Saldo disponível: " + (dto.getLimiteCredito() - totReceber)  + "\n"
+				 + "C.Receber em aberto: " + totReceber + "\n"
 				 + "Prazo: " + dto.getPrazo().toString(), Toast.LENGTH_LONG).show();
 	 }
 	 

@@ -16,7 +16,7 @@ public class ConfiguracaoGeral extends Activity {
 	CaminhoFTPBRL ftpBRL;
 	private EditText txtCaminhoFtp;
 	private EditText txtCodigoEmpresa;
-	private EditText txtCaminhoManual;
+	private EditText txtEmailEmpresa;
 	private EditText txtPortaFTP;
 	private Button btnSalvar;
 	private static final int MENU_SALVAR = 1;
@@ -30,7 +30,7 @@ public class ConfiguracaoGeral extends Activity {
 		ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
 		txtCaminhoFtp = (EditText) findViewById(R.id.txtCaminhoFtp);
 		txtCodigoEmpresa = (EditText) findViewById(R.id.txtCodigoEmpresa);
-		txtCaminhoManual = (EditText) findViewById(R.id.txtCaminhoManual);
+        txtEmailEmpresa = (EditText) findViewById(R.id.txtEmailEmpresa);
 		txtPortaFTP = (EditText) findViewById(R.id.txtPortaFtp);
 		btnSalvar = (Button) findViewById(R.id.btnSalvar);
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
@@ -55,10 +55,7 @@ public class ConfiguracaoGeral extends Activity {
 		else
 			txtCodigoEmpresa.setText(Global.caminhoFTPDTO.getCodEmpresa());
 		txtPortaFTP.setText(Global.caminhoFTPDTO.getPortaFTP());
-		if (Global.caminhoFTPDTO.getCaminhoManual() == null)
-			txtCaminhoManual.setText("/");
-		else
-			txtCaminhoManual.setText(Global.caminhoFTPDTO.getCaminhoManual());
+		txtEmailEmpresa.setText(Global.caminhoFTPDTO.getEmailEmpresa());
 		
 	    //MontaEntidade();
 	    //ftpBRL.PostCaminhoFTP(Global.caminhoFTPDTO);
@@ -74,7 +71,7 @@ public class ConfiguracaoGeral extends Activity {
 	 private void MontaEntidade() {
 		Global.caminhoFTPDTO.setCaminho(txtCaminhoFtp.getText().toString());
 		Global.caminhoFTPDTO.setCodEmpresa("1".concat(txtCodigoEmpresa.getText().toString()));
-		Global.caminhoFTPDTO.setCaminhoManual(txtCaminhoManual.getText().toString());
+		Global.caminhoFTPDTO.setEmailEmpresa(txtEmailEmpresa.getText().toString());
 		Global.caminhoFTPDTO.setPortaFTP(txtPortaFTP.getText().toString());
 	}
 	

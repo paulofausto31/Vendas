@@ -44,12 +44,12 @@
         android:id="@+id/txtLoHora"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_below="@+id/txtCodigoEmpresa"
-        android:text="Caminho Recepção Manual" />
+        android:layout_alignParentLeft="true"
+        android:text="Email da empresa" />
 
     <EditText
-        android:id="@+id/txtCaminhoManual"
+        android:id="@+id/txtEmailEmpresa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/txtCaminhoManual"
+        android:layout_below="@+id/txtEmailEmpresa"
         android:text="Porta FTP" />
 
     <EditText

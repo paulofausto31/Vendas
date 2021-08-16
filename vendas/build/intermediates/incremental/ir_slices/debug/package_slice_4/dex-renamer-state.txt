@@ -1,4 +1,0 @@
-#Thu Jan 10 20:13:59 GMT-03:00 2019
-base.0=C\:\\Users\\paulo\\projetos\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dexMerger\\debug\\4
-path.0=classes.dex
-renamed.0=classes.dex

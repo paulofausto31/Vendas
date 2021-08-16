@@ -1245,7 +1245,6 @@ id btnRecebeJson
 id btnSalvar
 id btnUtilitario
 id button
-id button2
 id buttonPanel
 id button_0
 id button_1
@@ -1425,8 +1424,8 @@ id radio
 id radio0
 id radio1
 id radioGroup1
+id rbtEmail
 id rbtLocal
-id rbtNenhum
 id rbtRemoto
 id rbtWebService
 id rdgDA
@@ -1492,7 +1491,6 @@ id textView
 id textView1
 id textView2
 id textView3
-id textView4
 id textView7
 id textView8
 id text_list_view
@@ -1509,7 +1507,6 @@ id txtAvencer
 id txtBairro
 id txtCPFCNPJ
 id txtCaminhoFtp
-id txtCaminhoManual
 id txtCidade
 id txtClientePedido
 id txtCodCliente
@@ -1532,6 +1529,7 @@ id txtDescricao
 id txtDescricaoProduto
 id txtDescricaoProdutoConsulta
 id txtDocumento
+id txtEmailEmpresa
 id txtEndereco
 id txtEstoque
 id txtFPgto
@@ -1647,7 +1645,6 @@ layout consulta_positivacao
 layout consulta_vendascliente
 layout consulta_vendasproduto
 layout entrada
-layout entrada_v2
 layout filtro_cidade
 layout filtro_fornecedor
 layout filtro_grupo

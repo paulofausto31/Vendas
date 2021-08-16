@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.android.gms:play-services-panorama:12.0.1@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-panorama-12.0.1.aar/dcf151a211ce85de6fdb2b567dd51a36/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-panorama-12.0.1.aar/b33dcf6fe2bda7c225be8f04f80369b0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fadbb552e28b9148e9ac1ad757962869/play-services-panorama-12.0.1/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fadbb552e28b9148e9ac1ad757962869/play-services-panorama-12.0.1/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fadbb552e28b9148e9ac1ad757962869/play-services-panorama-12.0.1/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

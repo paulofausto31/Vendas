@@ -10,7 +10,7 @@ public class CaminhoFTPDTO {
     String userRemoto;
     String passwordRemoto;
     String caminho;
-    String caminhoManual;
+    String emailEmpresa;
     String portaFTP;
     String metodoEntrada;
     String comDefault;
@@ -21,7 +21,7 @@ public class CaminhoFTPDTO {
 	
 	public CaminhoFTPDTO(Integer id, String serverLocal, String userLocal, String passwordLocal,
 			String serverRemoto, String userRemoto, String passwordRemoto, String caminho, String codEmpresa,
-			String caminhoManual, String portaFTP, String metodoEntrada, String comDefault){
+			String emailEmpresa, String portaFTP, String metodoEntrada, String comDefault){
 		this.id = id;
 		this.serverLocal = serverLocal;
 		this.userLocal = userLocal;
@@ -31,7 +31,7 @@ public class CaminhoFTPDTO {
 		this.passwordRemoto = passwordRemoto;
 		this.caminho = caminho;
 		this.codEmpresa = codEmpresa;
-		this.caminhoManual = caminhoManual;
+		this.emailEmpresa = emailEmpresa;
 		this.portaFTP = portaFTP;
 		this.metodoEntrada = metodoEntrada;
 		this.comDefault = comDefault;
@@ -93,11 +93,11 @@ public class CaminhoFTPDTO {
 	public void setCaminho(String caminho) {
 		this.caminho = caminho;
 	}
-	public String getCaminhoManual() {
-		return caminhoManual;
+	public String getEmailEmpresa() {
+		return emailEmpresa;
 	}
-	public void setCaminhoManual(String caminho) {
-		this.caminhoManual = caminho;
+	public void setEmailEmpresa(String emailEmpresa) {
+		this.emailEmpresa = emailEmpresa;
 	}
 	public String getMetodoEntrada() {
 		return metodoEntrada;

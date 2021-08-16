@@ -1,7 +1,0 @@
-#Thu Oct 18 11:08:35 BRT 2018
-base.0=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c6d9f80252a325208c8d4badea4f5bdf99b42a5c
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_079a80d585de09824412e7fc5fbb1141fed27575\\classes.dex
-base.1=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run_079a80d585de09824412e7fc5fbb1141fed27575
-file.0=C\:\\Users\\Paulo\\StudioProjects\\Vendas\\vendas\\build\\intermediates\\transforms\\dex\\debug\\folders\\1000\\10000\\instant-run-bootstrap_c6d9f80252a325208c8d4badea4f5bdf99b42a5c\\classes.dex

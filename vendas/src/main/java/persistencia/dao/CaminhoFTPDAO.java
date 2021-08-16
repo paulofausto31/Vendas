@@ -14,7 +14,7 @@ public class CaminhoFTPDAO {
 	private SQLiteDatabase db;
 	private static Context ctx;
 	private static String[] columns = {"id", "codEmpresa", "serverLocal", "userLocal", "passwordLocal",
-			"serverRemoto", "userRemoto", "passwordRemoto", "caminho", "caminhoManual",
+			"serverRemoto", "userRemoto", "passwordRemoto", "caminho", "emailEmpresa",
 			"portaFTP", "metodoEntrada", "comDefault"};
 
 	public CaminhoFTPDAO(){}
@@ -40,7 +40,7 @@ public class CaminhoFTPDAO {
 		ctv.put("userRemoto", dto.getUserRemoto());
 		ctv.put("passwordRemoto", dto.getPasswordRemoto());
 		ctv.put("caminho", dto.getCaminho());
-		ctv.put("caminhoManual", dto.getCaminhoManual());
+		ctv.put("emailEmpresa", dto.getEmailEmpresa());
 		ctv.put("portaFTP", dto.getPortaFTP());
 		ctv.put("metodoEntrada", dto.getMetodoEntrada());
 		ctv.put("comDefault", dto.getComDefault());
@@ -73,7 +73,7 @@ public class CaminhoFTPDAO {
 		ctv.put("serverRemoto", dto.getServerRemoto());
 		ctv.put("userRemoto", dto.getUserRemoto());
 		ctv.put("passwordRemoto", dto.getPasswordRemoto());
-		ctv.put("caminhoManual", dto.getCaminhoManual());
+		ctv.put("emailEmpresa", dto.getEmailEmpresa());
 		ctv.put("caminho", dto.getCaminho());
 		ctv.put("portaFTP", dto.getPortaFTP());
 		ctv.put("metodoEntrada", dto.getMetodoEntrada());
@@ -99,7 +99,7 @@ public class CaminhoFTPDAO {
 			dto.setUserRemoto(rs.getString(rs.getColumnIndex("userRemoto")));
 			dto.setPasswordRemoto(rs.getString(rs.getColumnIndex("passwordRemoto")));
 			dto.setCaminho(rs.getString(rs.getColumnIndex("caminho")));
-			dto.setCaminhoManual(rs.getString(rs.getColumnIndex("caminhoManual")));
+			dto.setEmailEmpresa(rs.getString(rs.getColumnIndex("emailEmpresa")));
 			dto.setPortaFTP(rs.getString(rs.getColumnIndex("portaFTP")));
 			dto.setMetodoEntrada(rs.getString(rs.getColumnIndex("metodoEntrada")));
 			dto.setComDefault(rs.getString(rs.getColumnIndex("comDefault")));
@@ -125,7 +125,7 @@ public class CaminhoFTPDAO {
 			dto.setUserRemoto(rs.getString(rs.getColumnIndex("userRemoto")));
 			dto.setPasswordRemoto(rs.getString(rs.getColumnIndex("passwordRemoto")));
 			dto.setCaminho(rs.getString(rs.getColumnIndex("caminho")));
-			dto.setCaminhoManual(rs.getString(rs.getColumnIndex("caminhoManual")));
+			dto.setEmailEmpresa(rs.getString(rs.getColumnIndex("emailEmpresa")));
 			dto.setPortaFTP(rs.getString(rs.getColumnIndex("portaFTP")));
 			dto.setMetodoEntrada(rs.getString(rs.getColumnIndex("metodoEntrada")));
 			dto.setComDefault(rs.getString(rs.getColumnIndex("comDefault")));
@@ -143,10 +143,10 @@ public class CaminhoFTPDAO {
 
 	public int getTotalRegistros(String codEmpresa)
 	{
-		//Cursor rs = db.query(tableName, columns, "codEmpresa=?", new String[]{codEmpresa}, null, null, null);
 		if (codEmpresa.length() == 14)
 			codEmpresa = "1".concat(codEmpresa);
-		Cursor rs = db.rawQuery("SELECT * FROM configuracaoFTP WHERE codEmpresa = ".concat(codEmpresa), null);
+		Cursor rs = db.query(tableName, columns, "codEmpresa=?", new String[]{codEmpresa}, null, null, null);
+		//Cursor rs = db.rawQuery("SELECT * FROM configuracaoFTP WHERE codEmpresa = ".concat(codEmpresa), null);
 
 		return  rs.getCount();
 	}
@@ -168,7 +168,7 @@ public class CaminhoFTPDAO {
 			dto.setUserRemoto(rs.getString(rs.getColumnIndex("userRemoto")));
 			dto.setPasswordRemoto(rs.getString(rs.getColumnIndex("passwordRemoto")));
 			dto.setCaminho(rs.getString(rs.getColumnIndex("caminho")));
-			dto.setCaminhoManual(rs.getString(rs.getColumnIndex("caminhoManual")));
+			dto.setEmailEmpresa(rs.getString(rs.getColumnIndex("emailEmpresa")));
 			dto.setPortaFTP(rs.getString(rs.getColumnIndex("portaFTP")));
 			dto.setMetodoEntrada(rs.getString(rs.getColumnIndex("metodoEntrada")));
 			dto.setComDefault(rs.getString(rs.getColumnIndex("comDefault")));

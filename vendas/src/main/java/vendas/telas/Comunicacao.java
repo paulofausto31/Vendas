@@ -33,7 +33,14 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
+
+import javax.activation.DataHandler;
+import javax.activation.FileDataSource;
+import javax.mail.*;
+import javax.mail.internet.*;
 
 import persistencia.brl.CaminhoFTPBRL;
 import persistencia.brl.ClienteBRL;
@@ -71,14 +78,13 @@ public class Comunicacao extends Activity {
 
 	private static final int MENU_CONFIGURACAO = 1;
 	private static final int TIMEOUT_MILLISEC = 30000;
-	private static final int local = 2131230966;
-	private static final int remoto = 2131230968;
-	private static final int nenhum = 2131493092;
-	private static final int webService = 2131493093;
+	//private static final int local = 2131230976;
+	//private static final int remoto = 2131230968;
+	//private static final int nenhum = 2131493092;
+	//private static final int webService = 2131493093;
 	private Button btnImportar;
 	private Button btnExportar;
 	private Button btnApagaBanco;
-	private Button btnConfiguracao;
 	private RadioGroup rbtDestino;
 	private ProgressBar progresso;
 	private Handler handler = new Handler();
@@ -90,7 +96,6 @@ public class Comunicacao extends Activity {
 //	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT", "TABPRE.TXT",
 //			"TABVEN.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
 	ClienteBRL cliBRL;
-	ConfiguracaoDTO cfgDTO;
 	ConfiguracaoBRL cfgBRL;
 	CaminhoFTPBRL ftpBRL;
 	ProdutoBRL proBRL;
@@ -161,37 +166,42 @@ public class Comunicacao extends Activity {
 			public void onClick(View v) {
 				SetComDefault(rbtDestino);
 				try {
-					if (rbtDestino.getCheckedRadioButtonId() != 2131099678)
-						pastaDest = "/InterPos";
-					else
-						pastaDest = ftpBRL.getCaminhoRecepcaoManual();
+					pastaDest = "/";
 					HabilitaDesabilitaBotoes(false);
 					processando = true;
-					progresso.setVisibility(0);
+					progresso.setVisibility(View.VISIBLE);
 					progresso.setIndeterminate(true);
 					new Thread(new Runnable() {
 						
 						@Override
 						public void run() {
 							try {
-								ftp = ftpBRL.ConectaFTP(rbtDestino.getCheckedRadioButtonId());
-								if (!ftpBRL.CheckFileExists(arquivosExportacao, ftp)){
-									if (ExportaArquivos())
+								if (rbtDestino.getCheckedRadioButtonId() == R.id.rbtLocal ||
+										rbtDestino.getCheckedRadioButtonId() == R.id.rbtRemoto) {
+
+									ftp = ftpBRL.ConectaFTP();
+									if (!ftpBRL.CheckFileExists(arquivosExportacao, ftp)) {
+										if (ExportaArquivosFTP())
+											venda.util.Global.retornoThead = "Concluído";
+										else
+											throw new Exception("Falha na exportação, repita o procedimento");
+									} else
+										throw new Exception("Importação pelo FTPInterpos pendente.");
+								}
+								else if(rbtDestino.getCheckedRadioButtonId() == R.id.rbtEmail){
+									if (ExportaArquivosEmail())
 										venda.util.Global.retornoThead = "Concluído";
 									else
 										throw new Exception("Falha na exportação, repita o procedimento");
-								} else
-									throw new Exception("Importação pelo FTPInterpos pendente.");
+								}
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								venda.util.Global.retornoThead = "O Servidor pode estar offLine";
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 								venda.util.Global.retornoThead = e.getMessage();
 							}
-							ftpBRL.DesconectaFTP(rbtDestino.getCheckedRadioButtonId(), ftp);
+							ftpBRL.DesconectaFTP(ftp);
 
 							handler.post(new Runnable() {
 								
@@ -200,13 +210,12 @@ public class Comunicacao extends Activity {
 									Toast.makeText(getBaseContext(), venda.util.Global.retornoThead, Toast.LENGTH_SHORT).show();
 									HabilitaDesabilitaBotoes(true);
 									processando = false;
-									progresso.setVisibility(4);
+									progresso.setVisibility(View.GONE);
 								}
 							});
 						}
 					}).start();
 				} catch (Exception e) {
-					// TODO: handle exception
 				}
 			}
 		});
@@ -217,25 +226,20 @@ public class Comunicacao extends Activity {
 			public void onClick(View arg0) {
 				SetComDefault(rbtDestino);
 				try {
-					if (rbtDestino.getCheckedRadioButtonId() != 2131099678)
-						pastaDest = "/InterPos";
-					else
-						pastaDest = ftpBRL.getCaminhoRecepcaoManual();
+					pastaDest = "/";
 					HabilitaDesabilitaBotoes(false);
 					processando = true;
-					progresso.setVisibility(0);
+					progresso.setVisibility(View.VISIBLE);
 					progresso.setIndeterminate(true);
 					new Thread(new Runnable() {
 						
 						@Override
 						public void run() {
 							try {
-								ftp = ftpBRL.ConectaFTP(rbtDestino.getCheckedRadioButtonId());
+								ftp = ftpBRL.ConectaFTP();
 							} catch (NumberFormatException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							} catch (Exception e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							for (final String arquivoImp : arquivosImportacao) {
@@ -246,7 +250,7 @@ public class Comunicacao extends Activity {
 										if (arquivoImp.equals("Final")){
 											HabilitaDesabilitaBotoes(true);
 											processando = false;
-											progresso.setVisibility(4);
+											progresso.setVisibility(View.GONE);
 											//Toast.makeText(getApplicationContext(), Global.retornoimportacao.toString(), Toast.LENGTH_LONG).show();
 										}else{
 											Toast.makeText(getBaseContext(), "Importando ".concat(arquivoImp), Toast.LENGTH_SHORT).show();
@@ -256,7 +260,7 @@ public class Comunicacao extends Activity {
 								if (!arquivoImp.equals("Final"))
 									RecebeArquivosTXT(arquivoImp);
 							}
-							ftpBRL.DesconectaFTP(rbtDestino.getCheckedRadioButtonId(), ftp);
+							ftpBRL.DesconectaFTP(ftp);
 						}
 					}).start();
 				} catch (Exception e) {
@@ -294,36 +298,44 @@ public class Comunicacao extends Activity {
 	 }
 	 
 	 private void GetComDefault(){
-		 if (Global.caminhoFTPDTO == null || Global.caminhoFTPDTO.getComDefault() == "L")
-			rbtDestino.check(local);
-		 else if (Global.caminhoFTPDTO.getComDefault() == "R")
-			rbtDestino.check(remoto);
-		 else if (Global.caminhoFTPDTO.getComDefault() == "N")
-			rbtDestino.check(nenhum);
-		 else if (Global.caminhoFTPDTO.getComDefault() == "W")
-			rbtDestino.check(webService);
+		 if (Global.caminhoFTPDTO == null || Global.caminhoFTPDTO.getComDefault() == null || Global.caminhoFTPDTO.getComDefault().equals("L"))
+			rbtDestino.check(R.id.rbtLocal);
+		 else if (Global.caminhoFTPDTO.getComDefault().equals("R"))
+			rbtDestino.check(R.id.rbtRemoto);
+		 else if (Global.caminhoFTPDTO.getComDefault().equals("E"))
+			rbtDestino.check(R.id.rbtEmail);
+		 else if (Global.caminhoFTPDTO.getComDefault().equals("W"))
+			rbtDestino.check(R.id.rbtWebService);
 		 else 
-			rbtDestino.check(local);
+			rbtDestino.check(R.id.rbtLocal);
 	 }
 	 
 	 private void SetComDefault(RadioGroup rbtDestino){
-		 
-		 if (rbtDestino.getCheckedRadioButtonId() == local)
-			 Global.caminhoFTPDTO.setComDefault("L");
-		 else if (rbtDestino.getCheckedRadioButtonId() == remoto)
-			 Global.caminhoFTPDTO.setComDefault("R");
-		 else if (rbtDestino.getCheckedRadioButtonId() == nenhum)
-			 Global.caminhoFTPDTO.setComDefault("N");
-		 else if (rbtDestino.getCheckedRadioButtonId() == webService)
-			 Global.caminhoFTPDTO.setComDefault("W");
-		 else
-			 Global.caminhoFTPDTO.setComDefault("E");
+
+		 switch (rbtDestino.getCheckedRadioButtonId()){
+			 case R.id.rbtLocal:
+				 Global.caminhoFTPDTO.setComDefault("L");
+				 break;
+			 case R.id.rbtRemoto:
+				 Global.caminhoFTPDTO.setComDefault("R");
+				 break;
+			 case R.id.rbtWebService:
+				 Global.caminhoFTPDTO.setComDefault("W");
+				 break;
+			 case R.id.rbtEmail:
+				 Global.caminhoFTPDTO.setComDefault("E");
+				 break;
+			 default:
+				 Global.caminhoFTPDTO.setComDefault("L");
+				 break;
+		 }
+
 		 ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
 	 }
 
-	
+
 	private void RecebeArquivosTXT(String arquivo){
-		if (rbtDestino.getCheckedRadioButtonId() == webService){
+		if (rbtDestino.getCheckedRadioButtonId() == R.id.rbtWebService){
 			Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			if (arquivo.equals("TABMOT.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
@@ -349,8 +361,8 @@ public class Comunicacao extends Activity {
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 		}
 		else{
-			ftpBRL.RecebeArquivoFTP(rbtDestino.getCheckedRadioButtonId(), arquivo, ftp);
-			File file = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos").concat("/").concat(arquivo));
+			ftpBRL.RecebeArquivoFTP(arquivo, ftp, pastaDest);
+			File file = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat("/").concat(arquivo));
 			if (file.exists()){
 				//Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 				if (arquivo.equals("TABEMP.TXT"))
@@ -379,7 +391,6 @@ public class Comunicacao extends Activity {
 		}
 	}
 
-	@Deprecated
 	public void TABPGT() {
 	    try {
 	        FormaPgtoBRL brl = new FormaPgtoBRL(getApplicationContext());
@@ -427,10 +438,8 @@ public class Comunicacao extends Activity {
 	                brl.InsereFormaPgto(dto);
 	            }
 	        } catch (ClientProtocolException e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        } catch (IOException e) {
-	            // TODO Auto-generated catch block
 	            e.printStackTrace();
 	        }
 	        // Log.i(getClass().getSimpleName(), "send  task - end");
@@ -468,7 +477,7 @@ public class Comunicacao extends Activity {
 		}
 	}
 	
-	public Boolean ExportaArquivos() throws IOException {
+	public Boolean ExportaArquivosFTP() throws IOException {
 		boolean retorno;
 		PedidoBRL pedBRL = new PedidoBRL(getApplicationContext());
 		int NumItensPedido = ExportaItensPedido();
@@ -476,7 +485,7 @@ public class Comunicacao extends Activity {
 		ExportaClienteNPositivados();
 		if (NumItensPedido > 0 && NumPedidos > 0) {
 			for (String arquivoExp : arquivosExportacao) {
-				ftpBRL.EnviaArquivoFTP(rbtDestino.getCheckedRadioButtonId(), arquivoExp, ftp);
+				ftpBRL.EnviaArquivoFTP(arquivoExp, ftp, pastaDest);
 			}
 			if (ftpBRL.CheckFileExists(arquivosExportacao, ftp)) {
 				retorno = true;
@@ -488,6 +497,101 @@ public class Comunicacao extends Activity {
 		return retorno;
 }
 
+	public void EnviarEmail(){
+		String to = ftpBRL.getEmailDaEmpresa();
+		final String from = "palmvendasit@gmail.com";
+		String host = "smtp.gmail.com";
+		String tabped = "TABPED.TXT";
+		String tabpei = "TABPEI.TXT";
+		String tabcnp = "TABCNP.TXT";
+		String msgText1 = "Enviando arquivo.\n";
+		String subject = "Pedidos vendedor " + Global.codVendedor;
+
+		// cria algumas propriedades e obtem uma sessao padrao
+		Properties props = System.getProperties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", "587");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+
+		Session session = Session.getInstance(props,
+				new javax.mail.Authenticator() {
+					protected PasswordAuthentication getPasswordAuthentication() {
+						return new PasswordAuthentication(from, "jugkimpfmloguqvo"); //mxjlpcucqrzmuwjx
+					}
+				});
+
+		try
+		{
+			// cria a mensagem
+			MimeMessage msg = new MimeMessage(session);
+			msg.setFrom(new InternetAddress(from));
+			InternetAddress[] address = {new InternetAddress(to)};
+			msg.setRecipients(Message.RecipientType.TO, address);
+			msg.setSubject(subject);
+
+			// cria a primeira parte da mensagem
+			MimeBodyPart mbp1 = new MimeBodyPart();
+			mbp1.setText(msgText1);
+
+			// cria a segunda parte da mensage
+			MimeBodyPart mbp2 = new MimeBodyPart();
+			MimeBodyPart mbp3 = new MimeBodyPart();
+			MimeBodyPart mbp4 = new MimeBodyPart();
+
+			// anexa o arquivo na mensagem
+			String caminho = Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat(tabped);
+			FileDataSource fds = new FileDataSource(caminho);
+			mbp2.setDataHandler(new DataHandler(fds));
+			mbp2.setFileName(fds.getName());
+			caminho = Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat(tabpei);
+			fds = new FileDataSource(caminho);
+			mbp3.setDataHandler(new DataHandler(fds));
+			mbp3.setFileName(fds.getName());
+			caminho = Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat(tabcnp);
+			fds = new FileDataSource(caminho);
+			mbp4.setDataHandler(new DataHandler(fds));
+			mbp4.setFileName(fds.getName());
+
+			// cria a Multipart
+			Multipart mp = new MimeMultipart();
+			mp.addBodyPart(mbp1);
+			mp.addBodyPart(mbp2);
+			mp.addBodyPart(mbp3);
+			mp.addBodyPart(mbp4);
+
+			// adiciona a Multipart na mensagem
+			msg.setContent(mp);
+
+			// configura a data: cabecalho
+			msg.setSentDate(new Date());
+
+			// envia a mensagem
+			Transport.send(msg);
+
+		}
+		catch (MessagingException mex) {
+			mex.printStackTrace();
+			Exception ex = null;
+			if ((ex = mex.getNextException()) != null) {
+				ex.printStackTrace();
+			}
+		}
+	}
+	public Boolean ExportaArquivosEmail() throws IOException {
+		boolean retorno = true;
+		PedidoBRL pedBRL = new PedidoBRL(getApplicationContext());
+		int NumItensPedido = ExportaItensPedido();
+		int NumPedidos = ExportaPedidos();
+		ExportaClienteNPositivados();
+		if (NumItensPedido > 0 && NumPedidos > 0) {
+			EnviarEmail();
+			pedBRL.UpdateBaixado();
+		}
+		else
+			retorno = false;
+		return retorno;
+	}
 	
 	private void ExportaClienteNPositivados() {
        String lstrNomeArq;
@@ -500,8 +604,9 @@ public class Comunicacao extends Activity {
     	   lstrNomeArq = "TABCNP.TXT";
             
            arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
-           if (arq.exists())
-        	   arq.delete();
+           if (arq.exists()) {
+			   arq.delete();
+		   }
            FileOutputStream fos;
 		   fos = new FileOutputStream(arq);
 
@@ -602,7 +707,7 @@ public class Comunicacao extends Activity {
        try
        {
     	   lstrNomeArq = "TABPEI.TXT";
-            
+
            arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
            if (arq.exists())
         	   arq.delete();

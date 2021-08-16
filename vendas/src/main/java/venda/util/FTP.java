@@ -20,6 +20,8 @@ import android.net.ConnectivityManager;
 import android.os.Environment;
 import android.test.RenamingDelegatingContext;
 
+import persistencia.brl.CaminhoFTPBRL;
+
 public class FTP {
 	
 	public static FTPClient ConectaServidorFTP(String Servidor, String login, String senha, String diretorio, int porta) throws Exception {
@@ -50,11 +52,10 @@ public class FTP {
 	    return conectado;
 	}
 	
-	public static Boolean EnviaArquivoFTP(String arquivo, FTPClient ftp){
+	public static Boolean EnviaArquivoFTP(String arquivo, FTPClient ftp, String pastaDest){
 		try {
-			
-			File file = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos").concat("/").concat(arquivo));
-			File fileDir = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos"));
+			File file = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat("/").concat(arquivo));
+			File fileDir = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest));
 			if (!fileDir.exists())
 				fileDir.mkdir();
             FileInputStream arqEnviar = new FileInputStream(file);
@@ -73,11 +74,11 @@ public class FTP {
 		}
 	}
 	
-	public static Boolean RecebeArquivoFTP(String arquivo, FTPClient ftp){
+	public static Boolean RecebeArquivoFTP(String arquivo, FTPClient ftp, String pastaDest){
 		try {
 			boolean status;
-			File file = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos").concat("/").concat(arquivo));
-			File fileDir = new File(Environment.getExternalStorageDirectory().toString().concat("/InterPos"));
+			File file = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest).concat("/").concat(arquivo));
+			File fileDir = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest));
 			if (!fileDir.exists())
 				fileDir.mkdir();
 			if (file.exists())

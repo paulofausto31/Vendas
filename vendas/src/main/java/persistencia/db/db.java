@@ -8,7 +8,7 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 29;
+	private static int version = 31;
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
@@ -19,7 +19,7 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [LocalizacaoGPS] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codVendedor] VARCHAR(4), [DataHora] VARCHAR(20), [latitude] VARCHAR(20), [longitude] VARCHAR(20))";
 		db.execSQL(sql);
-		sql = "CREATE TABLE IF NOT EXISTS [configuracaoFTP] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [serverLocal] VARCHAR(30), [userLocal] VARCHAR(30), [passwordLocal] VARCHAR(30), [serverRemoto] VARCHAR(30), [userRemoto] VARCHAR(30), [passwordRemoto] VARCHAR(30), [caminho] VARCHAR(60), [caminhoManual] VARCHAR(60), [portaFTP] VARCHAR(2),[metodoEntrada] VARCHAR(1), [comDefault] VARCHAR(1))";
+		sql = "CREATE TABLE IF NOT EXISTS [configuracaoFTP] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [serverLocal] VARCHAR(30), [userLocal] VARCHAR(30), [passwordLocal] VARCHAR(30), [serverRemoto] VARCHAR(30), [userRemoto] VARCHAR(30), [passwordRemoto] VARCHAR(30), [caminho] VARCHAR(60), [emailEmpresa] VARCHAR(60), [portaFTP] VARCHAR(2),[metodoEntrada] VARCHAR(1), [comDefault] VARCHAR(1))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [formaPgto] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codFPgto] VARCHAR(4), [descricao] VARCHAR(40), [multa] DECIMAL(18,2), [juros] DECIMAL(18,2))";
 		db.execSQL(sql);
@@ -97,7 +97,7 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [LocalizacaoGPS] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codVendedor] VARCHAR(4), [DataHora] VARCHAR(20), [latitude] VARCHAR(20), [longitude] VARCHAR(20))";
 		db.execSQL(sql);
-		sql = "CREATE TABLE IF NOT EXISTS [configuracaoFTP] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [serverLocal] VARCHAR(30), [userLocal] VARCHAR(30), [passwordLocal] VARCHAR(30), [serverRemoto] VARCHAR(30), [userRemoto] VARCHAR(30), [passwordRemoto] VARCHAR(30), [caminho] VARCHAR(60), [caminhoManual] VARCHAR(60), [portaFTP] VARCHAR(2),[metodoEntrada] VARCHAR(1), [comDefault] VARCHAR(1))";
+		sql = "CREATE TABLE IF NOT EXISTS [configuracaoFTP] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [serverLocal] VARCHAR(30), [userLocal] VARCHAR(30), [passwordLocal] VARCHAR(30), [serverRemoto] VARCHAR(30), [userRemoto] VARCHAR(30), [passwordRemoto] VARCHAR(30), [caminho] VARCHAR(60), [emailEmpresa] VARCHAR(60), [portaFTP] VARCHAR(2),[metodoEntrada] VARCHAR(1), [comDefault] VARCHAR(1))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [formaPgto] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codFPgto] VARCHAR(4), [descricao] VARCHAR(40), [multa] DECIMAL(18,2), [juros] DECIMAL(18,2))";
 		db.execSQL(sql);

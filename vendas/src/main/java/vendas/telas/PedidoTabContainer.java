@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 
+import persistencia.brl.ClienteBRL;
+import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
 import venda.util.Global;
 
@@ -14,16 +16,22 @@ public class PedidoTabContainer extends TabActivity {
 		super.onCreate(e);
 		setContentView(R.layout.tabcontainer);
 		this.setTitle(Global.tituloAplicacao);
+		ClienteBRL cliBRL;
+		ClienteDTO cliDTO;
 
 		Intent it = getIntent();
 	    int idCliente = it.getIntExtra("idCliente", 0);
 	    if (idCliente > 0){
 			venda.util.Global.pedidoGlobalDTO = new PedidoDTO();
-			venda.util.Global.itemPedidoGlobalDTO = null;
-			venda.util.Global.prodPesquisa = null;
-			venda.util.Global.descontoAcrescimo = null;
-	    }
 
+	    }else{
+			cliBRL = new ClienteBRL(getBaseContext());
+			cliDTO = cliBRL.getByCodCliente(venda.util.Global.pedidoGlobalDTO.getCodCliente());
+			idCliente = cliDTO.getId();
+		}
+		venda.util.Global.itemPedidoGlobalDTO = null;
+		venda.util.Global.prodPesquisa = null;
+		venda.util.Global.descontoAcrescimo = null;
 
 		TabHost host = getTabHost();
 		TabHost.TabSpec sec;
