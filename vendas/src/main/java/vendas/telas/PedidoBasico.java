@@ -187,7 +187,7 @@ public class PedidoBasico extends Activity {
 		super.onPause();
 		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;
 		if (cliDTO != null)
-			pedDTO.setCodCliente(cliDTO.getCodCliente()); 
+			pedDTO.setCodCliente(cliDTO.getCodCliente());
 		pedDTO.setCodVendedor(venDTO.getCodigo());
 		pedDTO.setDataPedido(txtDataPedido.getText().toString());
 		pedDTO.setFormaPgto(codFormaPgto);
