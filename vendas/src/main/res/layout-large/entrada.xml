@@ -27,43 +27,48 @@
         android:id="@+id/lblEmpresa"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vendedor:"
-        android:textSize="40sp"
         android:layout_below="@+id/textView2"
+        android:layout_marginTop="394dp"
+        android:layout_marginRight="237dp"
         android:layout_toLeftOf="@+id/txtEstoque"
-        android:layout_marginTop="166dp" />
+        android:text="Vendedor:"
+        android:textSize="40sp" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
-        android:text="Vendedor:"
-        android:textSize="40sp"
         android:layout_below="@+id/txtLoHora"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:text="Empresa:"
+        android:textSize="40sp" />
 
     <EditText
         android:id="@+id/txtVendedorEntrada"
-        android:layout_width="wrap_content"
-        android:layout_height="70dp"
-        android:ems="10"
-        android:inputType="number"
-        android:textSize="25sp"
+        android:layout_width="268dp"
+        android:layout_height="84dp"
         android:layout_below="@+id/lblEmpresa"
         android:layout_alignLeft="@+id/lblEmpresa"
-        android:layout_alignRight="@+id/lblEmpresa" />
+        android:layout_alignRight="@+id/lblEmpresa"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginRight="-86dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="25sp" />
 
     <Button
         android:id="@+id/btnEntrar"
-        android:layout_width="100dp"
-        android:layout_height="70dp"
-        android:text="Entrar"
-        android:textSize="25sp"
+        android:layout_width="286dp"
+        android:layout_height="111dp"
         android:layout_above="@+id/textView1"
+        android:layout_marginLeft="77dp"
+        android:layout_marginBottom="261dp"
         android:layout_toRightOf="@+id/txtLoHora"
-        android:layout_marginBottom="225dp" />
-    
+        android:text="Entrar"
+        android:textSize="25sp" />
+
     <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
@@ -77,9 +82,10 @@
     <Spinner
         android:id="@+id/cbxEmpresa"
         android:layout_width="match_parent"
-        android:layout_height="120px"
-        android:layout_alignParentLeft="true"
+        android:layout_height="139dp"
         android:layout_below="@+id/textView2"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="0dp"
         android:textSize="30sp" />
 
 </RelativeLayout>

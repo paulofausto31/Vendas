@@ -9,6 +9,7 @@ import persistencia.dto.PedidoDTO;
 public class Global {
 	public static PedidoDTO pedidoGlobalDTO;
 	public static ItenPedidoDTO itemPedidoGlobalDTO;
+	public static String pedidoWS;
 	public static CaminhoFTPDTO caminhoFTPDTO;
 	public static String codEmpresa;
 	public static String tituloAplicacao;

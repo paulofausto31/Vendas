@@ -34,6 +34,7 @@ import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
+import venda.util.Global;
 import venda.util.Util;
 
 @SuppressLint("NewApi")
@@ -45,6 +46,7 @@ public class PedidoHistorico extends ListActivity {
 	private static final int MENU_DESCONTO = 4;
 	private static final int MENU_ACRESCIMO = 5;
 	private static final int MENU_PDF = 6;
+	private static final int MENU_ENVIAR = 7;
 	PedidoDTO pedDTO;
 	ItenPedidoBRL itpBRL;
 	PedidoBRL pedBRL;
@@ -68,6 +70,7 @@ public class PedidoHistorico extends ListActivity {
         menu.add(0,MENU_DESCONTO,0,"Desconto Pedido"); 
         menu.add(0,MENU_ACRESCIMO,0,"Acrescimo Pedido"); 
         menu.add(0,MENU_PDF,0,"Gerar PDF");
+		menu.add(0,MENU_ENVIAR,0,"Enviar Pedido");
     }  
 	
 	 @Override
@@ -76,7 +79,7 @@ public class PedidoHistorico extends ListActivity {
 		 AdapterContextMenuInfo info = (AdapterContextMenuInfo) menu.getMenuInfo();
 		 pedDTO = (PedidoDTO)l.getAdapter().getItem(info.position);
 		 if (pedDTO.getBaixado() == 1 && menu.getItemId() != 3){
-			 Toast.makeText(getBaseContext(), "Este pedido ja foi baixado e não pode ser manipulado", Toast.LENGTH_SHORT).show();
+			 Toast.makeText(getBaseContext(), "Este pedido ja foi baixado/enviado e não pode ser manipulado", Toast.LENGTH_SHORT).show();
 			 return false;
 		 }
 		
@@ -102,6 +105,11 @@ public class PedidoHistorico extends ListActivity {
 		 case MENU_PDF:
 			 criandoPdf();
 			 
+			 return true;
+
+		 case MENU_ENVIAR:
+			 EnviarPedido(pedDTO);
+
 			 return true;
 		 case MENU_ACRESCIMO:  
 			 if (!itpBRL.ExisteDA(pedDTO.getId()))
@@ -148,8 +156,30 @@ public class PedidoHistorico extends ListActivity {
 		 }
 		 return false;
 	 }
-	 
-	 @SuppressLint("NewApi")
+
+	private void EnviarPedido(PedidoDTO pedDTO) {
+		PedidoBRL pedBRL = new PedidoBRL(getBaseContext());
+		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getBaseContext());
+
+		String pedidoWS = "p|" +
+						  pedDTO.getCodCliente().toString() + "|" + pedDTO.getDataPedido().toString()    + "|" +
+				   		  pedDTO.getHoraPedido().toString() + "|" + pedDTO.getHoraPedidoFim().toString() + "|" +
+				          pedDTO.getParcela().toString()    + "|" + pedDTO.getPrazo().toString()         + "|" +
+				          pedDTO.getFormaPgto().toString()  + "|" + pedDTO.getCodVendedor().toString()   + "|" +
+				          pedDTO.getLatitude().toString()   + "|" + pedDTO.getLongitude().toString()     + "|" +
+				          pedDTO.getId().toString()         + "|" + pedDTO.getInfAdicional().toString();
+
+		List<ItenPedidoDTO> itens = itpBRL.getByCodPedido(pedDTO.getId());
+		for (ItenPedidoDTO itenPedidoDTO : itens) {
+			pedidoWS += "i|" +
+					    itenPedidoDTO.getCodProduto().toString() + "|" + itenPedidoDTO.getQuantidade().toString() + "|" +
+					    itenPedidoDTO.getPreco().toString();
+		}
+		Global.pedidoWS = pedidoWS;
+	}
+
+
+	@SuppressLint("NewApi")
 	private void criandoPdf() {
          Document document = new Document();
 		 try {
