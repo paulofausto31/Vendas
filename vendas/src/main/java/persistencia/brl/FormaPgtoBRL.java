@@ -104,14 +104,14 @@ public class FormaPgtoBRL {
     }
 
     private String FormataValorNumerico(Double valor){
-        DecimalFormat formatador = new DecimalFormat("##,##00.00");
+        DecimalFormat formatador = new DecimalFormat("###00.00");
         return formatador.format(valor).replace(',', '.');
     }
 
     public String getValorAtualizado(String codFpto, Double valor, String dataVenc) throws ParseException{
         Date dateAtual = new Date();
         Date dateVenc = venda.util.Util.StringToDate(dataVenc);
-		DecimalFormat formatador = new DecimalFormat("##,##00.00");  
+		DecimalFormat formatador = new DecimalFormat("###00.00");
 	    String retornoFormatado = valor.toString();  
     	if (dateAtual.after(dateVenc)){
     		Double multa = (valor * getMulta(codFpto));
