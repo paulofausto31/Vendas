@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
 import persistencia.adapters.ClienteAdapter;
 import persistencia.brl.*;
 import persistencia.dto.*;
@@ -68,16 +69,27 @@ public class ClienteLista extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id){
 		 ClienteDTO dto = (ClienteDTO) l.getAdapter().getItem(position);
 		 Double totReceber = crbrl.getTotalReceberCliente(dto.getCodCliente());
-		 Toast.makeText(getBaseContext(), "Codigo: " + dto.getCodCliente().toString() + "\n"
-				 + "R.Social: " + dto.getRazaoSocial() + "\n"
-				 + "Fantasia: " + dto.getNome() + "\n"
-				 + "CPF/CNPJ: " + dto.getCpfCnpj() + "\n"
-				 + "Endereço: " + dto.getEndereco() + "\n"
-				 + "Telefone: " + dto.getTelefone() + "\n"
-				 + "Limite Crédito: " + dto.getLimiteCredito() + "\n"
-				 + "Saldo disponível: " + (dto.getLimiteCredito() - totReceber)  + "\n"
-				 + "C.Receber em aberto: " + totReceber + "\n"
-				 + "Prazo: " + dto.getPrazo().toString(), Toast.LENGTH_LONG).show();
+
+		String longMessage = "Codigo: " + dto.getCodCliente().toString() + "\n"
+			 + "R.Social: " + dto.getRazaoSocial() + "\n"
+			 + "Fantasia: " + dto.getNome() + "\n"
+			 + "CPF/CNPJ: " + dto.getCpfCnpj() + "\n"
+			 + "Endereço: " + dto.getEndereco() + "\n"
+			 + "Telefone: " + dto.getTelefone() + "\n"
+			 + "Limite Crédito: " + dto.getLimiteCredito() + "\n"
+		   	 + "Saldo disponível: " + (dto.getLimiteCredito() - totReceber)  + "\n"
+			 + "C.Receber em aberto: " + totReceber + "\n"
+			 + "Prazo: " + dto.getPrazo().toString();
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage(longMessage)
+				.setTitle("Mensagem")
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						// Ação ao clicar no botão OK
+					}
+				});
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	 }
 	 
 	 @Override

@@ -1,14 +1,18 @@
 package persistencia.db;
 
+import static com.itextpdf.text.factories.RomanAlphabetFactory.getString;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import vendas.telas.R;
 
 public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 31;
+	private static int version = 32; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}

@@ -63,12 +63,23 @@ public class ProdutoLista extends ListActivity {
 	 protected void onListItemClick(ListView l, View v, int position, long id){
 		 ProdutoDTO dto = (ProdutoDTO) l.getAdapter().getItem(position);
 		 List<PrecoDTO> listaPreco = preBRL.getByProduto(dto.getCodProduto());
-		 
-		 Toast.makeText(getBaseContext(), "Codigo: " + dto.getCodProduto().toString() + "\n"
+
+		 String longMessage = "Codigo: " + dto.getCodProduto().toString() + "\n"
 				 + "Descrição: " + dto.getDescricao() + "\n"
 				 + "Unidade: " + dto.getUnidade() + "\n"
 				 + "Estoque: " + dto.getEstoque().toString() + "\n"
-				 + "Preço: " + listaPreco.get(0).getPreco().toString(), Toast.LENGTH_LONG).show();
+				 + "Preço: " + listaPreco.get(0).getPreco().toString();
+
+		 AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		 builder.setMessage(longMessage)
+				 .setTitle("Mensagem")
+				 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					 public void onClick(DialogInterface dialog, int id) {
+						 // Ação ao clicar no botão OK
+					 }
+				 });
+		 AlertDialog dialog = builder.create();
+		 dialog.show();
 	 }
 	 
 	 @Override

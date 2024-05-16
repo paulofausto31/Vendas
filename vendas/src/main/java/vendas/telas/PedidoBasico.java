@@ -48,7 +48,7 @@ public class PedidoBasico extends Activity {
 	PedidoBRL pedBRL; 
 	ConfiguracaoBRL cfgBRL;
 	ContaReceberBRL recBRL;
-	private static final String URL = "http://pfsoft.esy.es/serverphp/sitlgps.php";
+	//private static final String URL = "http://pfsoft.esy.es/serverphp/sitlgps.php";
 
 	//... Componentes da Tela
 	EditText txtNumeroPedido;
@@ -101,42 +101,42 @@ public class PedidoBasico extends Activity {
 
 	}
 	
-	private class HttpAsyncPOST extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-            return post();
-        }
+//	private class HttpAsyncPOST extends AsyncTask<String, Void, String> {
+//        @Override
+//        protected String doInBackground(String... urls) {
+//            return post();
+//        }
         
-        @Override
-        protected void onPostExecute(String result) {
+//        @Override
+//        protected void onPostExecute(String result) {
 
-        }
-    }
-    private String post() {
-        String mensagem = "";
+//        }
+//    }
+    //private String post() {
+    //    String mensagem = "";
 
-        HttpClient httpclient = new DefaultHttpClient();
-        HttpPost post = new HttpPost(URL);
-        try {
-            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
-            nameValuePair.add(new BasicNameValuePair("loclie", cliDTO.getCodCliente().toString()));
-            nameValuePair.add(new BasicNameValuePair("lodata", txtDataPedido.getText().toString().replace("/", "-")));
-            nameValuePair.add(new BasicNameValuePair("logps1", localizacao.getLatitude()));
-            nameValuePair.add(new BasicNameValuePair("logps2", localizacao.getLongitude()));
-            nameValuePair.add(new BasicNameValuePair("lohora", venda.util.Util.getTime()));
-            nameValuePair.add(new BasicNameValuePair("lovend", venDTO.getCodigo().toString()));
+//        HttpClient httpclient = new DefaultHttpClient();
+//        HttpPost post = new HttpPost(URL);
+//        try {
+//            List<NameValuePair> nameValuePair = new ArrayList<NameValuePair>();
+//            nameValuePair.add(new BasicNameValuePair("loclie", cliDTO.getCodCliente().toString()));
+//            nameValuePair.add(new BasicNameValuePair("lodata", txtDataPedido.getText().toString().replace("/", "-")));
+//            nameValuePair.add(new BasicNameValuePair("logps1", localizacao.getLatitude()));
+//            nameValuePair.add(new BasicNameValuePair("logps2", localizacao.getLongitude()));
+//            nameValuePair.add(new BasicNameValuePair("lohora", venda.util.Util.getTime()));
+//            nameValuePair.add(new BasicNameValuePair("lovend", venDTO.getCodigo().toString()));
 
-            post.setEntity(new UrlEncodedFormEntity(nameValuePair));
+//            post.setEntity(new UrlEncodedFormEntity(nameValuePair));
             //post.setHeader("Content-type", "application/json");
-            HttpResponse response = httpclient.execute(post);
-            mensagem = "";//inputStreamToString(response.getEntity().getContent()).toString();
-            BufferedReader reader=new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"UTF-08"));
-            mensagem = reader.readLine();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return mensagem;
-    }
+//            HttpResponse response = httpclient.execute(post);
+//            mensagem = "";//inputStreamToString(response.getEntity().getContent()).toString();
+//            BufferedReader reader=new BufferedReader(new InputStreamReader(response.getEntity().getContent(),"UTF-08"));
+//            mensagem = reader.readLine();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return mensagem;
+//    }
 
 
 	
@@ -209,9 +209,9 @@ public class PedidoBasico extends Activity {
 				 pedBRL.Update(pedDTO);
 		}
 		venda.util.Global.pedidoGlobalDTO = pedDTO;
-		@SuppressWarnings("unused")
-		HttpAsyncPOST httpAsyncPost = new HttpAsyncPOST();
-		httpAsyncPost.execute();
+//		@SuppressWarnings("unused")
+//		HttpAsyncPOST httpAsyncPost = new HttpAsyncPOST();
+//		httpAsyncPost.execute();
 	}
 
 	@Override

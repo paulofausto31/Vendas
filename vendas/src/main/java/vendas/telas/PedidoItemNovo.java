@@ -59,8 +59,8 @@ public class PedidoItemNovo extends Activity {
 	//List<String> listaCodigo;
 	String Preco = "";
 	
-	PedidoDTO pedDTO = new PedidoDTO();
-	ItenPedidoDTO itemDTO = new ItenPedidoDTO();
+	PedidoDTO pedDTO; // = new PedidoDTO();
+	ItenPedidoDTO itemDTO; // = new ItenPedidoDTO();
 	PedidoBRL pedBRL;
 	ProdutoBRL proBRL;
 	PrecoBRL preBRL;
@@ -90,6 +90,8 @@ public class PedidoItemNovo extends Activity {
 		setContentView(R.layout.pedido_item_novo);
 		this.setTitle(Global.tituloAplicacao);
 
+		pedDTO = new PedidoDTO();
+		itemDTO = new ItenPedidoDTO();
 		preBRL = new PrecoBRL(getBaseContext());
 		 proBRL = new ProdutoBRL(getBaseContext());
 		 itpBRL = new ItenPedidoBRL(getBaseContext());
@@ -388,7 +390,7 @@ public class PedidoItemNovo extends Activity {
 			return true;		
 		}
 
-		private class Sfevend extends AsyncTask<String, Void, String> {
+/*		private class Sfevend extends AsyncTask<String, Void, String> {
 	        @Override
 	        protected String doInBackground(String... urls) {
 	            return SfevendPost();
@@ -398,9 +400,9 @@ public class PedidoItemNovo extends Activity {
 	        protected void onPostExecute(String result) {
 
 	        }
-	    }
+	    }*/
 		
-	    private String SfevendPost() {
+/*	    private String SfevendPost() {
 	        String mensagem = "";
 
 	        HttpClient httpclient = new DefaultHttpClient();
@@ -432,9 +434,9 @@ public class PedidoItemNovo extends Activity {
 	            e.printStackTrace();
 	        }
 	        return mensagem;
-	    }	
+	    }*/
 
-		private class Sfeveit extends AsyncTask<String, Void, String> {
+/*		private class Sfeveit extends AsyncTask<String, Void, String> {
 	        @Override
 	        protected String doInBackground(String... urls) {
 	            return SfeveitPost();
@@ -444,9 +446,9 @@ public class PedidoItemNovo extends Activity {
 	        protected void onPostExecute(String result) {
 
 	        }
-	    }
-		
-	    private String SfeveitPost() {
+	    }*/
+
+/*        private String SfeveitPost() {
 	        String mensagem = "";
 
 	        HttpClient httpclient = new DefaultHttpClient();
@@ -472,7 +474,7 @@ public class PedidoItemNovo extends Activity {
 	            e.printStackTrace();
 	        }
 	        return mensagem;
-	    }	
+	    }*/
 	    
 	    private void IncluiProduto(){
 			ItenPedidoDTO itpDTO = new ItenPedidoDTO();
@@ -508,15 +510,15 @@ public class PedidoItemNovo extends Activity {
 						if (pedDTO.getId() == 0){
 							pedBRL.InserePedido(pedDTO);
 							pedDTO.setId(pedBRL.getIdLast());
-							Sfevend sfevend = new Sfevend();
-							sfevend.execute();							
+							//Sfevend sfevend = new Sfevend();
+							//sfevend.execute();
 						}
 						// Insere Item Pedido
 						if (itpDTO.getId() == 0){
 							itpDTO.setCodPedido(pedDTO.getId());
 							itpBRL.InsereItenPedido(itpDTO);
-							Sfeveit sfeveit = new Sfeveit();
-							sfeveit.execute();								
+							//Sfeveit sfeveit = new Sfeveit();
+							//sfeveit.execute();
 						}
 						LimpaCampos();
 					}

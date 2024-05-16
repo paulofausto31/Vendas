@@ -18,7 +18,6 @@ import java.net.HttpURLConnection;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Environment;
-import android.test.RenamingDelegatingContext;
 
 import persistencia.brl.CaminhoFTPBRL;
 

@@ -1,19 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '28.0.3'
+    compileSdk 34
     useLibrary 'org.apache.http.legacy'
 
-    defaultConfig {
-        applicationId "vendas.telas"
-        minSdkVersion 14
-        targetSdkVersion 26
-        multiDexEnabled true
-    }
 
-    dexOptions {
-        javaMaxHeapSize "4g"
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+        applicationId "vendas.telas"
     }
 
     buildTypes {
@@ -22,12 +17,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
         }
     }
+    namespace 'vendas.telas'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation 'com.android.support:multidex:1.0.1'
     implementation 'com.sun.mail:android-mail:1.6.0'
     implementation 'com.android.support:support-v4:27.1.0'
     implementation 'com.google.code.gson:gson:2.8.2'
