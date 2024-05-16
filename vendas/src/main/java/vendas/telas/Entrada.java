@@ -59,8 +59,9 @@ public class Entrada extends Activity {
 		lblEmpresa = (TextView)findViewById(R.id.lblEmpresa);
 		cbxEmpresa = (Spinner)findViewById(R.id.cbxEmpresa);
 		venBRL = new VendedorBRL(getBaseContext());
+		VerificaPermissaoGravacao();
 
-        btnEntrar.setOnClickListener(new Button.OnClickListener() {
+		btnEntrar.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
@@ -108,7 +109,7 @@ public class Entrada extends Activity {
 
 	}
 
-	@Override
+/*	@Override
 	public void onRequestPermissionsResult(int requestCode,
 	    String permissions[], int[] grantResults) {
 		switch (requestCode) {
@@ -131,14 +132,13 @@ public class Entrada extends Activity {
 			// other 'case' lines to check for other
 			// permissions this app might request
 		}
-	}
+	}*/
 
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
-		VerificaPermissaoGravacao();
 		txtVendedor.setText("");
 		Global.codEmpresa = "";
 		Global.tituloAplicacao = "";

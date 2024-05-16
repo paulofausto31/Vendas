@@ -2,9 +2,12 @@ package vendas.telas;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +16,9 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Toast;
+
+
+import com.android.volley.BuildConfig;
 
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.http.client.ClientProtocolException;
@@ -122,6 +128,11 @@ public class Comunicacao extends Activity {
 			btnApagaBanco.setVisibility(View.VISIBLE);
 
 		GetComDefault();
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && false == Environment.isExternalStorageManager()) {
+			Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+			startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+		}
 
 		btnApagaBanco.setOnClickListener(new Button.OnClickListener() {
 
