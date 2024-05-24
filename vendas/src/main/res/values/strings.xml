@@ -3,6 +3,8 @@
     <string name="app_name">PalmVenda Android</string>
     <string name="app_versao">Versão apk: 10.1</string>
     <string name="bco_versao">Versão Banco: 32</string>
+    <string name="action_settings">action_settings</string>
+    <string name="home">Principal</string>
     <string name="btnCliente">Cliente</string>
     <string name="btnConsulta">Consulta</string>
     <string name="btnJustificativa">Justificativa</string>

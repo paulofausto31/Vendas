@@ -1,8 +1,12 @@
 package vendas.telas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 
@@ -10,6 +14,7 @@ import persistencia.brl.ClienteBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
 import venda.util.Global;
+import venda.util.Util;
 
 public class ConsultaPositivacao extends Activity {
 	
@@ -17,6 +22,7 @@ public class ConsultaPositivacao extends Activity {
 	private TextView txtPositvacaoClientes;
 	private TextView txtPercentualPositivacao;
 	private TextView txtTotalVendas;
+	private Button btnPrincipal;
 		
 	@Override
 	public void onCreate(Bundle e){
@@ -29,6 +35,20 @@ public class ConsultaPositivacao extends Activity {
 		txtPositvacaoClientes = (TextView) findViewById(R.id.lblConsultaClientesPositivados);
 		txtPercentualPositivacao = (TextView) findViewById(R.id.lblConsultaPercentagemPositivacao);
 		txtTotalVendas = (TextView) findViewById(R.id.lblConsultaTotalVendas);
+		btnPrincipal = (Button) findViewById(R.id.btnConsultaPrincipal);
+
+		btnPrincipal.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AbrePrincipal();
+			}
+		});
+	}
+
+	private void AbrePrincipal() {
+		Intent principal = new Intent(this, Principal.class);
+		startActivity(principal);
 	}
 
 	@Override

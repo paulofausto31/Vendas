@@ -90,6 +90,9 @@ public class Principal extends Activity {
     	//...
     	menu.add(0, Sincronizar, 0, "Sincronizar");
     	menu.add(0, Configuracoes, 0, "Configurações");
+
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu_main, menu);
     	//...
     	return true;
     }    
