@@ -1,11 +1,8 @@
 <component name="libraryTable">
-  <library name="Gradle: com.google.android.gms:play-services-instantapps:12.0.1@aar">
+  <library name="Gradle: com.google.android.gms:play-services-instantapps:12.0.1@aar" external-system-id="GRADLE">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-instantapps-12.0.1.aar/41f241c6db8639d384b12b84aaa81f33/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/play-services-instantapps-12.0.1.aar/aec52df52fcdc167ce54fe57f35c3d84/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b31dd676184ee584303be2af99fe3b3/play-services-instantapps-12.0.1/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b31dd676184ee584303be2af99fe3b3/play-services-instantapps-12.0.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/5b31dd676184ee584303be2af99fe3b3/play-services-instantapps-12.0.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/799d27372643153d86bae9ea078f0e7b/transformed/jetified-play-services-instantapps-12.0.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/799d27372643153d86bae9ea078f0e7b/transformed/jetified-play-services-instantapps-12.0.1/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

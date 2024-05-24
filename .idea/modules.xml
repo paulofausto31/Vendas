@@ -4,6 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Vendas.iml" filepath="$PROJECT_DIR$/Vendas.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.iml" filepath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.main.iml" filepath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.unitTest.iml" />
     </modules>
   </component>
 </project>

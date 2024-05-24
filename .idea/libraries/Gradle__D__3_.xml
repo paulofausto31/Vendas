@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: D (3)" external-system-id="GRADLE">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../sdk/platforms/android-34/optional/org.apache.http.legacy.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

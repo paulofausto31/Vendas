@@ -1,5 +1,5 @@
 <component name="libraryTable">
-  <library name="Gradle: com.sun.mail:android-mail:1.6.0">
+  <library name="Gradle: com.sun.mail:android-mail:1.6.0" external-system-id="GRADLE">
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.mail/android-mail/1.6.0/5cd030c77b594dac83e475923a293cd49a787594/android-mail-1.6.0.jar!/" />
     </CLASSES>
