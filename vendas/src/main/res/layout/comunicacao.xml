@@ -60,6 +60,7 @@
         android:layout_marginTop="40dp"
         android:text="Exportar / Enviar" />
 
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleLarge"
@@ -79,5 +80,18 @@
         android:layout_marginTop="50dp"
         android:text="Apaga Banco"
         android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnVoltarPrincipal"
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/radioGroup1"
+        android:layout_alignLeft="@+id/radioGroup1"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="-2dp"
+
+        android:layout_marginTop="181dp"
+        android:layout_marginRight="2dp"
+        android:text="Voltar" />
 
 </RelativeLayout>

@@ -96,6 +96,7 @@ public class Comunicacao extends Activity {
 	private Handler handler = new Handler();
 	private Boolean processando = false;
 	private String pastaDest;
+	private Button btnPrincipal;
 	private String[] arquivosExportacao = new String[] { "TABPED.TXT", "TABPEI.TXT", "TABCNP.TXT" };
 	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABVEN.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT",
 			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
@@ -123,6 +124,7 @@ public class Comunicacao extends Activity {
 		btnApagaBanco = (Button)findViewById(R.id.btnApagaBanco);
 		rbtDestino = (RadioGroup)findViewById(R.id.radioGroup1);
 		progresso = (ProgressBar)findViewById(R.id.progressBar);
+		btnPrincipal = (Button) findViewById(R.id.btnVoltarPrincipal);
 	    Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
 		if (Global.codVendedor.equals("9999"))
 			btnApagaBanco.setVisibility(View.VISIBLE);
@@ -133,6 +135,14 @@ public class Comunicacao extends Activity {
 			Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
 			startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
 		}
+
+		btnPrincipal.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AbrePrincipal();
+			}
+		});
 
 		btnApagaBanco.setOnClickListener(new Button.OnClickListener() {
 
@@ -279,6 +289,11 @@ public class Comunicacao extends Activity {
 				}
 			}
 		});
+	}
+
+	private void AbrePrincipal() {
+		Intent principal = new Intent(this, Principal.class);
+		startActivity(principal);
 	}
 
     private void btnConfiguracao_click(){

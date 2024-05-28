@@ -1,6 +1,7 @@
 package vendas.telas;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ public class ConfiguracaoGeral extends Activity {
 	private EditText txtEmailEmpresa;
 	private EditText txtPortaFTP;
 	private Button btnSalvar;
+	private Button btnComunicacao;
 	private static final int MENU_SALVAR = 1;
 
 	@Override
@@ -33,6 +35,16 @@ public class ConfiguracaoGeral extends Activity {
         txtEmailEmpresa = (EditText) findViewById(R.id.txtEmailEmpresa);
 		txtPortaFTP = (EditText) findViewById(R.id.txtPortaFtp);
 		btnSalvar = (Button) findViewById(R.id.btnSalvar);
+		btnComunicacao = (Button) findViewById(R.id.btnConfiguracaoPrincipal);
+
+		btnComunicacao.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				AbrePrincipal();
+			}
+		});
+
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) { btnSalvar_click(); }
 
@@ -43,6 +55,11 @@ public class ConfiguracaoGeral extends Activity {
 			}
 		});          
 
+	}
+
+	private void AbrePrincipal() {
+		Intent principal = new Intent(this, Principal.class);
+		startActivity(principal);
 	}
 
 	@Override

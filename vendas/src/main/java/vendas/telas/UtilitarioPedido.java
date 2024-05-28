@@ -1,12 +1,14 @@
 package vendas.telas;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.Button;
 import android.widget.ListView;
 
 import persistencia.adapters.UtilitarioPedidoAdapter;
@@ -17,6 +19,7 @@ import venda.util.Global;
 public class UtilitarioPedido extends ListActivity {
 
 	private static final int MENU_ABREPEDIDO = 1;
+	private Button btnPrincipal;
 	PedidoDTO pedDTO = new PedidoDTO();
 	
 	@Override
@@ -27,6 +30,10 @@ public class UtilitarioPedido extends ListActivity {
 		registerForContextMenu(getListView());
 	}
 
+	private void AbrePrincipal() {
+		Intent principal = new Intent(this, Principal.class);
+		startActivity(principal);
+	}
 
 	@Override
 	protected void onResume() {

@@ -27,7 +27,14 @@ public class UtilitarioTabContainer extends TabActivity {
         sec = host.
                 newTabSpec("Pendentes").
                 setIndicator("Pendentes").
-                setContent(new Intent(this,UtilitarioPedidoPendente.class))
+                setContent(new Intent(this, UtilitarioPedidoPendente.class))
+        ;
+        host.addTab(sec);
+        //... Voltar
+        sec = host.
+                newTabSpec("Principal").
+                setIndicator("Principal").
+                setContent(new Intent(this, UtilitarioPrincipal.class))
         ;
         host.addTab(sec);
         //======
