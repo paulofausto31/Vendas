@@ -7,17 +7,20 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.text.ParseException;
 
 import venda.util.Global;
 
-public class Principal extends Activity {
+public class Principal extends AppCompatActivity {
 
 	public static final int Sincronizar = 1;
 	public static final int Configuracoes = 2;
@@ -83,20 +86,17 @@ public class Principal extends Activity {
         btnUtilitario.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) { btnUtilitario_click(); }
 		});          
-    }    
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
-    	super.onCreateOptionsMenu(menu);    	
-    	//...
-    	menu.add(0, Sincronizar, 0, "Sincronizar");
-    	menu.add(0, Configuracoes, 0, "Configurações");
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_main, menu);
 
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu_main, menu);
-    	//...
-    	return true;
-    }    
-    @Override
+		return true;
+    }
+
+ /*   @Override
     public boolean onMenuItemSelected(int featureId, MenuItem item) {
     	switch (item.getItemId()) {
 			case Sincronizar:{
@@ -108,7 +108,43 @@ public class Principal extends Activity {
 			}break;
     	}
     	return false;
-    }
+    }*/
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_clientes:
+				Intent cliente = new Intent(this, ClienteLista.class);
+				startActivity(cliente);
+				return true;
+			case R.id.menu_produtos:
+				Intent produto = new Intent(this, ProdutoLista.class).putExtra("paramProduto", false);
+				startActivity(produto);
+				return true;
+			case R.id.menu_consultas:
+				Intent consulta = new Intent(this, ConsultaTabContainer.class);
+				startActivity(consulta);
+				return true;
+			case R.id.menu_comunicacao:
+				Intent comunicacao = new Intent(this, Comunicacao.class);
+				startActivity(comunicacao);
+				return true;
+			case R.id.menu_configuracao:
+				Intent configuracao = new Intent(this, ConfiguracaoTabContainer.class);
+				startActivity(configuracao);
+				return true;
+			case R.id.menu_utilitario:
+				Intent utilitario = new Intent(this, UtilitarioTabContainer.class);
+				startActivity(utilitario);
+				return true;
+			case R.id.menu_recyclerview:
+				Intent recyclerView = new Intent(this, RecyclerViewActivity.class);
+				startActivity(recyclerView);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
     
     private void btnUtilitario_click(){
     	Intent utilitario = new Intent(this, UtilitarioTabContainer.class);

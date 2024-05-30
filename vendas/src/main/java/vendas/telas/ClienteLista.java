@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
@@ -91,19 +92,38 @@ public class ClienteLista extends ListActivity {
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	 }
-	 
-	 @Override
-	 public boolean onCreateOptionsMenu(Menu menu){
-		// Menu
-		MenuItem MenuOrdenarNome = menu.add(0, MENU_ORDENAR_NOME, 0, "Ordenar Nome");
-		MenuItem MenuOrdenarSeqVisita = menu.add(0, MENU_ORDENAR_SEQVISITA, 0, "Ordenar Seq.Visita");
-		MenuItem MenuPesquisaFantasia = menu.add(0, MENU_PESQUISA_FANTASIA, 0, "Pesquisa Fantasia");
-		MenuItem MenuPesquisaRazao = menu.add(0, MENU_PESQUISA_RSOCIAL, 0, "Pesquisa R.Social");
-		MenuItem MenuTodos = menu.add(0, MENU_TODOS, 0, "Mostrar Todos");
 
-		return true; 
-	 }
-	 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu_cliente, menu);
+
+		return true;
+	}
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+			case R.id.menu_ordenar_nome:
+				setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("nome")));
+				return true;
+			case R.id.menu_ordenar_seqvisita:
+				setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("seqVisita")));
+				return true;
+			case R.id.menu_pesquisar_fantasia:
+				pesquisa(1);
+				return true;
+			case R.id.menu_pesquisa_rsocial:
+				pesquisa(2);
+				return true;
+			case R.id.menu_mostrar_todos:
+				setListAdapter(new ClienteAdapter(getBaseContext(), brl.getTodosOrdenado("nome")));
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
+	}
+
 	 @Override
 	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
 		
@@ -115,7 +135,7 @@ public class ClienteLista extends ListActivity {
 
 		 switch (menu.getItemId()){
 		 
-		 case MENU_ORDENAR_NOME: // mensagem 
+/*		 case MENU_ORDENAR_NOME: // mensagem
 			 setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("nome")));
 			 
 			 return true;
@@ -136,7 +156,7 @@ public class ClienteLista extends ListActivity {
 		 case MENU_PESQUISA_RSOCIAL:
 			 pesquisa(2);
 			 
-			 return true;
+			 return true;*/
 		 case MENU_COMPLEMENTO:
 			 startActivity(new Intent(getBaseContext(), ClienteComplemento.class).putExtra("idCliente", cliDTO.getId()));
 			 

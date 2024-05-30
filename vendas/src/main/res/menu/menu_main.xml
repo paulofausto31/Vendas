@@ -2,15 +2,38 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
       xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:id="@+id/menu_clientes"
+        android:title="Clientes"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/action_home"
-        android:icon="@drawable/ic_palmvenda"
-        android:title="@string/home"
+        android:id="@+id/menu_produtos"
+        android:title="Produtos"
         android:orderInCategory="100"
-        app:showAsAction="always"/>
-
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_utilitario"
+        android:title="Utilitário"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_consultas"
+        android:title="Consultas"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_comunicacao"
+        android:title="Comunicação"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_configuracao"
+        android:title="Configuração"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_recyclerview"
+        android:title="RecyclerView"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
 </menu>
