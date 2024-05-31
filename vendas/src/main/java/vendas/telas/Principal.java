@@ -114,7 +114,7 @@ public class Principal extends AppCompatActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 			case R.id.menu_clientes:
-				Intent cliente = new Intent(this, ClienteLista.class);
+				Intent cliente = new Intent(this, RVClienteLista.class);
 				startActivity(cliente);
 				return true;
 			case R.id.menu_produtos:
@@ -151,7 +151,7 @@ public class Principal extends AppCompatActivity {
     	startActivity(utilitario);
     }
     private void btnCliente_click(){
-    	Intent cliente = new Intent(this, ClienteLista.class);
+    	Intent cliente = new Intent(this, RVClienteLista.class);
     	startActivity(cliente);
     }
     private void btnConsulta_click(){

@@ -584,10 +584,10 @@ activity#vendas.telas.UtilitarioPrincipal
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:9-65
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:19-53
-activity#vendas.telas.RecyclerViewActivity
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:9-67
+activity#vendas.telas.RVClienteLista
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:9-61
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:19-55
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:19-49
 activity#vendas.telas.Localizacao
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:71:9-57
 	android:name

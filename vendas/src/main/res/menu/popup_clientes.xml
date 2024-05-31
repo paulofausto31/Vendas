@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_pedido"
+        android:title="Pedido" />
+    <item
+        android:id="@+id/action_justificativa"
+        android:title="Justificativa" />
+    <item
+        android:id="@+id/action_creceber"
+        android:title="Contas a receber" />
+    <item
+        android:id="@+id/action_complemento"
+        android:title="Complemento" />
+</menu>

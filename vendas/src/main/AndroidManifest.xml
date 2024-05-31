@@ -67,7 +67,7 @@
         <activity android:name="GeoLocalizacao"></activity>
         <activity android:name="MySql"></activity>
         <activity android:name="UtilitarioPrincipal"></activity>
-        <activity android:name=".RecyclerViewActivity"></activity>
+        <activity android:name=".RVClienteLista"></activity>
         <activity android:name="Localizacao"></activity>  
         <receiver
             android:name="BroadcastReceive"
