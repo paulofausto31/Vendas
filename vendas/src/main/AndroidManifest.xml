@@ -68,6 +68,9 @@
         <activity android:name="MySql"></activity>
         <activity android:name="UtilitarioPrincipal"></activity>
         <activity android:name=".RVClienteLista"></activity>
+        <activity android:name=".RVProdutoLista"></activity>
+        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".PedidoProdutoLista"></activity>
         <activity android:name="Localizacao"></activity>  
         <receiver
             android:name="BroadcastReceive"

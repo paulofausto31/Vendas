@@ -36,4 +36,5 @@
         android:title="RecyclerView"
         android:orderInCategory="100"
         app:showAsAction="never"/>
+
 </menu>

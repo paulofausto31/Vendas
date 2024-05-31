@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menu_pesquisa_produto"
+        android:title="Pesquisa"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_mostrar_todos"
+        android:title="Mostrar todos"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_voltar_produto"
+        android:title="Voltar"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+</menu>

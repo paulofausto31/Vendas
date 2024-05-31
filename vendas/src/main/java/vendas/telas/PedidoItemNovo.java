@@ -1,5 +1,7 @@
 package vendas.telas;
 
+import static androidx.activity.result.ActivityResultCallerKt.registerForActivityResult;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TabActivity;
@@ -22,6 +24,10 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -49,7 +55,7 @@ import persistencia.dto.ProdutoDTO;
 import venda.util.Global;
 import venda.util.Util;
 
-public class PedidoItemNovo extends Activity {
+public class PedidoItemNovo extends AppCompatActivity {
 	
 	private static int RETORNO_PRODUTO = 1;
 	private static final int MENU_TECLADO_NUMERICO = 1;
@@ -82,13 +88,24 @@ public class PedidoItemNovo extends Activity {
 	RadioButton rdgAcrescimo;
 	Button btnIncluirProduto;
 	private static final String URL_sfevend = "http://pfsoft.esy.es/serverphp/sfevend.php";	
-	private static final String URL_sfeveit = "http://pfsoft.esy.es/serverphp/sfeveit.php";	
-	
+	private static final String URL_sfeveit = "http://pfsoft.esy.es/serverphp/sfeveit.php";
+
+	private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
+			new ActivityResultContracts.StartActivityForResult(),
+			result -> {
+				if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+					String itemId = result.getData().getStringExtra("itemId");
+					txtCodProduto.setText(itemId);
+					CarregaDescricaoProduto(txtCodProduto.getText().toString());
+				}
+			}
+	);
+
 	@Override
 	public void onCreate(Bundle e){
 		super.onCreate(e);
 		setContentView(R.layout.pedido_item_novo);
-		this.setTitle(Global.tituloAplicacao);
+		//this.setTitle(Global.tituloAplicacao);
 
 		pedDTO = new PedidoDTO();
 		itemDTO = new ItenPedidoDTO();
@@ -192,7 +209,7 @@ public class PedidoItemNovo extends Activity {
         menu.add(0,MENU_TECLADO_NUMERICO,0,"Teclado Numérico");
         menu.add(0,MENU_TECLADO_ALFANUMERICO,0,"Teclado AlfaNumerico"); 
     }  
-	
+	/*
 	@Override
 	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
 
@@ -218,7 +235,7 @@ public class PedidoItemNovo extends Activity {
 		 }
 		 return false;
 	 }
-
+*/
 	private void LimpaCampos(){
 		txtCodProduto.setText("");
 		txtDescricaoProduto.setText("");
@@ -354,13 +371,17 @@ public class PedidoItemNovo extends Activity {
 		else if (txtCodProduto.getText().toString().trim().length() > 0)
 		{
 			Global.prodPesquisa = txtCodProduto.getText().toString().trim();
-			startActivityForResult(new Intent(getBaseContext(), ProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
+			Intent intent = new Intent(PedidoItemNovo.this, PedidoProdutoLista.class).putExtra("paramProduto", true);
+			activityResultLauncher.launch(intent);
+			//startActivityForResult(new Intent(getBaseContext(), RVProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
 		}else 
 		{
-			startActivityForResult(new Intent(getBaseContext(), ProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
+			Intent intent = new Intent(PedidoItemNovo.this, PedidoProdutoLista.class).putExtra("paramProduto", true);
+			activityResultLauncher.launch(intent);
+			//startActivityForResult(new Intent(getBaseContext(), RVProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
 		}
 	}
-	
+	/*
 	 protected void onActivityResult(int requestCode, int resultCode, Intent data) { 
 		 if (RETORNO_PRODUTO == requestCode){
 			 if (resultCode == RESULT_OK){
@@ -369,7 +390,7 @@ public class PedidoItemNovo extends Activity {
 			 }
 		 }
 	 }
-
+*/
 		private Boolean ValidaPedido(PedidoDTO pedDTO) {
 			if (pedDTO.getDataPedido().trim().length() <= 0){
 				Toast.makeText(getBaseContext(), "Informe a data do Pedido", Toast.LENGTH_SHORT).show();

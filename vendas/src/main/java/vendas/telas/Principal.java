@@ -138,7 +138,7 @@ public class Principal extends AppCompatActivity {
 				startActivity(utilitario);
 				return true;
 			case R.id.menu_recyclerview:
-				Intent recyclerView = new Intent(this, RecyclerViewActivity.class);
+				Intent recyclerView = new Intent(this, MainActivity.class);
 				startActivity(recyclerView);
 				return true;
 			default:
@@ -159,7 +159,7 @@ public class Principal extends AppCompatActivity {
     	startActivity(consulta);
     }
     private void btnProduto_click(){
-    	Intent produto = new Intent(this, ProdutoLista.class).putExtra("paramProduto", false);
+    	Intent produto = new Intent(this, RVProdutoLista.class).putExtra("paramProduto", false);
     	startActivity(produto);       	
     }    
     private void btnComunicacao_click(){
