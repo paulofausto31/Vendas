@@ -1,19 +1,44 @@
 package vendas.telas;
 
-import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.MenuItem;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
+import android.view.ViewGroup;
+import java.util.Arrays;
+import java.util.List;
 
 import persistencia.adapters.PedidoSelecaoAdapter;
+import persistencia.adapters.RVUtilitarioPedidoAdapter;
 import persistencia.brl.PedidoBRL;
 import persistencia.dto.PedidoDTO;
 import venda.util.Global;
 
-public class UtilitarioPedidoPendente extends ListActivity {
+public class UtilitarioPedidoPendente extends Fragment {
+
+    private RecyclerView recyclerView;
+    private RVUtilitarioPedidoAdapter adapter;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_pendentes, container, false);
+        recyclerView = view.findViewById(R.id.recycler_view_pendentes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        PedidoBRL brl = new PedidoBRL(getContext());
+        List<PedidoDTO> lista = brl.getAllPedAberto();
+        adapter = new RVUtilitarioPedidoAdapter(getContext(), lista);
+        recyclerView.setAdapter(adapter);
+
+        return view;
+    }
+}
+/*extends ListActivity {
 
     private static final int MENU_ABREPEDIDO = 1;
     private static final int MENU_FECHAPEDIDO = 2;
@@ -68,4 +93,4 @@ public class UtilitarioPedidoPendente extends ListActivity {
     }
 
 
-}
+}*/
