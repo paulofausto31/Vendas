@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
+import android.widget.PopupMenu;
 
 import persistencia.adapters.RVClienteAdapter;
 import persistencia.adapters.RVUtilitarioPedidoAdapter;
@@ -23,10 +24,12 @@ import persistencia.brl.PedidoBRL;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
 
-public class UtilitarioPedidoFechado extends Fragment {
+public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPedidoAdapter.OnItemLongClickListener {
 
 	private RecyclerView recyclerView;
 	private RVUtilitarioPedidoAdapter adapter;
+	List<PedidoDTO> lista;
+	PedidoBRL brl;
 
 	@Nullable
 	@Override
@@ -35,67 +38,40 @@ public class UtilitarioPedidoFechado extends Fragment {
 		recyclerView = view.findViewById(R.id.recycler_view_fechados);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+		brl = new PedidoBRL(getContext());
 
 		return view;
 	}
 
 	@Override
+	public void onItemLongClick(View view, int position) {
+		PedidoDTO pedDTO = lista.get(position);
+		PopupMenu popup = new PopupMenu(getContext(), view);
+		popup.getMenuInflater().inflate(R.menu.popup_utilitario, popup.getMenu());
+		popup.setOnMenuItemClickListener(item -> {
+			if (item.getItemId() == R.id.action_abre_pedido) {
+				atualizarLista(pedDTO);
+				return true;
+			}
+			return false;
+		});
+		popup.show();
+	}
+
+	private void atualizarLista(PedidoDTO dto) {
+		// Adicione lógica para atualizar a lista
+		brl.AbrePedidoBaixado(dto.getId());
+		lista = brl.getAllPedEnviado();
+		adapter = new RVUtilitarioPedidoAdapter(getContext(), lista, this);
+		recyclerView.setAdapter(adapter);
+		//Toast.makeText(getContext(), "Lista Atualizada", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
-		PedidoBRL brl = new PedidoBRL(getContext());
-		List<PedidoDTO> lista = brl.getAllPedEnviado();
-		adapter = new RVUtilitarioPedidoAdapter(getContext(), lista);
+		lista = brl.getAllPedEnviado();
+		adapter = new RVUtilitarioPedidoAdapter(getContext(), lista, this);
 		recyclerView.setAdapter(adapter);
 	}
 }
-
-/*
-
-	/*@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.setTitle(Global.tituloAplicacao);
-
-		registerForContextMenu(getListView());
-	}*/
-
-	/*private void AbrePrincipal() {
-		Intent principal = new Intent(this, Principal.class);
-		startActivity(principal);
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-		PedidoBRL brl = new PedidoBRL(getBaseContext());
-		setListAdapter(new UtilitarioPedidoAdapter(getBaseContext(), brl.getAllPedEnviado()));
-	}
-
-	@Override
-    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
-    super.onCreateContextMenu(menu, v, menuInfo);
-        menu.setHeaderTitle("Sub Menu Utilitário");
-        menu.add(0,MENU_ABREPEDIDO,0,"Abre Pedido");
-    }
-
-	 @Override
-	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
-
-		 ListView l = getListView();
-		 AdapterContextMenuInfo info = (AdapterContextMenuInfo) menu.getMenuInfo();
-		 if (info != null)
-			 pedDTO = (PedidoDTO)l.getAdapter().getItem(info.position);
-
-		 switch (menu.getItemId()){
-
-		 case MENU_ABREPEDIDO: // mensagem
-			 PedidoBRL pedBRL = new PedidoBRL(getBaseContext());
-			 pedBRL.AbrePedidoBaixado(pedDTO.getId());
- 			 setListAdapter(new UtilitarioPedidoAdapter(getBaseContext(), pedBRL.getAllPedEnviado()));
-			 return true;
-		 }
-		 return false;
-	 }
-
-
-}*/
