@@ -7,12 +7,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
+import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import persistencia.adapters.ConsultaClienteAdapter;
+import persistencia.adapters.RVConsultaClienteAdapter;
+import persistencia.adapters.RVConsultaProdutoAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
@@ -20,7 +31,37 @@ import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
 import venda.util.Global;
 
-public class ConsultaVendasCliente extends ListActivity {
+public class ConsultaVendasCliente extends Fragment {
+
+	private RecyclerView recyclerView;
+	private RVConsultaClienteAdapter adapter;
+	List<PedidoDTO> lista;
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_consulta_cliente, container, false);
+		recyclerView = view.findViewById(R.id.recycler_view_consulta_cliente);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		return view;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		PedidoBRL brl = new PedidoBRL(getContext());
+		lista = brl.getAllPedAberto();
+		adapter = new RVConsultaClienteAdapter(getContext(), lista);
+		recyclerView.setAdapter(adapter);
+	}
+}
+
+
+
+
+
+		/*extends ListActivity {
 
 	private static final int MENU_NOVO = 1;
 	private static final int MENU_EDITAR = 2;
@@ -115,4 +156,4 @@ public class ConsultaVendasCliente extends ListActivity {
 	 }
 	 
 
-}
+}*/
