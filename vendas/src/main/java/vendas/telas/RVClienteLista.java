@@ -44,6 +44,11 @@ public class RVClienteLista extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         // Dados de exemplo
         brl = new ClienteBRL(getBaseContext());
         crbrl = new ContaReceberBRL(getBaseContext());

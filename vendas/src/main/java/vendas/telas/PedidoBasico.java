@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class PedidoBasico extends Activity {
 	String codFormaPgto = "";
 	ClienteDTO cliDTO = new ClienteDTO();
 	VendedorBRL venBRL;
+	private Button btnVoltarClientes;
 	VendedorDTO venDTO = new VendedorDTO();
 	PedidoBRL pedBRL; 
 	ConfiguracaoBRL cfgBRL;
@@ -96,9 +98,21 @@ public class PedidoBasico extends Activity {
 	    cbxFormaPgto = (Spinner)findViewById(R.id.cbxFormaPgtoPedido);
 	    txtPrazo = (EditText)findViewById(R.id.txtPrazoPedido);
 	    txtParcela = (EditText)findViewById(R.id.txtParcelaPedido);
+		btnVoltarClientes = (Button) findViewById(R.id.btnPedidoVoltarCliente);
     	CaminhoFTPBRL ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
 		Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
 
+		btnVoltarClientes.setOnClickListener(new Button.OnClickListener() {
+
+			@Override
+			public void onClick(View v) { AbreCLientes(); }
+		});
+
+	}
+
+	private void AbreCLientes() {
+		Intent clientes = new Intent(this, RVClienteLista.class);
+		startActivity(clientes);
 	}
 	
 //	private class HttpAsyncPOST extends AsyncTask<String, Void, String> {

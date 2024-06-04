@@ -30,6 +30,6 @@
         android:id="@+id/menu_principal"
         android:title="Voltar"
         android:orderInCategory="100"
-        app:showAsAction="never"/>
+        app:showAsAction="always"/>
 
 </menu>

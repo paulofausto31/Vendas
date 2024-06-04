@@ -126,21 +126,25 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
                 case R.id.action_pedido:
                     intent = new Intent(context, PedidoTabContainer.class);
                     intent.putExtra("idCliente", dto.getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                     return true;
                 case R.id.action_justificativa:
                     intent = new Intent(context, JustificativaTabContainer.class);
                     intent.putExtra("idCliente", dto.getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                     return true;
                 case R.id.action_creceber:
                     intent = new Intent(context, ClienteContasReceber.class);
                     intent.putExtra("codCliente", dto.getCodCliente());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                     return true;
                 case R.id.action_complemento:
                     intent = new Intent(context, ClienteComplemento.class);
                     intent.putExtra("idCliente", dto.getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                     return true;
                 default:
