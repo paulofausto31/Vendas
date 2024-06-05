@@ -86,19 +86,5 @@
             android:layout_toRightOf="@+id/txtLoHora"
             android:text="Salvar" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/btnConfiguracaoPrincipal"
-            android:layout_width="384dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="276dp"
-            android:text="Voltar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </RelativeLayout>

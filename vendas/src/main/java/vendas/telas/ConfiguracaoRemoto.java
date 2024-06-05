@@ -1,81 +1,61 @@
 package vendas.telas;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import persistencia.brl.CaminhoFTPBRL;
 import venda.util.Global;
 
-public class ConfiguracaoRemoto extends Activity
-{
+public class ConfiguracaoRemoto extends Fragment {
+
 	CaminhoFTPBRL ftpBRL;
 	private EditText txtServidorRemoto;
 	private EditText txtUsuarioRemoto;
 	private EditText txtSenhaRemoto;
-	private static final int MENU_SALVAR = 1;
 
+	@Nullable
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.configuracao_remoto);
-		this.setTitle(Global.tituloAplicacao);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.configuracao_remoto, container, false);
 
-		ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
-		txtServidorRemoto = (EditText) findViewById(R.id.txtServidorRemoto);
-		txtUsuarioRemoto = (EditText) findViewById(R.id.txtUsuarioRemoto);
-		txtSenhaRemoto = (EditText) findViewById(R.id.txtSenhaRemoto);
 
+		ftpBRL = new CaminhoFTPBRL(getContext(), requireActivity());
+		Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
+
+		txtServidorRemoto = view.findViewById(R.id.txtServidorRemoto);
+		txtUsuarioRemoto = view.findViewById(R.id.txtUsuarioRemoto);
+		txtSenhaRemoto = view.findViewById(R.id.txtSenhaRemoto);
+
+		return view;
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-		
+
 		txtServidorRemoto.setText(Global.caminhoFTPDTO.getServerRemoto());
 		txtUsuarioRemoto.setText(Global.caminhoFTPDTO.getUserRemoto());
 		txtSenhaRemoto.setText(Global.caminhoFTPDTO.getPasswordRemoto());
-		
-	    //MontaEntidade();
-	    //ftpBRL.PostCaminhoFTP(Global.caminhoFTPDTO);
 	}
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
-		
+
 		MontaEntidade();
 	}
-	
-	 private void MontaEntidade() {
+
+	public void MontaEntidade() {
 		Global.caminhoFTPDTO.setServerRemoto(txtServidorRemoto.getText().toString());
 		Global.caminhoFTPDTO.setUserRemoto(txtUsuarioRemoto.getText().toString());
 		Global.caminhoFTPDTO.setPasswordRemoto(txtSenhaRemoto.getText().toString());
 	}
-	
-	 @Override
-	 public boolean onCreateOptionsMenu(Menu menu){
-		// Menu
-		MenuItem MenuSalvar = menu.add(0, MENU_SALVAR, 0, "Salvar");
-
-		return true; 
-	 }
-	 
-	 @Override
-	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
-		
-		 switch (menu.getItemId()){
-		 
-		 case MENU_SALVAR: // mensagem 
-			 MontaEntidade();
-			 if (ftpBRL.ValidaCaminhoFTP(1, Global.caminhoFTPDTO))
-				 ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
-			 
-			 return true;
-		 }
-		 return false;
-	 }
-
 }
+

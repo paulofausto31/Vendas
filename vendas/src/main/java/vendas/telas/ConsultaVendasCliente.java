@@ -1,18 +1,9 @@
 package vendas.telas;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -21,15 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import persistencia.adapters.ConsultaClienteAdapter;
 import persistencia.adapters.RVConsultaClienteAdapter;
-import persistencia.adapters.RVConsultaProdutoAdapter;
-import persistencia.brl.ClienteBRL;
-import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
-import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
-import venda.util.Global;
 
 public class ConsultaVendasCliente extends Fragment {
 

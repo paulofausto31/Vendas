@@ -1,18 +1,20 @@
 package vendas.telas;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import persistencia.brl.CaminhoFTPBRL;
 import venda.util.Global;
 
-public class ConfiguracaoGeral extends Activity {
+public class ConfiguracaoGeral extends Fragment {
 
 	CaminhoFTPBRL ftpBRL;
 	private EditText txtCaminhoFtp;
@@ -20,52 +22,39 @@ public class ConfiguracaoGeral extends Activity {
 	private EditText txtEmailEmpresa;
 	private EditText txtPortaFTP;
 	private Button btnSalvar;
-	private Button btnComunicacao;
-	private static final int MENU_SALVAR = 1;
 
+	@Nullable
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.configuracao_geral);
-		this.setTitle(Global.tituloAplicacao);
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.configuracao_geral, container, false);
 
-		ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
-		txtCaminhoFtp = (EditText) findViewById(R.id.txtCaminhoFtp);
-		txtCodigoEmpresa = (EditText) findViewById(R.id.txtCodigoEmpresa);
-        txtEmailEmpresa = (EditText) findViewById(R.id.txtEmailEmpresa);
-		txtPortaFTP = (EditText) findViewById(R.id.txtPortaFtp);
-		btnSalvar = (Button) findViewById(R.id.btnSalvar);
-		btnComunicacao = (Button) findViewById(R.id.btnConfiguracaoPrincipal);
 
-		btnComunicacao.setOnClickListener(new Button.OnClickListener() {
+		ftpBRL = new CaminhoFTPBRL(getContext(), requireActivity());
+		Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
 
-			@Override
-			public void onClick(View v) {
-				AbrePrincipal();
-			}
-		});
+		txtCaminhoFtp = view.findViewById(R.id.txtCaminhoFtp);
+		txtCodigoEmpresa = view.findViewById(R.id.txtCodigoEmpresa);
+		txtEmailEmpresa = view.findViewById(R.id.txtEmailEmpresa);
+		txtPortaFTP = view.findViewById(R.id.txtPortaFtp);
+		btnSalvar = view.findViewById(R.id.btnSalvar);
 
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) { btnSalvar_click(); }
 
 			private void btnSalvar_click() {
-				 MontaEntidade();
-				 if (ftpBRL.ValidaCaminhoFTP(1,Global.caminhoFTPDTO))
-					 ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
+				MontaEntidade();
+				if (ftpBRL.ValidaCaminhoFTP(1,Global.caminhoFTPDTO))
+					ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
 			}
-		});          
+		});
 
-	}
-
-	private void AbrePrincipal() {
-		Intent principal = new Intent(this, Principal.class);
-		startActivity(principal);
+		return view;
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-		
+
 		txtCaminhoFtp.setText(Global.caminhoFTPDTO.getCaminho());
 		if (Global.caminhoFTPDTO.getCodEmpresa() != null && Global.caminhoFTPDTO.getCodEmpresa().length() == 15)
 			txtCodigoEmpresa.setText(Global.caminhoFTPDTO.getCodEmpresa().substring(1,15));
@@ -73,48 +62,21 @@ public class ConfiguracaoGeral extends Activity {
 			txtCodigoEmpresa.setText(Global.caminhoFTPDTO.getCodEmpresa());
 		txtPortaFTP.setText(Global.caminhoFTPDTO.getPortaFTP());
 		txtEmailEmpresa.setText(Global.caminhoFTPDTO.getEmailEmpresa());
-		
-	    //MontaEntidade();
-	    //ftpBRL.PostCaminhoFTP(Global.caminhoFTPDTO);
+
 	}
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 
 		MontaEntidade();
 	}
-	
-	 private void MontaEntidade() {
+
+	public void MontaEntidade() {
 		Global.caminhoFTPDTO.setCaminho(txtCaminhoFtp.getText().toString());
 		Global.caminhoFTPDTO.setCodEmpresa("1".concat(txtCodigoEmpresa.getText().toString()));
 		Global.caminhoFTPDTO.setEmailEmpresa(txtEmailEmpresa.getText().toString());
 		Global.caminhoFTPDTO.setPortaFTP(txtPortaFTP.getText().toString());
 	}
-	
-	 @Override
-	 public boolean onCreateOptionsMenu(Menu menu){
-		// Menu
-		MenuItem MenuSalvar = menu.add(0, MENU_SALVAR, 0, "Salvar");
-
-		return true; 
-	 }
-	 
-	 @Override
-	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
-		
-		 switch (menu.getItemId()){
-		 
-		 case MENU_SALVAR: // mensagem 
-			 CaminhoFTPBRL ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
-			 MontaEntidade();
-			 if (ftpBRL.ValidaCaminhoFTP(1, Global.caminhoFTPDTO))
-				 ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
-			 
-			 return true;
-		 }
-		 return false;
-	 }
-
-
 }
+

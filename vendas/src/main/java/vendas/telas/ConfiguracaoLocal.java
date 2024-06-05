@@ -1,85 +1,60 @@
 package vendas.telas;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import persistencia.brl.CaminhoFTPBRL;
 import venda.util.Global;
 
-public class ConfiguracaoLocal extends Activity
-{
-	CaminhoFTPBRL ftpBRL;
-	public EditText txtServidorLocal;
-	private EditText txtUsuarioLocal;
-	private EditText txtSenhaLocal;
-	private static final int MENU_SALVAR = 1;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.configuracao_local);
-		this.setTitle(Global.tituloAplicacao);
+public class ConfiguracaoLocal extends Fragment {
 
-		ftpBRL = new CaminhoFTPBRL(getBaseContext(), getParent());
-		venda.util.Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
-		
-		txtServidorLocal = (EditText) findViewById(R.id.txtServidorLocal);
-		txtUsuarioLocal = (EditText) findViewById(R.id.txtUsuarioLocal);
-		txtSenhaLocal = (EditText) findViewById(R.id.txtSenhaLocal);
-		
-	}
+    private EditText txtServidorLocal;
+    private EditText txtUsuarioLocal;
+    private EditText txtSenhaLocal;
+    CaminhoFTPBRL ftpBRL;
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.configuracao_local, container, false);
 
-	@Override
-	protected void onResume() {
-		super.onResume();
-		
-		txtServidorLocal.setText(Global.caminhoFTPDTO.getServerLocal());
-		txtUsuarioLocal.setText(Global.caminhoFTPDTO.getUserLocal());
-		txtSenhaLocal.setText(Global.caminhoFTPDTO.getPasswordLocal());
-		
-	    //MontaEntidade();
-	    //ftpBRL.PostCaminhoFTP(Global.caminhoFTPDTO);
-	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		
-		MontaEntidade();
-	}
-	
-	 public void MontaEntidade() {
-		Global.caminhoFTPDTO.setServerLocal(txtServidorLocal.getText().toString());
-		Global.caminhoFTPDTO.setUserLocal(txtUsuarioLocal.getText().toString());
-		Global.caminhoFTPDTO.setPasswordLocal(txtSenhaLocal.getText().toString());		
-	}
+        ftpBRL = new CaminhoFTPBRL(getContext(), requireActivity());
+        Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
 
-	@Override
-	 public boolean onCreateOptionsMenu(Menu menu){
-		// Menu
-		MenuItem MenuSalvar = menu.add(0, MENU_SALVAR, 0, "Salvar");
+        txtServidorLocal = view.findViewById(R.id.txtServidorLocal);
+        txtUsuarioLocal = view.findViewById(R.id.txtUsuarioLocal);
+        txtSenhaLocal = view.findViewById(R.id.txtSenhaLocal);
 
-		return true; 
-	 }
-	 
-	 @Override
-	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
-		
-		 switch (menu.getItemId()){
-		 
-		 case MENU_SALVAR: // mensagem 
-			 MontaEntidade();
-			 if (ftpBRL.ValidaCaminhoFTP(1, Global.caminhoFTPDTO))
-				 ftpBRL.SalvaCaminhoFTP(Global.caminhoFTPDTO);
-			 
-			 return true;
-		 }
-		 return false;
-	 }
+        return view;
+    }
 
-	
-	
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        txtServidorLocal.setText(Global.caminhoFTPDTO.getServerLocal());
+        txtUsuarioLocal.setText(Global.caminhoFTPDTO.getUserLocal());
+        txtSenhaLocal.setText(Global.caminhoFTPDTO.getPasswordLocal());
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        MontaEntidade();
+    }
+
+    public void MontaEntidade() {
+        Global.caminhoFTPDTO.setServerLocal(txtServidorLocal.getText().toString());
+        Global.caminhoFTPDTO.setUserLocal(txtUsuarioLocal.getText().toString());
+        Global.caminhoFTPDTO.setPasswordLocal(txtSenhaLocal.getText().toString());
+    }
 }
+
