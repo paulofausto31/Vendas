@@ -14,8 +14,10 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -27,7 +29,10 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -39,15 +44,20 @@ import org.apache.http.message.BasicNameValuePair;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.brl.CaminhoFTPBRL;
+import persistencia.brl.ClienteBRL;
 import persistencia.brl.ConfiguracaoBRL;
+import persistencia.brl.ContaReceberBRL;
+import persistencia.brl.FormaPgtoBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.brl.PrecoBRL;
 import persistencia.brl.ProdutoBRL;
+import persistencia.brl.VendedorBRL;
 import persistencia.dto.ConfiguracaoDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
@@ -55,7 +65,7 @@ import persistencia.dto.ProdutoDTO;
 import venda.util.Global;
 import venda.util.Util;
 
-public class PedidoItemNovo extends AppCompatActivity {
+public class PedidoItemNovo extends Fragment {
 	
 	private static int RETORNO_PRODUTO = 1;
 	private static final int MENU_TECLADO_NUMERICO = 1;
@@ -87,13 +97,14 @@ public class PedidoItemNovo extends AppCompatActivity {
 	RadioButton rdgDesconto;
 	RadioButton rdgAcrescimo;
 	Button btnIncluirProduto;
-	private static final String URL_sfevend = "http://pfsoft.esy.es/serverphp/sfevend.php";	
-	private static final String URL_sfeveit = "http://pfsoft.esy.es/serverphp/sfeveit.php";
+	//private static final String URL_sfevend = "http://pfsoft.esy.es/serverphp/sfevend.php";
+	//private static final String URL_sfeveit = "http://pfsoft.esy.es/serverphp/sfeveit.php";
+
 
 	private final ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
 			new ActivityResultContracts.StartActivityForResult(),
 			result -> {
-				if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+				if (result.getResultCode() == getActivity().RESULT_OK && result.getData() != null) {
 					String itemId = result.getData().getStringExtra("itemId");
 					txtCodProduto.setText(itemId);
 					CarregaDescricaoProduto(txtCodProduto.getText().toString());
@@ -101,6 +112,97 @@ public class PedidoItemNovo extends AppCompatActivity {
 			}
 	);
 
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.pedido_item_novo, container, false);
+
+		pedDTO = new PedidoDTO();
+		itemDTO = new ItenPedidoDTO();
+		preBRL = new PrecoBRL(getContext());
+		proBRL = new ProdutoBRL(getContext());
+		itpBRL = new ItenPedidoBRL(getContext());
+		pedBRL = new PedidoBRL(getContext());
+
+		txtCodProduto = view.findViewById(R.id.txtCodProduto);
+		btnPesquisarProduto = view.findViewById(R.id.btnPesquisarProduto);
+		txtDescricaoProduto = view.findViewById(R.id.txtDescricaoProduto);
+		txtUnidade = view.findViewById(R.id.txtUnidade);
+		txtQuantidade = view.findViewById(R.id.txtQuantidade);
+		txtDA = view.findViewById(R.id.txtDA);
+		cbxPreco = view.findViewById(R.id.cbxPreco);
+		rdgDesconto = view.findViewById(R.id.radio0);
+		rdgAcrescimo = view.findViewById(R.id.radio1);
+		btnIncluirProduto = view.findViewById(R.id.btnIncluirProduto);
+		registerForContextMenu(txtCodProduto);
+
+		//Intent it = getIntent();
+		itpBRL = new ItenPedidoBRL(getContext());
+		//Integer extra = it.getIntExtra("codProduto", 0);
+		ItenPedidoDTO itpDTO = venda.util.Global.itemPedidoGlobalDTO;
+		if (itpDTO != null){
+			//itpDTO = itpBRL.getByCodProduto(venda.util.Global.pedidoGlobalDTO.getId(), extra);
+			txtCodProduto.setText(itpDTO.getCodProduto().toString());
+			txtQuantidade.setText(itpDTO.getQuantidade().toString());
+			CarregaDescricaoProduto(itpDTO.getCodProduto().toString());
+			idItemPedido = itpDTO.getId();
+			itemNovo = false;
+			btnPesquisarProduto.setEnabled(false);
+			txtCodProduto.setEnabled(false);
+			txtUnidade.setEnabled(false);
+		}
+		else
+			itemNovo = true;
+
+		txtDA.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+										  int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				if (txtDescricaoProduto.getText().length() > 0){
+					String paramDA = "D";
+					if (rdgAcrescimo.isChecked())
+						paramDA = "A";
+					String valorDA = txtDA.getText().toString().trim();
+					if (valorDA.length() > 0 && txtCodProduto.getText().toString().trim().length() > 0){
+						if (ValidaDesconto(valorDA)){
+							CarregaComboPreco(Long.parseLong(txtCodProduto.getText().toString().trim()),Double.parseDouble(valorDA), paramDA);
+						}
+						else
+							CarregaComboPreco(Long.parseLong(txtCodProduto.getText().toString().trim()),0.0, paramDA);
+					}
+					else
+						CarregaComboPreco(Long.parseLong(txtCodProduto.getText().toString().trim()),0.0, paramDA);
+				}
+			}
+		});
+
+		//... btnPesquisarProduto
+		btnPesquisarProduto.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) { btnPesquisarProduto_click() ;}
+		});
+		//... btnIncluirProduto
+		btnIncluirProduto.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) { btnIncluirProduto_click() ;}
+		});
+
+		return view;
+	}
+
+	/*
 	@Override
 	public void onCreate(Bundle e){
 		super.onCreate(e);
@@ -189,10 +291,10 @@ public class PedidoItemNovo extends AppCompatActivity {
 			public void onClick(View v) { btnIncluirProduto_click() ;}
 		});
 	}
-	
+	*/
 	
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;
@@ -202,14 +304,15 @@ public class PedidoItemNovo extends AppCompatActivity {
 		venda.util.Global.itemPedidoGlobalDTO = null;
 	}
 
-	@Override  
-    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {  
-    super.onCreateContextMenu(menu, v, menuInfo);  
+	/*
+	@Override
+    public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) {
+    super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle("Sub Menu Opções de Entrada");
         menu.add(0,MENU_TECLADO_NUMERICO,0,"Teclado Numérico");
-        menu.add(0,MENU_TECLADO_ALFANUMERICO,0,"Teclado AlfaNumerico"); 
-    }  
-	/*
+        menu.add(0,MENU_TECLADO_ALFANUMERICO,0,"Teclado AlfaNumerico");
+    }
+
 	@Override
 	 public boolean onMenuItemSelected(int featureID, MenuItem menu){
 
@@ -246,7 +349,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 	}
 	
 	private Boolean ValidaQuantidade(String qtd, String codProduto){
-		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getBaseContext());
+		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getContext());
 		
 		ConfiguracaoDTO cfgDTO = cfgBRL.getAll();
 
@@ -267,7 +370,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 	}
 	
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
 		if(Global.caminhoFTPDTO.getMetodoEntrada() == "N")
@@ -278,19 +381,19 @@ public class PedidoItemNovo extends AppCompatActivity {
 
 
 	private Boolean ValidaDesconto(final String valor) {
-		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getBaseContext());
+		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getContext());
 		ConfiguracaoDTO cfgDTO = cfgBRL.getAll();
 		
 		if (cfgDTO.getDescontoAcrescimo().equals("N")){
-			Toast.makeText(getBaseContext(), "Desconto/Acrescimo não permitido", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Desconto/Acrescimo não permitido", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		else if (Double.parseDouble(valor) > cfgDTO.getDescontoMaximo()){
-			Toast.makeText(getBaseContext(), "O Desconto/Acrescimo máximo permitido �: " + cfgDTO.getDescontoMaximo().toString(), Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "O Desconto/Acrescimo máximo permitido �: " + cfgDTO.getDescontoMaximo().toString(), Toast.LENGTH_SHORT).show();
 			return false;			
 		}
 		else if(venda.util.Global.descontoAcrescimo == null){
-			 AlertDialog.Builder confirmacao = new AlertDialog.Builder(this);
+			 AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
 			 
 			 confirmacao.setTitle("Confirmação Desconto");
 			 confirmacao.setMessage("Este desconto/acrescimo vale para todos os itens seguintes ?");
@@ -325,7 +428,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 	    listaDescricao = preBRL.getCombo("preco", codProduto, desconto, paramDA);
 		//listaCodigo = preBRL.getCombo("codProduto", "-1", codProduto);
 	    
-		ArrayAdapter<String> arrayAdapterPreco = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, listaDescricao);
+		ArrayAdapter<String> arrayAdapterPreco = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, listaDescricao);
 		cbxPreco.setAdapter(arrayAdapterPreco);	
 		
 		cbxPreco.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -361,7 +464,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 			}
 		}
 		else
-			Toast.makeText(getBaseContext(), "Produto não cadastrado", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Produto não cadastrado", Toast.LENGTH_SHORT).show();
 	}
 
 	private void btnPesquisarProduto_click() {
@@ -371,12 +474,12 @@ public class PedidoItemNovo extends AppCompatActivity {
 		else if (txtCodProduto.getText().toString().trim().length() > 0)
 		{
 			Global.prodPesquisa = txtCodProduto.getText().toString().trim();
-			Intent intent = new Intent(PedidoItemNovo.this, PedidoProdutoLista.class).putExtra("paramProduto", true);
+			Intent intent = new Intent(getContext(), PedidoProdutoLista.class).putExtra("paramProduto", true);
 			activityResultLauncher.launch(intent);
 			//startActivityForResult(new Intent(getBaseContext(), RVProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
 		}else 
 		{
-			Intent intent = new Intent(PedidoItemNovo.this, PedidoProdutoLista.class).putExtra("paramProduto", true);
+			Intent intent = new Intent(getContext(), PedidoProdutoLista.class).putExtra("paramProduto", true);
 			activityResultLauncher.launch(intent);
 			//startActivityForResult(new Intent(getBaseContext(), RVProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);
 		}
@@ -393,19 +496,19 @@ public class PedidoItemNovo extends AppCompatActivity {
 */
 		private Boolean ValidaPedido(PedidoDTO pedDTO) {
 			if (pedDTO.getDataPedido().trim().length() <= 0){
-				Toast.makeText(getBaseContext(), "Informe a data do Pedido", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "Informe a data do Pedido", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			if (pedDTO.getFormaPgto().toString().trim().equals("-1")){
-				Toast.makeText(getBaseContext(), "Informe a Forma de Pgto", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "Informe a Forma de Pgto", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			if (pedDTO.getParcela() <= 0){
-				Toast.makeText(getBaseContext(), "Informe a Parcela", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "Informe a Parcela", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			if (pedDTO.getPrazo() <= 0){
-				Toast.makeText(getBaseContext(), "Informe o Prazo", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "Informe o Prazo", Toast.LENGTH_SHORT).show();
 				return false;
 			}
 			return true;		
@@ -496,7 +599,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 	        }
 	        return mensagem;
 	    }*/
-	    
+
 	    private void IncluiProduto(){
 			ItenPedidoDTO itpDTO = new ItenPedidoDTO();
 			if (!itemNovo){
@@ -543,14 +646,14 @@ public class PedidoItemNovo extends AppCompatActivity {
 						}
 						LimpaCampos();
 					}
-				}
+				}/*
 				else
 				{
 				    TabActivity tabs = (TabActivity) getParent();
 				    tabs.getTabHost().setCurrentTab(0); 			 						
-				}
+				}*/
 			} catch (Exception e) {  
-			    Toast.makeText(getBaseContext(), "Erro ao incluir pedido", Toast.LENGTH_SHORT).show();  
+			    Toast.makeText(getContext(), "Erro ao incluir pedido", Toast.LENGTH_SHORT).show();
 			} finally {  
 				venda.util.Global.itemPedidoGlobalDTO = null;
 			} 	    	
@@ -559,7 +662,7 @@ public class PedidoItemNovo extends AppCompatActivity {
 	    private void btnIncluirProduto_click(){
 		if (ValidaInclusao()){
 			if (itemNovo && itpBRL.produtoExistente(venda.util.Global.pedidoGlobalDTO.getId(), Integer.parseInt(txtCodProduto.getText().toString()))){
-				 AlertDialog.Builder confirmacao = new AlertDialog.Builder(this);
+				 AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
 				 
 				 confirmacao.setTitle("Confirma Inclus�o");
 				 confirmacao.setMessage("Este item j� foi inclu�do, deseja incluir novamente ?");
@@ -606,26 +709,26 @@ public class PedidoItemNovo extends AppCompatActivity {
 
 	private boolean ValidaInclusao() {
 		if (txtDescricaoProduto.getText().toString().trim().length() <= 0){
-			Toast.makeText(getBaseContext(), "Selecione um produto", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Selecione um produto", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if (txtQuantidade.getText().toString().trim().length() <= 0){
-			Toast.makeText(getBaseContext(), "Informe a Quantidade", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Informe a Quantidade", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		if(ValidaQuantidade(txtQuantidade.getText().toString().trim(), txtCodProduto.getText().toString().trim())){
-			Toast.makeText(getBaseContext(), "Quantidade informada maior que o Saldo em Estoque", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Quantidade informada maior que o Saldo em Estoque", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 		if (Preco.trim().equals("Selecione")){
-			Toast.makeText(getBaseContext(), "Selecione um Preço", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getContext(), "Selecione um Preço", Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 		if(!Global.pedidoGlobalDTO.getFormaPgto().equals("DIN")) {
 			if (ValidaLimiteCredito(txtQuantidade.getText().toString().trim(), Preco.trim())) {
-				Toast.makeText(getBaseContext(), "Este pedido está execedendo o limite de crédito do cliente", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getContext(), "Este pedido está execedendo o limite de crédito do cliente", Toast.LENGTH_SHORT).show();
 			}
 		}
 

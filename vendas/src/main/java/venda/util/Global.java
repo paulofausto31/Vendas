@@ -14,6 +14,7 @@ public class Global {
 	public static String codEmpresa;
 	public static String tituloAplicacao;
 	public static String codVendedor;
+	public static int idCliente;
 	public static String prodPesquisa;
 	public static Double descontoAcrescimo;
 	public static boolean optionDesconto;

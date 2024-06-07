@@ -9,13 +9,21 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -29,6 +37,8 @@ import java.text.DecimalFormat;
 import java.util.List;
 
 import persistencia.adapters.HistoricoPedidoAdapter;
+import persistencia.adapters.RVHistoricoPedidoAdapter;
+import persistencia.adapters.RVItensPedidoAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
@@ -38,19 +48,29 @@ import venda.util.Global;
 import venda.util.Util;
 
 @SuppressLint("NewApi")
-public class PedidoHistorico extends ListActivity {
+public class PedidoHistorico extends Fragment {
 
-	private static final int MENU_EDITAR = 1;
-	private static final int MENU_EXCLUIR = 2;
-	private static final int MENU_VISUALIZAR = 3;
-	private static final int MENU_DESCONTO = 4;
-	private static final int MENU_ACRESCIMO = 5;
-	private static final int MENU_PDF = 6;
-	private static final int MENU_ENVIAR = 7;
+	private RecyclerView recyclerView;
+	private RVHistoricoPedidoAdapter adapter;
 	PedidoDTO pedDTO;
 	ItenPedidoBRL itpBRL;
 	PedidoBRL pedBRL;
+	List<PedidoDTO> lista;
 
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.fragment_pedido_historico, container, false);
+		recyclerView = view.findViewById(R.id.recycler_view_pedido_historico);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+		pedBRL = new PedidoBRL(getContext());
+		itpBRL = new ItenPedidoBRL(getContext());
+
+		return view;
+	}
+
+	/*
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -156,10 +176,10 @@ public class PedidoHistorico extends ListActivity {
 		 }
 		 return false;
 	 }
-
+*/
 	private void EnviarPedido(PedidoDTO pedDTO) {
-		PedidoBRL pedBRL = new PedidoBRL(getBaseContext());
-		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getBaseContext());
+		PedidoBRL pedBRL = new PedidoBRL(getContext());
+		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
 
 		String pedidoWS = "p|" +
 						  pedDTO.getCodCliente().toString() + "|" + pedDTO.getDataPedido().toString()    + "|" +
@@ -202,7 +222,7 @@ public class PedidoHistorico extends ListActivity {
 			 e.printStackTrace(); 
 			 } 
 		 catch (Exception e) {
-			 Toast.makeText(getBaseContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
 			 e.printStackTrace(); 
 			 } 
 		 finally {
@@ -211,13 +231,13 @@ public class PedidoHistorico extends ListActivity {
 	 }
 	 
 	 private void DescontoAcrescimo(final char tipo, final String titulo, final String mensagem, final PedidoDTO pedDTO){
-		 AlertDialog.Builder pesquisa = new AlertDialog.Builder(this);
+		 AlertDialog.Builder pesquisa = new AlertDialog.Builder(getContext());
 		 
 		 pesquisa.setTitle(titulo);
 		 pesquisa.setMessage(mensagem);
 		 pesquisa.setCancelable(false);
 		 
-		 final EditText input = new EditText(this);
+		 final EditText input = new EditText(getContext());
 		 pesquisa.setView(input);
 		 
 		 pesquisa.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -225,7 +245,7 @@ public class PedidoHistorico extends ListActivity {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				Double value = Double.parseDouble(input.getText().toString());	
-				ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
+				ClienteBRL cliBRL = new ClienteBRL(getContext());
 				if (tipo == 'D')
 					SetDescontoPedido(pedDTO, value);
 				else
@@ -251,7 +271,7 @@ public class PedidoHistorico extends ListActivity {
 	 
 	private void SetDescontoPedido(PedidoDTO pedDTO, Double value) {
 		Double preco;
-		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getBaseContext());
+		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
 		List<ItenPedidoDTO> itens = itpBRL.getByCodPedido(pedDTO.getId());
 		for (ItenPedidoDTO itenPedidoDTO : itens) {
 			preco = itenPedidoDTO.getPreco();
@@ -270,7 +290,7 @@ public class PedidoHistorico extends ListActivity {
 
 	private void SetAcrescimoPedido(PedidoDTO pedDTO, Double value) {
 		Double preco;
-		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getBaseContext());
+		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
 		List<ItenPedidoDTO> itens = itpBRL.getByCodPedido(pedDTO.getId());
 		for (ItenPedidoDTO itenPedidoDTO : itens) {
 			preco = itenPedidoDTO.getPreco();
@@ -281,21 +301,23 @@ public class PedidoHistorico extends ListActivity {
 			itpBRL.Update(itenPedidoDTO);
 		}
 	}
-
+/*
 	private void RetornaTabPedidoBasico() {
     TabActivity tabs = (TabActivity) getParent();
     tabs.getTabHost().setCurrentTab(0); 			 
 	}
-
+*/
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
-		PedidoBRL pedBRL = new PedidoBRL(getBaseContext());
-		setListAdapter(new HistoricoPedidoAdapter(getBaseContext(), pedBRL.getByCodCliente(venda.util.Global.pedidoGlobalDTO.getCodCliente())));				
+		PedidoBRL pedBRL = new PedidoBRL(getContext());
+		lista = pedBRL.getByCodCliente(venda.util.Global.pedidoGlobalDTO.getCodCliente());
+		adapter = new RVHistoricoPedidoAdapter(getContext(), lista);
+		recyclerView.setAdapter(adapter);
 	}
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
 		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;

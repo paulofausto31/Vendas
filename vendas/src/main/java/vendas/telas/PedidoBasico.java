@@ -4,13 +4,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -38,16 +44,15 @@ import persistencia.dto.PedidoDTO;
 import persistencia.dto.VendedorDTO;
 import venda.util.Global;
 
-public class PedidoBasico extends Activity {
-	
+public class PedidoBasico extends Fragment {
+
 	List<String> listaDescricao;
 	List<String> listaCodigo;
 	String codFormaPgto = "";
 	ClienteDTO cliDTO = new ClienteDTO();
 	VendedorBRL venBRL;
-	private Button btnVoltarClientes;
 	VendedorDTO venDTO = new VendedorDTO();
-	PedidoBRL pedBRL; 
+	PedidoBRL pedBRL;
 	ConfiguracaoBRL cfgBRL;
 	ContaReceberBRL recBRL;
 	//private static final String URL = "http://pfsoft.esy.es/serverphp/sitlgps.php";
@@ -60,7 +65,158 @@ public class PedidoBasico extends Activity {
 	EditText txtPrazo;
 	EditText txtParcela;
 	Localizacao localizacao;
-	
+
+	@Nullable
+	@Override
+	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View view = inflater.inflate(R.layout.pedido_basico, container, false);
+
+		FormaPgtoBRL pgtBRL = new FormaPgtoBRL(getContext());
+		venBRL =  new VendedorBRL(getContext());
+		venDTO = venBRL.getAll();
+		pedBRL = new PedidoBRL(getContext());
+		cfgBRL = new ConfiguracaoBRL(getContext());
+		recBRL = new ContaReceberBRL(getContext());
+
+		//Intent it = getIntent();
+		ClienteBRL cliBRL = new ClienteBRL(getContext());
+		int idCliente = Global.idCliente;
+		cliDTO = cliBRL.getById(idCliente);
+		try {
+			Global.totalContasReceber = recBRL.getValorAbertoByCliente(cliDTO.getCodCliente());
+			Global.totalLimiteCredito = cliDTO.getLimiteCredito();
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
+
+		localizacao = new Localizacao(getContext());
+
+		//exibeMensagemVendedor();
+
+		listaDescricao = pgtBRL.getCombo("descricao", "Selecione");
+		listaCodigo = pgtBRL.getCombo("codFPgto", "-1");
+
+		txtNumeroPedido = view.findViewById(R.id.txtNumeroPedido);
+		txtDataPedido = view.findViewById(R.id.txtDataPedido);
+		txtCliente = view.findViewById(R.id.txtClientePedido);
+		cbxFormaPgto = view.findViewById(R.id.cbxFormaPgtoPedido);
+		txtPrazo = view.findViewById(R.id.txtPrazoPedido);
+		txtParcela = view.findViewById(R.id.txtParcelaPedido);
+		CaminhoFTPBRL ftpBRL = new CaminhoFTPBRL(getContext(), requireActivity());
+		Global.caminhoFTPDTO = ftpBRL.getByEmpresa();
+
+		return view;
+	}
+/*
+	public static PedidoBasico newInstance(int idCliente) {
+		PedidoBasico fragment = new PedidoBasico();
+		Bundle args = new Bundle();
+		args.putInt("idCliente", idCliente);
+		fragment.setArguments(args);
+		return fragment;
+	}
+*/
+
+	private void exibeMensagemVendedor() {
+		String msg = cfgBRL.getMensagem();
+		if (msg.length() > 0)
+			venda.util.mensagem.messageBox(getContext(), "Mensagem", msg, "Ok");
+	}
+
+	private void LimpaCamposPedido() {
+		txtNumeroPedido.setText("0");
+		txtDataPedido.setText(venda.util.Util.getDate());
+		txtCliente.setText(cliDTO.getNome());
+		txtPrazo.setText("1");
+		txtParcela.setText("1");
+		CarregaComboFormaPgto();
+
+	}
+
+	private void CarregaComboFormaPgto() {
+		ArrayAdapter<String> arrayAdapterFormaPgto = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, listaDescricao);
+		cbxFormaPgto.setAdapter(arrayAdapterFormaPgto);
+		for (int i = 0; i < cbxFormaPgto.getCount(); i++) {
+			if (listaCodigo.get(i).trim().equals("DIN")) {
+				cbxFormaPgto.setSelection(i);
+			}
+		}
+
+		cbxFormaPgto.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View v,
+									   int posicao, long id) {
+				codFormaPgto = listaCodigo.get(posicao);
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+	}
+
+	@Override
+	public void onPause() {
+		// TODO Auto-generated method stub
+		super.onPause();
+		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;
+		if (cliDTO != null)
+			pedDTO.setCodCliente(cliDTO.getCodCliente());
+		pedDTO.setCodVendedor(venDTO.getCodigo());
+		pedDTO.setDataPedido(txtDataPedido.getText().toString());
+		pedDTO.setFormaPgto(codFormaPgto);
+		pedDTO.setHoraPedidoFim(venda.util.Util.getTime());
+		pedDTO.setParcela(Integer.parseInt(txtParcela.getText().toString()));
+		pedDTO.setPrazo(Integer.parseInt(txtPrazo.getText().toString()));
+		pedDTO.setLatitude(localizacao.getLatitude());
+		pedDTO.setLongitude(localizacao.getLongitude());
+		pedDTO.setInfAdicional("");
+		if (pedDTO.getId() == null || pedDTO.getId() == 0){
+			pedDTO.setId(0);
+			pedDTO.setBaixado(0);
+			pedDTO.setFechado("1");
+			pedDTO.setHoraPedido(venda.util.Util.getTime());
+		}else{
+			if (pedDTO.getBaixado() == 1)
+				Toast.makeText(getContext(), "Este pedido ja foi baixado e nao pode ser manipulado", Toast.LENGTH_SHORT).show();
+			else
+				pedBRL.Update(pedDTO);
+		}
+		venda.util.Global.pedidoGlobalDTO = pedDTO;
+//		@SuppressWarnings("unused")
+//		HttpAsyncPOST httpAsyncPost = new HttpAsyncPOST();
+//		httpAsyncPost.execute();
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;
+		if (pedDTO.getId() != null){
+			CarregaComboFormaPgto();
+			ClienteBRL cliBRL = new ClienteBRL(getContext());
+			ClienteDTO cliDTO = cliBRL.getByCodCliente(pedDTO.getCodCliente());
+			txtNumeroPedido.setText(pedDTO.getId().toString());
+			txtDataPedido.setText(pedDTO.getDataPedido());
+			txtCliente.setText(cliDTO.getNome());
+			txtPrazo.setText(pedDTO.getPrazo().toString());
+			txtParcela.setText(pedDTO.getParcela().toString());
+			for (int i = 0; i < cbxFormaPgto.getCount(); i++) {
+				if (listaCodigo.get(i).equals(pedDTO.getFormaPgto())) {
+					cbxFormaPgto.setSelection(i);
+				}
+			}
+		}
+		else
+			LimpaCamposPedido();
+
+	}
+}
+	/*
 	@Override
 	public void onCreate(Bundle e){
 		super.onCreate(e);
@@ -254,4 +410,4 @@ public class PedidoBasico extends Activity {
 	}
 	
 	
-}
+}*/

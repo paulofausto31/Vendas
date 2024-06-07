@@ -120,22 +120,7 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/txtPrazoPedido"
             android:text="          " />
-
-        <Button
-            android:id="@+id/btnPedidoVoltarCliente"
-            android:layout_width="136dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView7"
-            android:layout_alignParentStart="true"
-
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="155dp"
-            android:layout_marginLeft="-2dp"
-            android:layout_marginTop="-75dp"
-            android:layout_marginRight="27dp"
-            android:layout_marginBottom="167dp"
-            android:text="Voltar" />
+        
 
     </RelativeLayout>
 
