@@ -1,19 +1,9 @@
 package vendas.telas;
 
-import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,16 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import persistencia.adapters.ItensPedidoAdapter;
 import persistencia.adapters.RVItensPedidoAdapter;
-import persistencia.adapters.RVUtilitarioPedidoAdapter;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
-import persistencia.brl.ProdutoBRL;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
-import persistencia.dto.ProdutoDTO;
-import venda.util.Global;
 
 public class PedidoItens extends Fragment {
 

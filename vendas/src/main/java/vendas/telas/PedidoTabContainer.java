@@ -24,13 +24,14 @@ import venda.util.Global;
 public class PedidoTabContainer extends AppCompatActivity {
 
 	public static int idCliente;
+	private ViewPager2 viewPager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.newtabcontainer);
 
-		ViewPager2 viewPager = findViewById(R.id.view_pager);
+		viewPager = findViewById(R.id.view_pager);
 		TabLayout tabLayout = findViewById(R.id.tab_layout);
 
 		viewPager.setAdapter(new TabAdapter(this));
@@ -116,6 +117,10 @@ public class PedidoTabContainer extends AppCompatActivity {
 		public int getItemCount() {
 			return 5;
 		}
+	}
+
+	public ViewPager2 getViewPager() {
+		return viewPager;
 	}
 }
 

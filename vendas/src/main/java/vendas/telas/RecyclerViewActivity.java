@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Arrays;
 import java.util.List;
 
-import persistencia.adapters.ClienteAdapter;
 import persistencia.adapters.MyAdapter;
 
 public class RecyclerViewActivity extends AppCompatActivity {

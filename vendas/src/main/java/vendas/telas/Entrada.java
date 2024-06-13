@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -35,8 +36,7 @@ public class Entrada extends Activity {
 	Spinner cbxEmpresa;
 	EmpresaBRL empBRL;
 	VendedorBRL venBRL;
-	private static final int PERMISSAO_GRAVACAO = 828;
-
+	private static final int MY_PERMISSIONS_REQUEST_STORAGE = 0;
 
 	private void AbrePrincipal() {
 		Intent principal = new Intent(this, Principal.class);
@@ -52,6 +52,7 @@ public class Entrada extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.entrada);
+		VerificaPermissaoGravacao();
 
 		empBRL = new EmpresaBRL(getBaseContext());
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
@@ -59,7 +60,6 @@ public class Entrada extends Activity {
 		lblEmpresa = (TextView)findViewById(R.id.lblEmpresa);
 		cbxEmpresa = (Spinner)findViewById(R.id.cbxEmpresa);
 		venBRL = new VendedorBRL(getBaseContext());
-		VerificaPermissaoGravacao();
 
 		btnEntrar.setOnClickListener(new Button.OnClickListener() {
 
@@ -87,58 +87,41 @@ public class Entrada extends Activity {
 	}
 
 	public void VerificaPermissaoGravacao(){
-		// Here, thisActivity is the current activity
-		if (ContextCompat.checkSelfPermission(this,
-				android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-				!= PackageManager.PERMISSION_GRANTED) {
-
-			// Should we show an explanation?
-			if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-					android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-
-
-			} else {
-
-
-				ActivityCompat.requestPermissions(this,
-						new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-						PERMISSAO_GRAVACAO);
-
-			}
+		// Verifica se a permissão de leitura e gravação está concedida
+		if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
+				!= PackageManager.PERMISSION_GRANTED ||
+				ContextCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+						!= PackageManager.PERMISSION_GRANTED) {
+			// Se a permissão não foi concedida, solicita ao usuário
+			ActivityCompat.requestPermissions(this,
+					new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE,
+							Manifest.permission.WRITE_EXTERNAL_STORAGE},
+					MY_PERMISSIONS_REQUEST_STORAGE);
 		}
-
 	}
 
-/*	@Override
-	public void onRequestPermissionsResult(int requestCode,
-	    String permissions[], int[] grantResults) {
+	@Override
+	public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+		super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 		switch (requestCode) {
-			case PERMISSAO_GRAVACAO: {
-				// If request is cancelled, the result arrays are empty.
-				if (grantResults.length > 0
-						&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-					// permission was granted, yay! Do the
-					// contacts-related task you need to do.
-
+			case MY_PERMISSIONS_REQUEST_STORAGE: {
+				// Se a solicitação for cancelada, os arrays de resultados serão vazios
+				if (grantResults.length > 0 &&
+						grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+					// Permissão concedida, faça ação desejada
 				} else {
-
-					// permission denied, boo! Disable the
-					// functionality that depends on this permission.
+					// Permissão negada, informe ao usuário ou ajuste o comportamento do aplicativo
 				}
 				return;
 			}
-
-			// other 'case' lines to check for other
-			// permissions this app might request
 		}
-	}*/
-
+	}
 
 	@Override
 	protected void onResume() {
 		// TODO Auto-generated method stub
 		super.onResume();
+
 		txtVendedor.setText("");
 		Global.codEmpresa = "";
 		Global.tituloAplicacao = "";

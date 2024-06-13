@@ -7,20 +7,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.Arrays;
 import java.util.List;
 
-import persistencia.adapters.ClienteAdapter;
-import persistencia.adapters.MyAdapter;
 import persistencia.adapters.RVClienteAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;

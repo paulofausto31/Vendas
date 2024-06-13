@@ -24,10 +24,12 @@ public class RVConsultaClienteAdapter extends RecyclerView.Adapter<RVConsultaCli
 
     private List<PedidoDTO> lista;
     private Context ctx;
+    private OnItemLongClickListener longClickListener;
 
-    public RVConsultaClienteAdapter(Context ctx, List<PedidoDTO> lista) {
+    public RVConsultaClienteAdapter(Context ctx, List<PedidoDTO> lista, OnItemLongClickListener longClickListener) {
         this.ctx = ctx;
         this.lista = lista;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -58,6 +60,13 @@ public class RVConsultaClienteAdapter extends RecyclerView.Adapter<RVConsultaCli
         String totalFormatado = formatador.format(totalPedido);
         totalFormatado = totalFormatado.replace(',', '.');
         holder.txtValorConsulta.setText(totalFormatado);
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(v, position);
+                return true;
+            }
+            return false;
+        });
     }
 
     @Override
@@ -79,5 +88,9 @@ public class RVConsultaClienteAdapter extends RecyclerView.Adapter<RVConsultaCli
             txtValorConsulta = itemView.findViewById(R.id.txtValorConsulta);
             txtNomeClienteConsulta = itemView.findViewById(R.id.txtNomeClienteConsulta);
         }
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
     }
 }

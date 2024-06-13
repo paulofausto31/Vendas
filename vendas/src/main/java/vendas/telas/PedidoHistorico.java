@@ -2,21 +2,16 @@ package vendas.telas;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.ListActivity;
-import android.app.TabActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Environment;
-import android.view.ContextMenu;
-import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
+import android.content.Context;
 
 
 import androidx.annotation.NonNull;
@@ -24,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
@@ -36,9 +32,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import persistencia.adapters.HistoricoPedidoAdapter;
 import persistencia.adapters.RVHistoricoPedidoAdapter;
-import persistencia.adapters.RVItensPedidoAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
@@ -48,10 +42,11 @@ import venda.util.Global;
 import venda.util.Util;
 
 @SuppressLint("NewApi")
-public class PedidoHistorico extends Fragment {
+public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapter.OnItemLongClickListener {
 
 	private RecyclerView recyclerView;
 	private RVHistoricoPedidoAdapter adapter;
+	private PedidoTabContainer mainActivity;
 	PedidoDTO pedDTO;
 	ItenPedidoBRL itpBRL;
 	PedidoBRL pedBRL;
@@ -68,6 +63,37 @@ public class PedidoHistorico extends Fragment {
 		itpBRL = new ItenPedidoBRL(getContext());
 
 		return view;
+	}
+
+	@Override
+	public void onAttach(Context context) {
+		super.onAttach(context);
+		if (context instanceof PedidoTabContainer) {
+			mainActivity = (PedidoTabContainer) context;
+		}
+	}
+
+	@Override
+	public void onItemLongClick(View view, int position) {
+		PedidoDTO pedDTO = lista.get(position);
+		PopupMenu popup = new PopupMenu(getContext(), view);
+		popup.getMenuInflater().inflate(R.menu.popup_historico, popup.getMenu());
+		popup.setOnMenuItemClickListener(item -> {
+			if (item.getItemId() == R.id.action_historico_editar) {
+				venda.util.Global.pedidoGlobalDTO = pedDTO;
+				RetornaTabPedidoBasico();
+				return true;
+			}
+			return false;
+		});
+		popup.show();
+	}
+
+	private void RetornaTabPedidoBasico() {
+		if (mainActivity != null) {
+			ViewPager2 viewPager = mainActivity.getViewPager();
+			viewPager.setCurrentItem(0); // Index da aba que você deseja abrir
+		}
 	}
 
 	/*
@@ -312,7 +338,7 @@ public class PedidoHistorico extends Fragment {
 		super.onResume();
 		PedidoBRL pedBRL = new PedidoBRL(getContext());
 		lista = pedBRL.getByCodCliente(venda.util.Global.pedidoGlobalDTO.getCodCliente());
-		adapter = new RVHistoricoPedidoAdapter(getContext(), lista);
+		adapter = new RVHistoricoPedidoAdapter(getContext(), lista, this);
 		recyclerView.setAdapter(adapter);
 	}
 

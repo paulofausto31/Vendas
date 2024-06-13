@@ -1,9 +1,12 @@
 package vendas.telas;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
+
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -13,14 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import persistencia.adapters.RVConsultaClienteAdapter;
+import persistencia.brl.ClienteBRL;
 import persistencia.brl.PedidoBRL;
+import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
+import venda.util.Global;
 
-public class ConsultaVendasCliente extends Fragment {
+public class ConsultaVendasCliente extends Fragment implements RVConsultaClienteAdapter.OnItemLongClickListener {
 
 	private RecyclerView recyclerView;
 	private RVConsultaClienteAdapter adapter;
 	List<PedidoDTO> lista;
+	Intent intent;
 
 	@Nullable
 	@Override
@@ -33,11 +40,39 @@ public class ConsultaVendasCliente extends Fragment {
 	}
 
 	@Override
+	public void onItemLongClick(View view, int position) {
+		PedidoDTO pedDTO = lista.get(position);
+		ClienteBRL cliBRL = new ClienteBRL(getContext());
+		ClienteDTO cliDTO = cliBRL.getByCodCliente(pedDTO.getCodCliente());
+		PopupMenu popup = new PopupMenu(getContext(), view);
+		popup.getMenuInflater().inflate(R.menu.popup_consulta_cliente, popup.getMenu());
+		popup.setOnMenuItemClickListener(item -> {
+			if (item.getItemId() == R.id.action_consulta_cliente_novo) {
+				intent = new Intent(getContext(), PedidoTabContainer.class);
+				intent.putExtra("idCliente", cliDTO.getId());
+				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				return true;
+			}
+			if (item.getItemId() == R.id.action_consulta_cliente_editar) {
+				venda.util.Global.pedidoGlobalDTO = pedDTO;
+				intent = new Intent(getContext(), PedidoTabContainer.class);
+				intent.putExtra("idCliente", 0);
+				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				startActivity(intent);
+				return true;
+			}
+			return false;
+		});
+		popup.show();
+	}
+
+	@Override
 	public void onResume() {
 		super.onResume();
 		PedidoBRL brl = new PedidoBRL(getContext());
 		lista = brl.getAllPedAberto();
-		adapter = new RVConsultaClienteAdapter(getContext(), lista);
+		adapter = new RVConsultaClienteAdapter(getContext(), lista, this);
 		recyclerView.setAdapter(adapter);
 	}
 }

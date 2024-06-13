@@ -1,11 +1,9 @@
 package vendas.telas;
 
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,13 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import persistencia.adapters.ConsultaProdutosAdapter;
 import persistencia.adapters.RVConsultaProdutoAdapter;
 import persistencia.brl.ItenPedidoBRL;
-import persistencia.brl.PedidoBRL;
-import persistencia.dto.ItenPedidoDTO;
-import persistencia.dto.PedidoDTO;
-import venda.util.Global;
 
 public class ConsultaVendasProduto extends Fragment {
 

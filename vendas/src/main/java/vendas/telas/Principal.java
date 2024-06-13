@@ -1,8 +1,10 @@
 package vendas.telas;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +14,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 
@@ -20,35 +25,15 @@ import venda.util.Global;
 
 public class Principal extends AppCompatActivity {
 
-	public static final int Sincronizar = 1;
-	public static final int Configuracoes = 2;
 	private String chave;
-	private static final String TAG = "Coordenadas";		
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 		this.setTitle(Global.tituloAplicacao);
-        
-        //... Localicação
-        //Localizacao loc = new Localizacao(getBaseContext());
-/*        Boolean alarmeAtivo = (PendingIntent.getBroadcast(this, 0, new Intent("ALARME_DISPARADO"), PendingIntent.FLAG_NO_CREATE) == null);
-        if (alarmeAtivo)
-        {
-	        Intent intent = new Intent("ALARME_DISPARADO");
-	        PendingIntent p = PendingIntent.getBroadcast(this, 0, intent, 0);
-	        
-	        Calendar c = Calendar.getInstance();
-	        c.setTimeInMillis(System.currentTimeMillis());
-	        c.add(Calendar.SECOND, 3);
-	        
-	        AlarmManager alarm = (AlarmManager)getSystemService(ALARM_SERVICE);
-	        alarm.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),100000, p); //300000
-        }else
-        	Log.i("Logs", "Alarme j� ativo");
-*/        //... btnCliente
-        
-        
+
+
         Button btnCliente = (Button)findViewById(R.id.btnCliente);
         btnCliente.setOnClickListener(new Button.OnClickListener() {			
 			public void onClick(View v) { btnCliente_click();  }
@@ -115,7 +100,7 @@ public class Principal extends AppCompatActivity {
 				startActivity(cliente);
 				return true;
 			case R.id.menu_produtos:
-				Intent produto = new Intent(this, ProdutoLista.class).putExtra("paramProduto", false);
+				Intent produto = new Intent(this, RVProdutoLista.class).putExtra("paramProduto", false);
 				startActivity(produto);
 				return true;
 			case R.id.menu_consultas:

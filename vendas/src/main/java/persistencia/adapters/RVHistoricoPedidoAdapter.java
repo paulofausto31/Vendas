@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,10 +23,12 @@ import vendas.telas.R;
 public class RVHistoricoPedidoAdapter extends RecyclerView.Adapter<RVHistoricoPedidoAdapter.ViewHolder> {
     private List<PedidoDTO> lista;
     private Context ctx;
+    private OnItemLongClickListener longClickListener;
 
-    public RVHistoricoPedidoAdapter(Context ctx, List<PedidoDTO> lista) {
+    public RVHistoricoPedidoAdapter(Context ctx, List<PedidoDTO> lista, OnItemLongClickListener longClickListener) {
         this.ctx = ctx;
         this.lista = lista;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -49,6 +52,13 @@ public class RVHistoricoPedidoAdapter extends RecyclerView.Adapter<RVHistoricoPe
         String totalFormatado = formatador.format(total);
         totalFormatado = totalFormatado.replace(',', '.');
         holder.txtTotalHistorico.setText(totalFormatado);
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(v, position);
+                return true;
+            }
+            return false;
+        });
     }
 
     @Override
@@ -68,5 +78,9 @@ public class RVHistoricoPedidoAdapter extends RecyclerView.Adapter<RVHistoricoPe
             txtTotalHistorico = itemView.findViewById(R.id.txtTotalHistorico);
             txtPgto = itemView.findViewById(R.id.txtPgto);
         }
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
     }
 }
