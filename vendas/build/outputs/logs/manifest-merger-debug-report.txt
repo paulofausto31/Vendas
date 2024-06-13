@@ -13,7 +13,7 @@ MERGED from [com.google.android.gms:play-services-cast:12.0.1] C:\Users\Paulo\.g
 MERGED from [androidx.mediarouter:mediarouter:1.0.0-alpha5] C:\Users\Paulo\.gradle\caches\transforms-3\b50712086e894073a0d120ce545e83b8\transformed\mediarouter-1.0.0-alpha5\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\Paulo\.gradle\caches\transforms-3\84aca059a4004f02173e8cda25f28e03\transformed\appcompat-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.fragment:fragment-ktx:1.5.1] C:\Users\Paulo\.gradle\caches\transforms-3\70a3354f563df3b72663bff76f64498b\transformed\jetified-fragment-ktx-1.5.1\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\Users\Paulo\.gradle\caches\transforms-3\0c705d7be8aa97a6d59f70afbb7c60ef\transformed\recyclerview-1.3.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\Paulo\.gradle\caches\transforms-3\ae7c0efda1a65d73bac9b4c9bead5fc5\transformed\recyclerview-1.3.2\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.viewpager2:viewpager2:1.1.0] C:\Users\Paulo\.gradle\caches\transforms-3\109630d469aefa0298ba28b1b1d44744\transformed\jetified-viewpager2-1.1.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-ads:12.0.1] C:\Users\Paulo\.gradle\caches\transforms-3\ca349a8cea654bd044b5d1864b910199\transformed\jetified-play-services-ads-12.0.1\AndroidManifest.xml:17:1-25:12
 MERGED from [com.google.android.gms:play-services-ads-lite:12.0.1] C:\Users\Paulo\.gradle\caches\transforms-3\fbb2bcad3529091529d2956a1f51487f\transformed\jetified-play-services-ads-lite-12.0.1\AndroidManifest.xml:17:1-36:12
@@ -675,8 +675,8 @@ MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\Paulo\.gradle\caches\t
 MERGED from [androidx.appcompat:appcompat:1.6.1] C:\Users\Paulo\.gradle\caches\transforms-3\84aca059a4004f02173e8cda25f28e03\transformed\appcompat-1.6.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.fragment:fragment-ktx:1.5.1] C:\Users\Paulo\.gradle\caches\transforms-3\70a3354f563df3b72663bff76f64498b\transformed\jetified-fragment-ktx-1.5.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.fragment:fragment-ktx:1.5.1] C:\Users\Paulo\.gradle\caches\transforms-3\70a3354f563df3b72663bff76f64498b\transformed\jetified-fragment-ktx-1.5.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\Users\Paulo\.gradle\caches\transforms-3\0c705d7be8aa97a6d59f70afbb7c60ef\transformed\recyclerview-1.3.1\AndroidManifest.xml:20:5-44
-MERGED from [androidx.recyclerview:recyclerview:1.3.1] C:\Users\Paulo\.gradle\caches\transforms-3\0c705d7be8aa97a6d59f70afbb7c60ef\transformed\recyclerview-1.3.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\Paulo\.gradle\caches\transforms-3\ae7c0efda1a65d73bac9b4c9bead5fc5\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.3.2] C:\Users\Paulo\.gradle\caches\transforms-3\ae7c0efda1a65d73bac9b4c9bead5fc5\transformed\recyclerview-1.3.2\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.1.0] C:\Users\Paulo\.gradle\caches\transforms-3\109630d469aefa0298ba28b1b1d44744\transformed\jetified-viewpager2-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.viewpager2:viewpager2:1.1.0] C:\Users\Paulo\.gradle\caches\transforms-3\109630d469aefa0298ba28b1b1d44744\transformed\jetified-viewpager2-1.1.0\AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-ads:12.0.1] C:\Users\Paulo\.gradle\caches\transforms-3\ca349a8cea654bd044b5d1864b910199\transformed\jetified-play-services-ads-12.0.1\AndroidManifest.xml:21:5-23:52
