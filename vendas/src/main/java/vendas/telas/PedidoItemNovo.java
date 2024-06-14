@@ -136,24 +136,6 @@ public class PedidoItemNovo extends Fragment {
 		btnIncluirProduto = view.findViewById(R.id.btnIncluirProduto);
 		registerForContextMenu(txtCodProduto);
 
-		//Intent it = getIntent();
-		itpBRL = new ItenPedidoBRL(getContext());
-		//Integer extra = it.getIntExtra("codProduto", 0);
-		ItenPedidoDTO itpDTO = venda.util.Global.itemPedidoGlobalDTO;
-		if (itpDTO != null){
-			//itpDTO = itpBRL.getByCodProduto(venda.util.Global.pedidoGlobalDTO.getId(), extra);
-			txtCodProduto.setText(itpDTO.getCodProduto().toString());
-			txtQuantidade.setText(itpDTO.getQuantidade().toString());
-			CarregaDescricaoProduto(itpDTO.getCodProduto().toString());
-			idItemPedido = itpDTO.getId();
-			itemNovo = false;
-			btnPesquisarProduto.setEnabled(false);
-			txtCodProduto.setEnabled(false);
-			txtUnidade.setEnabled(false);
-		}
-		else
-			itemNovo = true;
-
 		txtDA.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -200,6 +182,34 @@ public class PedidoItemNovo extends Fragment {
 		});
 
 		return view;
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		//Intent it = getIntent();
+		itpBRL = new ItenPedidoBRL(getContext());
+		//Integer extra = it.getIntExtra("codProduto", 0);
+		ItenPedidoDTO itpDTO = venda.util.Global.itemPedidoGlobalDTO;
+		if (itpDTO != null){
+			//itpDTO = itpBRL.getByCodProduto(venda.util.Global.pedidoGlobalDTO.getId(), extra);
+			txtCodProduto.setText(itpDTO.getCodProduto().toString());
+			txtQuantidade.setText(itpDTO.getQuantidade().toString());
+			CarregaDescricaoProduto(itpDTO.getCodProduto().toString());
+			idItemPedido = itpDTO.getId();
+			itemNovo = false;
+			btnPesquisarProduto.setEnabled(false);
+			txtCodProduto.setEnabled(false);
+			txtUnidade.setEnabled(false);
+		}
+		else
+			itemNovo = true;
+
+		if(Global.caminhoFTPDTO.getMetodoEntrada() == "N")
+			txtCodProduto.setInputType(InputType.TYPE_CLASS_NUMBER);
+		else
+			txtCodProduto.setInputType(InputType.TYPE_CLASS_TEXT);
 	}
 
 	/*
@@ -368,17 +378,6 @@ public class PedidoItemNovo extends Fragment {
 		else
 			return false;
 	}
-	
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		if(Global.caminhoFTPDTO.getMetodoEntrada() == "N")
-			txtCodProduto.setInputType(InputType.TYPE_CLASS_NUMBER);
-		else
-			txtCodProduto.setInputType(InputType.TYPE_CLASS_TEXT);
-	}
-
 
 	private Boolean ValidaDesconto(final String valor) {
 		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getContext());

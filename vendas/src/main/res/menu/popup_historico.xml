@@ -3,4 +3,13 @@
     <item
         android:id="@+id/action_historico_editar"
         android:title="Editar" />
+    <item
+        android:id="@+id/action_historico_excluir"
+        android:title="Excluir" />
+    <item
+        android:id="@+id/action_historico_desconto"
+        android:title="Desconto" />
+    <item
+        android:id="@+id/action_historico_acrescimo"
+        android:title="Acrescimo" />
 </menu>

@@ -84,6 +84,58 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 				RetornaTabPedidoBasico();
 				return true;
 			}
+			if (item.getItemId() == R.id.action_historico_desconto){
+				if (!itpBRL.ExisteDA(pedDTO.getId()))
+					DescontoAcrescimo('D', "Desconto", "Informe o Desconto", pedDTO);
+				else
+					Toast.makeText(getContext(), "Este pedido ja possui desconto ou acrescimo", Toast.LENGTH_SHORT).show();
+
+				return true;
+			}
+			if (item.getItemId() == R.id.action_historico_acrescimo){
+				if (!itpBRL.ExisteDA(pedDTO.getId()))
+					DescontoAcrescimo('A', "Acrescimo", "Informe o Acrescimo", pedDTO);
+				else
+					Toast.makeText(getContext(), "Este pedido ja possui desconto ou acrescimo", Toast.LENGTH_SHORT).show();
+
+				return true;
+			}
+			if (item.getItemId() == R.id.action_historico_excluir) {
+				AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
+
+				confirmacao.setTitle("Excluir Pedido");
+				confirmacao.setMessage("Confirma Exclusão deste Pedido ?");
+				confirmacao.setCancelable(false);
+
+				confirmacao.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						PedidoBRL pedBRL = new PedidoBRL(getContext());
+						ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
+						itpBRL.deleteByCodPedido(pedDTO.getId());
+						pedBRL.delete(pedDTO);
+						venda.util.Global.pedidoGlobalDTO = new PedidoDTO();
+						RetornaTabPedidoBasico();
+					}
+				});
+
+				confirmacao.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+
+					}
+				});
+
+				AlertDialog alertDialog = confirmacao.create();
+
+				alertDialog.show();
+
+
+				return true;
+			}
 			return false;
 		});
 		popup.show();

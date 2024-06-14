@@ -23,10 +23,12 @@ public class RVItensPedidoAdapter extends RecyclerView.Adapter<RVItensPedidoAdap
 
     private List<ItenPedidoDTO> lista;
     private Context ctx;
+    private RVItensPedidoAdapter.OnItemLongClickListener longClickListener;
 
-    public RVItensPedidoAdapter(Context ctx, List<ItenPedidoDTO> lista) {
+    public RVItensPedidoAdapter(Context ctx, List<ItenPedidoDTO> lista, RVItensPedidoAdapter.OnItemLongClickListener longClickListener) {
         this.ctx = ctx;
         this.lista = lista;
+        this.longClickListener = longClickListener;
     }
 
     @NonNull
@@ -56,6 +58,13 @@ public class RVItensPedidoAdapter extends RecyclerView.Adapter<RVItensPedidoAdap
 
         Double total = dto.getQuantidade() * dto.getPreco();
         holder.txtTotal.setText(total.toString());
+        holder.itemView.setOnLongClickListener(v -> {
+            if (longClickListener != null) {
+                longClickListener.onItemLongClick(v, position);
+                return true;
+            }
+            return false;
+        });
     }
 
     @Override
@@ -79,5 +88,9 @@ public class RVItensPedidoAdapter extends RecyclerView.Adapter<RVItensPedidoAdap
             txtTotal = itemView.findViewById(R.id.txtTotal);
             txtDAList = itemView.findViewById(R.id.txtDAList);
         }
+    }
+
+    public interface OnItemLongClickListener {
+        void onItemLongClick(View view, int position);
     }
 }
