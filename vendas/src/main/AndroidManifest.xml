@@ -34,9 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="ClienteTabContainer"></activity>
         <activity android:name="Principal"></activity>
-        <activity android:name="vendas.telas.ClienteLista"></activity>
+        <activity android:name=".Principal_NavigationView"></activity>
         <activity android:name=".UtilitarioPedidoFechado"></activity>
         <activity android:name="UtilitarioPedidoPendente"></activity>
         <activity android:name="UtilitarioTabContainer"></activity>
@@ -58,7 +57,6 @@
         <activity android:name="PedidoBasico"></activity> 
         <activity android:name="PedidoHistorico"></activity> 
         <activity android:name="PedidoItens"></activity>
-        <activity android:name="ProdutoLista"></activity>  
         <activity android:name=".Comunicacao"></activity>
         <activity android:name="FiltroFornecedor"></activity>  
         <activity android:name="FiltroGrupo"></activity>  
