@@ -340,67 +340,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="79942867-3a59-4b25-96d9-4f2da4916cd9" name="Default" comment="Build versao 10.5">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_drawerlayout_drawerlayout_1_2_0_aar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PrincipalFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/nav_cabecalho.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vendas/src/main/res/menu/menu_drawer.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/checksums/sha1-checksums.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/java_pid24112.hprof" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__androidx_drawerlayout_drawerlayout_1_1_1_aar.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/vendas/Vendas.vendas.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/CidadeAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/CidadeAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/ClienteNaoPositivadoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/ClienteNaoPositivadoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/ContasReceberAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/ContasReceberAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/FornecedorAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/FornecedorAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/GrupoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/GrupoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/PedidoSelecaoAdapter.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/adapters/PedidoSelecaoAdapter.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ClienteComplemento.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ClienteComplemento.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Comunicacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Comunicacao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoGeral.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoGeral.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoLocal.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoLocal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoRemoto.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoRemoto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoTabContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConfiguracaoTabContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaPositivacao.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaPositivacao.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaTabContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaTabContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasProduto.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasProduto.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/JustificativaBasico.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/JustificativaBasico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/JustificativaTabContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/JustificativaTabContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/MySql.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/MySql.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoAbrir.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoAbrir.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoBasico.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoBasico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoHistorico.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoHistorico.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoInfAdicional.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoInfAdicional.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItens.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItens.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoTabContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoTabContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Principal.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Principal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/UtilitarioPedidoPendente.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/UtilitarioPedidoPendente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/UtilitarioTabContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/UtilitarioTabContainer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/ws/GetLGPS$JSONParse.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/ws/GetLGPS$JSONParse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/ws/GetLGPS.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/ws/GetLGPS.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Entrada.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Entrada.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -410,7 +361,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Users\Paulo\.android\avd\Pixel_8_API_28.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R9XT50LA85D]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -965,5 +916,11 @@
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="persistencia.dto.ClienteDTO" memberName="nome" />
+        <PinnedItemInfo parentTag="persistencia.dto.ClienteDTO" memberName="seqVisita" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
