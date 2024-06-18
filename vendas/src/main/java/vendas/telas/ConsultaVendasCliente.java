@@ -1,5 +1,6 @@
 package vendas.telas;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,12 +12,14 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import persistencia.adapters.RVConsultaClienteAdapter;
 import persistencia.brl.ClienteBRL;
+import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
@@ -60,6 +63,40 @@ public class ConsultaVendasCliente extends Fragment implements RVConsultaCliente
 				intent.putExtra("idCliente", 0);
 				//intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(intent);
+				return true;
+			}
+			if (item.getItemId() == R.id.action_consulta_cliente_excluir) {
+				AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
+
+				confirmacao.setTitle("Excluir Pedido");
+				confirmacao.setMessage("Confirma Exclusão deste Pedido ?");
+				confirmacao.setCancelable(false);
+
+				confirmacao.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						PedidoBRL pedBRL = new PedidoBRL(getContext());
+						ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
+						itpBRL.deleteByCodPedido(pedDTO.getId());
+						pedBRL.delete(pedDTO);
+						onResume();
+					}
+				});
+
+				confirmacao.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.cancel();
+
+					}
+				});
+
+				AlertDialog alertDialog = confirmacao.create();
+
+				alertDialog.show();
+
 				return true;
 			}
 			return false;
