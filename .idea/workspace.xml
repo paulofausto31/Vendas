@@ -339,7 +339,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79942867-3a59-4b25-96d9-4f2da4916cd9" name="Default" comment="Build versao 10.5">
+    <list default="true" id="79942867-3a59-4b25-96d9-4f2da4916cd9" name="Default" comment="Build versao 11">
       <change afterPath="$PROJECT_DIR$/java_pid24112.hprof" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
@@ -348,10 +348,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/colors.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/styles.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -839,7 +842,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718299632147</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Build versao 11">
+      <option name="closed" value="true" />
+      <created>1718676162695</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1718676162695</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -873,13 +884,13 @@
     <MESSAGE value="Build versao 9.2.2" />
     <MESSAGE value="Build versao 10.0" />
     <MESSAGE value="Build versao 10.1" />
-    <MESSAGE value="Build versao 11" />
     <MESSAGE value="Build versao 10.2" />
     <MESSAGE value="Build versao 10.3" />
     <MESSAGE value="Build versao 10.4" />
     <MESSAGE value="Build versao 10.5" />
     <MESSAGE value="Build versao 10.6" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build versao 10.6" />
+    <MESSAGE value="Build versao 11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build versao 11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

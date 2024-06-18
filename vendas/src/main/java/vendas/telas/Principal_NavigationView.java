@@ -45,7 +45,7 @@ public class Principal_NavigationView extends AppCompatActivity implements Navig
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrincipalFragment()).commit();
                 break;
             case R.id.nav_clientes:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrincipalFragment()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new RVClienteLista()).commit();
                 break;
             case R.id.nav_produtos:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrincipalFragment()).commit();

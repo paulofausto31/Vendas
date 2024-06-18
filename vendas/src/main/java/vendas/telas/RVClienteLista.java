@@ -4,12 +4,18 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,36 +26,44 @@ import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.dto.ClienteDTO;
 
-public class RVClienteLista extends AppCompatActivity {
+public class RVClienteLista extends Fragment {
     private RecyclerView recyclerView;
     private RVClienteAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     ClienteBRL brl;
     ContaReceberBRL crbrl;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.recyclerview_clientes);
-
-        recyclerView = findViewById(R.id.recycler_clientes);
-
-        // Use um LayoutManager para o RecyclerView
-        layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
+    public RVClienteLista() {
+        // Required empty public constructor
     }
 
     @Override
-    protected void onResume() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.recyclerview_clientes, container, false);
+
+        recyclerView = view.findViewById(R.id.recycler_clientes);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        return view;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true); // Habilita o menu no fragmento
+    }
+
+    @Override
+    public void onResume() {
         super.onResume();
         // Dados de exemplo
-        brl = new ClienteBRL(getBaseContext());
-        crbrl = new ContaReceberBRL(getBaseContext());
+        brl = new ClienteBRL(getContext());
+        crbrl = new ContaReceberBRL(getContext());
         List<ClienteDTO> _list = brl.getRotaDiaOrdenado("nome");
 
         // Configurar o Adapter com os dados
-        adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+        adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // Ação para quando um item é clicado
@@ -73,7 +87,7 @@ public class RVClienteLista extends AppCompatActivity {
                 + "Saldo disponível: " + (dto.getLimiteCredito() - totReceber)  + "\n"
                 + "C.Receber em aberto: " + totReceber + "\n"
                 + "Prazo: " + dto.getPrazo().toString();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setMessage(longMessage)
                 .setTitle("Mensagem")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -86,20 +100,26 @@ public class RVClienteLista extends AppCompatActivity {
     }
 
     @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_cliente, menu); // Infla o menu
+    }
+/*
+    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_cliente, menu);
 
         return true;
     }
-
+*/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         List<ClienteDTO> _list;
         switch (item.getItemId()) {
             case R.id.menu_ordenar_nome:
                 _list = brl.getRotaDiaOrdenado("nome");
-                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -111,7 +131,7 @@ public class RVClienteLista extends AppCompatActivity {
                 return true;
             case R.id.menu_ordenar_seqvisita:
                 _list = brl.getRotaDiaOrdenado("seqVisita");
-                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -129,7 +149,7 @@ public class RVClienteLista extends AppCompatActivity {
                 return true;
             case R.id.menu_mostrar_todos:
                 _list = brl.getTodosOrdenado("nome");
-                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -140,7 +160,7 @@ public class RVClienteLista extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 return true;
             case R.id.menu_principal:
-                Intent principal = new Intent(this, Principal.class);
+                Intent principal = new Intent(getContext(), Principal.class);
                 startActivity(principal);
                 return true;
             default:
@@ -149,13 +169,13 @@ public class RVClienteLista extends AppCompatActivity {
     }
 
     private void pesquisa(final int tipoPesquisa){
-        AlertDialog.Builder pesquisa = new AlertDialog.Builder(this);
+        AlertDialog.Builder pesquisa = new AlertDialog.Builder(getContext());
 
         pesquisa.setTitle("Pesquisa cliente");
         pesquisa.setMessage("Informe o nome do cliente");
         pesquisa.setCancelable(false);
 
-        final EditText input = new EditText(this);
+        final EditText input = new EditText(getContext());
         pesquisa.setView(input);
 
         pesquisa.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -163,12 +183,12 @@ public class RVClienteLista extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String value = input.getText().toString();
-                ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
+                ClienteBRL cliBRL = new ClienteBRL(getContext());
                 List<ClienteDTO> _list;
 
                 if (tipoPesquisa == 1){
                     _list = cliBRL.getByNome(value);
-                    adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                    adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             // Ação para quando um item é clicado
@@ -180,7 +200,7 @@ public class RVClienteLista extends AppCompatActivity {
                 }
                 else{
                     _list = cliBRL.getByRazaoSocial(value);
-                    adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                    adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             // Ação para quando um item é clicado
