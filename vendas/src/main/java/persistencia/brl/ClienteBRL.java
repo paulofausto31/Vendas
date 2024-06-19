@@ -40,13 +40,13 @@ public class ClienteBRL {
         dto.setFormaPgto(linha.substring(126, 130));
         dto.setPrazo(Integer.parseInt(linha.substring(130, 134)));
         dto.setCpfCnpj(linha.substring(134, 152));
-        dto.setSeqVisita(Integer.parseInt(linha.substring(152, 155)));
-        dto.setLimiteCredito(Double.parseDouble(linha.substring(155,162).replace(',', '.')));
-        dto.setInfAdicional(linha.substring(162, 170));
-        dto.setRazaoSocial(linha.substring(170, 205)); 
-        dto.setBairro(linha.substring(205, 225));
-        dto.setCidade(linha.substring(225, 240)); 
-        dto.setRotaDia(linha.substring(240, 241));
+        dto.setSeqVisita(Integer.parseInt(linha.substring(152, 156)));
+        dto.setLimiteCredito(Double.parseDouble(linha.substring(156,164).replace(',', '.')));
+        dto.setInfAdicional(linha.substring(164, 173));
+        dto.setRazaoSocial(linha.substring(173, 208));
+        dto.setCidade(linha.substring(208, 228));
+        dto.setBairro(linha.substring(228, 243));
+        dto.setRotaDia(linha.substring(243, 244));
         return dto;
     }
     
@@ -99,6 +99,10 @@ public class ClienteBRL {
 
     public List<ClienteDTO> getRotaDiaOrdenado(String campoOrdenacao){
     	return clienteDAO.getRotaDiaOrdenado(campoOrdenacao);
+    }
+
+    public List<ClienteDTO> getPorRotaOrdenado(String codRota, String campoOrdenacao){
+        return clienteDAO.getPorRotaOrdenado(codRota, campoOrdenacao);
     }
 
     public List<ClienteDTO> getTodosOrdenado(String campoOrdenacao){

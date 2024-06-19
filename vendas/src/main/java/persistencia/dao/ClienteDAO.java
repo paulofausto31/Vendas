@@ -293,6 +293,26 @@ public class ClienteDAO {
 		return lista;
 	}
 
+	public List<ClienteDTO> getPorRotaOrdenado(String codRota, String campoOrdenacao){
+
+		String sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(codRota).concat(" order by ").concat(campoOrdenacao);
+		Cursor rs = db.rawQuery(sql, null);
+		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+
+		while(rs.moveToNext()){
+			ClienteDTO dto = new ClienteDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getInt(rs.getColumnIndex("codCliente")), rs.getString(rs.getColumnIndex("nome")),
+					rs.getString(rs.getColumnIndex("endereco")), rs.getString(rs.getColumnIndex("telefone")), rs.getString(rs.getColumnIndex("dataUltimaCompra")),
+					rs.getDouble(rs.getColumnIndex("valorAtraso")), rs.getDouble(rs.getColumnIndex("valorVencer")), rs.getString(rs.getColumnIndex("formaPgto")),
+					rs.getInt(rs.getColumnIndex("prazo")), rs.getString(rs.getColumnIndex("cpfCnpj")), rs.getInt(rs.getColumnIndex("seqVisita")),
+					rs.getString(rs.getColumnIndex("infAdicional")), rs.getString(rs.getColumnIndex("razaoSocial")), rs.getString(rs.getColumnIndex("bairro")),
+					rs.getString(rs.getColumnIndex("cidade")), rs.getString(rs.getColumnIndex("rotaDia")), rs.getDouble(rs.getColumnIndex("limiteCredito")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
 	public List<ClienteDTO> getAllCidade(){
 
 		Cursor rs = db.rawQuery("SELECT Cidade FROM cliente WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" group by cidade "), null);
