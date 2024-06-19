@@ -12,6 +12,7 @@ public class Global {
 	public static String pedidoWS;
 	public static CaminhoFTPDTO caminhoFTPDTO;
 	public static String codEmpresa;
+	public static String codRota;
 	public static String tituloAplicacao;
 	public static String codVendedor;
 	public static int idCliente;

@@ -24,6 +24,7 @@ import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.brl.RotaBRL;
 import persistencia.dto.ClienteDTO;
+import venda.util.Global;
 
 public class RVClienteLista extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -52,8 +53,13 @@ public class RVClienteLista extends AppCompatActivity {
         // Dados de exemplo
         brl = new ClienteBRL(getBaseContext());
         crbrl = new ContaReceberBRL(getBaseContext());
-        List<ClienteDTO> _list = brl.getRotaDiaOrdenado("nome");
+        List<ClienteDTO> _list;
 
+        if (Global.codRota == null) {
+            _list = brl.getRotaDiaOrdenado("nome");
+        }else {
+            _list = brl.getPorRotaOrdenado(Global.codRota, "nome");
+        }
         // Configurar o Adapter com os dados
         adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
             @Override
@@ -171,16 +177,29 @@ public class RVClienteLista extends AppCompatActivity {
         rotBRL = new RotaBRL(getBaseContext());
         List<String> rotas = rotBRL.getComboRota();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
+        adapterRotas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterRotas);
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Handle spinner selection
-                String selectedItem = parent.getItemAtPosition(position).toString();
+                String rota = parent.getItemAtPosition(position).toString();
                 // Do something with the selected item
+                if (position > 0){
+                    Global.codRota = rota;
+                    List<ClienteDTO> lstClientes = brl.getPorRotaOrdenado(rota, "nome");
+                    adapter = new RVClienteAdapter(getBaseContext(), lstClientes, new RVClienteAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            // Ação para quando um item é clicado
+                            ClienteDTO item = lstClientes.get(position);
+                            AcaoDoClick(item);
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
+                }
             }
 
             @Override
