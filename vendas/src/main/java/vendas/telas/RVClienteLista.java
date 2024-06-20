@@ -10,7 +10,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,45 +28,40 @@ import persistencia.adapters.RVClienteAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.dto.ClienteDTO;
+import venda.util.Global;
 
-public class RVClienteLista extends Fragment {
+public class RVClienteLista extends AppCompatActivity {
     private RecyclerView recyclerView;
     private RVClienteAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     ClienteBRL brl;
     ContaReceberBRL crbrl;
 
-    public RVClienteLista() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.recyclerview_clientes, container, false);
-
-        recyclerView = view.findViewById(R.id.recycler_clientes);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        return view;
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true); // Habilita o menu no fragmento
+        setContentView(R.layout.recyclerview_clientes);
+
+        recyclerView = findViewById(R.id.recycler_clientes);
+
+        // Use um LayoutManager para o RecyclerView
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         // Dados de exemplo
-        brl = new ClienteBRL(getContext());
-        crbrl = new ContaReceberBRL(getContext());
-        List<ClienteDTO> _list = brl.getRotaDiaOrdenado("nome");
+        brl = new ClienteBRL(getBaseContext());
+        crbrl = new ContaReceberBRL(getBaseContext());
+        List<ClienteDTO> _list;
+
+        _list = brl.getRotaDiaOrdenado("nome");
 
         // Configurar o Adapter com os dados
-        adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+        adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 // Ação para quando um item é clicado
@@ -87,7 +85,7 @@ public class RVClienteLista extends Fragment {
                 + "Saldo disponível: " + (dto.getLimiteCredito() - totReceber)  + "\n"
                 + "C.Receber em aberto: " + totReceber + "\n"
                 + "Prazo: " + dto.getPrazo().toString();
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(longMessage)
                 .setTitle("Mensagem")
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -100,26 +98,20 @@ public class RVClienteLista extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_cliente, menu); // Infla o menu
-    }
-/*
-    @Override
     public boolean onCreateOptionsMenu(Menu menu){
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_cliente, menu);
 
         return true;
     }
-*/
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         List<ClienteDTO> _list;
         switch (item.getItemId()) {
             case R.id.menu_ordenar_nome:
                 _list = brl.getRotaDiaOrdenado("nome");
-                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -131,7 +123,7 @@ public class RVClienteLista extends Fragment {
                 return true;
             case R.id.menu_ordenar_seqvisita:
                 _list = brl.getRotaDiaOrdenado("seqVisita");
-                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -149,7 +141,7 @@ public class RVClienteLista extends Fragment {
                 return true;
             case R.id.menu_mostrar_todos:
                 _list = brl.getTodosOrdenado("nome");
-                adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
                         // Ação para quando um item é clicado
@@ -160,7 +152,7 @@ public class RVClienteLista extends Fragment {
                 recyclerView.setAdapter(adapter);
                 return true;
             case R.id.menu_principal:
-                Intent principal = new Intent(getContext(), Principal.class);
+                Intent principal = new Intent(this, Principal.class);
                 startActivity(principal);
                 return true;
             default:
@@ -169,13 +161,13 @@ public class RVClienteLista extends Fragment {
     }
 
     private void pesquisa(final int tipoPesquisa){
-        AlertDialog.Builder pesquisa = new AlertDialog.Builder(getContext());
+        AlertDialog.Builder pesquisa = new AlertDialog.Builder(this);
 
         pesquisa.setTitle("Pesquisa cliente");
         pesquisa.setMessage("Informe o nome do cliente");
         pesquisa.setCancelable(false);
 
-        final EditText input = new EditText(getContext());
+        final EditText input = new EditText(this);
         pesquisa.setView(input);
 
         pesquisa.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
@@ -183,12 +175,12 @@ public class RVClienteLista extends Fragment {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String value = input.getText().toString();
-                ClienteBRL cliBRL = new ClienteBRL(getContext());
+                ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
                 List<ClienteDTO> _list;
 
                 if (tipoPesquisa == 1){
                     _list = cliBRL.getByNome(value);
-                    adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                    adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             // Ação para quando um item é clicado
@@ -200,7 +192,7 @@ public class RVClienteLista extends Fragment {
                 }
                 else{
                     _list = cliBRL.getByRazaoSocial(value);
-                    adapter = new RVClienteAdapter(getContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                    adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {
                             // Ação para quando um item é clicado

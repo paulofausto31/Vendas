@@ -119,10 +119,6 @@ public class Principal extends AppCompatActivity {
 				Intent utilitario = new Intent(this, UtilitarioTabContainer.class);
 				startActivity(utilitario);
 				return true;
-			case R.id.menu_recyclerview:
-				Intent recyclerView = new Intent(this, MainActivity.class);
-				startActivity(recyclerView);
-				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}

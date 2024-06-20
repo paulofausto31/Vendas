@@ -31,10 +31,5 @@
         android:title="Configuração"
         android:orderInCategory="100"
         app:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_recyclerview"
-        android:title="RecyclerView"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
 
 </menu>
