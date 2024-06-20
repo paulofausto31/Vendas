@@ -9,4 +9,7 @@
     <item
         android:id="@+id/nav_produtos"
         android:title="Produtos" />
+    <item
+        android:id="@+id/nav_utilitarios"
+        android:title="Utilitário" />
 </menu>

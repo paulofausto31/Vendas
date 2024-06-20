@@ -8,10 +8,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class Principal_NavigationView extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Principal_NavigationView extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
     private NavigationView navView;
@@ -31,13 +32,37 @@ public class Principal_NavigationView extends AppCompatActivity implements Navig
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        navView.setNavigationItemSelectedListener(this);
+        //navView.setNavigationItemSelectedListener(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new PrincipalFragment()).commit();
-            navView.setCheckedItem(R.id.nav_principal);
+            //navView.setCheckedItem(R.id.nav_principal);
         }
-    }
 
+        // Configuração do listener para os itens do NavigationView
+        navView.setNavigationItemSelectedListener(item -> {
+            Fragment selectedFragment = null;
+
+            switch (item.getItemId()) {
+                case R.id.nav_principal:
+                    selectedFragment = new NavClienteLista();
+                    break;
+                case R.id.nav_utilitarios:
+                    selectedFragment = new NavUtilitarioTabContainer();
+                    break;
+            }
+
+            if (selectedFragment != null) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container, selectedFragment)
+                        .commit();
+            }
+
+            drawerLayout.closeDrawer(GravityCompat.START);
+            return true;
+        });
+    }
+}
+/*
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -64,4 +89,7 @@ public class Principal_NavigationView extends AppCompatActivity implements Navig
             super.onBackPressed();
         }
     }
-}
+
+ */
+
+

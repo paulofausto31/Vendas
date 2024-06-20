@@ -146,10 +146,10 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.sun.mail:android-activation:1.6.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.google.code.gson:gson:2.8.2" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.itextpdf:itextg:5.5.9" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (1)" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (2)" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (3)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (1)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (2)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (3)" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="Vendas.vendas.main" />
 </module>
