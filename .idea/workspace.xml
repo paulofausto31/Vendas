@@ -349,15 +349,14 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/ConsultaVendasCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/ConsultaVendasCliente.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/menu/menu_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/menu/menu_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/menu/popup_consulta_cliente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/menu/popup_consulta_cliente.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -401,7 +400,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="nav" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -853,7 +852,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718676162695</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Build versao 11">
+      <option name="closed" value="true" />
+      <created>1718843597596</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1718843597596</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
