@@ -72,6 +72,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/dialog_cliente_rota.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/entrada.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
@@ -319,9 +324,8 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="79942867-3a59-4b25-96d9-4f2da4916cd9" name="Default" comment="Build versao 11.0">
+    <list default="true" id="79942867-3a59-4b25-96d9-4f2da4916cd9" name="Default" comment="Build versao 11">
       <change afterPath="$PROJECT_DIR$/java_pid24112.hprof" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.bin" afterDir="false" />
@@ -330,13 +334,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/ConsultaVendasCliente.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/ConsultaVendasCliente.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/ConsultaVendasCliente.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/menu/popup_consulta_cliente.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/menu/popup_consulta_cliente.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/venda/util/Global.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/venda/util/Global.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,10 +373,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="valueResourceFile" />
+        <option value="resourceFile" />
         <option value="Class" />
         <option value="layoutResourceFile" />
-        <option value="resourceFile" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -832,7 +838,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718663625790</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="Build versao 11">
+      <option name="closed" value="true" />
+      <created>1718816701616</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1718816701616</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -866,12 +880,12 @@
     <MESSAGE value="Build versao 9.2.2" />
     <MESSAGE value="Build versao 10.0" />
     <MESSAGE value="Build versao 10.1" />
-    <MESSAGE value="Build versao 11" />
     <MESSAGE value="Build versao 10.2" />
     <MESSAGE value="Build versao 10.3" />
     <MESSAGE value="Build versao 10.4" />
     <MESSAGE value="Build versao 10.5" />
-    <option name="LAST_COMMIT_MESSAGE" value="Build versao 10.5" />
+    <MESSAGE value="Build versao 11" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build versao 11" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -887,29 +901,19 @@
           <option name="timeStamp" value="45" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Comunicacao.java</url>
-          <line>615</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Comunicacao.java</url>
-          <line>738</line>
-          <option name="timeStamp" value="93" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/venda/util/FTP.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="100" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItens.java</url>
           <line>78</line>
           <option name="timeStamp" value="115" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java</url>
-          <line>193</line>
-          <option name="timeStamp" value="117" />
+          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Comunicacao.java</url>
+          <line>837</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java</url>
+          <line>213</line>
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

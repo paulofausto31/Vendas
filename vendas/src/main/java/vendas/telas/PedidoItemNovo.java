@@ -191,7 +191,7 @@ public class PedidoItemNovo extends Fragment {
 		//Intent it = getIntent();
 		itpBRL = new ItenPedidoBRL(getContext());
 		//Integer extra = it.getIntExtra("codProduto", 0);
-		ItenPedidoDTO itpDTO = venda.util.Global.itemPedidoGlobalDTO;
+		ItenPedidoDTO itpDTO = Global.itemPedidoGlobalDTO;
 		if (itpDTO != null){
 			//itpDTO = itpBRL.getByCodProduto(venda.util.Global.pedidoGlobalDTO.getId(), extra);
 			txtCodProduto.setText(itpDTO.getCodProduto().toString());
@@ -202,6 +202,7 @@ public class PedidoItemNovo extends Fragment {
 			btnPesquisarProduto.setEnabled(false);
 			txtCodProduto.setEnabled(false);
 			txtUnidade.setEnabled(false);
+			Global.itemPedidoGlobalDTO = null;
 		}
 		else
 			itemNovo = true;
@@ -355,7 +356,10 @@ public class PedidoItemNovo extends Fragment {
 		txtUnidade.setText("");
 		txtQuantidade.setText("");
 		txtDA.setText("");
-		CarregaComboPreco(Long.parseLong("0"),0.00, "D");	
+		CarregaComboPreco(Long.parseLong("0"),0.00, "D");
+		btnPesquisarProduto.setEnabled(true);
+		txtCodProduto.setEnabled(true);
+		txtUnidade.setEnabled(true);
 	}
 	
 	private Boolean ValidaQuantidade(String qtd, String codProduto){
