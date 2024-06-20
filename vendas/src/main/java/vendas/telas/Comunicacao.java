@@ -65,6 +65,7 @@ import persistencia.brl.JustificativaPositivacaoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.brl.PrecoBRL;
 import persistencia.brl.ProdutoBRL;
+import persistencia.brl.RotaBRL;
 import persistencia.brl.VendedorBRL;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.ClienteNaoPositivadoDTO;
@@ -79,6 +80,7 @@ import persistencia.dto.JustificativaPositivacaoDTO;
 import persistencia.dto.PedidoDTO;
 import persistencia.dto.PrecoDTO;
 import persistencia.dto.ProdutoDTO;
+import persistencia.dto.RotaDTO;
 import persistencia.dto.VendedorDTO;
 import venda.util.Global;
 import venda.util.Util;
@@ -101,7 +103,7 @@ public class Comunicacao extends AppCompatActivity {
 	private String pastaDest;
 	private String[] arquivosExportacao = new String[] { "TABPED.TXT", "TABPEI.TXT", "TABCNP.TXT" };
 	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABVEN.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT",
-			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
+			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "TABROTA.TXT", "Final" };
 //	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT", "TABPRE.TXT",
 //			"TABVEN.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
 	ClienteBRL cliBRL;
@@ -172,6 +174,8 @@ public class Comunicacao extends AppCompatActivity {
 				cnpBRL.DeleteAll();
 				CaminhoFTPBRL ftpBRL = new CaminhoFTPBRL(getApplicationContext());
 				ftpBRL.DeleteAll();
+				RotaBRL rotBRL = new RotaBRL(getApplicationContext());
+				rotBRL.DeleteAll();
 			}
 		});
 			
@@ -368,8 +372,6 @@ public class Comunicacao extends AppCompatActivity {
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABFOR.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
-			else if (arquivo.equals("TABFOR.TXT"))
-				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABLIN.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABPRE.TXT"))
@@ -377,6 +379,8 @@ public class Comunicacao extends AppCompatActivity {
 			else if (arquivo.equals("TABREC.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABCLI.TXT"))
+				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
+			else if (arquivo.equals("TABROTA.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 		}
 		else{
@@ -404,6 +408,8 @@ public class Comunicacao extends AppCompatActivity {
 					ImportaPreco();
 				else if (arquivo.equals("TABREC.TXT"))
 					ImportaContaReceber();
+				else if (arquivo.equals("TABROTA.TXT"))
+					ImportaRota();
 				else if (arquivo.equals("TABCLI.TXT"))
 					ImportaCliente();
 			}
@@ -824,6 +830,38 @@ public class Comunicacao extends AppCompatActivity {
 			brl.CloseConection();
 		}
 	}
+
+	private void ImportaRota() {
+		String lstrNomeArq;
+		File arq;
+		String lstrlinha;
+		RotaBRL brl = new RotaBRL(getApplicationContext());
+		brl.DeleteByEmpresa();
+		try
+		{
+
+			lstrNomeArq = "TABROTA.txt";
+
+			arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
+			BufferedReader br = new BufferedReader(new FileReader(arq));
+
+			while ((lstrlinha = br.readLine()) != null) {
+				if (lstrlinha.length() > 0) {
+					RotaDTO dto = brl.InstanciaRota(lstrlinha);
+					if (!brl.InsereRota(dto)) {
+						new Exception("Falhou importacao de Rotas");
+					}
+				}
+			}
+			arq.delete();
+
+		} catch (Exception e) {
+			venda.util.mensagem.trace(getApplicationContext(), "Erro : " + e.getMessage());
+		} finally{
+			brl.CloseConection();
+		}
+	}
+
 
 	private void ImportaJustificativaPositivacao() {
 		String lstrNomeArq;

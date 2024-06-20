@@ -12,13 +12,15 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 32; //Integer.parseInt(getString(R.string.bco_versao));
+	private static int version = 33; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
+		sql = "CREATE TABLE IF NOT EXISTS [rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
+		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [LocalizacaoGPS] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codVendedor] VARCHAR(4), [DataHora] VARCHAR(20), [latitude] VARCHAR(20), [longitude] VARCHAR(20))";
@@ -65,6 +67,8 @@ public class db extends SQLiteOpenHelper {
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) 
 	{
+		sql = "DROP TABLE IF EXISTS [Rota]";
+		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [Empresa]";
 		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [localizacaoGPS]";
@@ -96,6 +100,8 @@ public class db extends SQLiteOpenHelper {
 		sql = "DROP TABLE IF EXISTS [Pedidos]";
 		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [ItensPedido]";
+		db.execSQL(sql);
+		sql = "CREATE TABLE IF NOT EXISTS [rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
 		db.execSQL(sql);

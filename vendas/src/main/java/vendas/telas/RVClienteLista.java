@@ -4,21 +4,16 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +22,7 @@ import java.util.List;
 import persistencia.adapters.RVClienteAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
+import persistencia.brl.RotaBRL;
 import persistencia.dto.ClienteDTO;
 import venda.util.Global;
 
@@ -35,6 +31,7 @@ public class RVClienteLista extends AppCompatActivity {
     private RVClienteAdapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     ClienteBRL brl;
+    RotaBRL rotBRL;
     ContaReceberBRL crbrl;
 
     @Override
@@ -58,8 +55,11 @@ public class RVClienteLista extends AppCompatActivity {
         crbrl = new ContaReceberBRL(getBaseContext());
         List<ClienteDTO> _list;
 
-        _list = brl.getRotaDiaOrdenado("nome");
-
+        if (Global.codRota == null) {
+            _list = brl.getRotaDiaOrdenado("nome");
+        }else {
+            _list = brl.getPorRotaOrdenado(Global.codRota, "nome");
+        }
         // Configurar o Adapter com os dados
         adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
             @Override
@@ -109,6 +109,9 @@ public class RVClienteLista extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         List<ClienteDTO> _list;
         switch (item.getItemId()) {
+            case R.id.menu_rota:
+                ComboRotas();
+                return true;
             case R.id.menu_ordenar_nome:
                 _list = brl.getRotaDiaOrdenado("nome");
                 adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
@@ -158,6 +161,66 @@ public class RVClienteLista extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void ComboRotas(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecione a rota");
+
+        // Inflate the custom layout
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_cliente_rota, null);
+        builder.setView(dialogView);
+
+        // Initialize the spinner
+        Spinner spinner = dialogView.findViewById(R.id.cbxRota);
+
+        rotBRL = new RotaBRL(getBaseContext());
+        List<String> rotas = rotBRL.getComboRota();
+
+        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
+        adapterRotas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapterRotas);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // Handle spinner selection
+                String rota = parent.getItemAtPosition(position).toString();
+                // Do something with the selected item
+                if (position > 0){
+                    Global.codRota = rota;
+                    List<ClienteDTO> lstClientes = brl.getPorRotaOrdenado(rota, "nome");
+                    adapter = new RVClienteAdapter(getBaseContext(), lstClientes, new RVClienteAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            // Ação para quando um item é clicado
+                            ClienteDTO item = lstClientes.get(position);
+                            AcaoDoClick(item);
+                        }
+                    });
+                    recyclerView.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                // Handle no item selected
+            }
+        });
+
+        // Add OK and Cancel buttons
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            // Handle OK button press
+            String selectedItem = spinner.getSelectedItem().toString();
+            // Do something with the selected item
+        });
+
+        builder.setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss());
+
+        // Create and show the dialog
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
     }
 
     private void pesquisa(final int tipoPesquisa){
