@@ -39,7 +39,7 @@ public class Entrada extends Activity {
 	private static final int MY_PERMISSIONS_REQUEST_STORAGE = 0;
 
 	private void AbrePrincipal() {
-		Intent principal = new Intent(this, Principal_NavigationView.class);
+		Intent principal = new Intent(this, Principal.class);
     	startActivity(principal);
 	}
 

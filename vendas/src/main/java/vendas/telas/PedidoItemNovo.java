@@ -355,7 +355,10 @@ public class PedidoItemNovo extends Fragment {
 		txtUnidade.setText("");
 		txtQuantidade.setText("");
 		txtDA.setText("");
-		CarregaComboPreco(Long.parseLong("0"),0.00, "D");	
+		CarregaComboPreco(Long.parseLong("0"),0.00, "D");
+		btnPesquisarProduto.setEnabled(true);
+		txtCodProduto.setEnabled(true);
+		txtUnidade.setEnabled(true);
 	}
 	
 	private Boolean ValidaQuantidade(String qtd, String codProduto){

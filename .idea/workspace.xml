@@ -349,12 +349,15 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Principal_NavigationView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/RVClienteLista.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/colors.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/colors.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/res/values/styles.xml" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/res/values/styles.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Entrada.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo$8.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/PedidoItemNovo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/vendas/telas/PedidoItemNovo.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -904,16 +907,6 @@
           <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/JustificativaBasico.java</url>
           <line>86</line>
           <option name="timeStamp" value="45" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Comunicacao.java</url>
-          <line>615</line>
-          <option name="timeStamp" value="87" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/vendas/telas/Comunicacao.java</url>
-          <line>738</line>
-          <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/vendas/src/main/java/venda/util/FTP.java</url>
