@@ -196,7 +196,7 @@ public class NavClienteLista  extends Fragment {
         rotBRL = new RotaBRL(getContext());
         List<String> rotas = rotBRL.getComboRota();
 
-        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
+        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, rotas);
         adapterRotas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterRotas);
 
