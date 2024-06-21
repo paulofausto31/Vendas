@@ -53,3 +53,9 @@ obj/
 
 # Android profiling
 *.hprof
+
+# Ignorar desktop.ini
+desktop.ini
+
+# Ignorar gradle wrapper zip
+gradle/wrapper/gradle-*.zip

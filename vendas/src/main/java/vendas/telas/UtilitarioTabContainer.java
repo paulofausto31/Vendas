@@ -25,6 +25,7 @@ public class UtilitarioTabContainer extends AppCompatActivity {
 
         ViewPager2 viewPager = findViewById(R.id.view_pager);
         TabLayout tabLayout = findViewById(R.id.tab_layout);
+        //teste
 
         viewPager.setAdapter(new TabAdapter(this));
 
