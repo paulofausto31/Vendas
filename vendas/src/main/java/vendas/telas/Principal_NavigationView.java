@@ -44,6 +44,9 @@ public class Principal_NavigationView extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.nav_principal:
+                    selectedFragment = new PrincipalFragment();
+                    break;
+                case R.id.nav_clientes:
                     selectedFragment = new NavClienteLista();
                     break;
                 case R.id.nav_utilitarios:
