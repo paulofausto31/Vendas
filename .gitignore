@@ -1,2 +1,61 @@
-/vendas/
-/*.hprof
+# Arquivos e pastas do Android Studio
+.idea/
+.gradle/
+local.properties
+*.iml
+*.hprof
+
+# Logs
+*.log
+
+# Diretório de build
+/build/
+/app/build/
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos do IntelliJ IDEA
+out/
+
+# Arquivos específicos do Android Studio
+.cxx/
+.externalNativeBuild/
+.idea/
+.gradle/
+local.properties
+.navigator/
+*.iml
+
+# Arquivos específicos do Android
+*.apk
+*.ap_
+*.aab
+
+# Arquivos de configurações do lint
+lint/intermediates/
+lint/generated/
+lint/reports/
+lint/reports/
+lint/outputs/
+lint/inputs/
+lint/debug/
+lint/release/
+
+# Arquivos de log e relatórios de crash
+crashlytics/build/
+crashlytics/logs/
+crashlytics/com.crashlytics.android.core.SessionReport/
+crashlytics/com.crashlytics.android.answers/
+crashlytics/native/
+crashlytics/resources/
+crashlytics/symbols/
+
+# Arquivos de cache do Google Services
+google-services.json
+
+# Arquivos do NDK
+ndk/
+obj/
+intermediates/
