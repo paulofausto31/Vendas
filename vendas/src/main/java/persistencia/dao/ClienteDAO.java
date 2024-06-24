@@ -276,8 +276,13 @@ public class ClienteDAO {
 
 	public List<ClienteDTO> getRotaDiaOrdenado(String campoOrdenacao){
 
-		Cursor rs = db.rawQuery("SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		String sql;
+		if (Global.codRota != null)
+			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+		else
+			sql = "SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
 		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		Cursor rs = db.rawQuery(sql, null);
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
 		
 		while(rs.moveToNext()){
