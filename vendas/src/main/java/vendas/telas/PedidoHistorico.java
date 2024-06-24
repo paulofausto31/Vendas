@@ -254,7 +254,7 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		 }
 		 return false;
 	 }
-*/
+
 	private void EnviarPedido(PedidoDTO pedDTO) {
 		PedidoBRL pedBRL = new PedidoBRL(getContext());
 		ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
@@ -275,7 +275,7 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		}
 		Global.pedidoWS = pedidoWS;
 	}
-
+*/
 
 	@SuppressLint("NewApi")
 	private void criandoPdf() {
