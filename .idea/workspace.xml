@@ -117,6 +117,11 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/list_clientes.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -135,6 +140,11 @@
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/main.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/nav_cabecalho.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/newtabcontainer.xml">
@@ -163,6 +173,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/pedido_itens.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -218,6 +233,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/menu/menu_consulta.xml">
+        <config>
+          <theme>@style/AppTheme</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/menu/menu_drawer.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -369,6 +389,7 @@
         <option value="Class" />
         <option value="valueResourceFile" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>

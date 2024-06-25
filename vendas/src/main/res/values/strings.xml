@@ -4,6 +4,9 @@
     <string name="app_versao">Versão apk: 11.2</string>
     <string name="bco_versao">Versão Banco: 33</string>
     <string name="action_settings">action_settings</string>
+    <string name="nav_header_desc">PalmVenda</string>
+    <string name="navigation_drawer_open">Open</string>
+    <string name="navigation_drawer_close">Close</string>
     <string name="home">Principal</string>
     <string name="btnCliente">Cliente</string>
     <string name="btnConsulta">Consulta</string>
