@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-86:12
-INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-86:12
-INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-86:12
-INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-86:12
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-84:12
+INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:2:1-84:12
 MERGED from [com.google.android.material:material:1.12.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\956569e4bbcbe4b251454764e02f8637\transformed\material-1.12.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat-resources:1.6.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\54c0f2eccff70b60327a003626be6751\transformed\jetified-appcompat-resources-1.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\9fe09018741f8d1539a243fa12c3e7fd\transformed\constraintlayout-2.0.1\AndroidManifest.xml:2:1-11:12
@@ -70,10 +70,10 @@ MERGED from [androidx.activity:activity:1.8.0] D:\projetos\StudioProjects\Vendas
 MERGED from [androidx.activity:activity-ktx:1.8.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\e74dd99724cfae4bb86640a71518ddfb\transformed\jetified-activity-ktx-1.8.0\AndroidManifest.xml:2:1-7:12
 MERGED from [com.android.volley:volley:1.1.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\c28847f078a6afb9d5765608af47a3f2\transformed\jetified-volley-1.1.0\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\c571ba5421218e045c87da2025000d62\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\8ee5738570e05d0efa1c70428fe7c1a0\transformed\drawerlayout-1.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\dcd0115cb306f25300a8dec488daa2cb\transformed\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\02cf7af6750c838618c10ba1da360be7\transformed\jetified-emoji2-views-helper-1.2.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.emoji2:emoji2:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\e60bf0ab8a1217670124be7e52d524ab\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:17:1-35:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\f5742c9f167c9de3423e86f68b2fa141\transformed\drawerlayout-1.1.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.cardview:cardview:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\5d976382a7af5fa42b6b63a8bff28979\transformed\cardview-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\0af0479384b1491118a13a6ca1a3b575\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.transition:transition:1.5.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\ada278447f7b5b9840834ec08ca3f3e1\transformed\transition-1.5.0\AndroidManifest.xml:2:1-7:12
@@ -239,8 +239,8 @@ ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:14:9-65
 application
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:18:5-84:20
-INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:18:5-84:20
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:18:5-82:20
+INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:18:5-82:20
 MERGED from [com.google.android.material:material:1.12.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\956569e4bbcbe4b251454764e02f8637\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.12.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\956569e4bbcbe4b251454764e02f8637\transformed\material-1.12.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\9fe09018741f8d1539a243fa12c3e7fd\transformed\constraintlayout-2.0.1\AndroidManifest.xml:9:5-20
@@ -483,176 +483,168 @@ category#android.intent.category.LAUNCHER
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:34:17-77
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:34:27-74
-activity#vendas.telas.ClienteTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:37:9-65
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:37:19-53
 activity#vendas.telas.Principal
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:38:9-55
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:37:9-55
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:38:19-43
-activity#vendas.telas.ClienteLista
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:39:9-71
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:37:19-43
+activity#vendas.telas.Principal_NavigationView
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:38:9-71
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:39:19-59
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:38:19-59
 activity#vendas.telas.UtilitarioPedidoFechado
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:39:9-70
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:39:19-58
+activity#vendas.telas.UtilitarioPedidoPendente
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:40:9-70
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:40:19-58
-activity#vendas.telas.UtilitarioPedidoPendente
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:41:9-70
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:41:19-58
 activity#vendas.telas.UtilitarioTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:42:9-68
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:41:9-68
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:42:19-56
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:41:19-56
 activity#vendas.telas.ClienteComplemento
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:43:9-64
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:42:9-64
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:43:19-52
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:42:19-52
 activity#vendas.telas.ClienteContasReceber
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:43:9-66
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:43:19-54
+activity#vendas.telas.ConsultaTabContainer
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:44:9-66
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:44:19-54
-activity#vendas.telas.ConsultaTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:45:9-66
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:45:19-54
 activity#vendas.telas.ConsultaPositivacao
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:46:9-65
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:45:9-65
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:46:19-53
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:45:19-53
 activity#vendas.telas.ConsultaVendasCliente
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:46:9-67
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:46:19-55
+activity#vendas.telas.ConsultaVendasProduto
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:47:9-67
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:47:19-55
-activity#vendas.telas.ConsultaVendasProduto
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:48:9-67
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:48:19-55
 activity#vendas.telas.JustificativaTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:49:9-71
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:48:9-71
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:49:19-59
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:48:19-59
 activity#vendas.telas.JustificativaBasico
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:50:9-65
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:49:9-65
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:50:19-53
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:49:19-53
 activity#vendas.telas.JustificativaHistorico
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:51:9-68
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:50:9-68
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:51:19-56
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:50:19-56
 activity#vendas.telas.PedidoTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:52:9-64
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:51:9-64
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:52:19-52
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:51:19-52
 activity#vendas.telas.ConfiguracaoTabContainer
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:53:9-71
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:52:9-71
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:53:19-59
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:52:19-59
 activity#vendas.telas.ConfiguracaoGeral
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:53:9-64
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:53:19-52
+activity#vendas.telas.ConfiguracaoLocal
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:54:9-64
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:54:19-52
-activity#vendas.telas.ConfiguracaoLocal
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:55:9-64
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:55:19-52
 activity#vendas.telas.ConfiguracaoRemoto
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:56:9-65
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:55:9-65
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:56:19-53
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:55:19-53
 activity#vendas.telas.PedidoAbrir
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:57:9-57
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:56:9-57
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:57:19-45
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:56:19-45
 activity#vendas.telas.PedidoBasico
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:58:9-58
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:57:9-58
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:58:19-46
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:57:19-46
 activity#vendas.telas.PedidoHistorico
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:59:9-61
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:58:9-61
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:59:19-49
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:58:19-49
 activity#vendas.telas.PedidoItens
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:60:9-57
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:59:9-57
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:60:19-45
-activity#vendas.telas.ProdutoLista
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:61:9-58
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:61:19-46
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:59:19-45
 activity#vendas.telas.Comunicacao
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:62:9-58
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:60:9-58
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:62:19-46
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:60:19-46
 activity#vendas.telas.FiltroFornecedor
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:63:9-62
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:61:9-62
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:63:19-50
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:61:19-50
 activity#vendas.telas.FiltroGrupo
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:64:9-57
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:62:9-57
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:64:19-45
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:62:19-45
 activity#vendas.telas.PedidoItemNovo
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:63:9-60
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:63:19-48
+activity#vendas.telas.PedidoInfAdicional
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:64:9-64
+	android:name
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:64:19-52
+activity#vendas.telas.GeoLocalizacao
 ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:65:9-60
 	android:name
 		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:65:19-48
-activity#vendas.telas.PedidoInfAdicional
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:66:9-64
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:66:19-52
-activity#vendas.telas.GeoLocalizacao
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:67:9-60
-	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:67:19-48
 activity#vendas.telas.MySql
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:68:9-51
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:66:9-51
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:68:19-39
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:66:19-39
 activity#vendas.telas.UtilitarioPrincipal
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:9-65
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:67:9-65
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:19-53
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:67:19-53
 activity#vendas.telas.RVClienteLista
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:9-61
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:68:9-61
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:19-49
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:68:19-49
 activity#vendas.telas.RVProdutoLista
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:71:9-61
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:9-61
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:71:19-49
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:69:19-49
 activity#vendas.telas.MainActivity
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:72:9-59
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:9-59
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:72:19-47
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:70:19-47
 activity#vendas.telas.PedidoProdutoLista
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:73:9-65
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:71:9-65
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:73:19-53
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:71:19-53
 activity#vendas.telas.Localizacao
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:74:9-57
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:72:9-57
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:74:19-45
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:72:19-45
 receiver#vendas.telas.BroadcastReceive
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:75:9-83:20
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:73:9-81:20
 	android:label
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:77:13-45
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:75:13-45
 	android:exported
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:78:13-36
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:76:13-36
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:76:13-44
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:74:13-44
 intent-filter#action:name:ALARME_DISPARADO+category:name:android.intent.category.DEFAULT
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:79:13-82:29
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:77:13-80:29
 action#ALARME_DISPARADO
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:80:17-58
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:78:17-58
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:80:25-56
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:78:25-56
 category#android.intent.category.DEFAULT
-ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:81:17-75
+ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:79:17-75
 	android:name
-		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:81:27-73
+		ADDED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml:79:27-73
 uses-sdk
 INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\projetos\StudioProjects\Vendas\vendas\src\main\AndroidManifest.xml
@@ -789,14 +781,14 @@ MERGED from [com.android.volley:volley:1.1.0] D:\projetos\StudioProjects\Vendas\
 MERGED from [com.android.volley:volley:1.1.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\c28847f078a6afb9d5765608af47a3f2\transformed\jetified-volley-1.1.0\AndroidManifest.xml:7:5-43
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\c571ba5421218e045c87da2025000d62\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\c571ba5421218e045c87da2025000d62\transformed\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\8ee5738570e05d0efa1c70428fe7c1a0\transformed\drawerlayout-1.2.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\8ee5738570e05d0efa1c70428fe7c1a0\transformed\drawerlayout-1.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\dcd0115cb306f25300a8dec488daa2cb\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\dcd0115cb306f25300a8dec488daa2cb\transformed\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\02cf7af6750c838618c10ba1da360be7\transformed\jetified-emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2-views-helper:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\02cf7af6750c838618c10ba1da360be7\transformed\jetified-emoji2-views-helper-1.2.0\AndroidManifest.xml:5:5-44
 MERGED from [androidx.emoji2:emoji2:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\e60bf0ab8a1217670124be7e52d524ab\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:21:5-44
 MERGED from [androidx.emoji2:emoji2:1.2.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\e60bf0ab8a1217670124be7e52d524ab\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:21:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\f5742c9f167c9de3423e86f68b2fa141\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] D:\projetos\StudioProjects\Vendas\caches\transforms-3\f5742c9f167c9de3423e86f68b2fa141\transformed\drawerlayout-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.cardview:cardview:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\5d976382a7af5fa42b6b63a8bff28979\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.cardview:cardview:1.0.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\5d976382a7af5fa42b6b63a8bff28979\transformed\cardview-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] D:\projetos\StudioProjects\Vendas\caches\transforms-3\0af0479384b1491118a13a6ca1a3b575\transformed\coordinatorlayout-1.1.0\AndroidManifest.xml:20:5-22:41

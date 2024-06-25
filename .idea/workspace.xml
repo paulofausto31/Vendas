@@ -117,11 +117,6 @@
           <theme>@style/AppTheme</theme>
         </config>
       </layout>
-      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/fragment_principal.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/list_clientes.xml">
         <config>
           <theme>@style/AppTheme</theme>
@@ -140,11 +135,6 @@
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/main.xml">
         <config>
           <theme>@android:style/Theme.Material.Light</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/nav_cabecalho.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/newtabcontainer.xml">
@@ -173,11 +163,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/pedido_itens.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/layout/principal_navigationview.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -233,11 +218,6 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/vendas/src/main/res/menu/menu_consulta.xml">
-        <config>
-          <theme>@style/AppTheme</theme>
-        </config>
-      </layout>
-      <layout url="file://$PROJECT_DIR$/vendas/src/main/res/menu/menu_drawer.xml">
         <config>
           <theme>@style/AppTheme</theme>
         </config>
@@ -351,10 +331,11 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.4/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/debug-mergeJavaRes/merge-state" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/dao/ClienteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/persistencia/dao/ClienteDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/venda/util/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/venda/util/Util.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/vendas/src/main/java/persistencia/dao/ClienteDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/src/main/java/persistencia/dao/ClienteDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Principal.class" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/vendas/telas/Principal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" beforeDir="false" afterPath="$PROJECT_DIR$/vendas/build/outputs/logs/manifest-merger-debug-report.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -399,7 +380,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="bakMaster" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -420,22 +401,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_directory_selection": "D:/projetos/StudioProjects/Vendas/vendas/src/main/res/layout",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.17",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "flutter.settings",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;D:/projetos/StudioProjects/Vendas/vendas/src/main/res/layout&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.17&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;flutter.settings&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="ReaderModeSettings">
     <option name="enabled" value="false" />
   </component>
@@ -875,7 +856,23 @@
       <option name="project" value="LOCAL" />
       <updated>1719277561220</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="Build versao 11.2">
+      <option name="closed" value="true" />
+      <created>1719278649465</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1719278649465</updated>
+    </task>
+    <task id="LOCAL-00044" summary="Build versao 11.2">
+      <option name="closed" value="true" />
+      <created>1719279592367</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1719279592367</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -940,11 +937,6 @@
           <url>file://$PROJECT_DIR$/vendas/src/main/java/persistencia/dao/ClienteDAO.java</url>
           <line>283</line>
           <option name="timeStamp" value="147" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/vendas/src/main/java/persistencia/dao/ClienteDAO.java</url>
-          <line>170</line>
-          <option name="timeStamp" value="150" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
