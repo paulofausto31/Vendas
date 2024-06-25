@@ -50,6 +50,32 @@ public class ClienteBRL {
         dto.setRotaDia(linha.substring(243, 244));
         return dto;
     }
+
+    public ClienteDTO InstanciaClienteOLD(String linha)
+    {
+        ClienteDTO dto = new ClienteDTO();
+        //dto.setId(1);
+        dto.setCodEmpresa(Global.codEmpresa);
+        dto.setCodCliente(Integer.parseInt(linha.substring(0, 6)));
+        dto.setNome(linha.substring(6, 41));
+        dto.setEndereco(linha.substring(41, 81));
+        dto.setTelefone(linha.substring(81, 94));
+        dto.setDataUltimaCompra(linha.substring(94, 104));
+        dto.setValorAtraso(Double.parseDouble(linha.substring(104, 115).replace(',', '.')));
+        //String temp = linha.substring(112, 8);
+        dto.setValorVencer(Double.parseDouble(linha.substring(115, 126).replace(',', '.')));
+        dto.setFormaPgto(linha.substring(126, 130));
+        dto.setPrazo(Integer.parseInt(linha.substring(130, 134)));
+        dto.setCpfCnpj(linha.substring(134, 152));
+        dto.setSeqVisita(Integer.parseInt(linha.substring(152, 155)));
+        dto.setLimiteCredito(Double.parseDouble(linha.substring(155,162).replace(',', '.')));
+        dto.setInfAdicional(linha.substring(162, 170));
+        dto.setRazaoSocial(linha.substring(170, 205));
+        dto.setBairro(linha.substring(205, 225));
+        dto.setCidade(linha.substring(225, 240));
+        dto.setRotaDia(linha.substring(240, 241));
+        return dto;
+    }
     
     public boolean InsereCliente(ClienteDTO cliDto) 
     {

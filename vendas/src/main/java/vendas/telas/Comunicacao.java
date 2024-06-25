@@ -1003,8 +1003,14 @@ public class Comunicacao extends AppCompatActivity {
             br = new BufferedReader(new FileReader(arq));
             
 			while ((lstrlinha = br.readLine()) != null) {
+				ClienteDTO dto;
 				if (lstrlinha.length() > 0) {
-					ClienteDTO dto = cliBRL.InstanciaCliente(lstrlinha);
+					if (lstrlinha.length() > 242) {
+						dto = cliBRL.InstanciaCliente(lstrlinha);
+					}
+					else {
+						dto = cliBRL.InstanciaClienteOLD(lstrlinha);
+					}
 					if (!cliBRL.InsereCliente(dto)) {
 						new Exception("Falhou importa��o de Clientes");
 					}
