@@ -46,7 +46,7 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
         ProdutoDTO item = items.get(position);
         PrecoBRL preBRL = new PrecoBRL(context);
         holder.txtDescricaoProduto.setText(item.getDescricao());
-        holder.txtEstoqueProduto.setText(item.getEstoque().toString());
+        holder.txtEstoqueProduto.setText(item.getEstoque().toString());//teste
 
         List<PrecoDTO> listPreco = preBRL.getByProduto(item.getCodProduto());
         if (listPreco.size() > 0) {

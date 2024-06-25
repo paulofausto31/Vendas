@@ -24,7 +24,7 @@ import persistencia.dto.ProdutoDTO;
 import venda.util.Global;
 
 public class PedidoProdutoLista extends AppCompatActivity {
-    private RVPedidoProdutoAdapter adapter;
+    private RVPedidoProdutoAdapter adapter;//teste
     private RecyclerView recyclerView;
 
     @Override

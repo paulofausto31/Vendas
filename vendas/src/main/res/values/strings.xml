@@ -3,7 +3,7 @@
     <string name="app_name">PalmVenda</string>
     <string name="app_versao">Versão apk: 10.9</string>
     <string name="bco_versao">Versão Banco: 32</string>
-    <string name="action_settings">action_settings</string>
+    <string name="action_settings">action_setting</string>
     <string name="nav_header_desc">PalmVenda</string>
     <string name="navigation_drawer_open">Open</string>
     <string name="navigation_drawer_close">Close</string>
