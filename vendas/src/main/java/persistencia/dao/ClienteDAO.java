@@ -164,11 +164,15 @@ public class ClienteDAO {
 	
 	public List<ClienteDTO> getByNome(String nome){
 
-		Cursor rs;
-/*		if (Global.codRota != null)
-			rs = db.query(tableName, columns, "nome like ? and codEmpresa=? and codRota=?", new String[]{"%" + nome + "%", Global.codEmpresa, Global.codRota}, null, null, null);
-		else*/
-			rs = db.query(tableName, columns, "nome like ? and codEmpresa=?", new String[]{"%" + nome + "%", Global.codEmpresa}, null, null, null);
+		String sql;
+		if (Global.codRota != null)
+			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.nome like ?");
+		else
+			sql = "SELECT * FROM cliente where nome like ? and codEmpresa = ".concat(Global.codEmpresa);
+		String searchTerm = "%".concat(nome).concat("%");
+		Cursor rs = db.rawQuery(sql, new String[]{searchTerm});
+
+		//Cursor rs = db.query(tableName, columns, "nome like ? and codEmpresa=?", new String[]{"%" + nome + "%", Global.codEmpresa}, null, null, null);
 
 		ClienteDTO dto = null;
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
