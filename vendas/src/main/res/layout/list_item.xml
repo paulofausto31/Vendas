@@ -3,11 +3,62 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:padding="17dp">
 
-    <TextView
-        android:id="@+id/text_view"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/snackbar_include"
+        android:layout_width="387dp"
         android:layout_height="wrap_content"
-        android:textSize="18sp" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtDescricaoProdutoPesquisa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblEstoque"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescricaoProdutoPesquisa"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="6dp"
+            android:text="Estoque:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtEstoqueProdutoPesquisa"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescricaoProdutoPesquisa"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="79dp"
+            android:layout_marginTop="6dp"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lblPreco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescricaoProdutoPesquisa"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="97dp"
+            android:text="Preço:"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtPrecoProdutoPesquisa"
+            android:layout_width="91dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDescricaoProdutoPesquisa"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="2dp"
+            android:gravity="left"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
 </LinearLayout>

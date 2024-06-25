@@ -145,10 +145,10 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.itextpdf:itextg:5.5.9" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: junit:junit:4.12" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: org.hamcrest:hamcrest-core:1.3" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (1)" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (2)" level="project" />
-    <orderEntry type="library" scope="TEST" name="Gradle: D (3)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (1)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (2)" level="project" />
+    <orderEntry type="library" scope="TEST" name="Gradle: C (3)" level="project" />
   </component>
   <component name="TestModuleProperties" production-module="Vendas.vendas.main" />
 </module>

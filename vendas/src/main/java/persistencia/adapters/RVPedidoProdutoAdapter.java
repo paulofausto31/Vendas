@@ -1,5 +1,6 @@
 package persistencia.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -11,11 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import persistencia.brl.PrecoBRL;
+import persistencia.dto.PrecoDTO;
 import persistencia.dto.ProdutoDTO;
 import vendas.telas.R;
 
 public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProdutoAdapter.ViewHolder> {
 
+    private Context context;
     private final List<ProdutoDTO> items;
     private final OnItemClickListener listener;
 
@@ -23,7 +27,8 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
         void onItemClick(ProdutoDTO item);
     }
 
-    public RVPedidoProdutoAdapter(List<ProdutoDTO> items, OnItemClickListener listener) {
+    public RVPedidoProdutoAdapter(Context ctx, List<ProdutoDTO> items, OnItemClickListener listener) {
+        this.context = ctx;
         this.items = items;
         this.listener = listener;
     }
@@ -39,7 +44,15 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProdutoDTO item = items.get(position);
-        holder.textView.setText(item.getDescricao());
+        PrecoBRL preBRL = new PrecoBRL(context);
+        holder.txtDescricaoProduto.setText(item.getDescricao());
+        holder.txtEstoqueProduto.setText(item.getEstoque().toString());//teste
+
+        List<PrecoDTO> listPreco = preBRL.getByProduto(item.getCodProduto());
+        if (listPreco.size() > 0) {
+            PrecoDTO preDTO = listPreco.get(0);
+            holder.txtPrecoProduto.setText(preDTO.getPreco().toString());
+        }
         holder.itemView.setOnLongClickListener(v -> {
             showPopupMenu(holder.itemView, item);
             return true;
@@ -52,11 +65,15 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView textView;
+        public final TextView txtDescricaoProduto;
+        public final TextView txtEstoqueProduto;
+        public final TextView txtPrecoProduto;
 
         public ViewHolder(View view) {
             super(view);
-            textView = view.findViewById(R.id.text_view);
+            txtDescricaoProduto = view.findViewById(R.id.txtDescricaoProdutoPesquisa);
+            txtEstoqueProduto = view.findViewById(R.id.txtEstoqueProdutoPesquisa);
+            txtPrecoProduto = view.findViewById(R.id.txtPrecoProdutoPesquisa);
         }
     }
 

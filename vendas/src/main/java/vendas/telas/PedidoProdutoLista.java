@@ -24,7 +24,7 @@ import persistencia.dto.ProdutoDTO;
 import venda.util.Global;
 
 public class PedidoProdutoLista extends AppCompatActivity {
-    private RVPedidoProdutoAdapter adapter;
+    private RVPedidoProdutoAdapter adapter;//teste
     private RecyclerView recyclerView;
 
     @Override
@@ -41,7 +41,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
 
         if (param) {
             List<ProdutoDTO> _list = brl.getByDescricao(Global.prodPesquisa);
-            adapter = new RVPedidoProdutoAdapter(_list, this::showPopupMenu);
+            adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -54,12 +54,12 @@ public class PedidoProdutoLista extends AppCompatActivity {
         if (venda.util.Global.prodPesquisa == null){
             List<ProdutoDTO> _list = brl.getAllOrdenado();
 
-            adapter = new RVPedidoProdutoAdapter(_list, this::showPopupMenu);
+            adapter = new RVPedidoProdutoAdapter(getBaseContext(),_list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         }else{
             List<ProdutoDTO> _list = brl.getByDescricao(Global.prodPesquisa);
 
-            adapter = new RVPedidoProdutoAdapter(_list, this::showPopupMenu);
+            adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         }
     }
@@ -126,7 +126,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
                 ProdutoBRL brl = new ProdutoBRL(getBaseContext());
                 List<ProdutoDTO> _list = brl.getAllOrdenado();
 
-                adapter = new RVPedidoProdutoAdapter(_list, this::showPopupMenu);
+                adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
                 recyclerView.setAdapter(adapter);
                 return true;
             case R.id.menu_voltar_produto:
@@ -138,7 +138,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
     }
 
     private void AcaoPesquisa(List<ProdutoDTO> list) {
-        adapter = new RVPedidoProdutoAdapter(list, this::showPopupMenu);
+        adapter = new RVPedidoProdutoAdapter(getBaseContext(), list, this::showPopupMenu);
         recyclerView.setAdapter(adapter);
     }
 }
