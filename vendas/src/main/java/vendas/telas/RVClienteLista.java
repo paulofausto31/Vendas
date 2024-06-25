@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -112,17 +113,8 @@ public class RVClienteLista extends AppCompatActivity {
             case R.id.menu_rota:
                 ComboRotas();
                 return true;
-            case R.id.menu_ordenar_nome:
-                _list = brl.getRotaDiaOrdenado("nome");
-                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        // Ação para quando um item é clicado
-                        ClienteDTO item = _list.get(position);
-                        AcaoDoClick(item);
-                    }
-                });
-                recyclerView.setAdapter(adapter);
+            case R.id.menu_filtros:
+                showFilterDialog();
                 return true;
             case R.id.menu_ordenar_seqvisita:
                 _list = brl.getRotaDiaOrdenado("seqVisita");
@@ -135,12 +127,6 @@ public class RVClienteLista extends AppCompatActivity {
                     }
                 });
                 recyclerView.setAdapter(adapter);
-                return true;
-            case R.id.menu_pesquisar_fantasia:
-                pesquisa(1);
-                return true;
-            case R.id.menu_pesquisa_rsocial:
-                pesquisa(2);
                 return true;
             case R.id.menu_mostrar_todos:
                 _list = brl.getTodosOrdenado("nome");
@@ -160,6 +146,91 @@ public class RVClienteLista extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void showFilterDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Selecione o filtro");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_cliente_filtros, null);
+        builder.setView(dialogView);
+
+        final Spinner spinnerFilter = dialogView.findViewById(R.id.cbxFiltros);
+        final EditText editTextValue = dialogView.findViewById(R.id.txtFiltroClientes);
+
+        // Configurar o Spinner (opcional, já definido no XML com android:entries)
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.filter_options, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerFilter.setAdapter(adapter);
+
+        builder.setTitle("Filter Options")
+                .setPositiveButton("OK", (dialog, id) -> {
+                    // Pegar os valores do Spinner e EditText
+                    String selectedFilter = spinnerFilter.getSelectedItem().toString();
+                    String value = editTextValue.getText().toString();
+                    // Faça algo com os valores (exemplo: filtrar lista)
+                    aplicarFiltros(selectedFilter, value);
+                })
+                .setNegativeButton("Cancel", (dialog, id) -> dialog.cancel());
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+    }
+
+    private void aplicarFiltros(String filtro, String valor) {
+        ClienteBRL cliBRL = new ClienteBRL(getBaseContext());
+        List<ClienteDTO> _list;
+
+        if(filtro.equals("Nome Fantasia")){
+            _list = cliBRL.getByNome(valor);
+            adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // Ação para quando um item é clicado
+                    ClienteDTO item = _list.get(position);
+                    AcaoDoClick(item);
+                }
+            });
+            recyclerView.setAdapter(adapter);
+        }
+        else if (filtro.equals("Razão Social")){
+            _list = cliBRL.getByRazaoSocial(valor);
+            adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // Ação para quando um item é clicado
+                    ClienteDTO item = _list.get(position);
+                    AcaoDoClick(item);
+                }
+            });
+            recyclerView.setAdapter(adapter);
+        }
+        else if (filtro.equals("Codigo")){
+            _list = cliBRL.getByCodigo(valor);
+            adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // Ação para quando um item é clicado
+                    ClienteDTO item = _list.get(position);
+                    AcaoDoClick(item);
+                }
+            });
+            recyclerView.setAdapter(adapter);
+        }
+        else if (filtro.equals("CPF/CNPJ")){
+            _list = cliBRL.getByCPFCNPJ(valor);
+            adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    // Ação para quando um item é clicado
+                    ClienteDTO item = _list.get(position);
+                    AcaoDoClick(item);
+                }
+            });
+            recyclerView.setAdapter(adapter);
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.List;
 import persistencia.dao.*;
 import persistencia.dto.*;
 import venda.util.Global;
+import venda.util.Util;
 
 public class ClienteBRL {
 
@@ -39,7 +40,7 @@ public class ClienteBRL {
         dto.setValorVencer(Double.parseDouble(linha.substring(115, 126).replace(',', '.')));
         dto.setFormaPgto(linha.substring(126, 130));
         dto.setPrazo(Integer.parseInt(linha.substring(130, 134)));
-        dto.setCpfCnpj(linha.substring(134, 152));
+        dto.setCpfCnpj(Util.removerMascaraCPF(linha.substring(134, 152).trim()));
         dto.setSeqVisita(Integer.parseInt(linha.substring(152, 156)));
         dto.setLimiteCredito(Double.parseDouble(linha.substring(156,164).replace(',', '.')));
         dto.setInfAdicional(linha.substring(164, 173));
@@ -111,6 +112,13 @@ public class ClienteBRL {
 
     public List<ClienteDTO> getByNome(String nome){
     	return clienteDAO.getByNome(nome);
+    }
+
+    public List<ClienteDTO> getByCodigo(String codigo){
+        return clienteDAO.getByCodigo(codigo);
+    }
+
+    public List<ClienteDTO> getByCPFCNPJ(String cpfCnpj){ return clienteDAO.getByCPFCNPJ(cpfCnpj);
     }
     
     public List<ClienteDTO> getByRazaoSocial(String razaoSocial){

@@ -164,8 +164,12 @@ public class ClienteDAO {
 	
 	public List<ClienteDTO> getByNome(String nome){
 
-		Cursor rs = db.query(tableName, columns, "nome like ? and codEmpresa=?", new String[]{"%" + nome + "%", Global.codEmpresa}, null, null, null);
-		
+		Cursor rs;
+/*		if (Global.codRota != null)
+			rs = db.query(tableName, columns, "nome like ? and codEmpresa=? and codRota=?", new String[]{"%" + nome + "%", Global.codEmpresa, Global.codRota}, null, null, null);
+		else*/
+			rs = db.query(tableName, columns, "nome like ? and codEmpresa=?", new String[]{"%" + nome + "%", Global.codEmpresa}, null, null, null);
+
 		ClienteDTO dto = null;
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
 		
@@ -230,6 +234,86 @@ public class ClienteDAO {
 		return lista;
 	}
 
+	public List<ClienteDTO> getByCPFCNPJ(String cpf_cnpj){
+
+		String sql;
+		if (Global.codRota != null)
+			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.cpfCnpj = ").concat(cpf_cnpj);
+		else
+			sql = "SELECT * FROM cliente where cpfCnpj = ".concat(cpf_cnpj) + " and codEmpresa = ".concat(Global.codEmpresa);
+
+		Cursor rs = db.rawQuery(sql, null);
+
+		ClienteDTO dto = null;
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+
+		while(rs.moveToNext()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
+	public List<ClienteDTO> getByCodigo(String codigo){
+
+		String sql;
+		if (Global.codRota != null)
+			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and r.codCliente = ").concat(codigo);
+		else
+			sql = "SELECT * FROM cliente where codCliente = ".concat(codigo) + " and codEmpresa = ".concat(Global.codEmpresa);
+
+		Cursor rs = db.rawQuery(sql, null);
+
+		ClienteDTO dto = null;
+		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
+
+		while(rs.moveToNext()){
+			dto = new ClienteDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodCliente(rs.getInt(rs.getColumnIndex("codCliente")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+			dto.setEndereco(rs.getString(rs.getColumnIndex("endereco")));
+			dto.setTelefone(rs.getString(rs.getColumnIndex("telefone")));
+			dto.setDataUltimaCompra(rs.getString(rs.getColumnIndex("dataUltimaCompra")));
+			dto.setValorAtraso(rs.getDouble(rs.getColumnIndex("valorAtraso")));
+			dto.setValorVencer(rs.getDouble(rs.getColumnIndex("valorVencer")));
+			dto.setFormaPgto(rs.getString(rs.getColumnIndex("formaPgto")));
+			dto.setPrazo(rs.getInt(rs.getColumnIndex("prazo")));
+			dto.setCpfCnpj(rs.getString(rs.getColumnIndex("cpfCnpj")));
+			dto.setSeqVisita(rs.getInt(rs.getColumnIndex("seqVisita")));
+			dto.setInfAdicional(rs.getString(rs.getColumnIndex("infAdicional")));
+			dto.setRazaoSocial(rs.getString(rs.getColumnIndex("razaoSocial")));
+			dto.setBairro(rs.getString(rs.getColumnIndex("bairro")));
+			dto.setCidade(rs.getString(rs.getColumnIndex("cidade")));
+			dto.setRotaDia(rs.getString(rs.getColumnIndex("rotaDia")));
+			dto.setLimiteCredito(rs.getDouble(rs.getColumnIndex("limiteCredito")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
 	public List<ClienteDTO> getAll(){
 
 		Cursor rs = db.rawQuery("SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa), null);
@@ -258,7 +342,14 @@ public class ClienteDAO {
 
 	public List<ClienteDTO> getTodosOrdenado(String campoOrdenacao){
 
-		Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
+		String sql;
+		if (Global.codRota != null)
+			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+		else
+			sql = "SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
+
+		Cursor rs = db.rawQuery(sql, null);
+
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
 
 		while(rs.moveToNext()){

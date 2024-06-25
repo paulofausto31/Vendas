@@ -7,23 +7,13 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
-        android:id="@+id/menu_ordenar_nome"
-        android:title="Ordenar Nome"
+        android:id="@+id/menu_filtros"
+        android:title="Filtros"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
         android:id="@+id/menu_ordenar_seqvisita"
         android:title="Ordenar Seq.Visita"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_pesquisar_fantasia"
-        android:title="Pesquisa Fantasia"
-        android:orderInCategory="100"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/menu_pesquisa_rsocial"
-        android:title="Pesquisa R.Social"
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item

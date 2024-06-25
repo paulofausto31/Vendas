@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="spinner_items">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
+    <string-array name="filter_options">
+        <item>Selecione ...</item>
+        <item>Codigo</item>
+        <item>CPF/CNPJ</item>
+        <item>Nome Fantasia</item>
+        <item>Razão Social</item>
     </string-array>
 </resources>

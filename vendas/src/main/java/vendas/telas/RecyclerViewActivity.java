@@ -49,17 +49,8 @@ public class RecyclerViewActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_ordenar_nome:
-                //setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("nome")));
-                return true;
             case R.id.menu_ordenar_seqvisita:
                 //setListAdapter(new ClienteAdapter(getBaseContext(), brl.getRotaDiaOrdenado("seqVisita")));
-                return true;
-            case R.id.menu_pesquisar_fantasia:
-                //pesquisa(1);
-                return true;
-            case R.id.menu_pesquisa_rsocial:
-                //pesquisa(2);
                 return true;
             case R.id.menu_mostrar_todos:
                 //setListAdapter(new ClienteAdapter(getBaseContext(), brl.getTodosOrdenado("nome")));

@@ -22,7 +22,12 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 public class Util {
-	
+
+	public static String removerMascaraCPF(String cpf) {
+		// Remove "." e "-"
+		return cpf.replaceAll("[./-]", "");
+	}
+
 	public List<ZipEntry> listarEntradasZip( File arquivo ) throws ZipException, IOException {  
 		    List<ZipEntry> entradasDoZip = new ArrayList<ZipEntry>();  
 		    ZipFile zip = null;  
