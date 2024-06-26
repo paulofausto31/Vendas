@@ -46,6 +46,7 @@
 .externalNativeBuild
 
 # Gradle
+/gradle/wrapper/gradle-wrapper.properties
 .gradle/
 /build/
 /*/build/
