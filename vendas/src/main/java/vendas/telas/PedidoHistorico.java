@@ -3,8 +3,12 @@ package vendas.telas;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.Settings;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +16,18 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 import android.content.Context;
+import android.content.pm.PackageManager;
 
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.android.volley.BuildConfig;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,6 +43,7 @@ import persistencia.brl.PedidoBRL;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
 import venda.util.Global;
+import venda.util.PDFGenerator;
 import venda.util.Util;
 
 @SuppressLint("NewApi")
@@ -62,6 +67,11 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		pedBRL = new PedidoBRL(getContext());
 		itpBRL = new ItenPedidoBRL(getContext());
 
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && false == Environment.isExternalStorageManager()) {
+			Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+			startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
+		}
+
 		return view;
 	}
 
@@ -82,6 +92,15 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 			if (item.getItemId() == R.id.action_historico_editar) {
 				venda.util.Global.pedidoGlobalDTO = pedDTO;
 				RetornaTabPedidoBasico();
+				return true;
+			}
+			if (item.getItemId() == R.id.action_historico_pdf) {
+				ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
+				List<ItenPedidoDTO> list = itpBRL.getByCodPedido(pedDTO.getId());
+				PDFGenerator pdf = new PDFGenerator();
+				pdf.createPDF(getContext(),"arquivoPDF.pdf", list);
+				sharePDF("arquivoPDF.pdf");
+
 				return true;
 			}
 			if (item.getItemId() == R.id.action_historico_desconto){
@@ -277,36 +296,6 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 	}
 */
 
-	@SuppressLint("NewApi")
-	private void criandoPdf() {
-         Document document = new Document();
-		 try {
-			 String filename = "teste.pdf";
-			 String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/MeuPdf";
-			 File dir = new File(path, filename); 
-			 if (!dir.exists()) { 
-				 dir.getParentFile().mkdirs(); 
-				 } 
-			 FileOutputStream fOut = new FileOutputStream(dir); 
-			 fOut.flush(); 
-			 PdfWriter.getInstance(document, fOut);
-			 document.open();
-			 document.add(new Paragraph(Util.FormataSpaces("Aqui esta meu pdf ",5,0)));
-			 } 
-		 catch (FileNotFoundException e) {
-			 e.printStackTrace(); 
-			 } 
-		 catch (IOException e) { 
-			 e.printStackTrace(); 
-			 } 
-		 catch (Exception e) {
-			 Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-			 e.printStackTrace(); 
-			 } 
-		 finally {
-			 document.close(); 
-		 }
-	 }
 	 
 	 private void DescontoAcrescimo(final char tipo, final String titulo, final String mensagem, final PedidoDTO pedDTO){
 		 AlertDialog.Builder pesquisa = new AlertDialog.Builder(getContext());
@@ -404,5 +393,44 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		venda.util.Global.pedidoGlobalDTO = pedDTO;
 	}
 
+	public void sharePDF(String fileName) {
+		Context context = getContext();
+		String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+		File file = new File(path, fileName);
+
+		Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
+
+		Intent shareIntent = new Intent();
+		shareIntent.setAction(Intent.ACTION_SEND);
+		shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+		shareIntent.setType("application/pdf");
+		shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
+		// Verifique se o WhatsApp está instalado
+		if (isAppInstalled(context, "com.whatsapp")) {
+			shareIntent.setPackage("com.whatsapp");
+		} else {
+			// O WhatsApp não está instalado, mostre um aviso ou use outro aplicativo de compartilhamento
+			shareIntent = Intent.createChooser(shareIntent, "Escolha um aplicativo para compartilhar o PDF");
+		}
+
+		try {
+			startActivity(shareIntent);
+		} catch (android.content.ActivityNotFoundException ex) {
+			// Mostrar uma mensagem de erro se não houver aplicativos que possam lidar com o Intent
+			Toast.makeText(context, "Nenhum aplicativo encontrado para compartilhar o PDF", Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	// Método para verificar se um aplicativo está instalado
+	private boolean isAppInstalled(Context context, String packageName) {
+		PackageManager pm = context.getPackageManager();
+		try {
+			pm.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
+			return true;
+		} catch (PackageManager.NameNotFoundException e) {
+			return false;
+		}
+	}
 
 }

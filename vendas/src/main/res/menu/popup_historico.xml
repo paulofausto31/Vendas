@@ -12,4 +12,7 @@
     <item
         android:id="@+id/action_historico_acrescimo"
         android:title="Acrescimo" />
+    <item
+        android:id="@+id/action_historico_pdf"
+        android:title="Gerar PDF" />
 </menu>
