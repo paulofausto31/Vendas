@@ -40,6 +40,7 @@ import persistencia.adapters.RVHistoricoPedidoAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
+import persistencia.dto.ClienteDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
 import venda.util.Global;
@@ -68,7 +69,8 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		itpBRL = new ItenPedidoBRL(getContext());
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && false == Environment.isExternalStorageManager()) {
-			Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+			Uri uri = Uri.parse("package:vendas.telas");
+			//Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
 			startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
 		}
 
@@ -96,9 +98,11 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 			}
 			if (item.getItemId() == R.id.action_historico_pdf) {
 				ItenPedidoBRL itpBRL = new ItenPedidoBRL(getContext());
+				ClienteBRL cliBRL = new ClienteBRL(getContext());
+				ClienteDTO cliDTO = cliBRL.getByCodCliente(pedDTO.getCodCliente());
 				List<ItenPedidoDTO> list = itpBRL.getByCodPedido(pedDTO.getId());
 				PDFGenerator pdf = new PDFGenerator();
-				pdf.createPDF(getContext(),"arquivoPDF.pdf", list);
+				pdf.createPDF(getContext(),"arquivoPDF.pdf", list, cliDTO);
 				sharePDF("arquivoPDF.pdf");
 
 				return true;

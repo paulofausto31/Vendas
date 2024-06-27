@@ -135,7 +135,8 @@ public class Comunicacao extends AppCompatActivity {
 		GetComDefault();
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && false == Environment.isExternalStorageManager()) {
-			Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
+			Uri uri = Uri.parse("package:vendas.telas");
+			//Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID);
 			startActivity(new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri));
 		}
 
