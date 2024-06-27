@@ -100,7 +100,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
                         if (value.length() < 3)
                             Toast.makeText(getBaseContext(), "A pesquisa deve conter no mínimo 3 caracteres", Toast.LENGTH_LONG).show();
                         else{
-                            venda.util.Global.prodPesquisa = value;
+                            Global.prodPesquisa = value;
                             ProdutoBRL brl = new ProdutoBRL(getBaseContext());
                             List<ProdutoDTO> _list = brl.getByDescricao(value);
                             AcaoPesquisa(_list);
@@ -125,7 +125,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
             case R.id.menu_mostrar_todos:
                 ProdutoBRL brl = new ProdutoBRL(getBaseContext());
                 List<ProdutoDTO> _list = brl.getAllOrdenado();
-
+                Global.prodPesquisa = null;
                 adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
                 recyclerView.setAdapter(adapter);
                 return true;

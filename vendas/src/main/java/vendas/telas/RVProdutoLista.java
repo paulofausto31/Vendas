@@ -145,7 +145,7 @@ public class RVProdutoLista extends AppCompatActivity {
                         if (value.length() < 3)
                             Toast.makeText(getBaseContext(), "A pesquisa deve conter no mínimo 3 caracteres", Toast.LENGTH_LONG).show();
                         else{
-                            venda.util.Global.prodPesquisa = value;
+                            Global.prodPesquisa = value;
                             ProdutoBRL brl = new ProdutoBRL(getBaseContext());
                             List<ProdutoDTO> _list = brl.getByDescricao(value);
 
@@ -177,7 +177,7 @@ public class RVProdutoLista extends AppCompatActivity {
                 return true;
             case R.id.menu_mostrar_todos:
                 List<ProdutoDTO> _list = brl.getAllOrdenado();
-
+                Global.prodPesquisa = null;
                 adapter = new RVProdutoAdapter(getBaseContext(), _list, new RVProdutoAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
