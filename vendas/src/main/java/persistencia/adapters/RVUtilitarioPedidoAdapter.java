@@ -38,6 +38,11 @@ public class RVUtilitarioPedidoAdapter extends RecyclerView.Adapter<RVUtilitario
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         PedidoDTO pedDTO = lista.get(position);
         ItenPedidoBRL itpBRL = new ItenPedidoBRL(ctx);
+        String status;
+        if (pedDTO.getFechado().equals("0"))
+            status = "A";
+        else
+            status = "F";
 
         Double totalPedido = itpBRL.getTotalPedido(pedDTO.getId());
         DecimalFormat formatador = new DecimalFormat("##,##00.00");
@@ -45,7 +50,7 @@ public class RVUtilitarioPedidoAdapter extends RecyclerView.Adapter<RVUtilitario
         totalFormatado = totalFormatado.replace(',', '.');
 
         holder.txtDataPedidoUtil.setText(pedDTO.getDataPedido());
-        holder.txtCodClienteUtil.setText(pedDTO.getCodCliente().toString());
+        holder.txtCodClienteUtil.setText(pedDTO.getCodCliente().toString() + "  " + status);
         holder.txtValorPedidoUtil.setText(totalFormatado);
         holder.itemView.setOnLongClickListener(v -> {
             if (longClickListener != null) {

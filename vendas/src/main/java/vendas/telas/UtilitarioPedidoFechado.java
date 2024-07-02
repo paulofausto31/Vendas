@@ -1,6 +1,5 @@
 package vendas.telas;
 
-import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,19 +8,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.List;
 import android.widget.PopupMenu;
 
-import persistencia.adapters.RVClienteAdapter;
 import persistencia.adapters.RVUtilitarioPedidoAdapter;
 import persistencia.brl.PedidoBRL;
-import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
 
 public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPedidoAdapter.OnItemLongClickListener {
@@ -47,7 +41,7 @@ public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPed
 	public void onItemLongClick(View view, int position) {
 		PedidoDTO pedDTO = lista.get(position);
 		PopupMenu popup = new PopupMenu(getContext(), view);
-		popup.getMenuInflater().inflate(R.menu.popup_utilitario, popup.getMenu());
+		popup.getMenuInflater().inflate(R.menu.popup_utilitario_enviado, popup.getMenu());
 		popup.setOnMenuItemClickListener(item -> {
 			if (item.getItemId() == R.id.action_abre_pedido) {
 				atualizarLista(pedDTO);

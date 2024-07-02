@@ -38,14 +38,35 @@ public class UtilitarioPedidoPendente extends Fragment implements RVUtilitarioPe
     public void onResume() {
         super.onResume();
         brl = new PedidoBRL(getContext());
-        lista = brl.getAllPedAberto();
-        adapter = new RVUtilitarioPedidoAdapter(getContext(), lista,this);
-        recyclerView.setAdapter(adapter);
+        atualizarLista();
     }
 
     @Override
     public void onItemLongClick(View view, int position) {
+        PedidoDTO pedDTO = lista.get(position);
 
+        PopupMenu popup = new PopupMenu(getContext(), view);
+        popup.getMenuInflater().inflate(R.menu.popup_utilitario_pendente, popup.getMenu());
+        popup.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_abre_pedido) {
+                brl.AbrePedidoPendente(pedDTO.getId());
+                atualizarLista();
+                return true;
+            }
+            if (item.getItemId() == R.id.action_fecha_pedido) {
+                brl.FechaPedidoPendente(pedDTO.getId());
+                atualizarLista();
+                return true;
+            }
+            return false;
+        });
+        popup.show();
+    }
+
+    private void atualizarLista() {
+        lista = brl.getAllPedAberto();
+        adapter = new RVUtilitarioPedidoAdapter(getContext(), lista,this);
+        recyclerView.setAdapter(adapter);
     }
 }
 
