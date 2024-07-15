@@ -29,6 +29,7 @@ import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.brl.RotaBRL;
 import persistencia.dto.ClienteDTO;
+import persistencia.dto.RotaDTO;
 import venda.util.Global;
 
 public class RVClienteLista extends AppCompatActivity {
@@ -250,9 +251,9 @@ public class RVClienteLista extends AppCompatActivity {
         Spinner spinner = dialogView.findViewById(R.id.cbxRota);
 
         rotBRL = new RotaBRL(getBaseContext());
-        List<String> rotas = rotBRL.getComboRota();
+        List<RotaDTO> rotas = rotBRL.getComboRota();
 
-        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
+        ArrayAdapter<RotaDTO> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
         adapterRotas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterRotas);
 
@@ -260,7 +261,8 @@ public class RVClienteLista extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Handle spinner selection
-                String rota = parent.getItemAtPosition(position).toString();
+                RotaDTO selectedItem = (RotaDTO) spinner.getSelectedItem();
+                String rota = selectedItem.getCodRota().toString();
                 // Do something with the selected item
                 if (position > 0){
                     Global.codRota = rota;

@@ -33,8 +33,7 @@ public class RotaBRL {
         //dto.setId(1);
         dto.setCodEmpresa(Global.codEmpresa);
         dto.setCodRota(Integer.parseInt(linha.substring(0, 4).trim()));
-        dto.setCodCliente(Integer.parseInt(linha.substring(4, 10)));
-        dto.setSeqVisita(Integer.parseInt(linha.substring(10, 14)));
+        dto.setDescricao(linha.substring(4, 24));
         return dto;
     }
 
@@ -77,7 +76,7 @@ public class RotaBRL {
         }
     }
 
-    public List<String> getComboRota(){
+    public List<RotaDTO> getComboRota(){
         return rotaDAO.getComboRota();
     }
 }

@@ -10,14 +10,16 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 33; //Integer.parseInt(getString(R.string.bco_versao));
+	private static int version = 34; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		sql = "CREATE TABLE IF NOT EXISTS [rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
+		sql = "CREATE TABLE IF NOT EXISTS [Rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [descricao] VARCHAR(20))";
+		db.execSQL(sql);
+		sql = "CREATE TABLE IF NOT EXISTS [ClienteRota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
 		db.execSQL(sql);
@@ -67,6 +69,8 @@ public class db extends SQLiteOpenHelper {
 	{
 		sql = "DROP TABLE IF EXISTS [Rota]";
 		db.execSQL(sql);
+		sql = "DROP TABLE IF EXISTS [ClienteRota]";
+		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [Empresa]";
 		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [localizacaoGPS]";
@@ -99,7 +103,9 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [ItensPedido]";
 		db.execSQL(sql);
-		sql = "CREATE TABLE IF NOT EXISTS [rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
+		sql = "CREATE TABLE IF NOT EXISTS [Rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [descricao] VARCHAR(20))";
+		db.execSQL(sql);
+		sql = "CREATE TABLE IF NOT EXISTS [ClienteRota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
 		db.execSQL(sql);

@@ -54,6 +54,7 @@ import javax.mail.internet.*;
 import persistencia.brl.CaminhoFTPBRL;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ClienteNaoPositivadoBRL;
+import persistencia.brl.ClienteRotaBRL;
 import persistencia.brl.ConfiguracaoBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.brl.EmpresaBRL;
@@ -69,6 +70,7 @@ import persistencia.brl.RotaBRL;
 import persistencia.brl.VendedorBRL;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.ClienteNaoPositivadoDTO;
+import persistencia.dto.ClienteRotaDTO;
 import persistencia.dto.ConfiguracaoDTO;
 import persistencia.dto.ContaReceberDTO;
 import persistencia.dto.EmpresaDTO;
@@ -103,7 +105,7 @@ public class Comunicacao extends AppCompatActivity {
 	private String pastaDest;
 	private String[] arquivosExportacao = new String[] { "TABPED.TXT", "TABPEI.TXT", "TABCNP.TXT" };
 	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABVEN.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT",
-			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "TABROTA.TXT", "Final" };
+			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "TABROTA.TXT", "TABCLR.TXT", "Final" };
 //	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT", "TABPRE.TXT",
 //			"TABVEN.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
 	ClienteBRL cliBRL;
@@ -177,6 +179,8 @@ public class Comunicacao extends AppCompatActivity {
 				ftpBRL.DeleteAll();
 				RotaBRL rotBRL = new RotaBRL(getApplicationContext());
 				rotBRL.DeleteAll();
+				ClienteRotaBRL clrBRL = new ClienteRotaBRL(getApplicationContext());
+				clrBRL.DeleteAll();
 			}
 		});
 			
@@ -383,6 +387,8 @@ public class Comunicacao extends AppCompatActivity {
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABROTA.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
+			else if (arquivo.equals("TABCLR.TXT"))
+				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 		}
 		else{
 			ftpBRL.RecebeArquivoFTP(arquivo, ftp, pastaDest);
@@ -411,6 +417,8 @@ public class Comunicacao extends AppCompatActivity {
 					ImportaContaReceber();
 				else if (arquivo.equals("TABROTA.TXT"))
 					ImportaRota();
+				else if (arquivo.equals("TABCLR.TXT"))
+					ImportaClienteRota();
 				else if (arquivo.equals("TABCLI.TXT"))
 					ImportaCliente();
 			}
@@ -863,6 +871,36 @@ public class Comunicacao extends AppCompatActivity {
 		}
 	}
 
+	private void ImportaClienteRota() {
+		String lstrNomeArq;
+		File arq;
+		String lstrlinha;
+		ClienteRotaBRL brl = new ClienteRotaBRL(getApplicationContext());
+		brl.DeleteByEmpresa();
+		try
+		{
+
+			lstrNomeArq = "TABCLR.txt";
+
+			arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
+			BufferedReader br = new BufferedReader(new FileReader(arq));
+
+			while ((lstrlinha = br.readLine()) != null) {
+				if (lstrlinha.length() > 0) {
+					ClienteRotaDTO dto = brl.InstanciaClienteRota(lstrlinha);
+					if (!brl.InsereClienteRota(dto)) {
+						new Exception("Falhou importacao de ClienteRotas");
+					}
+				}
+			}
+			arq.delete();
+
+		} catch (Exception e) {
+			venda.util.mensagem.trace(getApplicationContext(), "Erro : " + e.getMessage());
+		} finally{
+			brl.CloseConection();
+		}
+	}
 
 	private void ImportaJustificativaPositivacao() {
 		String lstrNomeArq;
