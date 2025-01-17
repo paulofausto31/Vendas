@@ -10,7 +10,7 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 33; //Integer.parseInt(getString(R.string.bco_versao));
+	private static int version = 34; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
@@ -55,7 +55,8 @@ public class db extends SQLiteOpenHelper {
 		sql = "CREATE TABLE [ClienteNaoPositivado] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [codJustificativa] INTEGER, [obs] VARCHAR(300), [data] VARCHAR(20), [hora] VARCHAR(20), [dataFim] VARCHAR(20), [horaFim] VARCHAR(20), [baixado] INTEGER)";
 		db.execSQL(sql);		
 		// Cria tabela de Pedidos
-		sql = "CREATE TABLE [Pedidos] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codCliente] INTEGER, [codVendedor] INTEGER, [formaPgto] VARCHAR(10), [prazo] INTEGER, [parcela] INTEGER, [dataPedido] VARCHAR(20), [horaPedido] VARCHAR(20), [baixado] VARCHAR(1), [dataPedidoFim] VARCHAR(20), [horaPedidoFim] VARCHAR(20), [infAdicional] VARCHAR(250), [latitude] VARCHAR(50), [longitude] VARCHAR(50), [fechado] VARCHAR(1))";
+		sql = "CREATE TABLE [Pedidos] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codCliente] INTEGER, [codVendedor] INTEGER, [formaPgto] VARCHAR(10), [prazo] INTEGER, [parcela] INTEGER, [dataPedido] VARCHAR(20), [horaPedido] VARCHAR(20)," +
+			  " [baixado] VARCHAR(1), [dataPedidoFim] VARCHAR(20), [horaPedidoFim] VARCHAR(20), [infAdicional] VARCHAR(250), [latitude] VARCHAR(50), [longitude] VARCHAR(50), [fechado] VARCHAR(1), [codPedidoMySQL] INTEGER, [dataPedidoEnvio] VARCHAR(20), [horaPedidoEnvio] VARCHAR(20))";
 		db.execSQL(sql);		
 		// Cria tabela de Itens Pedidos
 		sql = "CREATE TABLE [ItensPedido] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] INTEGER, [DA] VARCHAR(1),[DAValor] NUMERIC(18,2))";
@@ -137,7 +138,8 @@ public class db extends SQLiteOpenHelper {
 		sql = "CREATE TABLE [ClienteNaoPositivado] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [codJustificativa] INTEGER, [obs] VARCHAR(300), [data] VARCHAR(20), [hora] VARCHAR(20), [dataFim] VARCHAR(20), [horaFim] VARCHAR(20), [baixado] INTEGER)";
 		db.execSQL(sql);		
 		// Cria tabela de Pedidos
-		sql = "CREATE TABLE [Pedidos] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codCliente] INTEGER, [codVendedor] INTEGER, [formaPgto] VARCHAR(10), [prazo] INTEGER, [parcela] INTEGER, [dataPedido] VARCHAR(20), [horaPedido] VARCHAR(20), [baixado] VARCHAR(1), [dataPedidoFim] VARCHAR(20), [horaPedidoFim] VARCHAR(20), [infAdicional] VARCHAR(250), [latitude] VARCHAR(50), [longitude] VARCHAR(50), [fechado] VARCHAR(1))";
+		sql = "CREATE TABLE [Pedidos] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codCliente] INTEGER, [codVendedor] INTEGER, [formaPgto] VARCHAR(10), [prazo] INTEGER, [parcela] INTEGER, [dataPedido] VARCHAR(20), [horaPedido] VARCHAR(20)," +
+				" [baixado] VARCHAR(1), [dataPedidoFim] VARCHAR(20), [horaPedidoFim] VARCHAR(20), [infAdicional] VARCHAR(250), [latitude] VARCHAR(50), [longitude] VARCHAR(50), [fechado] VARCHAR(1), [codPedidoMySQL] INTEGER, [dataPedidoEnvio] VARCHAR(20), [horaPedidoEnvio] VARCHAR(20))";
 		db.execSQL(sql);		
 		// Cria tabela de Itens Pedidos
 		sql = "CREATE TABLE [ItensPedido] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] INTEGER, [DA] VARCHAR(1),[DAValor] NUMERIC(18,2))";

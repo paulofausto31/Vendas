@@ -60,11 +60,11 @@ public class RVClienteLista extends AppCompatActivity {
         crbrl = new ContaReceberBRL(getBaseContext());
         List<ClienteDTO> _list;
 
-        if (Global.codRota == null) {
+        if (Global.lstClientes == null)
             _list = brl.getRotaDiaOrdenado("nome");
-        }else {
-            _list = brl.getPorRotaOrdenado(Global.codRota, "nome");
-        }
+        else
+            _list = Global.lstClientes;
+
         // Configurar o Adapter com os dados
         adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
             @Override
@@ -122,6 +122,7 @@ public class RVClienteLista extends AppCompatActivity {
                 return true;
             case R.id.menu_ordenar_seqvisita:
                 _list = brl.getRotaDiaOrdenado("seqVisita");
+                Global.lstClientes = _list;
                 adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -134,6 +135,20 @@ public class RVClienteLista extends AppCompatActivity {
                 return true;
             case R.id.menu_mostrar_todos:
                 _list = brl.getTodosOrdenado("nome");
+                Global.lstClientes = null;
+                adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        // Ação para quando um item é clicado
+                        ClienteDTO item = _list.get(position);
+                        AcaoDoClick(item);
+                    }
+                });
+                recyclerView.setAdapter(adapter);
+                return true;
+            case R.id.menu_pedidos:
+                _list = brl.getClientesPedidos("nome");
+                Global.lstClientes = _list;
                 adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {
@@ -190,6 +205,7 @@ public class RVClienteLista extends AppCompatActivity {
 
         if(filtro.equals("Nome Fantasia")){
             _list = cliBRL.getByNome(valor);
+            Global.lstClientes = _list;
             adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -202,6 +218,7 @@ public class RVClienteLista extends AppCompatActivity {
         }
         else if (filtro.equals("Razão Social")){
             _list = cliBRL.getByRazaoSocial(valor);
+            Global.lstClientes = _list;
             adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -214,6 +231,7 @@ public class RVClienteLista extends AppCompatActivity {
         }
         else if (filtro.equals("Codigo")){
             _list = cliBRL.getByCodigo(valor);
+            Global.lstClientes = _list;
             adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -226,6 +244,7 @@ public class RVClienteLista extends AppCompatActivity {
         }
         else if (filtro.equals("CPF/CNPJ")){
             _list = cliBRL.getByCPFCNPJ(valor);
+            Global.lstClientes = _list;
             adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
@@ -265,6 +284,7 @@ public class RVClienteLista extends AppCompatActivity {
                 if (position > 0){
                     Global.codRota = rota;
                     List<ClienteDTO> lstClientes = brl.getPorRotaOrdenado(rota, "nome");
+                    Global.lstClientes = lstClientes;
                     adapter = new RVClienteAdapter(getBaseContext(), lstClientes, new RVClienteAdapter.OnItemClickListener() {
                         @Override
                         public void onItemClick(int position) {

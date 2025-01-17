@@ -3,4 +3,10 @@
     <item
         android:id="@+id/action_abre_pedido"
         android:title="Abrir Pedido" />
+    <item
+        android:id="@+id/action_visualizar_pedido"
+        android:title="Visualizar Pedido" />
+    <item
+        android:id="@+id/action_gerar_pdf"
+        android:title="Gerar PDF" />
 </menu>

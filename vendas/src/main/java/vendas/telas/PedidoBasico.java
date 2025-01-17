@@ -173,7 +173,6 @@ public class PedidoBasico extends Fragment {
 		pedDTO.setPrazo(Integer.parseInt(txtPrazo.getText().toString()));
 		pedDTO.setLatitude(localizacao.getLatitude());
 		pedDTO.setLongitude(localizacao.getLongitude());
-		pedDTO.setInfAdicional("");
 		if (pedDTO.getId() == null || pedDTO.getId() == 0){
 			pedDTO.setId(0);
 			pedDTO.setBaixado(0);

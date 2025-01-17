@@ -1,13 +1,26 @@
 package persistencia.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ItenPedidoDTO {
 
 	Integer id;
 	String codEmpresa;
+	@SerializedName("idtabped")
+	@Expose
     Integer codPedido;
+	@SerializedName("codproduto")
+	@Expose
     Long codProduto;
+	@SerializedName("preco")
+	@Expose
     Double preco;
+	@SerializedName("quantidade")
+	@Expose
     Double quantidade;
+	@SerializedName("unidade")
+	@Expose
     Integer unidade;
     String DA;
     Double DAValor;

@@ -19,7 +19,7 @@ public class PedidoDAO {
 	private static Context ctx;
 	private static String[] columns = {"id", "codEmpresa", "codCliente", "codVendedor", "formaPgto", "prazo",
 		"parcela", "dataPedido", "horaPedido", "baixado", "dataPedidoFim", "horaPedidoFim", 
-		"infAdicional", "latitude", "longitude", "fechado"};
+		"infAdicional", "latitude", "longitude", "fechado", "codPedidoMySQL", "dataPedidoEnvio", "horaPedidoEnvio"};
 	
 	public PedidoDAO(){}
 	
@@ -51,6 +51,9 @@ public class PedidoDAO {
 		ctv.put("latitude", dto.getLatitude());
 		ctv.put("longitude", dto.getLongitude());
 		ctv.put("fechado", dto.getFechado());
+		ctv.put("codPedidoMySQL", dto.getCodPedidoMySQL());
+		ctv.put("dataPedidoEnvio", dto.getDataPedidoEnvio());
+		ctv.put("horaPedidoEnvio", dto.getHoraPedidoEnvio());
 
 		return (db.insert(tableName, null, ctv) > 0);
 	}
@@ -88,6 +91,9 @@ public class PedidoDAO {
 		ctv.put("latitude", dto.getLatitude());
 		ctv.put("longitude", dto.getLongitude());
 		ctv.put("fechado", dto.getFechado());
+		ctv.put("codPedidoMySQL", dto.getCodPedidoMySQL());
+		ctv.put("dataPedidoEnvio", dto.getDataPedidoEnvio());
+		ctv.put("horaPedidoEnvio", dto.getHoraPedidoEnvio());
 
 		return (db.update(tableName, ctv, "id=?", new String[]{dto.getId().toString()}) > 0);
 	}
@@ -96,8 +102,18 @@ public class PedidoDAO {
 
 		ContentValues ctv = new ContentValues();
 		ctv.put("baixado", 1);
+		ctv.put("dataPedidoEnvio", venda.util.Util.getDate());
+		ctv.put("horaPedidoEnvio", venda.util.Util.getTime());
 		
 		return (db.update(tableName, ctv, "codEmpresa=? and fechado=1", new String[]{Global.codEmpresa}) > 0);
+	}
+
+	public boolean updatePedidoMySQL(Integer codPedido, Long codPedidoMySQL){
+
+		ContentValues ctv = new ContentValues();
+		ctv.put("codPedidoMySQL", codPedidoMySQL);
+
+		return (db.update(tableName, ctv, "id=?", new String[]{codPedido.toString()}) > 0);
 	}
 
 	public boolean AbrePedidoBaixado(Integer id){
@@ -148,6 +164,9 @@ public class PedidoDAO {
 			dto.setLatitude(rs.getString(rs.getColumnIndex("latitude")));
 			dto.setLongitude(rs.getString(rs.getColumnIndex("longitude")));
 			dto.setFechado(rs.getString(rs.getColumnIndex("fechado")));
+			dto.setCodPedidoMySQL(rs.getInt(rs.getColumnIndex("codPedidoMySQL")));
+			dto.setDataPedidoEnvio(rs.getString(rs.getColumnIndex("dataPedidoEnvio")));
+			dto.setHoraPedidoEnvio(rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 		}
 		
 		return dto;
@@ -178,6 +197,9 @@ public class PedidoDAO {
 			dto.setLatitude(rs.getString(rs.getColumnIndex("latitude")));
 			dto.setLongitude(rs.getString(rs.getColumnIndex("longitude")));
 			dto.setFechado(rs.getString(rs.getColumnIndex("fechado")));
+			dto.setCodPedidoMySQL(rs.getInt(rs.getColumnIndex("codPedidoMySQL")));
+			dto.setDataPedidoEnvio(rs.getString(rs.getColumnIndex("dataPedidoEnvio")));
+			dto.setHoraPedidoEnvio(rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 			lista.add(dto);
 		}
 		
@@ -195,7 +217,8 @@ public class PedidoDAO {
 					rs.getString(rs.getColumnIndex("formaPgto")), rs.getInt(rs.getColumnIndex("prazo")), rs.getInt(rs.getColumnIndex("parcela")),
 					rs.getString(rs.getColumnIndex("dataPedido")), rs.getString(rs.getColumnIndex("horaPedido")), rs.getInt(rs.getColumnIndex("baixado")),
 					rs.getString(rs.getColumnIndex("dataPedidoFim")), rs.getString(rs.getColumnIndex("horaPedidoFim")), 
-					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")));
+					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")),rs.getInt(rs.getColumnIndex("codPedidoMySQL")),
+					rs.getString(rs.getColumnIndex("dataPedidoEnvio")), rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 			lista.add(dto);
 		}
 		
@@ -213,7 +236,8 @@ public class PedidoDAO {
 					rs.getString(rs.getColumnIndex("formaPgto")), rs.getInt(rs.getColumnIndex("prazo")), rs.getInt(rs.getColumnIndex("parcela")),
 					rs.getString(rs.getColumnIndex("dataPedido")), rs.getString(rs.getColumnIndex("horaPedido")), rs.getInt(rs.getColumnIndex("baixado")),
 					rs.getString(rs.getColumnIndex("dataPedidoFim")), rs.getString(rs.getColumnIndex("horaPedidoFim")), 
-					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")));
+					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")),rs.getInt(rs.getColumnIndex("codPedidoMySQL")),
+					rs.getString(rs.getColumnIndex("dataPedidoEnvio")), rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 			lista.add(dto);
 		}
 		
@@ -229,7 +253,7 @@ public class PedidoDAO {
 
 	public List<PedidoDTO> getAllPedAberto(){
 
-		Cursor rs = db.rawQuery("SELECT p.id,p.codEmpresa,p.codCliente,p.codVendedor,p.formaPgto,p.prazo,p.parcela,p.dataPedido,p.horaPedido,p.baixado,p.dataPedidoFim,p.horaPedidoFim, p.infAdicional, p.latitude, p.longitude, p.fechado FROM Pedidos p, Cliente c where p.codCliente = c.codCliente and baixado = 0 and p.codEmpresa = ".concat(Global.codEmpresa), null);
+		Cursor rs = db.rawQuery("SELECT p.id,p.codEmpresa,p.codCliente,p.codVendedor,p.formaPgto,p.prazo,p.parcela,p.dataPedido,p.horaPedido,p.baixado,p.dataPedidoFim,p.horaPedidoFim, p.infAdicional, p.latitude, p.longitude, p.fechado, p.codPedidoMySQL, p.dataPedidoEnvio, p.horaPedidoEnvio FROM Pedidos p, Cliente c where p.codCliente = c.codCliente and baixado = 0 and p.codEmpresa = ".concat(Global.codEmpresa), null);
 		
 		List<PedidoDTO> lista = new ArrayList<PedidoDTO>();
 		
@@ -238,7 +262,8 @@ public class PedidoDAO {
 					rs.getString(rs.getColumnIndex("formaPgto")), rs.getInt(rs.getColumnIndex("prazo")), rs.getInt(rs.getColumnIndex("parcela")),
 					rs.getString(rs.getColumnIndex("dataPedido")), rs.getString(rs.getColumnIndex("horaPedido")), rs.getInt(rs.getColumnIndex("baixado")),
 					rs.getString(rs.getColumnIndex("dataPedidoFim")), rs.getString(rs.getColumnIndex("horaPedidoFim")), 
-					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")));
+					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")),rs.getInt(rs.getColumnIndex("codPedidoMySQL")),
+					rs.getString(rs.getColumnIndex("dataPedidoEnvio")), rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 			lista.add(dto);
 		}
 		
@@ -256,7 +281,8 @@ public class PedidoDAO {
 					rs.getString(rs.getColumnIndex("formaPgto")), rs.getInt(rs.getColumnIndex("prazo")), rs.getInt(rs.getColumnIndex("parcela")),
 					rs.getString(rs.getColumnIndex("dataPedido")), rs.getString(rs.getColumnIndex("horaPedido")), rs.getInt(rs.getColumnIndex("baixado")),
 					rs.getString(rs.getColumnIndex("dataPedidoFim")), rs.getString(rs.getColumnIndex("horaPedidoFim")), 
-					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")));
+					rs.getString(rs.getColumnIndex("infAdicional")),rs.getString(rs.getColumnIndex("latitude")),rs.getString(rs.getColumnIndex("longitude")),rs.getString(rs.getColumnIndex("fechado")),rs.getInt(rs.getColumnIndex("codPedidoMySQL")),
+					rs.getString(rs.getColumnIndex("dataPedidoEnvio")), rs.getString(rs.getColumnIndex("horaPedidoEnvio")));
 			lista.add(dto);
 		}
 		

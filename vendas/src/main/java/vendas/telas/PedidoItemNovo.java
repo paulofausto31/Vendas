@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.LayoutInflater;
@@ -48,6 +49,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import TaskNetwork.ApiService;
 import persistencia.brl.CaminhoFTPBRL;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ConfiguracaoBRL;
@@ -62,6 +64,8 @@ import persistencia.dto.ConfiguracaoDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
 import persistencia.dto.ProdutoDTO;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import venda.util.Global;
 import venda.util.Util;
 
@@ -136,6 +140,7 @@ public class PedidoItemNovo extends Fragment {
 		btnIncluirProduto = view.findViewById(R.id.btnIncluirProduto);
 		registerForContextMenu(txtCodProduto);
 
+
 		txtDA.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -206,6 +211,15 @@ public class PedidoItemNovo extends Fragment {
 		}
 		else
 			itemNovo = true;
+
+		PedidoDTO pedDTO = Global.pedidoGlobalDTO;
+		if (pedDTO.getBaixado() == 1){
+			btnPesquisarProduto.setEnabled(false);
+			btnIncluirProduto.setEnabled(false);
+		}else{
+			btnPesquisarProduto.setEnabled(true);
+			btnIncluirProduto.setEnabled(true);
+		}
 
 		if(Global.caminhoFTPDTO.getMetodoEntrada() == "N")
 			txtCodProduto.setInputType(InputType.TYPE_CLASS_NUMBER);
@@ -662,7 +676,8 @@ public class PedidoItemNovo extends Fragment {
 			} 	    	
 	    }
 
-	    private void btnIncluirProduto_click(){
+
+	private void btnIncluirProduto_click(){
 		if (ValidaInclusao()){
 			if (itemNovo && itpBRL.produtoExistente(venda.util.Global.pedidoGlobalDTO.getId(), Integer.parseInt(txtCodProduto.getText().toString()))){
 				 AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());

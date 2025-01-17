@@ -702,7 +702,7 @@ public class Comunicacao extends AppCompatActivity {
 					   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemPedido.getHoraPedidoFim(), 5));
 				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemPedido.getLatitude(), 20));
 				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemPedido.getLongitude(), 20));
-				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(itemPedido.getInfAdicional(), 255));
+				   lstrlinha = lstrlinha.concat(Util.FormataSpaces(Util.removeQuebraLinha(itemPedido.getInfAdicional()), 255));
 				   lstrlinha = lstrlinha.concat(Util.FormataZeros(Global.codEmpresa, 4));
 				   lstrlinha = lstrlinha.concat("\r\n");
 				   //transforma o texto digitado em array de bytes

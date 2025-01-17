@@ -132,6 +132,10 @@ public class ClienteBRL {
         return clienteDAO.getPorRotaOrdenado(codRota, campoOrdenacao);
     }
 
+    public List<ClienteDTO> getClientesPedidos(String campoOrdenacao){
+        return clienteDAO.getClientesPedidos(campoOrdenacao);
+    }
+
     public List<ClienteDTO> getTodosOrdenado(String campoOrdenacao){
         return clienteDAO.getTodosOrdenado(campoOrdenacao);
     }

@@ -9,7 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -34,18 +36,35 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
+import TaskNetwork.ApiService;
 import persistencia.adapters.RVHistoricoPedidoAdapter;
 import persistencia.brl.ClienteBRL;
+import persistencia.brl.ClienteNaoPositivadoBRL;
 import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.dto.ClienteDTO;
+import persistencia.dto.ClienteNaoPositivadoDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import venda.util.DateSerializer;
 import venda.util.Global;
 import venda.util.PDFGenerator;
 import venda.util.Util;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 @SuppressLint("NewApi")
 public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapter.OnItemLongClickListener {
@@ -57,6 +76,7 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 	ItenPedidoBRL itpBRL;
 	PedidoBRL pedBRL;
 	List<PedidoDTO> lista;
+	ApiService apiService;
 
 	@Nullable
 	@Override
@@ -67,6 +87,13 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 
 		pedBRL = new PedidoBRL(getContext());
 		itpBRL = new ItenPedidoBRL(getContext());
+
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("http://192.168.100.27:8080/") // 216.137.189.176
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+
+		apiService = retrofit.create(ApiService.class);
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && false == Environment.isExternalStorageManager()) {
 			Uri uri = Uri.parse("package:vendas.telas");
@@ -85,15 +112,155 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 		}
 	}
 
+	public String convertStringToDate(String dateString) {
+		// Formato atual da data na string
+		String currentPattern = "dd/MM/yyyy";
+
+		// Novo formato desejado para a data na string
+		String newPattern = "yyyy-MM-dd";
+		try {
+			// Primeiro, convertemos a string para o formato Date atual
+			SimpleDateFormat currentFormat = new SimpleDateFormat(currentPattern);
+			Date date = currentFormat.parse(dateString);
+
+			// Em seguida, formatamos a data para o novo formato desejado
+			SimpleDateFormat newFormat = new SimpleDateFormat(newPattern);
+			String formattedDate = newFormat.format(date);
+
+			// Exibindo o resultado
+			return formattedDate;
+		} catch (ParseException e) {
+			// Tratamento de exceção se a string não puder ser analisada no formato atual
+			e.printStackTrace();
+			return "";
+		}
+	}
+
+	private void EnviaClienteNaoPositivado(List<ClienteNaoPositivadoDTO> lstClienteNaoPositivado) {
+		// Configurar Gson para considerar apenas os campos anotados com @Expose
+		Gson gson = new GsonBuilder()
+				.excludeFieldsWithoutExposeAnnotation()
+				.registerTypeAdapter(Date.class, new DateSerializer())
+				.create();
+
+		for (ClienteNaoPositivadoDTO cnpDTO : lstClienteNaoPositivado) {
+			ClienteNaoPositivadoDTO newCnpDTO = cnpDTO;
+			String newDataIni = convertStringToDate(cnpDTO.getData());
+			newCnpDTO.setData(newDataIni);
+			newCnpDTO.setDataFim(newDataIni);
+			newCnpDTO.setHora(cnpDTO.getHora().substring(0,5));
+			newCnpDTO.setHoraFim(cnpDTO.getHoraFim().substring(0,5));
+			newCnpDTO.setCodEmpresa(Global.codEmpresa.substring(1,14));
+
+			// Converter o objeto pedDTO para JSON e registrar no log
+			String json = gson.toJson(newCnpDTO);
+			Log.d("JSON", "JSON gerado: " + json);
+
+			Call<Void> call = apiService.enviarClienteNaoPositivado(newCnpDTO);
+			call.enqueue(new Callback<Void>() {
+				@Override
+				public void onResponse(Call<Void> call, Response<Void> response) {
+					if (response.isSuccessful()) {
+						// Pedido enviado com sucesso
+						Toast.makeText(getContext(), "Cliente não positivado enviado com sucesso", Toast.LENGTH_SHORT).show();
+						Log.d("API", "Cliente não positivado enviado com sucesso");
+					} else {
+						// Ocorreu um erro na resposta
+						String errorMessage = "";
+						try {
+							errorMessage = response.errorBody().string();
+						} catch (IOException e) {
+							e.printStackTrace();
+							errorMessage = "Erro ao ler a mensagem de erro.";
+						}
+						Toast.makeText(getContext(), "Falha ao enviar Cliente não positivado: " + errorMessage, Toast.LENGTH_SHORT).show();
+						Log.d("API", "Erro: " + response.code() + " - " + errorMessage);
+					}
+				}
+
+				@Override
+				public void onFailure(Call<Void> call, Throwable t) {
+					// Ocorreu um erro na comunicação
+					Log.e("API", "Erro ao enviar Cliente não positivado", t);
+				}
+			});
+		}
+	}
+
+	private void EnviaPedido(PedidoDTO pedDTO, List<ItenPedidoDTO> lstItemPedido) {
+		// Configurar Gson para considerar apenas os campos anotados com @Expose
+		Gson gson = new GsonBuilder()
+				.excludeFieldsWithoutExposeAnnotation()
+				.registerTypeAdapter(Date.class, new DateSerializer())
+				.create();
+
+		PedidoDTO newPedDTO = pedDTO;
+		String newDataIni = convertStringToDate(pedDTO.getDataPedido());
+		newPedDTO.setDataPedido(newDataIni);
+		newPedDTO.setDataPedidoFim(newDataIni);
+		newPedDTO.setHoraPedido(pedDTO.getHoraPedido().substring(0,5));
+		newPedDTO.setHoraPedidoFim(pedDTO.getHoraPedidoFim().substring(0,5));
+		newPedDTO.setCodEmpresa(pedDTO.getCodEmpresa().substring(1,14));
+		newPedDTO.setItemPedido(lstItemPedido);
+		// Converter o objeto pedDTO para JSON e registrar no log
+		String json = gson.toJson(newPedDTO);
+		Log.d("JSON", "JSON gerado: " + json);
+
+		Call<Long> call = apiService.enviarPedido(newPedDTO);
+		call.enqueue(new Callback<Long>() {
+			@Override
+			public void onResponse(Call<Long> call, Response<Long> response) {
+				if (response.isSuccessful()) {
+					// Pedido enviado com sucesso
+					Long idPedidoMySQL = response.body();
+					pedBRL.updatePedidoMySQL(pedDTO.getId(), idPedidoMySQL);
+					Toast.makeText(getContext(), "Pedido enviado com sucesso", Toast.LENGTH_SHORT).show();
+					Log.d("API", "Pedido enviado com sucesso");
+				} else {
+					// Ocorreu um erro na resposta
+					String errorMessage = "";
+					try {
+						errorMessage = response.errorBody().string();
+					} catch (IOException e) {
+						e.printStackTrace();
+						errorMessage = "Erro ao ler a mensagem de erro.";
+					}
+					Toast.makeText(getContext(), "Falha ao enviar pedido: " + errorMessage, Toast.LENGTH_SHORT).show();
+					Log.d("API", "Erro: " + response.code() + " - " + errorMessage);
+				}
+			}
+
+			@Override
+			public void onFailure(Call<Long> call, Throwable t) {
+				// Ocorreu um erro na comunicação
+				Log.e("API", "Erro ao enviar pedido", t);
+			}
+		});
+	}
+
 	@Override
 	public void onItemLongClick(View view, int position) {
 		PedidoDTO pedDTO = lista.get(position);
 		PopupMenu popup = new PopupMenu(getContext(), view);
 		popup.getMenuInflater().inflate(R.menu.popup_historico, popup.getMenu());
+		MenuItem enviarPedido = popup.getMenu().findItem(R.id.action_historico_enviar_pedido);
+		enviarPedido.setVisible(false);
 		popup.setOnMenuItemClickListener(item -> {
 			if (item.getItemId() == R.id.action_historico_editar) {
 				venda.util.Global.pedidoGlobalDTO = pedDTO;
 				RetornaTabPedidoBasico();
+				return true;
+			}
+			if (item.getItemId() == R.id.action_historico_enviar_pedido) {
+				if (pedDTO.getBaixado() == 0) {
+					List<ItenPedidoDTO> lstItemPedido = itpBRL.getByCodPedido(pedDTO.getId());
+					EnviaPedido(pedDTO, lstItemPedido);
+					ClienteNaoPositivadoBRL cnpBRL = new ClienteNaoPositivadoBRL(getContext());
+					List<ClienteNaoPositivadoDTO> lstClienteNaoPositivado = cnpBRL.getAllAberto();
+					EnviaClienteNaoPositivado(lstClienteNaoPositivado);
+				}
+				else
+					Toast.makeText(getContext(), "Este pedido ja foi enviado !!", Toast.LENGTH_SHORT).show();
 				return true;
 			}
 			if (item.getItemId() == R.id.action_historico_pdf) {

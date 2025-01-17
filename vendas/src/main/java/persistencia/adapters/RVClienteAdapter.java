@@ -60,6 +60,7 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
         holder.txtRVNomeCliente.setText(dto.getNome());
         holder.txtRVCodigoCliente.setText(dto.getCodCliente().toString() + "  ");
         holder.txtRVEmpresa.setText(dto.getRazaoSocial().substring(0, 20));
+        holder.txtRVSeqVisita.setText("Seq. Visita: " + dto.getSeqVisita().toString());
 
         int retorno = 0;
         if (pedBRL.getPedidoAbertoCliente(dto.getCodCliente()) > 0)
@@ -85,6 +86,7 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
         public TextView txtRVEmpresa;
         public TextView txtRVPedido;
         public TextView txtRVNomeCliente;
+        public TextView txtRVSeqVisita;
 
         public ViewHolder(View view) {
             super(view);
@@ -92,6 +94,7 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
             txtRVEmpresa = view.findViewById(R.id.lblRVEmpresa);
             txtRVPedido = view.findViewById(R.id.txtRVPedido);
             txtRVNomeCliente = view.findViewById(R.id.txtRVNomeCliente);
+            txtRVSeqVisita = view.findViewById(R.id.txtRVSeqVisita);
             view.setOnLongClickListener((View.OnLongClickListener) this);
 
 

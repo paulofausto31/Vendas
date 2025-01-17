@@ -86,7 +86,20 @@ public class PedidoBRL {
             venda.util.mensagem.trace(ctx, e.toString());
     		return false;
         }
-    } 
+    }
+
+    public boolean updatePedidoMySQL(Integer codPedido, Long codPedidoMySQL)
+    {
+        try
+        {
+            return pedidoDAO.updatePedidoMySQL(codPedido, codPedidoMySQL);
+        }
+        catch (Exception e)
+        {
+            venda.util.mensagem.trace(ctx, e.toString());
+            return false;
+        }
+    }
 
     public boolean delete(PedidoDTO dto){
     	return pedidoDAO.delete(dto);

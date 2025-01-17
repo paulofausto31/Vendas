@@ -17,6 +17,11 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/menu_pedidos"
+        android:title="Com Pedidos"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/menu_mostrar_todos"
         android:title="Mostrar Todos"
         android:orderInCategory="100"

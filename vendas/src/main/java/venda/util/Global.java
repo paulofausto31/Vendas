@@ -1,14 +1,17 @@
 package venda.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import persistencia.dto.CaminhoFTPDTO;
+import persistencia.dto.ClienteDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
 
 public class Global {
 	public static PedidoDTO pedidoGlobalDTO;
 	public static ItenPedidoDTO itemPedidoGlobalDTO;
+	public static List<ClienteDTO> lstClientes;
 	public static String pedidoWS;
 	public static CaminhoFTPDTO caminhoFTPDTO;
 	public static String codEmpresa;

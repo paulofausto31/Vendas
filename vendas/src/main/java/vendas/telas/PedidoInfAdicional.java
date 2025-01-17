@@ -52,11 +52,12 @@ public class PedidoInfAdicional extends Fragment {
 		// TODO Auto-generated method stub
 		super.onResume();
 		PedidoDTO pedDTO = venda.util.Global.pedidoGlobalDTO;
-		if (pedDTO.getId() != null){
-			txtInfAdicional.setText(pedDTO.getInfAdicional());
+		if (pedDTO.getInfAdicional() == null){
+			txtInfAdicional.setText("");
 		}
 		else
-		    txtInfAdicional.setText("");
+			txtInfAdicional.setText(pedDTO.getInfAdicional());
+
 
 	}
 

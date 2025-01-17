@@ -1,16 +1,37 @@
 package persistencia.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ClienteNaoPositivadoDTO {
 
 	Integer id;
+	@SerializedName("codempresa")
+	@Expose
 	String codEmpresa;
+	@SerializedName("codcliente")
+	@Expose
     Integer codCliente;
+	@SerializedName("codjustificativa")
+	@Expose
     Integer codJustificativa;
+	@SerializedName("obs")
+	@Expose
     String obs;
+	@SerializedName("dataini")
+	@Expose
     String data;
+	@SerializedName("horaini")
+	@Expose
     String hora;
+	@SerializedName("datafim")
+	@Expose
     String dataFim;
+	@SerializedName("horafim")
+	@Expose
     String horaFim;
+	@SerializedName("baixado")
+	@Expose
     Integer baixado;
     
 	public ClienteNaoPositivadoDTO(){

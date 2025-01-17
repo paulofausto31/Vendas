@@ -1,23 +1,55 @@
 package persistencia.dto;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class PedidoDTO {
 
     Integer id;
+	@SerializedName("empresa")
+	@Expose
 	String codEmpresa;
+	@SerializedName("CodCliente")
+	@Expose
     Integer codCliente;
+	@SerializedName("CodVendedor")
+	@Expose
     Integer codVendedor;
+	@SerializedName("FormaPgto")
+	@Expose
     String formaPgto;
+	@SerializedName("Prazo")
+	@Expose
     Integer prazo;
+	@SerializedName("Parcela")
+	@Expose
     Integer parcela;
+	@SerializedName("DataIni")
+	@Expose
     String dataPedido;
+	@SerializedName("HoraIni")
+	@Expose
     String horaPedido;
     Integer baixado;
+	@SerializedName("DataFim")
+	@Expose
     String dataPedidoFim;
+	@SerializedName("HoraFim")
+	@Expose
     String horaPedidoFim;
     String infAdicional;
     String latitude;
     String longitude;
     String fechado;
+	@SerializedName("ItemPedido")
+	@Expose
+	List<ItenPedidoDTO> itemPedido;
+	Integer codPedidoMySQL;
+	String dataPedidoEnvio;
+	String horaPedidoEnvio;
+
     
 	public PedidoDTO(){
 		
@@ -26,7 +58,7 @@ public class PedidoDTO {
 	public PedidoDTO(Integer id, String codEmpresa, Integer codCliente, Integer codVendedor, String formaPgto
 		, Integer prazo, Integer parcela, String dataPedido, String horaPedido
 		, Integer baixado, String dataPedidoFim, String horaPedidoFim, String infAdicional,
-		String latitude, String longitude, String fechado){
+		String latitude, String longitude, String fechado, Integer codPedidoMySQL, String dataPedidoEnvio, String horaPedidoEnvio){
 		this.id = id;
 		this.codEmpresa = codEmpresa;
 		this.codCliente = codCliente;
@@ -43,6 +75,9 @@ public class PedidoDTO {
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.fechado = fechado;
+		this.codPedidoMySQL = codPedidoMySQL;
+		this.dataPedidoEnvio = dataPedidoEnvio;
+		this.horaPedidoEnvio = horaPedidoEnvio;
 	}
     
 	
@@ -145,5 +180,29 @@ public class PedidoDTO {
 	}
 	public void setFechado(String fechado) {
 		this.fechado = fechado;
+	}
+	public List<ItenPedidoDTO> getItemPedido() {
+		return itemPedido;
+	}
+	public void setItemPedido(List<ItenPedidoDTO> itemPedido) {
+		this.itemPedido = itemPedido;
+	}
+	public Integer getCodPedidoMySQL() {
+		return codPedidoMySQL;
+	}
+	public void setCodPedidoMySQL(Integer codPedidoMySQL) {
+		this.codPedidoMySQL = codPedidoMySQL;
+	}
+	public String getDataPedidoEnvio() {
+		return dataPedidoEnvio;
+	}
+	public void setDataPedidoEnvio(String dataPedidoEnvio) {
+		this.dataPedidoEnvio = dataPedidoEnvio;
+	}
+	public String getHoraPedidoEnvio() {
+		return horaPedidoEnvio;
+	}
+	public void setHoraPedidoEnvio(String horaPedidoEnvio) {
+		this.horaPedidoEnvio = horaPedidoEnvio;
 	}
 }

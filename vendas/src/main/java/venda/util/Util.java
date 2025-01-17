@@ -313,11 +313,21 @@ public class Util {
 	}
 
 	public static String FormataSpaces(String value, int tamanho){
+		if (value == null)
+			value = "";
 		String retorno = value;
 		for (int i = tamanho; i > value.length(); i--) {
 			retorno = retorno.concat(" ");
 		}
 		return retorno;
+	}
+
+	public static String removeQuebraLinha(String input) {
+		if (input == null) {
+			return null;
+		}
+		// Substitui as quebras de linha (\n e \r) por uma string vazia.
+		return input.replaceAll("[\\n\\r]", "");
 	}
 
 	public static String FormataSpaces(String value, int esquerda, int direita){
