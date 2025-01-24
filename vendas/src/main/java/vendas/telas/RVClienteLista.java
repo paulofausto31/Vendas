@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.adapters.RVClienteAdapter;
@@ -29,6 +30,7 @@ import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
 import persistencia.brl.RotaBRL;
 import persistencia.dto.ClienteDTO;
+import persistencia.dto.RotaDTO;
 import venda.util.Global;
 
 public class RVClienteLista extends AppCompatActivity {
@@ -38,6 +40,32 @@ public class RVClienteLista extends AppCompatActivity {
     ClienteBRL brl;
     RotaBRL rotBRL;
     ContaReceberBRL crbrl;
+
+    public class Rota {
+        private Integer codigo;
+        private String descricao;
+
+        public Rota(){}
+
+        public Rota(Integer codigo, String descricao) {
+            this.codigo = codigo;
+            this.descricao = descricao;
+        }
+
+        public Integer getCodigo() {
+            return codigo;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        @Override
+        public String toString() {
+            // Retorna a descrição para exibição no dropdown
+            return descricao;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -269,9 +297,16 @@ public class RVClienteLista extends AppCompatActivity {
         Spinner spinner = dialogView.findViewById(R.id.cbxRota);
 
         rotBRL = new RotaBRL(getBaseContext());
-        List<String> rotas = rotBRL.getComboRota();
+        List<RotaDTO> rotas = rotBRL.getComboRota();
 
-        ArrayAdapter<String> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rotas);
+        List<Rota> lstRota = new ArrayList<Rota>();
+        lstRota.add(new Rota(-1, "Selecione uma rota ..."));
+        for (RotaDTO rotaDTO : rotas) {
+            Rota rotaAdd = new Rota(rotaDTO.getCodRota(), rotaDTO.getDescricao());
+            lstRota.add(rotaAdd);
+        }
+
+        ArrayAdapter<Rota> adapterRotas = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, lstRota);
         adapterRotas.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapterRotas);
 
@@ -279,11 +314,13 @@ public class RVClienteLista extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 // Handle spinner selection
-                String rota = parent.getItemAtPosition(position).toString();
+                Rota rotaSelecionada = (Rota) parent.getItemAtPosition(position);
+                Integer codigoSelecionado = rotaSelecionada.getCodigo();
+                //String rota = parent.getItemAtPosition(position).toString();
                 // Do something with the selected item
                 if (position > 0){
-                    Global.codRota = rota;
-                    List<ClienteDTO> lstClientes = brl.getPorRotaOrdenado(rota, "nome");
+                    Global.codRota = rotaSelecionada.getCodigo().toString();
+                    List<ClienteDTO> lstClientes = brl.getPorRotaOrdenado(codigoSelecionado.toString(), "nome");
                     Global.lstClientes = lstClientes;
                     adapter = new RVClienteAdapter(getBaseContext(), lstClientes, new RVClienteAdapter.OnItemClickListener() {
                         @Override

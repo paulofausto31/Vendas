@@ -1,20 +1,23 @@
 package persistencia.dto;
 
-public class RotaDTO {
+public class RotaClienteDTO {
+
     Integer id;
     String codEmpresa;
+    Integer codCliente;
     Integer codRota;
-    String descricao;
+    Integer seqVisita;
 
-    public RotaDTO(){
+    public RotaClienteDTO(){
 
     }
 
-    public RotaDTO(int id, String codEmpresa, int codRota, String descricao){
+    public RotaClienteDTO(int id, String codEmpresa, int codCliente, int codRota, int seqVisita){
         this.id = id;
         this.codEmpresa = codEmpresa;
+        this.codCliente = codCliente;
         this.codRota = codRota;
-        this.descricao = descricao;
+        this.seqVisita = seqVisita;
     }
 
     public Integer getId() {
@@ -29,16 +32,22 @@ public class RotaDTO {
     public void setCodEmpresa(String codEmpresa) {
         this.codEmpresa = codEmpresa;
     }
+    public Integer getCodCliente() {
+        return codCliente;
+    }
+    public void setCodCliente(Integer codCliente) {
+        this.codCliente = codCliente;
+    }
     public Integer getCodRota() {
         return codRota;
     }
     public void setCodRota(Integer codRota) {
         this.codRota = codRota;
     }
-    public String getDescricao() {
-        return descricao;
+    public Integer getSeqVisita() {
+        return seqVisita;
     }
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setSeqVisita(Integer seqVisita) {
+        this.seqVisita = seqVisita;
     }
 }

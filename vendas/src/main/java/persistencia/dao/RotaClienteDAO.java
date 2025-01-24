@@ -9,20 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import persistencia.db.db;
-import persistencia.dto.ClienteDTO;
 import persistencia.dto.RotaClienteDTO;
-import persistencia.dto.RotaDTO;
 import venda.util.Global;
 
-public class RotaDAO {
-    private static String tableName = "Rota";
+public class RotaClienteDAO {
+
+    private static String tableName = "RotaCliente";
     private SQLiteDatabase db;
     private static Context ctx;
     private static String[] columns = {"id", "codEmpresa", "codRota", "descricao"};
 
-    public RotaDAO(){}
+    public RotaClienteDAO(){}
 
-    public RotaDAO(Context ctx){
+    public RotaClienteDAO(Context ctx){
         this.ctx = ctx;
         this.db = new db(ctx).getWritableDatabase();
     }
@@ -31,18 +30,18 @@ public class RotaDAO {
         db.close();
     }
 
-    public boolean insert(RotaDTO dto){
+    public boolean insert(RotaClienteDTO dto){
 
         ContentValues ctv = new ContentValues();
-        ctv.put("id", dto.getId());
         ctv.put("codEmpresa", dto.getCodEmpresa());
         ctv.put("codRota", dto.getCodRota());
-        ctv.put("descricao", dto.getDescricao());
+        ctv.put("codCliente", dto.getCodCliente());
+        ctv.put("seqVisita", dto.getSeqVisita());
 
         return (db.insert(tableName, null, ctv) > 0);
     }
 
-    public boolean delete(RotaDTO dto){
+    public boolean delete(RotaClienteDTO dto){
 
         return (db.delete(tableName, "id=?", new String[]{dto.getId().toString()}) > 0);
     }
@@ -57,31 +56,26 @@ public class RotaDAO {
         return (db.delete(tableName,null , null) > 0);
     }
 
-    public boolean update(RotaDTO dto){
+    public boolean update(RotaClienteDTO dto){
 
         ContentValues ctv = new ContentValues();
         ctv.put("codEmpresa", dto.getCodEmpresa());
         ctv.put("codRota", dto.getCodRota());
-        ctv.put("descricao", dto.getDescricao());
+        ctv.put("codCliente", dto.getCodCliente());
+        ctv.put("seqVisita", dto.getSeqVisita());
 
         return (db.update(tableName, ctv, "id=?", new String[]{dto.getId().toString()}) > 0);
     }
 
-    public List<RotaDTO> getComboRota(){
+    public List<String> getComboRotaCliente(){
 
-        String sql = "SELECT * FROM rota WHERE codEmpresa = ".concat(Global.codEmpresa);
+        String sql = "SELECT codRota FROM rota WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" group by codRota");
         Cursor rs = db.rawQuery(sql, null);
 
-        RotaDTO dto = null;
-        List<RotaDTO> lista = new ArrayList<RotaDTO>();
-        //lista.add("Selecione ...");
+        List<String> lista = new ArrayList<String>();
+        lista.add("Selecione ...");
         while(rs.moveToNext()){
-            dto = new RotaDTO();
-            dto.setId(rs.getInt(rs.getColumnIndex("id")));
-            dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
-            dto.setCodRota(rs.getInt(rs.getColumnIndex("codRota")));
-            dto.setDescricao(rs.getString(rs.getColumnIndex("Descricao")));
-            lista.add(dto);
+            lista.add(rs.getString(rs.getColumnIndex("codRota")).toString());
         }
 
         return lista;

@@ -4,44 +4,43 @@ import android.content.Context;
 
 import java.util.List;
 
-import persistencia.dao.FormaPgtoDAO;
-import persistencia.dao.RotaDAO;
-import persistencia.dto.FormaPgtoDTO;
-import persistencia.dto.RotaDTO;
+import persistencia.dao.RotaClienteDAO;
+import persistencia.dto.RotaClienteDTO;
 import venda.util.Global;
 
-public class RotaBRL {
-    RotaDAO rotaDAO;
+public class RotaClienteBRL {
+
+    RotaClienteDAO rotaClienteDAO;
     Context ctx;
 
-    public RotaBRL(){}
+    public RotaClienteBRL(){}
 
-    public RotaBRL(Context ctx)
+    public RotaClienteBRL(Context ctx)
     {
         this.ctx = ctx;
-        if (rotaDAO == null)
-            rotaDAO = new RotaDAO(ctx);
+        if (rotaClienteDAO == null)
+            rotaClienteDAO = new RotaClienteDAO(ctx);
     }
 
-    public void CloseConection(){
-        rotaDAO.CloseConection();
+    public void CloseConection(){ rotaClienteDAO.CloseConection();
     }
 
-    public RotaDTO InstanciaRota(String linha)
+    public RotaClienteDTO InstanciaRotaCliente(String linha)
     {
-        RotaDTO dto = new RotaDTO();
+        RotaClienteDTO dto = new RotaClienteDTO();
         //dto.setId(1);
         dto.setCodEmpresa(Global.codEmpresa);
         dto.setCodRota(Integer.parseInt(linha.substring(0, 4).trim()));
-        dto.setDescricao(linha.substring(4, 50));
+        dto.setCodCliente(Integer.parseInt(linha.substring(4, 10)));
+        dto.setSeqVisita(Integer.parseInt(linha.substring(10, 14)));
         return dto;
     }
 
-    public boolean InsereRota(RotaDTO rotaDTO)
+    public boolean InsereRotaCliente(RotaClienteDTO rotaClienteDTO)
     {
         try
         {
-            return rotaDAO.insert(rotaDTO);
+            return rotaClienteDAO.insert(rotaClienteDTO);
         }
         catch (Exception e)
         {
@@ -54,7 +53,7 @@ public class RotaBRL {
     {
         try
         {
-            return rotaDAO.deleteAll();
+            return rotaClienteDAO.deleteAll();
         }
         catch (Exception e)
         {
@@ -67,7 +66,7 @@ public class RotaBRL {
     {
         try
         {
-            return rotaDAO.deleteByEmpresa();
+            return rotaClienteDAO.deleteByEmpresa();
         }
         catch (Exception e)
         {
@@ -76,7 +75,7 @@ public class RotaBRL {
         }
     }
 
-    public List<RotaDTO> getComboRota(){
-        return rotaDAO.getComboRota();
+    public List<String> getComboRotaCliente(){
+        return rotaClienteDAO.getComboRotaCliente();
     }
 }

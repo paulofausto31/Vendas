@@ -66,6 +66,7 @@ import persistencia.brl.PedidoBRL;
 import persistencia.brl.PrecoBRL;
 import persistencia.brl.ProdutoBRL;
 import persistencia.brl.RotaBRL;
+import persistencia.brl.RotaClienteBRL;
 import persistencia.brl.VendedorBRL;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.ClienteNaoPositivadoDTO;
@@ -80,6 +81,7 @@ import persistencia.dto.JustificativaPositivacaoDTO;
 import persistencia.dto.PedidoDTO;
 import persistencia.dto.PrecoDTO;
 import persistencia.dto.ProdutoDTO;
+import persistencia.dto.RotaClienteDTO;
 import persistencia.dto.RotaDTO;
 import persistencia.dto.VendedorDTO;
 import venda.util.Global;
@@ -102,7 +104,7 @@ public class Comunicacao extends AppCompatActivity {
 	private Boolean processando = false;
 	private String pastaDest;
 	private String[] arquivosExportacao = new String[] { "TABPED.TXT", "TABPEI.TXT", "TABCNP.TXT" };
-	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABVEN.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT",
+	private String[] arquivosImportacao = new String[] { "TABROT.TXT", "TABEMP.TXT", "TABVEN.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT",
 			"TABPRE.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "TABROTA.TXT", "Final" };
 //	private String[] arquivosImportacao = new String[] { "TABEMP.TXT", "TABMOT.TXT", "TABPRO.TXT", "TABCLI.TXT", "TABPRE.TXT",
 //			"TABVEN.TXT", "TABFOR.TXT", "TABLIN.TXT", "TABCFG.TXT", "TABPGT.TXT", "TABREC.TXT", "Final" };
@@ -383,6 +385,8 @@ public class Comunicacao extends AppCompatActivity {
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 			else if (arquivo.equals("TABROTA.TXT"))
 				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
+			else if (arquivo.equals("TABROT.TXT"))
+				Toast.makeText(getBaseContext(), "Importando ".concat(arquivo), Toast.LENGTH_SHORT).show();
 		}
 		else{
 			ftpBRL.RecebeArquivoFTP(arquivo, ftp, pastaDest);
@@ -410,6 +414,8 @@ public class Comunicacao extends AppCompatActivity {
 				else if (arquivo.equals("TABREC.TXT"))
 					ImportaContaReceber();
 				else if (arquivo.equals("TABROTA.TXT"))
+					ImportaRotaCliente();
+				else if (arquivo.equals("TABROT.TXT"))
 					ImportaRota();
 				else if (arquivo.equals("TABCLI.TXT"))
 					ImportaCliente();
@@ -832,6 +838,37 @@ public class Comunicacao extends AppCompatActivity {
 		}
 	}
 
+	private void ImportaRotaCliente() {
+		String lstrNomeArq;
+		File arq;
+		String lstrlinha;
+		RotaClienteBRL brl = new RotaClienteBRL(getApplicationContext());
+		brl.DeleteByEmpresa();
+		try
+		{
+
+			lstrNomeArq = "TABROTA.txt";
+
+			arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
+			BufferedReader br = new BufferedReader(new FileReader(arq));
+
+			while ((lstrlinha = br.readLine()) != null) {
+				if (lstrlinha.length() > 0) {
+					RotaClienteDTO dto = brl.InstanciaRotaCliente(lstrlinha);
+					if (!brl.InsereRotaCliente(dto)) {
+						new Exception("Falhou importacao de Rotas Cliente");
+					}
+				}
+			}
+			arq.delete();
+
+		} catch (Exception e) {
+			venda.util.mensagem.trace(getApplicationContext(), "Erro : " + e.getMessage());
+		} finally{
+			brl.CloseConection();
+		}
+	}
+
 	private void ImportaRota() {
 		String lstrNomeArq;
 		File arq;
@@ -841,7 +878,7 @@ public class Comunicacao extends AppCompatActivity {
 		try
 		{
 
-			lstrNomeArq = "TABROTA.txt";
+			lstrNomeArq = "TABROT.txt";
 
 			arq = new File(Environment.getExternalStorageDirectory().toString().concat(pastaDest), lstrNomeArq);
 			BufferedReader br = new BufferedReader(new FileReader(arq));
@@ -862,7 +899,6 @@ public class Comunicacao extends AppCompatActivity {
 			brl.CloseConection();
 		}
 	}
-
 
 	private void ImportaJustificativaPositivacao() {
 		String lstrNomeArq;

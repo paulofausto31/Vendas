@@ -88,6 +88,8 @@ public class FTP {
             ftp.setFileType(FTPClient.BINARY_FILE_TYPE);
 			FileOutputStream arqEnviar = new FileOutputStream(file, true);
             status = ftp.retrieveFile(arquivo, arqEnviar);
+			if (!status && file.exists())
+				file.delete();
             arqEnviar.close();
 			return status;
 		} catch (Exception e) {

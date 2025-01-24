@@ -166,7 +166,7 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.nome like ?");
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.nome like ?");
 		else
 			sql = "SELECT * FROM cliente where nome like ? and codEmpresa = ".concat(Global.codEmpresa);
 		String searchTerm = "%".concat(nome).concat("%");
@@ -242,7 +242,7 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.cpfCnpj = ").concat(cpf_cnpj);
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and c.cpfCnpj = ").concat(cpf_cnpj);
 		else
 			sql = "SELECT * FROM cliente where cpfCnpj = ".concat(cpf_cnpj) + " and codEmpresa = ".concat(Global.codEmpresa);
 
@@ -282,7 +282,7 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and r.codCliente = ").concat(codigo);
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" and r.codCliente = ").concat(codigo);
 		else
 			sql = "SELECT * FROM cliente where codCliente = ".concat(codigo) + " and codEmpresa = ".concat(Global.codEmpresa);
 
@@ -348,7 +348,7 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
 		else
 			sql = "SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
 
@@ -373,7 +373,7 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
 		else
 			sql = "SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
 		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
@@ -397,7 +397,7 @@ public class ClienteDAO {
 
 		String sql = "";
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, pedidos p, rota r where c.codCliente = p.codCliente and c.codCliente = r.codCliente and c.codEmpresa = p.codEmpresa and p.baixado = 0 and p.fechado = 1 and c.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+			sql = "SELECT c.* FROM cliente c, pedidos p, RotaCliente r where c.codCliente = p.codCliente and c.codCliente = r.codCliente and c.codEmpresa = p.codEmpresa and p.baixado = 0 and p.fechado = 1 and c.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
 		else
 			sql = "SELECT c.* FROM cliente c, pedidos p where c.codCliente = p.codCliente and c.codEmpresa = p.codEmpresa and p.baixado = 0 and p.fechado = 1 and c.codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
 		Cursor rs = db.rawQuery(sql, null);
@@ -419,7 +419,7 @@ public class ClienteDAO {
 
 	public List<ClienteDTO> getPorRotaOrdenado(String codRota, String campoOrdenacao){
 
-		String sql = "SELECT c.* FROM cliente c, rota r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(codRota).concat(" order by ").concat(campoOrdenacao);
+		String sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(codRota).concat(" order by ").concat(campoOrdenacao);
 		Cursor rs = db.rawQuery(sql, null);
 		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
