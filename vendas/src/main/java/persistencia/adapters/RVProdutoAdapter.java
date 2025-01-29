@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import persistencia.brl.ItenPedidoBRL;
+import persistencia.brl.ProdutoBRL;
 import persistencia.dto.ProdutoDTO;
 import vendas.telas.R;
 
@@ -22,6 +24,9 @@ public class RVProdutoAdapter extends RecyclerView.Adapter<RVProdutoAdapter.View
     private Context context;
     private static List<ProdutoDTO> lista;
     private OnItemClickListener listener;
+    ItenPedidoBRL itpBRL;
+    ProdutoBRL proBRL;
+
 
     public RVProdutoAdapter(Context ctx, List<ProdutoDTO> lista, OnItemClickListener listener){
         this.context = ctx;
@@ -38,6 +43,8 @@ public class RVProdutoAdapter extends RecyclerView.Adapter<RVProdutoAdapter.View
     public RVProdutoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_produtos, parent, false);
+        itpBRL = new ItenPedidoBRL(context);
+        proBRL = new ProdutoBRL(context);
         return new RVProdutoAdapter.ViewHolder(view);
     }
 
@@ -45,9 +52,14 @@ public class RVProdutoAdapter extends RecyclerView.Adapter<RVProdutoAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProdutoDTO dto = lista.get(position);
 
+
+        Double qtdTotal = itpBRL.getSumQtdAberto(dto.getCodProduto());
+        Double saldoEstoque = proBRL.getSaldoEstoque(dto.getCodProduto().toString());
+        Double saldo = saldoEstoque - qtdTotal;
+
         holder.txtRVCodigoProduto.setText(dto.getCodProduto().toString());
         holder.txtRVDescricaoProduto.setText(dto.getDescricao());
-        holder.txtRVEstoqueProduto.setText(dto.getEstoque().toString());
+        holder.txtRVEstoqueProduto.setText(saldo.toString());
 
     }
 

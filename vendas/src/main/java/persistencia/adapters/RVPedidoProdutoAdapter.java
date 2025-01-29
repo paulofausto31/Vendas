@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import persistencia.brl.ItenPedidoBRL;
 import persistencia.brl.PrecoBRL;
+import persistencia.brl.ProdutoBRL;
 import persistencia.dto.PrecoDTO;
 import persistencia.dto.ProdutoDTO;
 import vendas.telas.R;
@@ -22,6 +24,8 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     private Context context;
     private final List<ProdutoDTO> items;
     private final OnItemClickListener listener;
+    ItenPedidoBRL itpBRL;
+    ProdutoBRL proBRL;
 
     public interface OnItemClickListener {
         void onItemClick(ProdutoDTO item);
@@ -38,6 +42,8 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item, parent, false);
+        itpBRL = new ItenPedidoBRL(context);
+        proBRL = new ProdutoBRL(context);
         return new ViewHolder(view);
     }
 
@@ -45,8 +51,13 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ProdutoDTO item = items.get(position);
         PrecoBRL preBRL = new PrecoBRL(context);
+
+        Double qtdTotal = itpBRL.getSumQtdAberto(item.getCodProduto());
+        Double saldoEstoque = proBRL.getSaldoEstoque(item.getCodProduto().toString());
+        Double saldo = saldoEstoque - qtdTotal;
+
         holder.txtDescricaoProduto.setText(item.getDescricao());
-        holder.txtEstoqueProduto.setText(item.getEstoque().toString());//teste
+        holder.txtEstoqueProduto.setText(saldo.toString());//teste
 
         List<PrecoDTO> listPreco = preBRL.getByProduto(item.getCodProduto());
         if (listPreco.size() > 0) {
