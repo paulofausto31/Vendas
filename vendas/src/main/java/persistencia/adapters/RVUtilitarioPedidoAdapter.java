@@ -52,6 +52,8 @@ public class RVUtilitarioPedidoAdapter extends RecyclerView.Adapter<RVUtilitario
         holder.txtDataPedidoUtil.setText(pedDTO.getDataPedido());
         holder.txtCodClienteUtil.setText(pedDTO.getCodCliente().toString() + "  " + status);
         holder.txtValorPedidoUtil.setText(totalFormatado);
+        holder.txtDataEnvioUtil.setText(pedDTO.getDataPedidoEnvio());
+        holder.txtHoraEnvioUtil.setText(pedDTO.getHoraPedidoEnvio());
         holder.itemView.setOnLongClickListener(v -> {
             if (longClickListener != null) {
                 longClickListener.onItemLongClick(v, position);
@@ -71,12 +73,16 @@ public class RVUtilitarioPedidoAdapter extends RecyclerView.Adapter<RVUtilitario
         TextView txtValorPedidoUtil;
         TextView txtDataPedidoUtil;
         TextView txtCodClienteUtil;
+        TextView txtDataEnvioUtil;
+        TextView txtHoraEnvioUtil;
 
         ViewHolder(View itemView) {
             super(itemView);
             txtValorPedidoUtil = itemView.findViewById(R.id.txtValorPedidoUtil);
             txtDataPedidoUtil = itemView.findViewById(R.id.txtDataPedidoUtil);
             txtCodClienteUtil = itemView.findViewById(R.id.txtCodClienteUtil);
+            txtDataEnvioUtil = itemView.findViewById(R.id.txtDataEnvioUtil);
+            txtHoraEnvioUtil = itemView.findViewById(R.id.txtHoraEnvioUtil);
         }
     }
 
