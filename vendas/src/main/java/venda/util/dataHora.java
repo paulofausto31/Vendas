@@ -1,9 +1,22 @@
 package venda.util;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class dataHora {
+
+    public static boolean isDataValida(String data) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            LocalDate.parse(data, formatter);
+            return true;
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
 
 	public static String dataDia()
 	{

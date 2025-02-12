@@ -49,6 +49,7 @@ public class PedidoDTO {
 	Integer codPedidoMySQL;
 	String dataPedidoEnvio;
 	String horaPedidoEnvio;
+	String dataEntrega;
 
     
 	public PedidoDTO(){
@@ -58,7 +59,8 @@ public class PedidoDTO {
 	public PedidoDTO(Integer id, String codEmpresa, Integer codCliente, Integer codVendedor, String formaPgto
 		, Integer prazo, Integer parcela, String dataPedido, String horaPedido
 		, Integer baixado, String dataPedidoFim, String horaPedidoFim, String infAdicional,
-		String latitude, String longitude, String fechado, Integer codPedidoMySQL, String dataPedidoEnvio, String horaPedidoEnvio){
+		String latitude, String longitude, String fechado, Integer codPedidoMySQL, String dataPedidoEnvio, String horaPedidoEnvio,
+		String dataEntrega){
 		this.id = id;
 		this.codEmpresa = codEmpresa;
 		this.codCliente = codCliente;
@@ -78,6 +80,7 @@ public class PedidoDTO {
 		this.codPedidoMySQL = codPedidoMySQL;
 		this.dataPedidoEnvio = dataPedidoEnvio;
 		this.horaPedidoEnvio = horaPedidoEnvio;
+		this.dataEntrega = dataEntrega;
 	}
     
 	
@@ -204,5 +207,11 @@ public class PedidoDTO {
 	}
 	public void setHoraPedidoEnvio(String horaPedidoEnvio) {
 		this.horaPedidoEnvio = horaPedidoEnvio;
+	}
+	public String getDataEntrega() {
+		return dataEntrega;
+	}
+	public void setDataEntrega(String dataEntrega) {
+		this.dataEntrega = dataEntrega;
 	}
 }

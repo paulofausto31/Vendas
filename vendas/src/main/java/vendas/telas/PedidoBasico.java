@@ -43,6 +43,8 @@ import persistencia.dto.ClienteDTO;
 import persistencia.dto.PedidoDTO;
 import persistencia.dto.VendedorDTO;
 import venda.util.Global;
+import venda.util.MaskWatcher;
+import venda.util.dataHora;
 
 public class PedidoBasico extends Fragment {
 
@@ -60,6 +62,7 @@ public class PedidoBasico extends Fragment {
 	//... Componentes da Tela
 	EditText txtNumeroPedido;
 	EditText txtDataPedido;
+	EditText txtDataEntrega;
 	EditText txtCliente;
 	Spinner cbxFormaPgto;
 	EditText txtPrazo;
@@ -98,6 +101,8 @@ public class PedidoBasico extends Fragment {
 
 		txtNumeroPedido = view.findViewById(R.id.txtNumeroPedido);
 		txtDataPedido = view.findViewById(R.id.txtDataPedido);
+		txtDataEntrega = view.findViewById(R.id.txtDataEntrega);
+		txtDataEntrega.addTextChangedListener(new MaskWatcher(txtDataEntrega));
 		txtCliente = view.findViewById(R.id.txtClientePedido);
 		cbxFormaPgto = view.findViewById(R.id.cbxFormaPgtoPedido);
 		txtPrazo = view.findViewById(R.id.txtPrazoPedido);
@@ -126,6 +131,7 @@ public class PedidoBasico extends Fragment {
 	private void LimpaCamposPedido() {
 		txtNumeroPedido.setText("0");
 		txtDataPedido.setText(venda.util.Util.getDate());
+		txtDataEntrega.setText("  /  /    ");
 		txtCliente.setText(cliDTO.getNome());
 		txtPrazo.setText("1");
 		txtParcela.setText("1");
@@ -166,6 +172,10 @@ public class PedidoBasico extends Fragment {
 		if (cliDTO != null)
 			pedDTO.setCodCliente(cliDTO.getCodCliente());
 		pedDTO.setCodVendedor(venDTO.getCodigo());
+		if (dataHora.isDataValida(txtDataEntrega.getText().toString()))
+			pedDTO.setDataEntrega(txtDataEntrega.getText().toString());
+		else
+			pedDTO.setDataEntrega("");
 		pedDTO.setDataPedido(txtDataPedido.getText().toString());
 		pedDTO.setFormaPgto(codFormaPgto);
 		pedDTO.setHoraPedidoFim(venda.util.Util.getTime());
@@ -201,6 +211,7 @@ public class PedidoBasico extends Fragment {
 			ClienteDTO cliDTO = cliBRL.getByCodCliente(pedDTO.getCodCliente());
 			txtNumeroPedido.setText(pedDTO.getId().toString());
 			txtDataPedido.setText(pedDTO.getDataPedido());
+			txtDataEntrega.setText(pedDTO.getDataEntrega());
 			txtCliente.setText(cliDTO.getNome());
 			txtPrazo.setText(pedDTO.getPrazo().toString());
 			txtParcela.setText(pedDTO.getParcela().toString());

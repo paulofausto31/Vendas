@@ -30,7 +30,7 @@ public class RVUtilitarioPedidoAdapter extends RecyclerView.Adapter<RVUtilitario
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.utilitario_pedido, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.utilitario_item_pedido, parent, false);
         return new ViewHolder(view);
     }
 

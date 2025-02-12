@@ -69,7 +69,7 @@ public class RotaDAO {
 
     public List<RotaDTO> getComboRota(){
 
-        String sql = "SELECT * FROM rota WHERE codEmpresa = ".concat(Global.codEmpresa);
+        String sql = "SELECT * FROM rota WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" order by Descricao");
         Cursor rs = db.rawQuery(sql, null);
 
         RotaDTO dto = null;

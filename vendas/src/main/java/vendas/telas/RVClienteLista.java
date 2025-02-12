@@ -162,8 +162,10 @@ public class RVClienteLista extends AppCompatActivity {
                 recyclerView.setAdapter(adapter);
                 return true;
             case R.id.menu_mostrar_todos:
-                _list = brl.getTodosOrdenado("nome");
                 Global.lstClientes = null;
+                Global.codRota = null;
+                _list = brl.getTodosOrdenado("nome");
+
                 adapter = new RVClienteAdapter(getBaseContext(), _list, new RVClienteAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(int position) {

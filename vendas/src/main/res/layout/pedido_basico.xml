@@ -29,21 +29,40 @@
             <requestFocus />
         </EditText>
 
+        <!-- Data -->
         <TextView
             android:id="@+id/txtEstoque"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/txtNumeroPedido"
             android:text="Data" />
 
         <EditText
             android:id="@+id/txtDataPedido"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/txtEstoque"
+            android:layout_below="@+id/txtEstoque"
+            android:ems="10" />
+
+        <!-- Data da Entrega ao lado, com alinhamento correto -->
+        <TextView
+            android:id="@+id/txtDataEntregaLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/txtNumeroPedido"
-            android:layout_alignBottom="@+id/txtNumeroPedido"
-            android:layout_alignLeft="@+id/txtEstoque"
+            android:layout_toRightOf="@+id/txtDataPedido"
+            android:layout_alignBaseline="@+id/txtEstoque"
+            android:layout_marginLeft="30dp"
+            android:text="Data da Entrega" />
+
+        <EditText
+            android:id="@+id/txtDataEntrega"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/txtDataPedido"
+            android:layout_toRightOf="@+id/txtDataPedido"
+            android:layout_marginLeft="30dp"
             android:ems="10" />
 
         <TextView
@@ -51,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtNumeroPedido"
+            android:layout_below="@+id/txtDataPedido"
             android:text="Cliente" />
 
         <EditText
@@ -120,7 +139,6 @@
             android:layout_alignParentLeft="true"
             android:layout_below="@+id/txtPrazoPedido"
             android:text="          " />
-        
 
     </RelativeLayout>
 

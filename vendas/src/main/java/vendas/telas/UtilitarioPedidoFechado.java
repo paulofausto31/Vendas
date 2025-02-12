@@ -46,10 +46,23 @@ public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPed
 		recyclerView = view.findViewById(R.id.recycler_view_fechados);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+		// Inicializa o PedidoBRL
 		brl = new PedidoBRL(getContext());
+
+		// Carrega os dados da lista de pedidos
+		lista = brl.getAllPedEnviado();
+
+		// Verifica se a lista não está vazia antes de configurar o adapter
+		if (lista != null && !lista.isEmpty()) {
+			adapter = new RVUtilitarioPedidoAdapter(getContext(), lista, this);
+			recyclerView.setAdapter(adapter);
+		} else {
+			Toast.makeText(getContext(), "Nenhum pedido disponível", Toast.LENGTH_SHORT).show();
+		}
 
 		return view;
 	}
+
 
 	@Override
 	public void onItemLongClick(View view, int position) {
