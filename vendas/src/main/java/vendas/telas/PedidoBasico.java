@@ -1,6 +1,7 @@
 package vendas.telas;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import persistencia.brl.CaminhoFTPBRL;
@@ -103,6 +105,7 @@ public class PedidoBasico extends Fragment {
 		txtDataPedido = view.findViewById(R.id.txtDataPedido);
 		txtDataEntrega = view.findViewById(R.id.txtDataEntrega);
 		txtDataEntrega.addTextChangedListener(new MaskWatcher(txtDataEntrega));
+		txtDataEntrega.setOnClickListener(v -> abrirCalendario());
 		txtCliente = view.findViewById(R.id.txtClientePedido);
 		cbxFormaPgto = view.findViewById(R.id.cbxFormaPgtoPedido);
 		txtPrazo = view.findViewById(R.id.txtPrazoPedido);
@@ -198,6 +201,24 @@ public class PedidoBasico extends Fragment {
 //		@SuppressWarnings("unused")
 //		HttpAsyncPOST httpAsyncPost = new HttpAsyncPOST();
 //		httpAsyncPost.execute();
+	}
+
+	private void abrirCalendario() {
+		final Calendar calendario = Calendar.getInstance();
+		int ano = calendario.get(Calendar.YEAR);
+		int mes = calendario.get(Calendar.MONTH);
+		int dia = calendario.get(Calendar.DAY_OF_MONTH);
+
+		DatePickerDialog datePickerDialog = new DatePickerDialog(
+				getContext(),
+				(view, year, month, dayOfMonth) -> {
+					// Ajusta o mês (pois começa do índice 0)
+					String dataSelecionada = String.format("%02d/%02d/%d", dayOfMonth, month + 1, year);
+					txtDataEntrega.setText(dataSelecionada);
+				},
+				ano, mes, dia);
+
+		datePickerDialog.show();
 	}
 
 	@Override

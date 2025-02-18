@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/lblEmpresa"
@@ -12,13 +13,10 @@
 
     <EditText
         android:id="@+id/txtNome"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:editable="false"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
+        android:ems="10" />
 
     <TextView
         android:id="@+id/txtEstoque"
@@ -28,7 +26,7 @@
 
     <Spinner
         android:id="@+id/cbxJustificativa"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <TextView
@@ -39,17 +37,42 @@
 
     <EditText
         android:id="@+id/txtObs"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.35"
-        android:ems="10"
         android:inputType="textMultiLine|textPostalAddress"
-        android:singleLine="false" />
+        android:singleLine="false"
+        android:gravity="top"
+        android:minHeight="100dp"/>
 
-    <Button
-        android:id="@+id/btnGravar"
-        android:layout_width="114dp"
+    <!-- Espaço flexível para empurrar os botões para o rodapé -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <!-- Layout para os botões no rodapé -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Gravar" />
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
+
+        <Button
+            android:id="@+id/btnVoltar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Voltar"
+            android:onClick="voltarTela" />
+
+        <Button
+            android:id="@+id/btnGravar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Gravar" />
+    </LinearLayout>
 
 </LinearLayout>

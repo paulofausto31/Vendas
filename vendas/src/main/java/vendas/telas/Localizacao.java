@@ -66,22 +66,22 @@ public class Localizacao implements GoogleApiClient.ConnectionCallbacks,
 	public String getLatitude(){
 		Log.i(TAG, "Dentro do getLatitude");
 
-		Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		//Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 		
-		if (l != null)
-			return Double.toString(l.getLatitude());
-		else
+		//if (l != null)
+		//	return Double.toString(l.getLatitude());
+		//else
 			return "";
 		
 	}
 	
 	public String getLongitude(){
 
-		Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+		//Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 		
-		if (l != null)
-			return Double.toString(l.getLongitude());
-		else
+		//if (l != null)
+		//	return Double.toString(l.getLongitude());
+		//else
 			return "";
 		
 	}
@@ -104,11 +104,11 @@ public class Localizacao implements GoogleApiClient.ConnectionCallbacks,
 	
 	private void startLocationUpdate(){
 		iniLocationRequest();
-		LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, Localizacao.this);
+		//LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, Localizacao.this);
 	}
 	
 	private void stopLocationUpdate(){
-		LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, Localizacao.this);
+		//LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, Localizacao.this);
 	}
 
 	public void onConnectionFailed(ConnectionResult arg0) {

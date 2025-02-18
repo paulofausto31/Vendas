@@ -1,136 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="32dp">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="396dp" >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/lblEmpresa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:text="Numero                "
-            android:textSize="25sp" />
+            android:text="Número"
+            android:textSize="30sp"/>
 
         <EditText
             android:id="@+id/txtNumeroPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/lblEmpresa"
-            android:layout_below="@+id/lblEmpresa"
-            android:editable="false"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:ems="10"
-            android:textSize="25sp" >
+            android:textSize="28sp"
+            android:editable="false"/>
 
-            <requestFocus />
-        </EditText>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txtEstoque"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data"
+                android:textSize="30sp"/>
+
+            <EditText
+                android:id="@+id/txtDataPedido"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:textSize="28sp"/>
+
+            <TextView
+                android:id="@+id/txtDataEntregaLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Data da Entrega"
+                android:textSize="30sp"/>
+
+            <EditText
+                android:id="@+id/txtDataEntrega"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:focusable="false"
+                android:textSize="28sp"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/txtLoHora"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtNumeroPedido"
             android:text="Cliente"
-            android:textSize="25sp" />
+            android:textSize="30sp"/>
 
         <EditText
             android:id="@+id/txtClientePedido"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtLoHora"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
             android:ems="10"
-            android:textSize="25sp" />
+            android:textSize="28sp"/>
 
         <TextView
             android:id="@+id/txtLoVend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtClientePedido"
             android:text="Forma Pgto"
-            android:textSize="25sp" />
+            android:textSize="30sp"/>
 
         <Spinner
             android:id="@+id/cbxFormaPgtoPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtLoVend" />
+            android:layout_width="match_parent"
+            android:layout_height="80dp"/>
 
-        <TextView
-            android:id="@+id/txtLoGPS1"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/cbxFormaPgtoPedido"
-            android:text="Prazo"
-            android:textSize="25sp" />
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/txtPrazoPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignRight="@+id/txtNumeroPedido"
-            android:layout_below="@+id/txtLoGPS1"
-            android:ems="10"
-            android:textSize="25sp" />
+            <TextView
+                android:id="@+id/txtLoGPS1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prazo"
+                android:textSize="30sp"/>
 
-        <EditText
-            android:id="@+id/txtParcelaPedido"
-            android:layout_width="293dp"
-            android:layout_height="70dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/txtLoGPS1"
-            android:ems="10"
-            android:textSize="25sp" />
+            <EditText
+                android:id="@+id/txtPrazoPedido"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:textSize="28sp"/>
 
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/txtPrazoPedido"
-            android:text="          " />
+            <TextView
+                android:id="@+id/txtLoGPS2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Parcela"
+                android:textSize="30sp"/>
 
-        <EditText
-            android:id="@+id/txtDataPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="70dp"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/txtEstoque"
-            android:layout_toRightOf="@+id/txtNumeroPedido"
-            android:ems="10"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/txtLoGPS2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/txtPrazoPedido"
-            android:layout_toRightOf="@+id/txtPrazoPedido"
-            android:text="Parcela               "
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/txtEstoque"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/txtNumeroPedido"
-            android:layout_alignLeft="@+id/txtDataPedido"
-            android:text="Data"
-            android:textSize="25sp" />
-        
-    </RelativeLayout>
-
+            <EditText
+                android:id="@+id/txtParcelaPedido"
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:textSize="28sp"/>
+        </LinearLayout>
+    </LinearLayout>
 </ScrollView>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">PalmVenda</string>
-    <string name="app_versao">Versão apk: 12.4</string>
+    <string name="app_versao">Versão apk: 12.6</string>
     <string name="bco_versao">Versão Banco: 36</string>
     <string name="action_settings">action_settings</string>
     <string name="nav_header_desc">PalmVenda</string>

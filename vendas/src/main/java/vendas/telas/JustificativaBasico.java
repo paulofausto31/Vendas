@@ -38,6 +38,7 @@ public class JustificativaBasico extends Activity {
 	Spinner cbxJustificativa;
 	EditText txtObs;
 	Button btnSalvar;
+	Button btnVoltar;
 	
 	@Override
 	public void onCreate(Bundle e){
@@ -62,6 +63,7 @@ public class JustificativaBasico extends Activity {
 		cbxJustificativa = (Spinner)findViewById(R.id.cbxJustificativa);
 		txtObs = (EditText)findViewById(R.id.txtObs);
 		btnSalvar = (Button)findViewById(R.id.btnGravar);
+		btnVoltar = (Button)findViewById(R.id.btnVoltar);
 		
 	    txtNome.setText(cliDTO.getNome());
 		
@@ -69,7 +71,9 @@ public class JustificativaBasico extends Activity {
 		btnSalvar.setOnClickListener(new Button.OnClickListener() {			
 			@Override
 			public void onClick(View v) { btnGravar_click(); }
-		});			
+		});
+
+		btnVoltar.setOnClickListener(v -> finish());
 	}
 	
 	 @Override

@@ -566,7 +566,8 @@ public class PedidoHistorico extends Fragment implements RVHistoricoPedidoAdapte
 
 	public void sharePDF(String fileName) {
 		Context context = getContext();
-		String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+		//String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+		String path = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
 		File file = new File(path, fileName);
 
 		Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);

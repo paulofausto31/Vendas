@@ -1,5 +1,6 @@
 package vendas.telas;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -100,7 +101,8 @@ public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPed
 
 	public void sharePDF(String fileName) {
 		Context context = getContext();
-		String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+		//String path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).toString();
+		String path = context.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
 		File file = new File(path, fileName);
 
 		Uri uri = FileProvider.getUriForFile(context, context.getPackageName() + ".provider", file);
@@ -117,6 +119,7 @@ public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPed
 		} else {
 			// O WhatsApp não está instalado, mostre um aviso ou use outro aplicativo de compartilhamento
 			shareIntent = Intent.createChooser(shareIntent, "Escolha um aplicativo para compartilhar o PDF");
+
 		}
 
 		try {

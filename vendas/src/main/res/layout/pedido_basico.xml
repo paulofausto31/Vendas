@@ -63,6 +63,7 @@
             android:layout_alignBaseline="@+id/txtDataPedido"
             android:layout_toRightOf="@+id/txtDataPedido"
             android:layout_marginLeft="30dp"
+            android:focusable="false"
             android:ems="10" />
 
         <TextView
