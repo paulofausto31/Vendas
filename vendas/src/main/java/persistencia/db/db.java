@@ -10,7 +10,7 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 36; //Integer.parseInt(getString(R.string.bco_versao));
+	private static int version = 37; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
@@ -21,7 +21,8 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [RotaCliente] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
 		db.execSQL(sql);
-		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
+		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100)" +
+				", [Endereco] VARCHAR(500), [Bairro] VARCHAR(50), [Cidade] VARCHAR(50), [UF] VARCHAR(2), [CEP] VARCHAR(10), [Telefone] VARCHAR(50), [Email] VARCHAR(50))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [LocalizacaoGPS] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codVendedor] VARCHAR(4), [DataHora] VARCHAR(20), [latitude] VARCHAR(20), [longitude] VARCHAR(20))";
 		db.execSQL(sql);
@@ -109,7 +110,8 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [RotaCliente] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
 		db.execSQL(sql);
-		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100))";
+		sql = "CREATE TABLE IF NOT EXISTS [Empresa] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [cnpj] VARCHAR(14), [RazaoSocial] VARCHAR(100), [Fantasia] VARCHAR(100)" +
+				", [Endereco] VARCHAR(200), [Bairro] VARCHAR(50), [Cidade] VARCHAR(50), [UF] VARCHAR(2), [CEP] VARCHAR(10), [Telefone] VARCHAR(50), [Email] VARCHAR(50))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [LocalizacaoGPS] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codVendedor] VARCHAR(4), [DataHora] VARCHAR(20), [latitude] VARCHAR(20), [longitude] VARCHAR(20))";
 		db.execSQL(sql);

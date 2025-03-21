@@ -81,4 +81,8 @@ public class VendedorBRL {
         return vendedorDAO.getVendedorEmpresa(codEmpresa, codVendedor);
     }
 
+    public VendedorDTO getVendedorEmpresa(String codEmpresa){
+        return vendedorDAO.getVendedorEmpresa(codEmpresa);
+    }
+
 }

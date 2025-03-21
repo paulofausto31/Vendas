@@ -7,6 +7,16 @@
         android:orderInCategory="100"
         app:showAsAction="never"/>
     <item
+        android:id="@+id/menu_linha"
+        android:title="Filtro Linha"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/menu_fornecedor"
+        android:title="Filtro Fornecedor"
+        android:orderInCategory="100"
+        app:showAsAction="never"/>
+    <item
         android:id="@+id/menu_mostrar_todos"
         android:title="Mostrar todos"
         android:orderInCategory="100"

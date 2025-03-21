@@ -99,4 +99,21 @@ public class VendedorDAO {
 
 		return rs.getCount() > 0;
 	}
+
+	public VendedorDTO getVendedorEmpresa(String codEmpresa){
+
+		Cursor rs = db.query(tableName, columns, "codEmpresa=?", new String[]{codEmpresa.toString()}, null, null, null);
+
+		VendedorDTO dto = null;
+
+		if(rs.moveToFirst()){
+			dto = new VendedorDTO();
+			dto.setId(rs.getInt(rs.getColumnIndex("id")));
+			dto.setCodEmpresa(rs.getString(rs.getColumnIndex("codEmpresa")));
+			dto.setCodigo(rs.getInt(rs.getColumnIndex("codigo")));
+			dto.setNome(rs.getString(rs.getColumnIndex("nome")));
+		}
+
+		return dto;
+	}
 }

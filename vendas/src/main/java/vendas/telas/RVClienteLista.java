@@ -28,8 +28,11 @@ import java.util.List;
 import persistencia.adapters.RVClienteAdapter;
 import persistencia.brl.ClienteBRL;
 import persistencia.brl.ContaReceberBRL;
+import persistencia.brl.FornecedorBRL;
+import persistencia.brl.GrupoBRL;
 import persistencia.brl.RotaBRL;
 import persistencia.dto.ClienteDTO;
+import persistencia.dto.GrupoDTO;
 import persistencia.dto.RotaDTO;
 import venda.util.Global;
 
@@ -40,6 +43,7 @@ public class RVClienteLista extends AppCompatActivity {
     ClienteBRL brl;
     RotaBRL rotBRL;
     ContaReceberBRL crbrl;
+
 
     public class Rota {
         private Integer codigo;

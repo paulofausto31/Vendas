@@ -7,11 +7,13 @@ import persistencia.dto.CaminhoFTPDTO;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.PedidoDTO;
+import persistencia.dto.ProdutoDTO;
 
 public class Global {
 	public static PedidoDTO pedidoGlobalDTO;
 	public static ItenPedidoDTO itemPedidoGlobalDTO;
 	public static List<ClienteDTO> lstClientes;
+	public static List<ProdutoDTO> lstProdutos;
 	public static String pedidoWS;
 	public static CaminhoFTPDTO caminhoFTPDTO;
 	public static String codEmpresa;

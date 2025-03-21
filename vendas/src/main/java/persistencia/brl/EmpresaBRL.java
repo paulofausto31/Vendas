@@ -37,6 +37,13 @@ public class EmpresaBRL {
         dto.setCnpj(linha.substring(4, 18));
         dto.setRazaoSocial(linha.substring(18, 118));
         dto.setFantasia(linha.substring(118, 218));
+        dto.setEndereco(linha.substring(218, 418));
+        dto.setBairro(linha.substring(418, 468));
+        dto.setCidade(linha.substring(468, 518));
+        dto.setUf(linha.substring(518, 520));
+        dto.setCep(linha.substring(520, 530));
+        dto.setTelefone(linha.substring(530, 550));
+        dto.setEmail(linha.substring(550, 600));
         return dto;
     }
 
@@ -64,6 +71,10 @@ public class EmpresaBRL {
             venda.util.mensagem.trace(ctx, e.toString());
             return false;
         }
+    }
+
+    public EmpresaDTO getByCodEmpresa(String codEmpresa){
+        return empresaDAO.getByCodEmpresa(codEmpresa);
     }
 
     public boolean DeleteByEmpresa(String codEmpresa)

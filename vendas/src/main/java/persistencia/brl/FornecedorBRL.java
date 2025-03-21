@@ -1,6 +1,9 @@
 package persistencia.brl;
 
 import android.content.Context;
+
+import java.util.List;
+
 import persistencia.dao.*;
 import persistencia.dto.*;
 import venda.util.Global;
@@ -70,5 +73,9 @@ public class FornecedorBRL {
             venda.util.mensagem.trace(ctx, e.toString());
             return false;
         }
+    }
+
+    public List<FornecedorDTO> getAll(){
+        return fornecedorDAO.getAll();
     }
 }
