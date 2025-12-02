@@ -398,47 +398,50 @@ public class PedidoItemNovo extends Fragment {
 	}
 
 	private Boolean ValidaDesconto(final String valor) {
-		ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getContext());
-		ConfiguracaoDTO cfgDTO = cfgBRL.getAll();
-		
-		if (cfgDTO.getDescontoAcrescimo().equals("N")){
-			Toast.makeText(getContext(), "Desconto/Acrescimo não permitido", Toast.LENGTH_SHORT).show();
-			return false;
-		}
-		else if (Double.parseDouble(valor) > cfgDTO.getDescontoMaximo()){
-			Toast.makeText(getContext(), "O Desconto/Acrescimo máximo permitido �: " + cfgDTO.getDescontoMaximo().toString(), Toast.LENGTH_SHORT).show();
-			return false;			
-		}
-		else if(venda.util.Global.descontoAcrescimo == null){
-			 AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
-			 
-			 confirmacao.setTitle("Confirmação Desconto");
-			 confirmacao.setMessage("Este desconto/acrescimo vale para todos os itens seguintes ?");
-			 confirmacao.setCancelable(false);
-			 
-			 confirmacao.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					venda.util.Global.descontoAcrescimo = Double.parseDouble(valor);
-					venda.util.Global.optionDesconto = rdgDesconto.isChecked();
-				}
-			});
-			 
-			 confirmacao.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					venda.util.Global.descontoAcrescimo = null;
-					dialog.cancel();	
-				}
-			});
-			 
-			 AlertDialog alertDialog = confirmacao.create();
 
-			 alertDialog.show();
+		if (!valor.equals("0")) {
+
+			ConfiguracaoBRL cfgBRL = new ConfiguracaoBRL(getContext());
+			ConfiguracaoDTO cfgDTO = cfgBRL.getAll();
+
+			if (cfgDTO.getDescontoAcrescimo().equals("N")) {
+				Toast.makeText(getContext(), "Desconto/Acrescimo não permitido", Toast.LENGTH_SHORT).show();
+				return false;
+			} else if (Double.parseDouble(valor) > cfgDTO.getDescontoMaximo()) {
+				Toast.makeText(getContext(), "O Desconto/Acrescimo máximo permitido �: " + cfgDTO.getDescontoMaximo().toString(), Toast.LENGTH_SHORT).show();
+				return false;
+			} else if (venda.util.Global.descontoAcrescimo == null) {
+				AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
+
+				confirmacao.setTitle("Confirmação Desconto");
+				confirmacao.setMessage("Este desconto/acrescimo vale para todos os itens seguintes ?");
+				confirmacao.setCancelable(false);
+
+				confirmacao.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						venda.util.Global.descontoAcrescimo = Double.parseDouble(valor);
+						venda.util.Global.optionDesconto = rdgDesconto.isChecked();
+					}
+				});
+
+				confirmacao.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						venda.util.Global.descontoAcrescimo = null;
+						dialog.cancel();
+					}
+				});
+
+				AlertDialog alertDialog = confirmacao.create();
+
+				alertDialog.show();
+			}
 		}
 		return true;
+
 	}
 	
 	private void CarregaComboPreco(Long codProduto, Double desconto, String paramDA) {
@@ -678,7 +681,8 @@ public class PedidoItemNovo extends Fragment {
 
 
 	private void btnIncluirProduto_click(){
-		if (ValidaInclusao()){
+		String valorDA = txtDA.getText().toString().trim().replace("","0");
+		if (ValidaInclusao() && ValidaDesconto(valorDA)){
 			if (itemNovo && itpBRL.produtoExistente(venda.util.Global.pedidoGlobalDTO.getId(), Integer.parseInt(txtCodProduto.getText().toString()))){
 				 AlertDialog.Builder confirmacao = new AlertDialog.Builder(getContext());
 				 

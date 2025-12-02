@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Environment;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -41,7 +43,7 @@ import vendas.telas.R;
 
 public class PDFGenerator {
 
-    public void createPDF(Context ctx, String fileName, List<ItenPedidoDTO> itens, ClienteDTO cliDTO) {
+    public void createPDF(Context ctx, String fileName, List<ItenPedidoDTO> itens, ClienteDTO cliDTO) throws FileNotFoundException {
         String path = ctx.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
         File file = new File(path, fileName);
         ProdutoBRL proBRL = new ProdutoBRL(ctx);
@@ -49,10 +51,11 @@ public class PDFGenerator {
         VendedorBRL venBRL = new VendedorBRL(ctx);
         ProdutoDTO proDTO;
 
+        PdfWriter writer = new PdfWriter(file);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc);
         try {
-            PdfWriter writer = new PdfWriter(file);
-            PdfDocument pdfDoc = new PdfDocument(writer);
-            Document document = new Document(pdfDoc);
+
 
             // Adicionando a imagem da logomarca
             EmpresaDTO empDTO = empBRL.getByCodEmpresa(Global.codEmpresa);
@@ -63,6 +66,8 @@ public class PDFGenerator {
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_idm);
             else if (empDTO.getCnpj().equals("01914386000100"))
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_al);
+            else if (empDTO.getCnpj().equals("27696101000103"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_japa);
             else
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_branco);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -136,23 +141,24 @@ public class PDFGenerator {
             // Adicionando um espaço de duas linhas
             document.add(new Paragraph("\n"));
 
-// Adicionando título antes da tabela
+            // Adicionando título antes da tabela
             document.add(new Paragraph("DADOS DO ORÇAMENTO").setBold().setFontSize(10));
 
-// Linha sólida abaixo do título
+            // Linha sólida abaixo do título
             document.add(new LineSeparator(new SolidLine()));
 
-// Criando uma tabela com as colunas corretas (sem NCM)
-            float[] columnWidths = {30f, 300f, 60f, 50f, 100f, 100f}; // Ajuste das larguras
+            // Criando uma tabela com as colunas corretas (sem NCM)
+            float[] columnWidths = {30f, 60f, 300f, 60f, 50f, 100f, 100f}; // Ajuste das larguras
             Table table = new Table(columnWidths);
             table.setWidth(UnitValue.createPercentValue(100));
 
-// Configurando fonte menor para o cabeçalho
+            // Configurando fonte menor para o cabeçalho
             float headerFontSize = 8f;
             float itemFontSize = 8f;
 
-// Adicionando cabeçalhos formatados com fonte reduzida
+            // Adicionando cabeçalhos formatados com fonte reduzida
             table.addHeaderCell(new Cell().add(new Paragraph("#").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("CODIGO").setBold().setFontSize(headerFontSize)).setBorder(Border.NO_BORDER));
             table.addHeaderCell(new Cell().add(new Paragraph("DESCRIÇÃO").setBold().setFontSize(headerFontSize)).setBorder(Border.NO_BORDER));
             table.addHeaderCell(new Cell().add(new Paragraph("QTDE.").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
             table.addHeaderCell(new Cell().add(new Paragraph("UN.").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
@@ -163,7 +169,7 @@ public class PDFGenerator {
             Double totalGeral = 0.00;
             int index = 1; // Contador para numeração
 
-// Adicionando produtos na tabela
+            // Adicionando produtos na tabela
             for (ItenPedidoDTO item : itens) {
                 proDTO = proBRL.getByCodProduto(item.getCodProduto());
                 Double total = item.getQuantidade() * item.getPreco();
@@ -171,6 +177,9 @@ public class PDFGenerator {
 
                 // Número do item
                 table.addCell(new Cell().add(new Paragraph(index + ".").setFontSize(itemFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+
+                // Código do produto
+                table.addCell(new Cell().add(new Paragraph(proDTO.getCodProduto().toString()).setFontSize(itemFontSize)).setBorder(Border.NO_BORDER));
 
                 // Descrição do produto
                 table.addCell(new Cell().add(new Paragraph(proDTO.getDescricao()).setFontSize(itemFontSize)).setBorder(Border.NO_BORDER));
@@ -190,19 +199,29 @@ public class PDFGenerator {
                 index++;
 
                 // Adicionando linha tracejada após cada item
-                table.addCell(new Cell(1, 6).add(new LineSeparator(new DottedLine())).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell(1, 7).add(new LineSeparator(new DottedLine())).setBorder(Border.NO_BORDER));
             }
 
-// Adicionando linha final com o total geral
-            table.addCell(new Cell(1, 4).add(new Paragraph("TOTAL DO PEDIDO").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+            // Adicionando linha final com o total geral
+            table.addCell(new Cell(1, 5).add(new Paragraph("TOTAL DO PEDIDO").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
             table.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER)); // Célula vazia para alinhamento
             table.addCell(new Cell().add(new Paragraph("R$ " + df.format(totalGeral))).setBold().setFontSize(headerFontSize).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
 
             document.add(table);
             document.close();
-            System.out.println("PDF Created");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            Toast.makeText(ctx, "PDF criado com sucesso!", Toast.LENGTH_LONG).show();
+            Log.i("PDF", "PDF criado com sucesso: " + file.getAbsolutePath());
+        } catch (Exception e) {
+            Log.e("PDF", "Erro ao criar PDF: " + e.getMessage(), e);
+            Toast.makeText(ctx, "Erro ao criar o PDF. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
+        } finally {
+            try {
+                if (document != null) document.close();
+                if (pdfDoc != null) pdfDoc.close();
+                if (writer != null) writer.close();
+            } catch (Exception e) {
+                Log.e("PDF", "Erro ao fechar recursos: " + e.getMessage(), e);
+            }
         }
     }
 

@@ -41,7 +41,7 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item, parent, false);
+                .inflate(R.layout.list_itens, parent, false);
         itpBRL = new ItenPedidoBRL(context);
         proBRL = new ProdutoBRL(context);
         return new ViewHolder(view);
@@ -56,6 +56,7 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
         Double saldoEstoque = proBRL.getSaldoEstoque(item.getCodProduto().toString());
         Double saldo = saldoEstoque - qtdTotal;
 
+        holder.txtCodigoProdutoPesquisa.setText(item.getCodProduto().toString());
         holder.txtDescricaoProduto.setText(item.getDescricao());
         holder.txtEstoqueProduto.setText(saldo.toString());//teste
 
@@ -76,12 +77,14 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public final TextView txtCodigoProdutoPesquisa;
         public final TextView txtDescricaoProduto;
         public final TextView txtEstoqueProduto;
         public final TextView txtPrecoProduto;
 
         public ViewHolder(View view) {
             super(view);
+            txtCodigoProdutoPesquisa = view.findViewById(R.id.txtCodigoProdutoPesquisa);
             txtDescricaoProduto = view.findViewById(R.id.txtDescricaoProdutoPesquisa);
             txtEstoqueProduto = view.findViewById(R.id.txtEstoqueProdutoPesquisa);
             txtPrecoProduto = view.findViewById(R.id.txtPrecoProdutoPesquisa);

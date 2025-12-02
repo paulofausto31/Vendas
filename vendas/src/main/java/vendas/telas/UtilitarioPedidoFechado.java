@@ -14,11 +14,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
 import android.widget.PopupMenu;
 import android.widget.Toast;
@@ -89,8 +91,13 @@ public class UtilitarioPedidoFechado extends Fragment implements RVUtilitarioPed
 				ClienteDTO cliDTO = cliBRL.getByCodCliente(pedDTO.getCodCliente());
 				List<ItenPedidoDTO> list = itpBRL.getByCodPedido(pedDTO.getId());
 				PDFGenerator pdf = new PDFGenerator();
-				pdf.createPDF(getContext(),"arquivoPDF.pdf", list, cliDTO);
-				sharePDF("arquivoPDF.pdf");
+                try {
+                    pdf.createPDF(getContext(),"arquivoPDF.pdf", list, cliDTO);
+                } catch (Exception e) {
+					Log.e("PDF", "Erro ao criar PDF: " + e.getMessage(), e);
+					Toast.makeText(getContext(), "Erro ao criar o PDF. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
+				}
+                sharePDF("arquivoPDF.pdf");
 
 				return true;
 			}
