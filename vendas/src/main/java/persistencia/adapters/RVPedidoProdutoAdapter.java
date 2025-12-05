@@ -41,7 +41,7 @@ public class RVPedidoProdutoAdapter extends RecyclerView.Adapter<RVPedidoProduto
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_itens, parent, false);
+                .inflate(R.layout.list_item, parent, false);
         itpBRL = new ItenPedidoBRL(context);
         proBRL = new ProdutoBRL(context);
         return new ViewHolder(view);

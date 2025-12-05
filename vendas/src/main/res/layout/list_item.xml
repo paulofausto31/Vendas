@@ -24,7 +24,7 @@
                 android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:text="000000"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
         </LinearLayout>
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Descrição do produto"
-            android:textSize="18sp" />
+            android:textSize="13sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Estoque:"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_marginEnd="4dp" />
 
             <TextView
@@ -60,20 +60,22 @@
                 android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:text="32"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="end">
 
             <TextView
                 android:id="@+id/lblPreco"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Preço:"
-                android:textSize="16sp"
+                android:textSize="13sp"
                 android:layout_marginEnd="4dp" />
 
             <TextView
@@ -81,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="R$ 32,00"
-                android:textSize="16sp" />
+                android:textSize="13sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
