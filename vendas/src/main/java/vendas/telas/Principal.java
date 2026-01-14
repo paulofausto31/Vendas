@@ -26,6 +26,8 @@ import venda.util.Global;
 public class Principal extends AppCompatActivity {
 
 	private String chave;
+    private boolean teste = false;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
