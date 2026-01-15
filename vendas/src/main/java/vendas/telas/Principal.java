@@ -26,50 +26,50 @@ import venda.util.Global;
 public class Principal extends AppCompatActivity {
 
 	private String chave;
-    private boolean teste = false;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
-		this.setTitle(Global.tituloAplicacao);
+        setContentView(R.layout.main); // Certifique-se que o XML novo está com este nome
+        this.setTitle(Global.tituloAplicacao);
 
+        // Ligando os cliques dos novos Cards às funções que você já criou
 
-        Button btnCliente = (Button)findViewById(R.id.btnCliente);
-        btnCliente.setOnClickListener(new Button.OnClickListener() {			
-			public void onClick(View v) { btnCliente_click();  }
-		});
-        //... btnConsulta
-        Button btnConsulta = (Button)findViewById(R.id.btnConsulta);
-        btnConsulta.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) { btnConsulta_click(); }
-		});
-        //... btnProduto
-        Button btnProduto = (Button)findViewById(R.id.btnProduto);
-        btnProduto.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) { btnProduto_click(); }
-		});          
-        //... btnComunicacao
-        Button btnComunicacao = (Button)findViewById(R.id.btnComunicacao);
-        btnComunicacao.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) { btnComunicacao_click(); }
-		});          
-        //... btnConfiguracao
-        Button btnConfiguracao = (Button)findViewById(R.id.btnConfiguracao);
-        btnConfiguracao.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) { try {
-				btnConfiguracao_click();
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} }
-		});          
-        //... btnUtilitario
-        Button btnUtilitario = (Button)findViewById(R.id.btnUtilitario);
-        btnUtilitario.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) { btnUtilitario_click(); }
-		});          
+        findViewById(R.id.cardCliente).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { btnCliente_click(); }
+        });
+
+        findViewById(R.id.cardProduto).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { btnProduto_click(); }
+        });
+
+        findViewById(R.id.cardConsulta).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { btnConsulta_click(); }
+        });
+
+        findViewById(R.id.cardComunicacao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { btnComunicacao_click(); }
+        });
+
+        findViewById(R.id.cardUtilitario).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { btnUtilitario_click(); }
+        });
+
+        findViewById(R.id.cardConfiguracao).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    btnConfiguracao_click();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     @Override
@@ -79,20 +79,6 @@ public class Principal extends AppCompatActivity {
 
 		return true;
     }
-
- /*   @Override
-    public boolean onMenuItemSelected(int featureId, MenuItem item) {
-    	switch (item.getItemId()) {
-			case Sincronizar:{
-				
-			}break;
-			case Configuracoes:{
-				Intent configuracao = new Intent(this, ConfiguracaoTabContainer.class);
-				startActivity(configuracao);
-			}break;
-    	}
-    	return false;
-    }*/
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -125,7 +111,7 @@ public class Principal extends AppCompatActivity {
 				return super.onOptionsItemSelected(item);
 		}
 	}
-    
+
     private void btnUtilitario_click(){
     	Intent utilitario = new Intent(this, UtilitarioTabContainer.class);
     	startActivity(utilitario);
