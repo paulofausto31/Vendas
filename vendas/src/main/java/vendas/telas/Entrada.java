@@ -57,7 +57,7 @@ public class Entrada extends Activity {
 		empBRL = new EmpresaBRL(getBaseContext());
         btnEntrar = (Button)findViewById(R.id.btnEntrar);
         txtVendedor = (TextView)findViewById(R.id.txtVendedorEntrada);
-		lblEmpresa = (TextView)findViewById(R.id.lblEmpresa);
+		//lblEmpresa = (TextView)findViewById(R.id.lblEmpresa);
 		cbxEmpresa = (Spinner)findViewById(R.id.cbxEmpresa);
 		venBRL = new VendedorBRL(getBaseContext());
 
@@ -128,12 +128,12 @@ public class Entrada extends Activity {
 		int totalEmpresas = empBRL.getTotalEmpresas();
 
 		if (totalEmpresas < 1) {
-			lblEmpresa.setVisibility(View.INVISIBLE);
+			//lblEmpresa.setVisibility(View.INVISIBLE);
 			cbxEmpresa.setVisibility(View.INVISIBLE);
 		}
 		else if (totalEmpresas >= 1)
 		{
-			lblEmpresa.setVisibility(View.VISIBLE);
+			//lblEmpresa.setVisibility(View.VISIBLE);
 			cbxEmpresa.setVisibility(View.VISIBLE);
 			listaDescricao = empBRL.getCombo("cnpj", "Fantasia", "Selecione");
 			listaCodigo = empBRL.getCombo("codEmpresa", "-1");

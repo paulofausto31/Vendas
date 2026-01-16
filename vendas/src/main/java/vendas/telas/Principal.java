@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,13 +20,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 
+import persistencia.brl.ClienteBRL;
+import persistencia.brl.ItenPedidoBRL;
+import persistencia.brl.PedidoBRL;
 import venda.util.Global;
 
 public class Principal extends AppCompatActivity {
 
 	private String chave;
+    private TextView txtTotalVendas, txtQtdPedidos, txtPercentual;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,30 @@ public class Principal extends AppCompatActivity {
                 }
             }
         });
+
+        txtTotalVendas = findViewById(R.id.txtTotalVendas);
+        txtQtdPedidos = findViewById(R.id.txtQtdPedidos);
+        txtPercentual = findViewById(R.id.txtPercentual);
+
+        atualizarDashboard();
+    }
+
+    private void atualizarDashboard() {
+        // Exemplo de dados reais vindo do banco
+
+        DecimalFormat formatador = new DecimalFormat("##,###0.00");
+        ItenPedidoBRL itpBRL = new ItenPedidoBRL(this);
+        Double totalVendas = itpBRL.getSumTotalAberto();
+
+        ClienteBRL cliBRL = new ClienteBRL(this);
+        Double totalClientes = Double.parseDouble(cliBRL.getTotalClientes().toString());
+        PedidoBRL pedBRL = new PedidoBRL(this);
+        Double totalPositivacao = Double.parseDouble(pedBRL.getTotalPositivacao().toString());
+        Double percentualPositivacao = ((totalPositivacao / totalClientes) * 100);
+
+        txtTotalVendas.setText(String.format("R$ %.2f", totalVendas));
+        txtQtdPedidos.setText(String.valueOf(totalPositivacao));
+        txtPercentual.setText(String.format("%.1f%%", percentualPositivacao));
     }
 
     @Override
