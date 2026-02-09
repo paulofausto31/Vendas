@@ -1,21 +1,17 @@
 package persistencia.adapters;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import java.util.List;
 
 import persistencia.brl.ClienteNaoPositivadoBRL;
@@ -30,10 +26,10 @@ import vendas.telas.R;
 public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.ViewHolder> {
 
     private Context context;
-    private static List<ClienteDTO> lista;
-    private static OnItemClickListener listener;
+    private List<ClienteDTO> lista;
+    private OnItemClickListener listener;
 
-    public RVClienteAdapter(Context ctx, List<ClienteDTO> lista, OnItemClickListener listener){
+    public RVClienteAdapter(Context ctx, List<ClienteDTO> lista, OnItemClickListener listener) {
         this.context = ctx;
         this.lista = lista;
         this.listener = listener;
@@ -45,35 +41,42 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
 
     @NonNull
     @Override
-    public RVClienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_clientes, parent, false);
-        return new RVClienteAdapter.ViewHolder(view);
+                .inflate(R.layout.cliente_lista_card, parent, false);
+        return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RVClienteAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ClienteDTO dto = lista.get(position);
         PedidoBRL pedBRL = new PedidoBRL(context);
         ClienteNaoPositivadoBRL cnpBRL = new ClienteNaoPositivadoBRL(context);
 
-        holder.txtRVNomeCliente.setText(dto.getNome());
-        holder.txtRVCodigoCliente.setText(dto.getCodCliente().toString() + "  ");
-        holder.txtRVEmpresa.setText(dto.getRazaoSocial().substring(0, 20));
-        holder.txtRVSeqVisita.setText("Seq. Visita: " + dto.getSeqVisita().toString());
+        holder.txtNomeCliente.setText(dto.getRazaoSocial());
+        holder.txtFantasia.setText(dto.getNome());
+        holder.txtSeqVisita.setText("Seq. Visita: " + dto.getSeqVisita().toString());
 
-        int retorno = 0;
-        if (pedBRL.getPedidoAbertoCliente(dto.getCodCliente()) > 0)
-            holder.txtRVPedido.setText("Pedido");
-        else if(cnpBRL.getCNPClienteAberto(dto.getCodCliente()) > 0)
-            holder.txtRVPedido.setText("Justificativa");
-        else
-            retorno = 4;
+        // Lógica de cores dinâmicas para o Status
+        if (pedBRL.getPedidoAbertoCliente(dto.getCodCliente()) > 0) {
+            holder.txtStatusPedido.setText("Pedido Realizado");
+            holder.txtStatusPedido.setTextColor(Color.parseColor("#2E7D32")); // Verde escuro
+            holder.txtStatusPedido.setBackgroundColor(Color.parseColor("#E8F5E9")); // Verde clarinho de fundo
+            holder.txtStatusPedido.setVisibility(View.VISIBLE);
+        } else if (cnpBRL.getCNPClienteAberto(dto.getCodCliente()) > 0) {
+            holder.txtStatusPedido.setText("Justificativa");
+            holder.txtStatusPedido.setTextColor(Color.parseColor("#E65100")); // Laranja escuro
+            holder.txtStatusPedido.setBackgroundColor(Color.parseColor("#FFF3E0")); // Laranja clarinho de fundo
+            holder.txtStatusPedido.setVisibility(View.VISIBLE);
+        } else {
+            holder.txtStatusPedido.setVisibility(View.GONE);
+        }
 
-        if (retorno == 0)
-            holder.txtRVPedido.setVisibility(View.VISIBLE);
-        else
-            holder.txtRVPedido.setVisibility(View.INVISIBLE);
+        holder.btnMenuAcoes.setOnClickListener(v -> showBottomSheet(dto));
+        holder.btnAtalhoPedido.setOnClickListener(v -> abrirTelaPedido(dto));
+        holder.itemView.setOnClickListener(v -> {
+            if (listener != null) listener.onItemClick(position);
+        });
     }
 
     @Override
@@ -81,78 +84,65 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
         return lista.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder  implements View.OnLongClickListener, PopupMenu.OnMenuItemClickListener {
-        public TextView txtRVCodigoCliente;
-        public TextView txtRVEmpresa;
-        public TextView txtRVPedido;
-        public TextView txtRVNomeCliente;
-        public TextView txtRVSeqVisita;
+    private void showBottomSheet(ClienteDTO dto) {
+        BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(context);
+        View view = LayoutInflater.from(context).inflate(R.layout.cliente_bottomsheet, null);
+
+        TextView lblNome = view.findViewById(R.id.lblNomeClienteMenu);
+        LinearLayout btnPedido = view.findViewById(R.id.btnMenuNovoPedido);
+        LinearLayout btnFinanceiro = view.findViewById(R.id.btnMenuFinanceiro);
+        LinearLayout btnComplemento = view.findViewById(R.id.btnMenuComplemento);
+        LinearLayout btnJustificativa = view.findViewById(R.id.btnMenuJustificativa);
+
+        lblNome.setText(dto.getRazaoSocial());
+
+        btnPedido.setOnClickListener(v -> { abrirTelaPedido(dto); bottomSheetDialog.dismiss(); });
+        btnJustificativa.setOnClickListener(v -> {
+            Intent intent = new Intent(context, JustificativaTabContainer.class);
+            intent.putExtra("idCliente", dto.getId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            bottomSheetDialog.dismiss();
+        });
+        btnFinanceiro.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ClienteContasReceber.class);
+            intent.putExtra("codCliente", dto.getCodCliente());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            bottomSheetDialog.dismiss();
+        });
+        btnComplemento.setOnClickListener(v -> {
+            Intent intent = new Intent(context, ClienteComplemento.class);
+            intent.putExtra("idCliente", dto.getId());
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intent);
+            bottomSheetDialog.dismiss();
+        });
+
+        bottomSheetDialog.setContentView(view);
+        bottomSheetDialog.show();
+    }
+
+    private void abrirTelaPedido(ClienteDTO dto) {
+        Intent intent = new Intent(context, PedidoTabContainer.class);
+        intent.putExtra("idCliente", dto.getId());
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView txtNomeCliente, txtFantasia, txtSeqVisita, txtStatusPedido;
+        public ImageButton btnMenuAcoes;
+        public View btnAtalhoPedido;
 
         public ViewHolder(View view) {
             super(view);
-            txtRVCodigoCliente = view.findViewById(R.id.txtRVCodCliente);
-            txtRVEmpresa = view.findViewById(R.id.lblRVEmpresa);
-            txtRVPedido = view.findViewById(R.id.txtRVPedido);
-            txtRVNomeCliente = view.findViewById(R.id.txtRVNomeCliente);
-            txtRVSeqVisita = view.findViewById(R.id.txtRVSeqVisita);
-            view.setOnLongClickListener((View.OnLongClickListener) this);
-
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onItemClick(position);
-                        }
-                    }
-                }
-            });
-        }
-        @Override
-        public boolean onLongClick(View v) {
-            PopupMenu popup = new PopupMenu(v.getContext(), v);
-            MenuInflater inflater = popup.getMenuInflater();
-            inflater.inflate(R.menu.popup_clientes, popup.getMenu());
-            popup.setOnMenuItemClickListener((PopupMenu.OnMenuItemClickListener) this);
-            popup.show();
-            return true;
-        }
-
-        @Override
-        public boolean onMenuItemClick(MenuItem item) {
-            int position = getAdapterPosition();
-            ClienteDTO dto = lista.get(position);
-            Intent intent;
-            switch (item.getItemId()) {
-                case R.id.action_pedido:
-                    intent = new Intent(context, PedidoTabContainer.class);
-                    intent.putExtra("idCliente", dto.getId());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                    return true;
-                case R.id.action_justificativa:
-                    intent = new Intent(context, JustificativaTabContainer.class);
-                    intent.putExtra("idCliente", dto.getId());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                    return true;
-                case R.id.action_creceber:
-                    intent = new Intent(context, ClienteContasReceber.class);
-                    intent.putExtra("codCliente", dto.getCodCliente());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                    return true;
-                case R.id.action_complemento:
-                    intent = new Intent(context, ClienteComplemento.class);
-                    intent.putExtra("idCliente", dto.getId());
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                    return true;
-                default:
-                    return false;
-            }
+            txtNomeCliente = view.findViewById(R.id.txtNomeCliente);
+            txtFantasia = view.findViewById(R.id.txtFantasia);
+            txtSeqVisita = view.findViewById(R.id.txtVisita);
+            txtStatusPedido = view.findViewById(R.id.txtStatusPedido);
+            btnMenuAcoes = view.findViewById(R.id.btnMenuAcoes);
+            btnAtalhoPedido = view.findViewById(R.id.btnNovoPedido);
         }
     }
 }
