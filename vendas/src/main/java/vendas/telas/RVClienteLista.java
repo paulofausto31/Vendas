@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -145,6 +147,7 @@ public class RVClienteLista extends AppCompatActivity {
         adapter = new RVClienteAdapter(this, novaLista, position -> {
             AcaoDoClick(novaLista.get(position));
         });
+        atualizarResumoFiltros(novaLista.size());
         recyclerView.setAdapter(adapter);
     }
 
@@ -184,6 +187,18 @@ public class RVClienteLista extends AppCompatActivity {
         }
         Global.lstClientes = list;
         configurarAdapter(list);
+    }
+
+    private void atualizarResumoFiltros(int total) {
+        TextView txtFiltros = findViewById(R.id.txtResumoFiltros);
+        TextView txtTotal = findViewById(R.id.txtContagemClientes);
+
+        // Global.codRota ou o nome da rota que você obteve no ComboRotas
+        String rotaAtual = Global.codRota != null ? Global.codRota : "Todas";
+        String ordenacao = "Seq. Visita"; // Ou a lógica que estiver usando
+
+        txtFiltros.setText(String.format("Filtros: Rota: %s | Ord: %s", rotaAtual, ordenacao));
+        txtTotal.setText("Total: " + total);
     }
 
     private void ComboRotas() {
