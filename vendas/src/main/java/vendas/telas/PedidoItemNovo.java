@@ -494,6 +494,8 @@ public class PedidoItemNovo extends Fragment {
 		else if (txtCodProduto.getText().toString().trim().length() > 0)
 		{
 			Global.prodPesquisa = txtCodProduto.getText().toString().trim();
+            List<ProdutoDTO> _list = proBRL.getByDescricao(Global.prodPesquisa);
+            Global.lstProdutos = _list;
 			Intent intent = new Intent(getContext(), PedidoProdutoLista.class).putExtra("paramProduto", true);
 			activityResultLauncher.launch(intent);
 			//startActivityForResult(new Intent(getBaseContext(), RVProdutoLista.class).putExtra("paramProduto", true), RETORNO_PRODUTO);

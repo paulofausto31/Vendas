@@ -105,39 +105,36 @@ public class PedidoProdutoLista extends AppCompatActivity {
 
         brl = new ProdutoBRL(getBaseContext());
         preBRL = new PrecoBRL(getBaseContext());
-        /*
-        Intent it = getIntent();
-        Boolean param = it.getBooleanExtra("paramProduto", true);
 
-        if (param) {
-            List<ProdutoDTO> _list = brl.getByDescricao(Global.prodPesquisa);
-            adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, new RVPedidoProdutoAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-                    // Ação para quando um item é clicado
-                    ProdutoDTO item = _list.get(position);
-                    AcaoDoClick(item);
-                }
-            });
+        // Recupera o Intent passado pela tela anterior
+        Intent it = getIntent();
+        boolean param = it.getBooleanExtra("paramProduto", false);
+
+        // Se o parâmetro for true e a lista global não for nula, exibe a lista filtrada
+        if (param && Global.lstProdutos != null) {
+            // Utilizando this::showPopupMenu para manter o mesmo padrão do resto da classe
+            adapter = new RVPedidoProdutoAdapter(getBaseContext(), Global.lstProdutos, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         }
-
-         */
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
-        ProdutoBRL brl = new ProdutoBRL(getBaseContext());
-        if (Global.lstProdutos == null){
-            List<ProdutoDTO> _list = brl.getAllOrdenado();
 
+        // Se o adapter já foi configurado (por exemplo, pelo Intent no onCreate ou por um filtro do menu),
+        // não precisamos recriá-lo aqui.
+        if (recyclerView.getAdapter() != null) {
+            return;
+        }
+
+        ProdutoBRL brl = new ProdutoBRL(getBaseContext());
+        if (Global.lstProdutos == null) {
+            List<ProdutoDTO> _list = brl.getAllOrdenado();
             adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
-        }else{
+        } else {
             List<ProdutoDTO> _list = Global.lstProdutos;
-
             adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         }
