@@ -10,7 +10,7 @@ public class db extends SQLiteOpenHelper {
 
 	private static String dbName = "palmvenda.db";
 	private static String sql; 
-	private static int version = 37; //Integer.parseInt(getString(R.string.bco_versao));
+	private static int version = 39; //Integer.parseInt(getString(R.string.bco_versao));
 	public db(Context ctx) {
 		super(ctx, dbName, null, version);
 	}
@@ -63,8 +63,14 @@ public class db extends SQLiteOpenHelper {
 			  " [dataEntrega] VARCHAR(20))";
 		db.execSQL(sql);		
 		// Cria tabela de Itens Pedidos
-		sql = "CREATE TABLE [ItensPedido] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] INTEGER, [DA] VARCHAR(1),[DAValor] NUMERIC(18,2))";
-		db.execSQL(sql);			
+        sql = "CREATE TABLE [ItensPedido] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] INTEGER, [DA] VARCHAR(1),[DAValor] NUMERIC(18,2))";
+		db.execSQL(sql);
+        // Cria tabela de Avarias
+        sql = "CREATE TABLE [Avarias] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [codVendedor] INTEGER, [dataAvaria] VARCHAR(20), [InfAdicional] VARCHAR(500))";
+        db.execSQL(sql);
+        // Cria tabela de Itens Avarias
+        sql = "CREATE TABLE [ItensAvaria] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codAvaria] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] VARCHAR(3))";
+        db.execSQL(sql);
 	}
 
 	@Override
@@ -106,6 +112,10 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);
 		sql = "DROP TABLE IF EXISTS [ItensPedido]";
 		db.execSQL(sql);
+        sql = "DROP TABLE IF EXISTS [Avarias]";
+        db.execSQL(sql);
+        sql = "DROP TABLE IF EXISTS [ItensAvaria]";
+        db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [Rota] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [Descricao] VARCHAR(100))";
 		db.execSQL(sql);
 		sql = "CREATE TABLE IF NOT EXISTS [RotaCliente] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codRota] INTEGER, [codCliente] INTEGER, [seqVisita] INTEGER)";
@@ -153,7 +163,13 @@ public class db extends SQLiteOpenHelper {
 		db.execSQL(sql);		
 		// Cria tabela de Itens Pedidos
 		sql = "CREATE TABLE [ItensPedido] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codPedido] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] INTEGER, [DA] VARCHAR(1),[DAValor] NUMERIC(18,2))";
-		db.execSQL(sql);		
+		db.execSQL(sql);
+        // Cria tabela de Avarias
+        sql = "CREATE TABLE [Avarias] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codCliente] INTEGER, [codVendedor] INTEGER, [dataAvaria] VARCHAR(20), [InfAdicional] VARCHAR(500))";
+        db.execSQL(sql);
+        // Cria tabela de Itens Avarias
+        sql = "CREATE TABLE [ItensAvaria] ([id] INTEGER PRIMARY KEY AUTOINCREMENT, [codEmpresa] VARCHAR(15), [codAvaria] INTEGER, [codProduto] BIGINT, [preco] NUMERIC(18,4), [quantidade] NUMERIC(18,2), [unidade] VARCHAR(3))";
+        db.execSQL(sql);
 	}
 
 }

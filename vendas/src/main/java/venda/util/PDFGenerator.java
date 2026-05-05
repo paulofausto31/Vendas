@@ -34,14 +34,201 @@ import java.util.List;
 import persistencia.brl.EmpresaBRL;
 import persistencia.brl.ProdutoBRL;
 import persistencia.brl.VendedorBRL;
+import persistencia.dto.AvariaDTO;
 import persistencia.dto.ClienteDTO;
 import persistencia.dto.EmpresaDTO;
+import persistencia.dto.ItemAvariaDTO;
 import persistencia.dto.ItenPedidoDTO;
 import persistencia.dto.ProdutoDTO;
 import persistencia.dto.VendedorDTO;
 import vendas.telas.R;
 
 public class PDFGenerator {
+
+    public void createPDFAvaria(Context ctx, String fileName, List<ItemAvariaDTO> itens, ClienteDTO cliDTO, AvariaDTO avaDTO) throws FileNotFoundException {
+        String path = ctx.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
+        File file = new File(path, fileName);
+        ProdutoBRL proBRL = new ProdutoBRL(ctx);
+        EmpresaBRL empBRL = new EmpresaBRL(ctx);
+        VendedorBRL venBRL = new VendedorBRL(ctx);
+        ProdutoDTO proDTO;
+
+        PdfWriter writer = new PdfWriter(file);
+        PdfDocument pdfDoc = new PdfDocument(writer);
+        Document document = new Document(pdfDoc);
+        try {
+            // Adicionando a imagem da logomarca
+            EmpresaDTO empDTO = empBRL.getByCodEmpresa(Global.codEmpresa);
+            Bitmap bitmap = null;
+            if (empDTO.getCnpj().equals("07765220000155"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_sanazon);
+            else if (empDTO.getCnpj().equals("07547684000195"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_idm);
+            else if (empDTO.getCnpj().equals("01914386000100"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_al);
+            else if (empDTO.getCnpj().equals("27696101000103"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_japa);
+            else if (empDTO.getCnpj().equals("08309568000109"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_qminas);
+            else
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_branco);
+
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            ImageData imageData = ImageDataFactory.create(stream.toByteArray());
+            Image image = new Image(imageData);
+            image.setWidth(100);
+            image.setHeight(50);
+
+            // Criando tabela para alinhar logotipo e informações da empresa
+            Table headerTable = new Table(new float[]{1, 3});
+            headerTable.setWidth(UnitValue.createPercentValue(100));
+            headerTable.addCell(new Cell().add(image).setBorder(Border.NO_BORDER));
+            headerTable.addCell(new Cell().add(new Paragraph(empDTO.getRazaoSocial().trim()).setBold())
+                    .add(new Paragraph("CNPJ: ".concat(empDTO.getCnpj().trim()) ))
+                    .add(new Paragraph(empDTO.getEndereco().trim()))
+                    .add(new Paragraph(empDTO.getBairro().trim().concat(" - ").concat(empDTO.getCidade().trim()).concat(" - ").concat(empDTO.getUf().trim()).concat(" - ").concat(empDTO.getCep().trim())))
+                    .add(new Paragraph("Fone: ".concat(empDTO.getTelefone().trim()).concat("  Email: ").concat(empDTO.getEmail().trim())))
+                    .setBorder(Border.NO_BORDER));
+            document.add(headerTable);
+
+            document.add(new Paragraph("\n"));
+
+            // Criando tabela para os dados do cliente e do vendedor
+            Table clientTable = new Table(new float[]{2, 2});
+            clientTable.setWidth(UnitValue.createPercentValue(100));
+
+            VendedorDTO venDTO = venBRL.getVendedorEmpresa(empDTO.getCodEmpresa());
+            clientTable.addCell(new Cell().add(new Paragraph("DADOS DO CLIENTE (AVARIA)").setBold().setFontSize(10)).setBorder(Border.NO_BORDER));
+            clientTable.addCell(new Cell().add(new Paragraph("VENDEDOR: ".concat(venDTO.getNome()).concat(" DATA: ").concat(dataHora.dataDia()))
+                    .setTextAlignment(TextAlignment.RIGHT).setBold().setFontSize(10)).setBorder(Border.NO_BORDER));
+
+            document.add(clientTable);
+            document.add(new LineSeparator(new SolidLine()));
+
+            // Criando a estrutura dos dados do cliente
+            Table clientDetailsTable = new Table(new float[]{2, 2});
+            clientDetailsTable.setWidth(UnitValue.createPercentValue(100));
+
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("RAZÃO SOCIAL: ").setBold().add(cliDTO.getRazaoSocial()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("NOME FANTASIA: ").setBold().add(cliDTO.getNome()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("CNPJ: ").setBold().add(cliDTO.getCpfCnpj()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("TELEFONE: ").setBold().add(cliDTO.getTelefone()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("ENDEREÇO: ").setBold().add(cliDTO.getEndereco()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("BAIRRO: ").setBold().add(cliDTO.getBairro()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("CIDADE: ").setBold().add(cliDTO.getCidade()).setFontSize(9)).setBorder(Border.NO_BORDER));
+            clientDetailsTable.addCell(new Cell().add(new Paragraph("").setFontSize(9)).setBorder(Border.NO_BORDER));
+
+            document.add(clientDetailsTable);
+            document.add(new Paragraph("\n"));
+
+            // TÍTULO ALTERADO PARA AVARIA
+            document.add(new Paragraph("ITENS DA AVARIA").setBold().setFontSize(10));
+            document.add(new LineSeparator(new SolidLine()));
+
+            float[] columnWidths = {30f, 60f, 300f, 60f, 50f, 100f, 100f};
+            Table table = new Table(columnWidths);
+            table.setWidth(UnitValue.createPercentValue(100));
+
+            float headerFontSize = 8f;
+            float itemFontSize = 8f;
+
+            table.addHeaderCell(new Cell().add(new Paragraph("#").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("CODIGO").setBold().setFontSize(headerFontSize)).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("DESCRIÇÃO").setBold().setFontSize(headerFontSize)).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("QTDE.").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("UN.").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("V. UNIT.").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+            table.addHeaderCell(new Cell().add(new Paragraph("V. TOTAL").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+
+            DecimalFormat df = new DecimalFormat("#,##0.00");
+            Double totalGeral = 0.00;
+            int index = 1;
+
+            // LAÇO ALTERADO PARA ItemAvariaDTO
+            for (ItemAvariaDTO item : itens) {
+                // Recupera a descrição do banco igual fazemos no Adapter
+                proDTO = proBRL.getByCodProduto(item.getCodProduto());
+                String descricao = (proDTO != null) ? proDTO.getDescricao() : "Produto não encontrado";
+
+                Double total = item.getQuantidade() * item.getPreco();
+                totalGeral += total;
+
+                table.addCell(new Cell().add(new Paragraph(index + ".").setFontSize(itemFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getCodProduto())).setFontSize(itemFontSize)).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph(descricao).setFontSize(itemFontSize)).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph(String.valueOf(item.getQuantidade())).setFontSize(itemFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph(item.getUnidade()).setFontSize(itemFontSize)).setTextAlignment(TextAlignment.CENTER).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph("R$ " + df.format(item.getPreco())).setFontSize(itemFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+                table.addCell(new Cell().add(new Paragraph("R$ " + df.format(total)).setFontSize(itemFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+
+                index++;
+                table.addCell(new Cell(1, 7).add(new LineSeparator(new DottedLine())).setBorder(Border.NO_BORDER));
+            }
+
+            // TÍTULO FINAL ALTERADO
+            table.addCell(new Cell(1, 5).add(new Paragraph("TOTAL DA AVARIA").setBold().setFontSize(headerFontSize)).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(new Paragraph("")).setBorder(Border.NO_BORDER));
+            table.addCell(new Cell().add(new Paragraph("R$ " + df.format(totalGeral))).setBold().setFontSize(headerFontSize).setTextAlignment(TextAlignment.RIGHT).setBorder(Border.NO_BORDER));
+
+            document.add(table);
+
+            if (avaDTO.getInfAdicional() != null && !avaDTO.getInfAdicional().trim().isEmpty()) {
+                document.add(new Paragraph("\n")); // Dá um pequeno espaço após a tabela
+                document.add(new Paragraph("INFORMAÇÕES ADICIONAIS").setBold().setFontSize(10));
+                document.add(new LineSeparator(new SolidLine()));
+                document.add(new Paragraph(avaDTO.getInfAdicional().trim()).setFontSize(9));
+            }
+
+            // ==========================================
+            // ADICIONA BLOCO DE ASSINATURAS
+            // ==========================================
+
+            // Dá um espaço em branco razoável para a pessoa assinar fisicamente (ou digitalmente)
+            document.add(new Paragraph("\n\n\n\n\n\n"));
+
+            // Cria uma tabela com 3 colunas proporcionais (Assinatura 1 | Espaço central | Assinatura 2)
+            Table signatureTable = new Table(new float[]{1, 0.2f, 1});
+            signatureTable.setWidth(UnitValue.createPercentValue(100));
+
+            // 1. Célula do Cliente
+            Cell clientCell = new Cell().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+            clientCell.add(new Paragraph("________________________________________").setFontSize(10));
+            clientCell.add(new Paragraph("Assinatura do Cliente").setBold().setFontSize(9));
+            clientCell.add(new Paragraph(cliDTO.getNome()).setFontSize(9)); // Traz o nome fantasia / nome do cliente
+
+            // 2. Célula de Espaçamento no meio
+            Cell spaceCell = new Cell().setBorder(Border.NO_BORDER);
+
+            // 3. Célula da Empresa
+            Cell companyCell = new Cell().setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+            companyCell.add(new Paragraph("________________________________________").setFontSize(10));
+            companyCell.add(new Paragraph("Assinatura da Empresa").setBold().setFontSize(9));
+            companyCell.add(new Paragraph(empDTO.getRazaoSocial()).setFontSize(9)); // Traz a razão social da empresa
+
+            // Adiciona as células na tabela e a tabela no documento
+            signatureTable.addCell(clientCell);
+            signatureTable.addCell(spaceCell);
+            signatureTable.addCell(companyCell);
+
+            document.add(signatureTable);
+
+            document.close();
+            Toast.makeText(ctx, "PDF de Avaria gerado com sucesso!", Toast.LENGTH_LONG).show();
+            Log.i("PDF", "PDF criado com sucesso: " + file.getAbsolutePath());
+        } catch (Exception e) {
+            Log.e("PDF", "Erro ao criar PDF de Avaria: " + e.getMessage(), e);
+            Toast.makeText(ctx, "Erro ao criar o PDF. Por favor, tente novamente.", Toast.LENGTH_LONG).show();
+        } finally {
+            try {
+                if (document != null) document.close();
+                if (pdfDoc != null) pdfDoc.close();
+                if (writer != null) writer.close();
+            } catch (Exception e) {
+                Log.e("PDF", "Erro ao fechar recursos: " + e.getMessage(), e);
+            }
+        }
+    }
 
     public void createPDF(Context ctx, String fileName, List<ItenPedidoDTO> itens, ClienteDTO cliDTO) throws FileNotFoundException {
         String path = ctx.getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
@@ -68,6 +255,8 @@ public class PDFGenerator {
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_al);
             else if (empDTO.getCnpj().equals("27696101000103"))
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_japa);
+            else if (empDTO.getCnpj().equals("08309568000109"))
+                bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_qminas);
             else
                 bitmap = BitmapFactory.decodeResource(ctx.getResources(), R.drawable.logo_branco);
             ByteArrayOutputStream stream = new ByteArrayOutputStream();

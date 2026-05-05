@@ -21,6 +21,7 @@ import java.util.List;
 import persistencia.brl.ClienteNaoPositivadoBRL;
 import persistencia.brl.PedidoBRL;
 import persistencia.dto.ClienteDTO;
+import vendas.telas.AvariaActivity;
 import vendas.telas.ClienteComplemento;
 import vendas.telas.ClienteContasReceber;
 import vendas.telas.JustificativaTabContainer;
@@ -146,6 +147,12 @@ public class RVClienteAdapter extends RecyclerView.Adapter<RVClienteAdapter.View
                     return true;
                 case R.id.action_complemento:
                     intent = new Intent(context, ClienteComplemento.class);
+                    intent.putExtra("idCliente", dto.getId());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                    return true;
+                case R.id.action_avaria:
+                    intent = new Intent(context, AvariaActivity.class);
                     intent.putExtra("idCliente", dto.getId());
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

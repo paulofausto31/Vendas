@@ -82,7 +82,18 @@
         <activity android:name=".RVProdutoLista"></activity>
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".PedidoProdutoLista"></activity>
-        <activity android:name="Localizacao"></activity>  
+        <activity android:name="Localizacao"></activity>
+        <activity android:name=".AvariaActivity"></activity>
+        <!-- Adicione isso dentro da tag <application> -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <receiver
             android:name="BroadcastReceive"
             android:label="BroadcastReceive"

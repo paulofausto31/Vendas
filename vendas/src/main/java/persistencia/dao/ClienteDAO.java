@@ -373,9 +373,9 @@ public class ClienteDAO {
 
 		String sql;
 		if (Global.codRota != null)
-			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = ".concat(Global.codEmpresa).concat(" and r.codRota = ").concat(Global.codRota).concat(" order by ").concat(campoOrdenacao);
+			sql = "SELECT c.* FROM cliente c, RotaCliente r where c.codCliente = r.codCliente and c.codEmpresa = r.codEmpresa and r.codEmpresa = " + Global.codEmpresa + " and r.codRota = " + Global.codRota + " order by " + campoOrdenacao;
 		else
-			sql = "SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao);
+			sql = "SELECT * FROM cliente where rotaDia = 'S' and codEmpresa = " + Global.codEmpresa + " order by " + campoOrdenacao;
 		//Cursor rs = db.rawQuery("SELECT * FROM cliente where codEmpresa = ".concat(Global.codEmpresa).concat(" order by ").concat(campoOrdenacao), null);
 		Cursor rs = db.rawQuery(sql, null);
 		List<ClienteDTO> lista = new ArrayList<ClienteDTO>();
