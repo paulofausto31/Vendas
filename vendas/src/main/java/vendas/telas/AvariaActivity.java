@@ -106,7 +106,7 @@ public class AvariaActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // 1. Deleta do Banco de Dados
-                        // ATENÇÃO: Substitua "ExcluiItemAvaria" pelo nome real do seu método de delete no BRL
+
                         boolean sucesso = itaBRL.delete(itaDTO);
 
                         if (sucesso) {
@@ -131,7 +131,6 @@ public class AvariaActivity extends AppCompatActivity {
         // Joga os dados de volta pros campos
         txtCodProduto.setText(String.valueOf(item.getCodProduto()));
 
-        // Busca a descrição do produto para exibir (sem acionar os valores padrão do outro método)
         ProdutoDTO proDTO = proBRL.getByCodProduto(item.getCodProduto());
         if (proDTO != null) {
             txtDescricaoProduto.setText(proDTO.getDescricao());
@@ -237,7 +236,7 @@ public class AvariaActivity extends AppCompatActivity {
             // 3. Monta o nome do arquivo dinamicamente (ex: Avaria_105.pdf)
             String nomeArquivo = "Avaria_" + avariaAtual.getId() + ".pdf";
 
-            // 4. Instancia o gerador e chama o seu novo método
+
             PDFGenerator pdfGen = new PDFGenerator();
             pdfGen.createPDFAvaria(this, nomeArquivo, listaItensAvaria, clienteAtual, avariaAtual);
 
@@ -269,7 +268,7 @@ public class AvariaActivity extends AppCompatActivity {
             avariaAtual.setInfAdicional(obs);
 
             // Manda o BRL atualizar o banco de dados.
-            // ATENÇÃO: Confirme se o nome do seu método no avaBRL é esse mesmo (AtualizaAvaria ou similar)
+
             avaBRL.Update(avariaAtual);
         }
     }
@@ -308,7 +307,6 @@ public class AvariaActivity extends AppCompatActivity {
         }
     }
 
-    // 1. Esse método "infla" (desenha) o menu na barra de título
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Mude "menu_avaria" se você usou outro nome no Passo 2
@@ -316,7 +314,6 @@ public class AvariaActivity extends AppCompatActivity {
         return true;
     }
 
-    // 2. Esse método "escuta" o clique nos botões da barra de título
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Verifica se o cara clicou no nosso botão de ID "action_voltar"
