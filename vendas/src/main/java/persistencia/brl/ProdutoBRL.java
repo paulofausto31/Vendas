@@ -44,9 +44,17 @@ public class ProdutoBRL {
     public List<ProdutoDTO> getAllOrdenado(){
 		return produtoDAO.getAllOrdenado();	    	
     }
+
+    public List<ProdutoDTO> getAllOrdenado(char estoqueNegativo){
+        return produtoDAO.getAllOrdenado(estoqueNegativo);
+    }
     
     public List<ProdutoDTO> getByFornecedor(Integer codFornecedor){
 		return produtoDAO.getByFornecedor(codFornecedor);	    	
+    }
+
+    public List<ProdutoDTO> getByFornecedor(Integer codFornecedor, char estoqueNegativo){
+        return produtoDAO.getByFornecedor(codFornecedor, estoqueNegativo);
     }
     
     public Double getSaldoEstoque(String codProduto){
@@ -57,8 +65,16 @@ public class ProdutoBRL {
 		return produtoDAO.getByDescricao(descricao);	    	
     }
 
+    public List<ProdutoDTO> getByDescricao(String descricao, char estoqueNegativo){
+        return produtoDAO.getByDescricao(descricao, estoqueNegativo);
+    }
+
     public List<ProdutoDTO> getByGrupo(String codGrupo){
-		return produtoDAO.getByGrupo(codGrupo);	    	
+		return produtoDAO.getByGrupo(codGrupo);
+    }
+
+    public List<ProdutoDTO> getByGrupo(String codGrupo, char estoqueNegativo){
+        return produtoDAO.getByGrupo(codGrupo, estoqueNegativo);
     }
     
     public ProdutoDTO getById(Integer id){

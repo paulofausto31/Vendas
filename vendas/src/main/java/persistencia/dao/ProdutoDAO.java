@@ -136,9 +136,9 @@ public class ProdutoDAO {
 		return lista;
 	}
 		
-		public List<ProdutoDTO> getAllOrdenado(){
+	public List<ProdutoDTO> getAllOrdenado(){
 
-			Cursor rs = db.rawQuery("SELECT * FROM produto WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" order by Descricao"), null);
+			Cursor rs = db.rawQuery("SELECT * FROM produto WHERE estoque > 0 and codEmpresa = ".concat(Global.codEmpresa).concat(" order by Descricao"), null);
 			
 			List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
 			
@@ -157,9 +157,88 @@ public class ProdutoDAO {
 		return lista;
 	}
 
-		public List<ProdutoDTO> getByFornecedor(Integer codFornecedor){
+	public List<ProdutoDTO> getAllOrdenado(char estoqueNegativo){
 
-			Cursor rs = db.query(tableName, columns, "fornecedor=? and codEmpresa=?", new String[]{codFornecedor.toString(), Global.codEmpresa}, null, null, null);
+		Cursor rs;
+		if (estoqueNegativo == 'N')
+			rs = db.rawQuery("SELECT * FROM produto WHERE estoque > 0 and codEmpresa = ".concat(Global.codEmpresa).concat(" order by Descricao"), null);
+		else
+			rs = db.rawQuery("SELECT * FROM produto WHERE codEmpresa = ".concat(Global.codEmpresa).concat(" order by Descricao"), null);
+
+		List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+
+		int total = 0;
+
+		while(rs.moveToNext()){
+			ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
+					rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
+					rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
+			lista.add(dto);
+			total++;
+			if (total >= 350)
+				rs.moveToLast();
+		}
+
+		return lista;
+	}
+
+	public List<ProdutoDTO> getByFornecedor(Integer codFornecedor, char estoqueNegativo){
+
+		Cursor rs;
+		if (estoqueNegativo == 'N')
+			rs = db.query(tableName, columns, "fornecedor=? and codEmpresa=? and estoque > 0", new String[]{codFornecedor.toString(), Global.codEmpresa}, null, null, null);
+		else
+			rs = db.query(tableName, columns, "fornecedor=? and codEmpresa=?", new String[]{codFornecedor.toString(), Global.codEmpresa}, null, null, null);
+
+		List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+
+		while(rs.moveToNext()){
+			ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
+					rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
+					rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+	public List<ProdutoDTO> getByFornecedor(Integer codFornecedor){
+
+			Cursor rs = db.query(tableName, columns, "fornecedor=? and codEmpresa=? and estoque > 0", new String[]{codFornecedor.toString(), Global.codEmpresa}, null, null, null);
+			
+			List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+
+			while(rs.moveToNext()){
+				ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
+						rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
+						rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
+				lista.add(dto);
+			}
+			
+			return lista;
+		}
+	public List<ProdutoDTO> getByDescricao(String descricao, char estoqueNegativo){
+
+		Cursor rs;
+		if (estoqueNegativo == 'S')
+			rs = db.query(tableName, columns, "descricao like ? and codEmpresa=?", new String[]{"%" + descricao + "%", Global.codEmpresa}, null, null, null);
+		else
+			rs = db.query(tableName, columns, "descricao like ? and codEmpresa=? and estoque > 0", new String[]{"%" + descricao + "%", Global.codEmpresa}, null, null, null);
+
+		List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+
+		while(rs.moveToNext()){
+			ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
+					rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
+					rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
+
+	public List<ProdutoDTO> getByDescricao(String descricao){
+
+			Cursor rs = db.query(tableName, columns, "descricao like ? and codEmpresa=? and estoque > 0.0", new String[]{"%" + descricao + "%", Global.codEmpresa}, null, null, null);
 			
 			List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
 
@@ -173,23 +252,7 @@ public class ProdutoDAO {
 			return lista;
 		}
 
-		public List<ProdutoDTO> getByDescricao(String descricao){
-
-			Cursor rs = db.query(tableName, columns, "descricao like ? and codEmpresa=?", new String[]{"%" + descricao + "%", Global.codEmpresa}, null, null, null);
-			
-			List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
-
-			while(rs.moveToNext()){
-				ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
-						rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
-						rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
-				lista.add(dto);
-			}
-			
-			return lista;
-		}
-
-		public Double getSaldoEstoque(String codProduto){
+	public Double getSaldoEstoque(String codProduto){
 
 			Cursor rs = db.rawQuery("SELECT sum(p.estoque) as saldo FROM Produto p where p.codProduto = ".concat(codProduto).concat(" and codEmpresa =").concat(Global.codEmpresa), null);
 			
@@ -202,9 +265,9 @@ public class ProdutoDAO {
 			return saldo;
 		}
 
-		public List<ProdutoDTO> getByGrupo(String codGrupo){
+	public List<ProdutoDTO> getByGrupo(String codGrupo){
 
-			Cursor rs = db.query(tableName, columns, "grupo=? and codEmpresa=?", new String[]{codGrupo.toString(), Global.codEmpresa}, null, null, null);
+			Cursor rs = db.query(tableName, columns, "grupo=? and codEmpresa=? and estoque > 0", new String[]{codGrupo.toString(), Global.codEmpresa}, null, null, null);
 			
 			List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
 
@@ -217,6 +280,26 @@ public class ProdutoDAO {
 			
 			return lista;
 		}
+
+	public List<ProdutoDTO> getByGrupo(String codGrupo, char estoqueNegativo){
+
+		Cursor rs;
+		if (estoqueNegativo == 'S')
+			rs = db.query(tableName, columns, "grupo=? and codEmpresa=?", new String[]{codGrupo.toString(), Global.codEmpresa}, null, null, null);
+		else
+			rs = db.query(tableName, columns, "grupo=? and codEmpresa=? and estoque > 0", new String[]{codGrupo.toString(), Global.codEmpresa}, null, null, null);
+
+		List<ProdutoDTO> lista = new ArrayList<ProdutoDTO>();
+
+		while(rs.moveToNext()){
+			ProdutoDTO dto = new ProdutoDTO(rs.getInt(rs.getColumnIndex("id")), rs.getString(rs.getColumnIndex("codEmpresa")), rs.getLong(rs.getColumnIndex("codProduto")), rs.getString(rs.getColumnIndex("descricao")),
+					rs.getString(rs.getColumnIndex("unidade")), rs.getDouble(rs.getColumnIndex("estoque")), rs.getString(rs.getColumnIndex("grupo")),
+					rs.getInt(rs.getColumnIndex("fornecedor")), rs.getInt(rs.getColumnIndex("unidade2")));
+			lista.add(dto);
+		}
+
+		return lista;
+	}
 
 }
 

@@ -36,7 +36,8 @@ import persistencia.dto.ProdutoDTO;
 import venda.util.Global;
 
 public class PedidoProdutoLista extends AppCompatActivity {
-    private RVPedidoProdutoAdapter adapter;//teste
+    private RVPedidoProdutoAdapter adapter;
+    private char estoqueNegativo;
     private RecyclerView recyclerView;
     ProdutoBRL brl;
     PrecoBRL preBRL;
@@ -109,6 +110,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
         // Recupera o Intent passado pela tela anterior
         Intent it = getIntent();
         boolean param = it.getBooleanExtra("paramProduto", false);
+        estoqueNegativo = it.getCharExtra("estoqueNegativo", 'N');
 
         // Se o parâmetro for true e a lista global não for nula, exibe a lista filtrada
         if (param && Global.lstProdutos != null) {
@@ -130,7 +132,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
 
         ProdutoBRL brl = new ProdutoBRL(getBaseContext());
         if (Global.lstProdutos == null) {
-            List<ProdutoDTO> _list = brl.getAllOrdenado();
+            List<ProdutoDTO> _list = brl.getAllOrdenado(estoqueNegativo);
             adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
             recyclerView.setAdapter(adapter);
         } else {
@@ -188,7 +190,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
 
                 // Do something with the selected item
                 if (position > 0){
-                    List<ProdutoDTO> lstProdutos = brl.getByGrupo(codigoSelecionado);
+                    List<ProdutoDTO> lstProdutos = brl.getByGrupo(codigoSelecionado, estoqueNegativo);
                     Global.lstProdutos = lstProdutos;
                     teste(lstProdutos);
                 }
@@ -273,7 +275,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
 
                 // Do something with the selected item
                 if (position > 0){
-                    List<ProdutoDTO> lstProdutos = brl.getByFornecedor(codigoSelecionado);
+                    List<ProdutoDTO> lstProdutos = brl.getByFornecedor(codigoSelecionado, estoqueNegativo);
                     Global.lstProdutos = lstProdutos;
                     teste(lstProdutos);
                 }
@@ -328,7 +330,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
                         else{
                             //Global.prodPesquisa = value;
                             ProdutoBRL brl = new ProdutoBRL(getBaseContext());
-                            List<ProdutoDTO> _list = brl.getByDescricao(value);
+                            List<ProdutoDTO> _list = brl.getByDescricao(value, estoqueNegativo);
                             Global.lstProdutos = _list;
                             AcaoPesquisa(_list);
 
@@ -351,7 +353,7 @@ public class PedidoProdutoLista extends AppCompatActivity {
                 return true;
             case R.id.menu_mostrar_todos:
                 ProdutoBRL brl = new ProdutoBRL(getBaseContext());
-                List<ProdutoDTO> _list = brl.getAllOrdenado();
+                List<ProdutoDTO> _list = brl.getAllOrdenado(estoqueNegativo);
                 Global.lstProdutos = null;
                 adapter = new RVPedidoProdutoAdapter(getBaseContext(), _list, this::showPopupMenu);
                 recyclerView.setAdapter(adapter);
